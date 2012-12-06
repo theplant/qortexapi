@@ -6,6 +6,13 @@ import (
 	"time"
 )
 
+type Organization struct {
+	Id        bson.ObjectId
+	Name      string
+	QortexURL string
+	LogoURL   string
+}
+
 type User struct {
 	Id            bson.ObjectId
 	Email         string
@@ -18,11 +25,22 @@ type User struct {
 	IsSharedUser  bool
 	OrgId         bson.ObjectId
 	OriginalOrgId bson.ObjectId
-	Permalink     string
+	URL           string
+}
+
+type Group struct {
+	Id          bson.ObjectId
+	Name        string
+	Description string
+	Author      User
+	IsAdmin     bool
+	GType       string
+	LogoURL     string
+	IconName    string
 }
 
 type Attachment struct {
-	Permalink   string
+	URL         string
 	Filename    string
 	FileIconURL string
 	HumanSize   string
@@ -45,6 +63,7 @@ type Task struct {
 	CompletedAt        time.Time `json:",omitempty"`
 	CreatedAt          time.Time
 	LocalDueDate       string
+	LocalDueShortDate  string
 	LocalCompletedDate string
 }
 
@@ -53,6 +72,7 @@ type Wiki struct {
 	EntryLinks                   []string
 	LocalCurrentVersionUpdatedAt string
 	LocalHistoryUpdatedAt        string
+	WikiVersion
 }
 
 type ShareGroupRequest struct {
@@ -62,29 +82,29 @@ type ShareGroupRequest struct {
 }
 
 type Entry struct {
-	GroupId                 bson.ObjectId
-	GroupName               string
-	EType                   string
-	HtmlTitle               template.HTML
-	HtmlContent             template.HTML
-	TypeTitle               string
-	IconName                string
-	LocalHumanCreatedAt     string
-	Permalink               string
-	IsBroadcast             bool
-	IsSystemMessage         bool
-	IsWiki                  bool
-	IsTaskTodo              bool
-	Author                  User
-	ToUsers                 []User
-	LikedByUsers            []User
-	CurrentUserCanEdit      bool
-	Attachments             []*Attachment
-	AllAttachmentsCount     int
-	AllAttachmentsPermalink string
-	Comments                []*Entry
-	Task                    *Task
-	Wiki                    *Wiki
-	CommentsCount           int
-	ShareGroupRequest       *ShareGroupRequest
+	GroupId             bson.ObjectId
+	GroupName           string
+	EType               string
+	HtmlTitle           template.HTML
+	HtmlContent         template.HTML
+	TypeTitle           string
+	IconName            string
+	LocalHumanCreatedAt string
+	Permalink           string
+	IsBroadcast         bool
+	IsSystemMessage     bool
+	IsWiki              bool
+	IsTaskTodo          bool
+	Author              User
+	ToUsers             []User
+	LikedByUsers        []User
+	CurrentUserCanEdit  bool
+	Attachments         []*Attachment
+	AllAttachmentsCount int
+	AllAttachmentsURL   string
+	Comments            []*Entry
+	Task                *Task
+	Wiki                *Wiki
+	CommentsCount       int
+	ShareGroupRequest   *ShareGroupRequest
 }
