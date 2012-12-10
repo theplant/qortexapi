@@ -2,19 +2,19 @@ package qortexapi
 
 import (
 	"html/template"
-	"labix.org/v2/mgo/bson"
+	// "text/template"
 	"time"
 )
 
 type Organization struct {
-	Id        bson.ObjectId
+	Id        string
 	Name      string
 	QortexURL string
 	LogoURL   string
 }
 
 type User struct {
-	Id            bson.ObjectId
+	Id            string
 	Email         string
 	Name          string
 	Title         string
@@ -23,13 +23,13 @@ type User struct {
 	Timezone      string
 	IsSuperUser   bool
 	IsSharedUser  bool
-	OrgId         bson.ObjectId
-	OriginalOrgId bson.ObjectId
+	OrgId         string
+	OriginalOrgId string
 	URL           string
 }
 
 type Group struct {
-	Id          bson.ObjectId
+	Id          string
 	Name        string
 	Description string
 	Author      User
@@ -72,7 +72,7 @@ type Wiki struct {
 	EntryLinks                   []string
 	LocalCurrentVersionUpdatedAt string
 	LocalHistoryUpdatedAt        string
-	WikiVersion
+	// WikiVersion
 }
 
 type ShareGroupRequest struct {
@@ -82,29 +82,72 @@ type ShareGroupRequest struct {
 }
 
 type Entry struct {
-	GroupId             bson.ObjectId
-	GroupName           string
-	EType               string
-	HtmlTitle           template.HTML
-	HtmlContent         template.HTML
-	TypeTitle           string
-	IconName            string
-	LocalHumanCreatedAt string
-	Permalink           string
-	IsBroadcast         bool
-	IsSystemMessage     bool
-	IsWiki              bool
-	IsTaskTodo          bool
-	Author              User
-	ToUsers             []User
-	LikedByUsers        []User
-	CurrentUserCanEdit  bool
-	Attachments         []*Attachment
+	Id                   string
+	EType                string
+	Title                string
+	TypeTitle            string
+	AllAttachmentsURL    string
+	Permalink            string
+	IconName             string
+	LocalHumanCreatedAt  string
+	WholeLastUpdateAtAgo string
+
+	HtmlTitle     template.HTML
+	HtmlContent   template.HTML
+	Link          template.HTMLAttr
+	WatchlistHtml template.HTML
+
+	IsBroadcast        bool
+	IsSystemMessage    bool
+	IsWiki             bool
+	IsTaskTodo         bool
+	IsInWatchList      bool
+	CurrentUserCanEdit bool
+
 	AllAttachmentsCount int
-	AllAttachmentsURL   string
-	Comments            []*Entry
-	Task                *Task
-	Wiki                *Wiki
 	CommentsCount       int
-	ShareGroupRequest   *ShareGroupRequest
+
+	Author            *User
+	Group             *Group
+	Task              *Task
+	Wiki              *Wiki
+	ShareGroupRequest *ShareGroupRequest
+
+	ToUsers      []*User
+	LikedByUsers []*User
+	Attachments  []*Attachment
+	Comments     []*Entry
+}
+
+type WatchList struct {
+	Items         []*WatchItem
+	WhatWatchList bool
+}
+
+type WatchItem struct {
+	AttachCnt  int
+	CommentCnt int
+	LikeCnt    int
+
+	AttachCntStr  template.HTML
+	CommentCntStr template.HTML
+	LikeCntStr    template.HTML
+
+	WatchTime time.Time
+
+	WatchEntry *Entry
+}
+
+type WatchItems []*WatchItem
+
+type ByWatchTime struct{ WatchItems }
+
+func (s WatchItems) Len() int { return len(s) }
+
+func (s WatchItems) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s ByWatchTime) Less(i, j int) bool {
+	return s.WatchItems[i].WatchTime.Unix() > s.WatchItems[j].WatchTime.Unix()
 }
