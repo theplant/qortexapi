@@ -20,3 +20,7 @@ type UserService interface {
 	StopWatching(entryId string, groupId string) (IsAdded bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
 }
+
+type GroupService interface {
+	GetAllGroups() (r []*Group, err error)
+}
