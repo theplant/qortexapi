@@ -29,14 +29,20 @@ type User struct {
 }
 
 type Group struct {
-	Id          string
-	Name        string
-	Description string
-	Author      User
-	IsAdmin     bool
-	GType       string
-	LogoURL     string
-	IconName    string
+	Id                string
+	Name              string
+	Description       string
+	GType             string
+	LogoURL           string
+	IconName          string
+	Link              string
+	Author            User
+	IsAdmin           bool
+	IsPrivate         bool
+	Editable          bool
+	FollowedByMe      bool
+	AdministratedByMe bool
+	IsShared          bool
 }
 
 type Attachment struct {
