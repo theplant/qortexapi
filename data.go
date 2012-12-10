@@ -40,6 +40,7 @@ type Group struct {
 	IsAdmin           bool
 	IsPrivate         bool
 	Editable          bool
+	Managable          bool
 	FollowedByMe      bool
 	AdministratedByMe bool
 	IsShared          bool
