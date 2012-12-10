@@ -137,17 +137,3 @@ type WatchItem struct {
 
 	WatchEntry *Entry
 }
-
-type WatchItems []*WatchItem
-
-type ByWatchTime struct{ WatchItems }
-
-func (s WatchItems) Len() int { return len(s) }
-
-func (s WatchItems) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-func (s ByWatchTime) Less(i, j int) bool {
-	return s.WatchItems[i].WatchTime.Unix() > s.WatchItems[j].WatchTime.Unix()
-}
