@@ -19,6 +19,9 @@ type UserService interface {
 	AddToWatchList(entryId string, groupId string) (added bool, err error)
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
+
+	GetDraftList(before time.Time, limit int) (r *DraftList, err error)
+	DeleteDraft(entryId string, groupId string) (err error)
 }
 
 type GroupService interface {

@@ -82,15 +82,20 @@ type ShareGroupRequest struct {
 }
 
 type Entry struct {
-	Id                   string
-	EType                string
-	Title                string
-	TypeTitle            string
+	Id         string
+	EType      string
+	Title      string
+	TypeTitle  string
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
+	BumpedUpAt time.Time
+
 	AllAttachmentsURL    string
 	Permalink            string
 	IconName             string
 	LocalHumanCreatedAt  string
 	WholeLastUpdateAtAgo string
+	LastUpdateAtAgo      string
 
 	HtmlTitle     template.HTML
 	HtmlContent   template.HTML
@@ -136,4 +141,9 @@ type WatchItem struct {
 	WatchTime time.Time
 
 	WatchEntry *Entry
+}
+
+type DraftList struct {
+	// UserId     string
+	DraftItems []*Entry
 }
