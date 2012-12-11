@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type UserService interface {
+type AuthUserService interface {
 	// CreatePost() (err error)
 	// UpdatePost() (err error)
 	// CreateWiki() (err error)
@@ -22,8 +22,8 @@ type UserService interface {
 
 	GetDraftList(before time.Time, limit int) (r *DraftList, err error)
 	DeleteDraft(entryId string, groupId string) (err error)
-}
 
-type GroupService interface {
 	GetAllGroups() (r []*Group, err error)
+	AddUserToGroup(groupId string, userId string) (err error)
+	RemoveUserFromGroup(groupId string, userId string)(err error)
 }

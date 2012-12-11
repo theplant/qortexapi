@@ -1,0 +1,14 @@
+.DS_Store
+/public/.sass-cache/
+/docs/
+workspace.vim
+tags
+main
+a.out
+*.swp
+*.sublime-project
+*.sublime-workspace
+*cscope*
+/aaron
+dump_test_db/
+db_reset.sh
