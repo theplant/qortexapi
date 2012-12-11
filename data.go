@@ -28,6 +28,20 @@ type User struct {
 	URL           string
 }
 
+type EmbedUser struct {
+	Id             string
+	Email          string
+	Name           string
+	Title          string
+	Avatar         string
+	JID            string
+	Timezone       string
+	IsSuperUser    bool
+	IsShare        bool
+	OrganizationId string
+	OriginalOrgId  string
+}
+
 type Group struct {
 	Id                string
 	Name              string
@@ -40,19 +54,31 @@ type Group struct {
 	IsAdmin           bool
 	IsPrivate         bool
 	Editable          bool
-	Managable          bool
+	Managable         bool
 	FollowedByMe      bool
 	AdministratedByMe bool
 	IsShared          bool
 }
 
 type Attachment struct {
-	URL         string
-	Filename    string
-	FileIconURL string
-	HumanSize   string
-	Size        int
-	IsImage     bool
+	Id            string
+	OwnerIds      []string
+	Category      string
+	Filename      string
+	ContentType   string
+	MD5           string
+	ContentLength int64
+	Error         string
+	GroupIds      []string
+	UploadTime    time.Time
+	Width         int
+	Height        int
+
+	URL          string
+	ImageIconURL string
+	FileIconURL  string
+	HumanSize    string
+	IsImage      bool
 }
 
 type Task struct {
@@ -66,8 +92,8 @@ type Task struct {
 	CompletedUsers     []User
 	OnlyPendingUser    User
 	OnlyCompleter      User
-	Due                time.Time `json:",omitempty"`
-	CompletedAt        time.Time `json:",omitempty"`
+	Due                time.Time
+	CompletedAt        time.Time
 	CreatedAt          time.Time
 	LocalDueDate       string
 	LocalDueShortDate  string
@@ -93,6 +119,8 @@ type Entry struct {
 	EType      string
 	Title      string
 	TypeTitle  string
+	RootId     string
+	GroupId    string
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 	BumpedUpAt time.Time
@@ -104,14 +132,18 @@ type Entry struct {
 	WholeLastUpdateAtAgo string
 	LastUpdateAtAgo      string
 
-	HtmlTitle     template.HTML
-	HtmlContent   template.HTML
-	Link          template.HTMLAttr
-	WatchlistHtml template.HTML
+	HtmlTitle      template.HTML
+	HtmlContent    template.HTML
+	Link           template.HTMLAttr
+	WatchlistHtml  template.HTML
+	ToUsersHtml    template.HTML
+	UploadURL      template.HTMLAttr
+	CommentFormURL template.HTMLAttr
 
 	IsBroadcast        bool
 	IsSystemMessage    bool
 	IsWiki             bool
+	IsPost             bool
 	IsTaskTodo         bool
 	IsInWatchList      bool
 	CurrentUserCanEdit bool
@@ -119,16 +151,17 @@ type Entry struct {
 	AllAttachmentsCount int
 	CommentsCount       int
 
-	Author            *User
+	Author            *EmbedUser
 	Group             *Group
 	Task              *Task
 	Wiki              *Wiki
 	ShareGroupRequest *ShareGroupRequest
 
-	ToUsers      []*User
-	LikedByUsers []*User
+	ToUsers      []*EmbedUser
+	LikedByUsers []*EmbedUser
 	Attachments  []*Attachment
 	Comments     []*Entry
+	NewComment   *Entry
 }
 
 type WatchList struct {

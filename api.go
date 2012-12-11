@@ -1,11 +1,12 @@
 package qortexapi
 
 import (
+	"github.com/sunfmin/govalidations"
 	"time"
 )
 
 type AuthUserService interface {
-	// CreatePost() (err error)
+	CreatePost(input *InputEntry) (r *Entry, validated *govalidations.Validated, err error)
 	// UpdatePost() (err error)
 	// CreateWiki() (err error)
 	// UpdateWiki() (err error)
@@ -25,5 +26,5 @@ type AuthUserService interface {
 
 	GetAllGroups() (r []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
-	RemoveUserFromGroup(groupId string, userId string)(err error)
+	RemoveUserFromGroup(groupId string, userId string) (err error)
 }
