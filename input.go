@@ -22,3 +22,16 @@ type InputEntry struct {
 	// convert to wiki
 	BaseOnEntryId string
 }
+
+type GroupInput struct {
+	Id            string
+	Name          string
+	Description   string
+	Type          string
+	LogoURL       string
+	IconName      string
+	IsPrivate     bool
+	IsShared      bool
+	GroupOwners   []string
+	InvitedOrgIds []string
+}
