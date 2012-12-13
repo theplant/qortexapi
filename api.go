@@ -27,6 +27,6 @@ type AuthUserService interface {
 	GetAllGroups() (r []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
-	//UpdateGroup(input *GroupInput) (err error)
+	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	ConvertToSharedGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 }

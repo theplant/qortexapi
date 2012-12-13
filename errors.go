@@ -15,5 +15,6 @@ func (this *CanNotBlankError) Error() string {
 var OrganizationNotFoundError = errors.New("organization not found")
 var GroupNotFoundError = errors.New("group not found")
 var UserNotFoundError = errors.New("user not found")
-var PermissionDenied = errors.New("permiession denied")
+var PermissionDeniedError = errors.New("permiession denied")
 var UserSavedError = errors.New("can not save user")
+var GroupSavedError = errors.New("can not save group")
