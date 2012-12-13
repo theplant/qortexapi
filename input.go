@@ -1,6 +1,6 @@
 package qortexapi
 
-type InputEntry struct {
+type EntryInput struct {
 	Id               string
 	EType            string
 	Title            string

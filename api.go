@@ -6,7 +6,7 @@ import (
 )
 
 type AuthUserService interface {
-	CreatePost(input *InputEntry) (r *Entry, validated *govalidations.Validated, err error)
+	CreatePost(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	// UpdatePost() (err error)
 	// CreateWiki() (err error)
 	// UpdateWiki() (err error)
