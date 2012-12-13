@@ -33,13 +33,14 @@ type EmbedUser struct {
 	Email          string
 	Name           string
 	Title          string
-	Avatar         string
+	Avatar32       string
 	JID            string
 	Timezone       string
 	IsSuperUser    bool
 	IsShare        bool
 	OrganizationId string
 	OriginalOrgId  string
+	UserPageUrl    template.HTMLAttr
 }
 
 type Group struct {
@@ -50,7 +51,7 @@ type Group struct {
 	LogoURL           string
 	IconName          string
 	Link              string
-	Author            User
+	Author            EmbedUser
 	IsAdmin           bool
 	IsPrivate         bool
 	Editable          bool
@@ -74,9 +75,9 @@ type Attachment struct {
 	Width         int
 	Height        int
 
-	URL          string
-	ImageIconURL string
-	FileIconURL  string
+	URL          template.HTMLAttr
+	ImageIconURL template.HTMLAttr
+	FileIconURL  template.HTMLAttr
 	HumanSize    string
 	IsImage      bool
 }
@@ -86,22 +87,25 @@ type Task struct {
 	CurrentUserIsOwner bool
 	CurrentUserIsDone  bool
 	IsCompleted        bool
+	IsClosed           bool
 	IsOneCompleter     bool
 	IsOnePendingUser   bool
-	PendingUsers       []User
-	CompletedUsers     []User
-	OnlyPendingUser    User
-	OnlyCompleter      User
+	PendingUsers       []EmbedUser
+	CompletedUsers     []EmbedUser
+	OnlyPendingUser    EmbedUser
+	OnlyCompleter      EmbedUser
 	Due                time.Time
 	CompletedAt        time.Time
 	CreatedAt          time.Time
 	LocalDueDate       string
 	LocalDueShortDate  string
 	LocalCompletedDate string
+
+	ColorCssClass string
 }
 
 type Wiki struct {
-	CurrentVersionEditor         User
+	CurrentVersionEditor         EmbedUser
 	EntryLinks                   []string
 	LocalCurrentVersionUpdatedAt string
 	LocalHistoryUpdatedAt        string
@@ -118,9 +122,11 @@ type Entry struct {
 	Id         string
 	EType      string
 	Title      string
+	Content    string
 	TypeTitle  string
 	RootId     string
 	GroupId    string
+	AuthorId   string
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
 	BumpedUpAt time.Time
@@ -131,34 +137,44 @@ type Entry struct {
 	LocalHumanCreatedAt  string
 	WholeLastUpdateAtAgo string
 	LastUpdateAtAgo      string
+	MentionedUserIds     string
 
-	HtmlTitle      template.HTML
-	HtmlContent    template.HTML
+	HtmlTitle         template.HTML
+	HtmlContent       template.HTML
+	WatchlistHtml     template.HTML
+	ToUsersHtml       template.HTML
+	CommentsCountHtml template.HTML
+	LikedByUsersHtml  template.HTML
+
 	Link           template.HTMLAttr
-	WatchlistHtml  template.HTML
-	ToUsersHtml    template.HTML
 	UploadURL      template.HTMLAttr
 	CommentFormURL template.HTMLAttr
 
 	IsBroadcast        bool
 	IsSystemMessage    bool
+	IsRequest          bool
 	IsWiki             bool
 	IsPost             bool
-	IsTaskTodo         bool
+	IsTask             bool
+	IsTaskToDo         bool
 	IsInWatchList      bool
 	CurrentUserCanEdit bool
+	CanEdit            bool
+	ManagerCanEdit     bool
+	LikedByMe          bool
+	HasInlineTask      bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
 
-	Author            *EmbedUser
+	Author            EmbedUser
 	Group             *Group
 	Task              *Task
 	Wiki              *Wiki
 	ShareGroupRequest *ShareGroupRequest
 
-	ToUsers      []*EmbedUser
-	LikedByUsers []*EmbedUser
+	ToUsers      []EmbedUser
+	LikedByUsers []EmbedUser
 	Attachments  []*Attachment
 	Comments     []*Entry
 	NewComment   *Entry
