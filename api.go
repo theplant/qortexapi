@@ -24,9 +24,11 @@ type AuthUserService interface {
 	GetDraftList(before time.Time, limit int) (r *DraftList, err error)
 	DeleteDraft(entryId string, groupId string) (err error)
 
+	//Group related
+	CreateGroup(input *GroupInput) (r *Group, validated *govalidations.Validated, err error)
+	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
+	ConvertToSharedGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	GetAllGroups() (r []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
-	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
-	ConvertToSharedGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 }
