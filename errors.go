@@ -8,6 +8,12 @@ type CanNotBlankError struct {
 	Field string
 }
 
+func NewCanNotBlankError(field string) *CanNotBlankError {
+	return &CanNotBlankError{
+		Field: field,
+	}
+}
+
 func (this *CanNotBlankError) Error() string {
 	return this.Field + " can't be blank"
 }
