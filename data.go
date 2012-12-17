@@ -30,7 +30,7 @@ type User struct {
 	FromSharedGroup bool
 	Editable        bool
 	Followable      bool
-	FollowedByMe      bool
+	FollowedByMe    bool
 	AdminingGroup   bool
 }
 
@@ -65,6 +65,7 @@ type Group struct {
 	FollowedByMe      bool
 	AdministratedByMe bool
 	IsShared          bool
+	HostOrgName       string
 }
 
 type GroupSelectorItem struct {
