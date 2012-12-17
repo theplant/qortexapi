@@ -149,6 +149,7 @@ type Entry struct {
 	Link           template.HTMLAttr
 	UploadURL      template.HTMLAttr
 	CommentFormURL template.HTMLAttr
+	UpdatePostURL  template.HTMLAttr
 
 	IsBroadcast        bool
 	IsSystemMessage    bool
