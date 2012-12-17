@@ -33,4 +33,5 @@ type AuthUserService interface {
 	GetAllGroups() (r []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
+	GetUsers(groupId string, query string, pageNumber int, countPerPage int) (r []*User, pageCount int, err error)
 }
