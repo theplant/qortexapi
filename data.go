@@ -61,16 +61,30 @@ type Group struct {
 	IsShared          bool
 }
 
+type GroupSelectorItem struct {
+	Id         string
+	Name       string
+	IsSelected bool
+}
+
+type GroupSelector struct {
+	Header            template.HTML
+	SelectedGroupId   string
+	SysMessage        *GroupSelectorItem
+	FollowingGroups   []*GroupSelectorItem
+	UnFollowingGroups []*GroupSelectorItem
+}
+
 type Attachment struct {
 	Id            string
-	OwnerIds      []string
+	OwnerId       []string
 	Category      string
 	Filename      string
 	ContentType   string
 	MD5           string
 	ContentLength int64
 	Error         string
-	GroupIds      []string
+	GroupId       []string
 	UploadTime    time.Time
 	Width         int
 	Height        int
@@ -159,11 +173,13 @@ type Entry struct {
 	IsTask             bool
 	IsTaskToDo         bool
 	IsInWatchList      bool
+	IsToGroup          bool
 	CurrentUserCanEdit bool
 	CanEdit            bool
 	ManagerCanEdit     bool
 	LikedByMe          bool
 	HasInlineTask      bool
+	TaskIsCompleted    bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
@@ -174,11 +190,13 @@ type Entry struct {
 	Wiki              *Wiki
 	ShareGroupRequest *ShareGroupRequest
 
-	ToUsers      []EmbedUser
-	LikedByUsers []EmbedUser
-	Attachments  []*Attachment
-	Comments     []*Entry
-	NewComment   *Entry
+	ToUsers        []EmbedUser
+	MentionedUsers []EmbedUser
+	LikedByUsers   []EmbedUser
+	Attachments    []*Attachment
+	Comments       []*Entry
+	NewComment     *Entry
+	GroupSlector   *GroupSelector
 }
 
 type WatchList struct {

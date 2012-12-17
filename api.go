@@ -8,6 +8,7 @@ import (
 type AuthUserService interface {
 	CreatePost(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	UpdatePost(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
+	EditPost(entryId string, groupId string) (r *Entry, err error)
 	// CreateWiki() (err error)
 	// UpdateWiki() (err error)
 	// CreatePostWithTask() (err error)
