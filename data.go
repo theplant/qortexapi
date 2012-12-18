@@ -14,24 +14,26 @@ type Organization struct {
 }
 
 type User struct {
-	Id              string
-	Email           string
-	Name            string
-	Title           string
-	Avatar          string
-	JID             string
-	Timezone        string
-	IsSuperUser     bool
-	IsSharedUser    bool
-	OrgId           string
-	OriginalOrgId   string
-	URL             string
-	IsDeleted       bool
-	FromSharedGroup bool
-	Editable        bool
-	Followable      bool
-	FollowedByMe    bool
-	AdminingGroup   bool
+	Id               string
+	Email            string
+	Name             string
+	Title            string
+	Avatar           string
+	JID              string
+	Timezone         string
+	IsSuperUser      bool
+	IsSharedUser     bool
+	OrgId            string
+	OriginalOrgId    string
+	URL              string
+	IsDeleted        bool
+	FromSharedGroup  bool
+	Editable         bool
+	Followable       bool
+	FollowedByMe     bool
+	AdminingAGroup   bool
+	AdminingTheGroup bool
+	FollowingGroups  []*Group
 }
 
 type EmbedUser struct {
