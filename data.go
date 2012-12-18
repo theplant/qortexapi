@@ -167,10 +167,11 @@ type Entry struct {
 	CommentsCountHtml template.HTML
 	LikedByUsersHtml  template.HTML
 
-	Link           template.HTMLAttr
-	UploadURL      template.HTMLAttr
-	CommentFormURL template.HTMLAttr
-	UpdatePostURL  template.HTMLAttr
+	Link             template.HTMLAttr
+	UploadURL        template.HTMLAttr
+	CommentFormURL   template.HTMLAttr
+	UpdatePostURL    template.HTMLAttr
+	UpdateCommentURL template.HTMLAttr
 
 	IsBroadcast        bool
 	IsSystemMessage    bool
