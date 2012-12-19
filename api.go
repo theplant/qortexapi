@@ -36,5 +36,5 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	OrganizationUsers(query string, pageNumber int, countPerPage int) (r []*User, pageCount int, err error)
-	GroupUsers(groupId string, query string, OnlyFollowers bool, pageNumber int, countPerPage int) (r []*User, pageCount int, err error)
+	GroupUsers(groupId string, query string, OnlyFollowers bool, sortKey string, countPerPage int) (r []*User, newSortKey string, err error)
 }
