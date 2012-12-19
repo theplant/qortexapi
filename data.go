@@ -43,6 +43,7 @@ type EmbedUser struct {
 	Email          string
 	Name           string
 	Title          string
+	Avatar16       string
 	Avatar32       string
 	JID            string
 	Timezone       string
@@ -130,17 +131,44 @@ type Task struct {
 }
 
 type Wiki struct {
-	CurrentVersionEditor         EmbedUser
-	EntryLinks                   []string
-	LocalCurrentVersionUpdatedAt string
-	LocalHistoryUpdatedAt        string
-	// WikiVersion
+	IsLastVersion          bool
+	LocalUpdatedAt         string
+	UpdatedAtUnixNano      string
+	CurrentVersionEditor   EmbedUser
+	LinkedEntries          []*LinkedEntry
+	BaseOnEntryId          string
+	BaseOnEntryTitle       string
+	BaseOnEntryLink        template.HTMLAttr
+	Versions               []*WikiVersion
+	CurrentVersionComments []*Entry
+	OtherVersionsComments  []*Entry
+}
+
+type WikiVersion struct {
+	Id                string
+	GroupId           string
+	UpdatedAt         time.Time
+	LocalUpdatedAt    string
+	UpdatedAtUnixNano string
+	CurVerEditor      EmbedUser
 }
 
 type ShareGroupRequest struct {
 	IsCurrentOrgSent     bool
 	IsCurrentOrgAccepted bool
 	IsCurrentOrgRejected bool
+}
+
+type LinkedEntry struct {
+	Id             string
+	EType          string
+	Title          string
+	GroupId        string
+	AuthorId       string
+	IsRoot         bool
+	RootId         string
+	RootEntryTitle string
+	Link           template.HTMLAttr
 }
 
 type Entry struct {
@@ -160,6 +188,7 @@ type Entry struct {
 	Permalink            string
 	IconName             string
 	LocalHumanCreatedAt  string
+	LocalHumanUpdatedAt  string
 	WholeLastUpdateAtAgo string
 	LastUpdateAtAgo      string
 	MentionedUserIds     string
