@@ -16,7 +16,9 @@ type Organization struct {
 type User struct {
 	Id                   string
 	Email                string
-	Name                 string
+	Firstame             string
+	LastName             string
+	FullName             string
 	Title                string
 	Avatar               string
 	JID                  string
