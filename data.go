@@ -73,6 +73,8 @@ type Group struct {
 	AdministratedByMe bool
 	IsShared          bool
 	HostOrgName       string
+	EntriesCount      int
+	FollowersCount    int
 }
 
 type GroupSelectorItem struct {
