@@ -45,4 +45,8 @@ type AuthUserService interface {
 	EnableUser(userId string) (err error)
 	DisableUser(userId string) (err error)
 	DeleteUser(userId string) (err error)
+	PromoteToSuperUser(userId string) (err error)
+	DemoteFromSuperUser(userId string) (err error)
+	FollowUser(userId string) (err error)
+	UnfollowUser(userId string) (err error)
 }
