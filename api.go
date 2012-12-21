@@ -13,6 +13,8 @@ type AuthUserService interface {
 	EditComment(entryId string, groupId string) (r *Entry, err error)
 	CreateWiki(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	EditWiki(entryId string, groupId string) (r *Entry, err error)
+	GetWiki(entryId string, groupId string, updateAtUnixNano string) (r *Entry, err error)
+	GetWikiByTitle(title string, groupId string, updateAtUnixNano string) (r *Entry, err error)
 	UpdateWiki(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	// UpdateWiki() (err error)
 	// CreatePostWithTask() (err error)
