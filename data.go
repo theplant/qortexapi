@@ -242,6 +242,7 @@ type Entry struct {
 	Attachments    []*Attachment
 	Comments       []*Entry
 	NewComment     *Entry
+	NewEntry       *Entry
 	GroupSlector   *GroupSelector
 }
 
