@@ -40,4 +40,9 @@ type AuthUserService interface {
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	OrganizationUsers(query string, pageNumber int, countPerPage int) (r []*User, pageCount int, err error)
 	GroupUsers(groupId string, query string, OnlyFollowers bool, sortKey string, countPerPage int) (r []*User, newSortKey string, err error)
+
+	//User related
+	EnableUser(userId string) (err error)
+	DisableUser(userId string) (err error)
+	DeleteUser(userId string) (err error)
 }
