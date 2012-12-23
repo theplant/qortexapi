@@ -27,7 +27,11 @@ type User struct {
 	IsSharedUser         bool
 	OrgId                string
 	OriginalOrgId        string
-	URL                  string
+	PrefixURL            string
+	ProfileURL           string
+	IsLoggedInUser       bool
+	IsAvailable          bool
+	IsDisabled           bool
 	IsDeleted            bool
 	FromSharedGroup      bool
 	FromOrganizationName string
@@ -53,7 +57,7 @@ type EmbedUser struct {
 	IsShare        bool
 	OrganizationId string
 	OriginalOrgId  string
-	UserPageUrl    template.HTMLAttr
+	ProfileURL     template.HTMLAttr
 }
 
 type Group struct {

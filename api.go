@@ -40,10 +40,11 @@ type AuthUserService interface {
 	GetPublicGroups(keyword string) (r []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
-	OrganizationUsers(query string, pageNumber int, countPerPage int) (r []*User, pageCount int, err error)
-	GroupUsers(groupId string, query string, OnlyFollowers bool, sortKey string, countPerPage int) (r []*User, newSortKey string, err error)
 
 	//User related
+	OrganizationUsers(query string, pageNumber int, countPerPage int) (r []*User, pageCount int, err error)
+	GroupUsers(groupId string, query string, OnlyFollowers bool, sortKey string, countPerPage int) (r []*User, newSortKey string, err error)
+	GetUser(userId string) (r *User, err error)
 	EnableUser(userId string) (err error)
 	DisableUser(userId string) (err error)
 	DeleteUser(userId string) (err error)
