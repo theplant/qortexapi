@@ -134,25 +134,31 @@ type Attachment struct {
 }
 
 type Task struct {
-	IsAcknowledgement  bool
-	CurrentUserIsOwner bool
-	CurrentUserIsDone  bool
-	IsCompleted        bool
-	IsClosed           bool
-	IsOneCompleter     bool
-	IsOnePendingUser   bool
-	PendingUsers       []EmbedUser
-	CompletedUsers     []EmbedUser
-	OnlyPendingUser    EmbedUser
-	OnlyCompleter      EmbedUser
-	Due                time.Time
-	CompletedAt        time.Time
-	CreatedAt          time.Time
-	LocalDueDate       string
-	LocalDueShortDate  string
-	LocalCompletedDate string
+	IsTaskOwner       bool
+	IsTaskAssignee    bool
+	IsOthers          bool
+	IsCurrentUserDone bool
 
-	ColorCssClass string
+	IsAcknowledgement bool
+	IsTodoForOne      bool
+	IsTodoForAll      bool
+
+	IsCompleted bool
+	IsClosed    bool
+
+	CreatedAt   time.Time
+	Due         time.Time
+	CompletedAt time.Time
+
+	TotalUsersCount     int
+	CompletedUsersCount int
+	PendingUsersCount   int
+
+	ToUsers        []EmbedUser
+	PendingUsers   []EmbedUser
+	CompletedUsers []EmbedUser
+
+	TaskBarHtml template.HTML
 }
 
 type Wiki struct {
@@ -228,9 +234,6 @@ type Entry struct {
 
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
-	// CommentFormURL   template.HTMLAttr
-	// UpdatePostURL    template.HTMLAttr
-	// UpdateCommentURL template.HTMLAttr
 
 	IsBroadcast        bool
 	IsSystemMessage    bool
