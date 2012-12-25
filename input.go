@@ -1,5 +1,9 @@
 package qortexapi
 
+import (
+	"time"
+)
+
 type EntryInput struct {
 	Id               string
 	EType            string
@@ -34,4 +38,25 @@ type GroupInput struct {
 	IsShared      bool
 	GroupOwners   []string
 	InvitedOrgIds []string
+}
+
+type OrganizationInput struct {
+	Id                       string
+	OType                    string
+	Name                     string
+	Summary                  string
+	Address                  string
+	Phone                    string
+	Website                  string
+	Domain                   string
+	Domains                  []string
+	RestrictSubscriptionMail bool
+	CreatedAt                time.Time
+	AuthorId                 string
+	MemberIds                []string
+	GroupIds                 []string
+	QortexURL                string
+	LogoURL                  string
+	ChatToken                string
+	RegistrationMode         int
 }

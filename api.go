@@ -52,4 +52,8 @@ type AuthUserService interface {
 	DemoteFromSuperUser(userId string) (err error)
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
+
+	//Organization Related
+	UpdateOrganization(input *OrganizationInput) (r *Organization, validated *govalidations.Validated, err error)
+	SwitchOrganization(orgId string) (err error)
 }
