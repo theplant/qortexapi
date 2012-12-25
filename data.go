@@ -158,6 +158,7 @@ type Task struct {
 	CompletedUsersCount int
 	PendingUsersCount   int
 
+	Owner          EmbedUser
 	ToUsers        []EmbedUser
 	PendingUsers   []EmbedUser
 	CompletedUsers []EmbedUser
