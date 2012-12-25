@@ -146,9 +146,13 @@ type Task struct {
 	IsCompleted bool
 	IsClosed    bool
 
+	IsDueToday bool
+	IsOverDue  bool
+
 	CreatedAt   time.Time
 	Due         time.Time
 	CompletedAt time.Time
+	LocalDue    string
 
 	TotalUsersCount     int
 	CompletedUsersCount int
