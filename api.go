@@ -10,6 +10,7 @@ type AuthUserService interface {
 	EditPost(entryId string, groupId string) (r *Entry, err error)
 	UpdatePost(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	CreateTask(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
+	CloseTask(entryId string, groupId string) (r *Task, err error)
 	CreateComment(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	EditComment(entryId string, groupId string) (r *Entry, err error)
 	CreateWiki(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
