@@ -57,4 +57,7 @@ type AuthUserService interface {
 	//Organization Related
 	UpdateOrganization(input *OrganizationInput) (r *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
+	AcceptSharedGroupRequest(sharedOrgId string, sharedGroupId string) (err error)
+	RejectSharedGroupRequest(sharedOrgId string, sharedGroupId string) (err error)
+	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (r *Entry, err error)
 }
