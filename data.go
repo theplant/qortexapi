@@ -138,10 +138,12 @@ type Task struct {
 	IsDueToday bool
 	IsOverDue  bool
 
-	CreatedAt   time.Time
-	Due         time.Time
-	CompletedAt time.Time
-	LocalDue    string
+	CreatedAt         time.Time
+	Due               time.Time
+	CompletedAt       time.Time
+	LocalCreatedDate  string
+	LocalDue          string
+	LocalDueShortDate string
 
 	TotalUsersCount     int
 	CompletedUsersCount int
@@ -221,6 +223,7 @@ type Entry struct {
 
 	HtmlTitle         template.HTML
 	HtmlContent       template.HTML
+	HtmlContentPart   template.HTML
 	WatchlistHtml     template.HTML
 	ToUsersHtml       template.HTML
 	CommentsCountHtml template.HTML
@@ -244,6 +247,7 @@ type Entry struct {
 	LikedByMe          bool
 	HasInlineTask      bool
 	TaskIsCompleted    bool
+	IsRoot             bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
