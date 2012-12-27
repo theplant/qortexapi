@@ -27,6 +27,17 @@ type EntryInput struct {
 	BaseOnEntryId string
 }
 
+//type RequestInput struct {
+//Title          string
+//Content        string
+//SharedGroupId  string
+//SharedOrgId    string
+//HostOrgId      string
+//ToOrgIds       []string
+//AcceptedOrgIds []string
+//RejectedOrgIds []string
+//}
+
 type GroupInput struct {
 	Id            string
 	Name          string

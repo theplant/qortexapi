@@ -10,24 +10,13 @@ type Organization struct {
 	Id                       string
 	Name                     string
 	QortexURL                string
+	Summary string
 	LogoURL                  string
-	HostOrgId                string
-	EmbededOrgIds            string
-	GroupToOrgMap            map[string]string
-	OType                    string
-	Summary                  string
 	Address                  string
 	Phone                    string
 	Website                  string
-	Domain                   string
 	Domains                  []string
 	RestrictSubscriptionMail bool
-	CreatedAt                time.Time
-	AuthorId                 string
-	MemberIds                []string
-	GroupIds                 []string
-	ChatToken                string
-	RegistrationMode         int
 }
 
 type User struct {

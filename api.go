@@ -56,6 +56,7 @@ type AuthUserService interface {
 	UnfollowUser(userId string) (err error)
 
 	//Organization Related
+	OrganizationInfo(orgId string) (r *Organization, err error)
 	UpdateOrganization(input *OrganizationInput) (r *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
 	AcceptSharedGroupRequest(sharedOrgId string, sharedGroupId string) (err error)
