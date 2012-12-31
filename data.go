@@ -10,7 +10,7 @@ type Organization struct {
 	Id                       string
 	Name                     string
 	QortexURL                string
-	Summary string
+	Summary                  string
 	LogoURL                  string
 	Address                  string
 	Phone                    string
