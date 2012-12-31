@@ -6,6 +6,7 @@ import (
 )
 
 type AuthUserService interface {
+	CreateBroadcast(input *BroadcastInput) (r *Entry, validated *govalidations.Validated, err error)
 	CreatePost(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	EditPost(entryId string, groupId string) (r *Entry, err error)
 	UpdatePost(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)

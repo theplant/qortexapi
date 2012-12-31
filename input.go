@@ -27,6 +27,16 @@ type EntryInput struct {
 	BaseOnEntryId string
 }
 
+type BroadcastInput struct {
+	Id            string
+	Title         string
+	Content       string
+	ToOrgIds      string
+	IsToAllAdmins bool
+	IsToAllUsers  bool
+	IsToSomeOrgs  bool
+}
+
 //type RequestInput struct {
 //Title          string
 //Content        string
