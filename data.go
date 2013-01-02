@@ -273,6 +273,12 @@ type WatchList struct {
 	WhatWatchList bool
 }
 
+type MyTask struct {
+	TasksForMe     []*Entry
+	MyCreatedTasks []*Entry
+	AboutTodos     bool
+}
+
 type WatchItem struct {
 	AttachCnt  int
 	CommentCnt int

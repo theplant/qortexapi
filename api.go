@@ -26,6 +26,7 @@ type AuthUserService interface {
 	// UpdatePostWithTask() (err error)
 	// MyFeedEntries(entryType string, before time.Time, limit int) (r []*Entry, err error)
 	GroupEntries(groupId string, entryType string, before time.Time, limit int) (g *Group, r []*Entry, err error)
+	MyTasks(active bool, before time.Time, limit int) (myTask *MyTask, err error)
 	// UserEntries(userId string, entryType string, before time.Time, limit int) (u *User, r []*Entry, err error)
 	// LoadEntry(groupId string, entryId string) (g *Group, r *Entry, err error)
 	GetWatchList(before time.Time, limit int) (r *WatchList, err error)
