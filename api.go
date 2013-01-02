@@ -16,6 +16,7 @@ type AuthUserService interface {
 	CloseTask(entryId string, groupId string) (r *Task, err error)
 	CreateComment(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	GetComment(entryId string, groupId string) (r *Entry, err error)
+	UpdateComment(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	CreateWiki(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	GetWiki(entryId string, groupId string, updateAtUnixNano string) (r *Entry, err error)
 	GetWikiByTitle(title string, groupId string, updateAtUnixNano string) (r *Entry, err error)
