@@ -43,4 +43,6 @@ var (
 	FollowUserError                = errors.New("can not follow user")
 	UnfollowUserError              = errors.New("can not unfollow user")
 	AlreadyJoinedOrganizationError = errors.New("already joined the organization")
+	SystemMessagesNotFoundError    = errors.New("system messages not found")
+	DatabaseNotExistError          = errors.New("no such database")
 )

@@ -232,12 +232,21 @@ type Entry struct {
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
 
-	IsBroadcast        bool
-	IsSystemMessage    bool
-	IsRequest          bool
+	IsBroadcast                bool
+	IsBroadcastTypeToAllAdmins bool
+	IsBroadcastTypeToAllUsers  bool
+	IsBroadcastTypeToSomeOrgs  bool
+	FromOrg                    *Organization
+	ToOrgs                     []*Organization
+	ToOrgsHtml                 template.HTML
+
+	IsSystemMessage bool
+	IsRequest       bool
+
 	IsWiki             bool
 	IsPost             bool
 	IsTask             bool
+	IsChat             bool
 	IsTaskToDo         bool
 	IsInWatchList      bool
 	IsToGroup          bool

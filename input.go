@@ -27,14 +27,18 @@ type EntryInput struct {
 	BaseOnEntryId string
 }
 
+const (
+	BT_TO_ALL_ADMINS         = "boradcast_type_to_all_admins"
+	BT_TO_ALL_USERS          = "boradcast_type_to_all_users"
+	BT_TO_SOME_ORGANIZATIONS = "boradcast_type_to_some_organizations"
+)
+
 type BroadcastInput struct {
 	Id            string
 	Title         string
 	Content       string
-	ToOrgIds      string
-	IsToAllAdmins bool
-	IsToAllUsers  bool
-	IsToSomeOrgs  bool
+	ToOrgIds      []string
+	BroadcastType string
 }
 
 //type RequestInput struct {
