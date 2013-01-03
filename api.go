@@ -9,6 +9,7 @@ type AuthUserService interface {
 	NewEntry(groupId string) (r *Entry, err error)
 	QortexMessages(messsageType string, before time.Time, limit int) (r []*Entry, newestBumpedupTime int64, lastestBumpedupTime int64, hasMore bool, unreadEntryIds []string, err error) // when messageType is empty or equals "all", return all kinds of messages
 	CreateBroadcast(input *BroadcastInput) (r *Entry, validated *govalidations.Validated, err error)
+	CreateBroadcastComment(input *BroadcastInput) (r *Entry, validated *govalidations.Validated, err error)
 	UpdateBroadcast(input *BroadcastInput) (r *Entry, validated *govalidations.Validated, err error)
 	CreatePost(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	EditBroadcast(entryId string) (r *Entry, err error)

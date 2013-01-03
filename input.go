@@ -39,6 +39,7 @@ type BroadcastInput struct {
 	Content       string
 	ToOrgIds      []string
 	BroadcastType string
+	RootId        string
 }
 
 //type RequestInput struct {
