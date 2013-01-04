@@ -198,6 +198,20 @@ type LinkedEntry struct {
 	Link           template.HTMLAttr
 }
 
+type Request struct {
+	Info           template.HTML
+	ActionButton   template.HTML
+	FromOrg        *Organization
+	ToOrgs         []*Organization
+	AcceptedOrgs   []*Organization
+	RejectedOrgs   []*Organization
+	PendingOrgs    []*Organization
+	AcceptedComma  string
+	RejectedComma  string
+	SharedGroup    *Group
+	SharedOrgIdHex string
+}
+
 type Entry struct {
 	Id         string
 	EType      string
@@ -228,10 +242,12 @@ type Entry struct {
 	ToUsersHtml       template.HTML
 	CommentsCountHtml template.HTML
 	LikedByUsersHtml  template.HTML
+	ReplyOptionsHtml  template.HTML
 
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
 
+	IsSystemMessage            bool
 	IsBroadcast                bool
 	IsBroadcastTypeToAllAdmins bool
 	IsBroadcastTypeToAllUsers  bool
@@ -239,9 +255,8 @@ type Entry struct {
 	FromOrg                    *Organization
 	ToOrgs                     []*Organization
 	ToOrgsHtml                 template.HTML
-
-	IsSystemMessage bool
-	IsRequest       bool
+	IsRequest                  bool
+	Request                    *Request
 
 	IsWiki             bool
 	IsPost             bool
