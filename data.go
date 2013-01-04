@@ -242,7 +242,7 @@ type Entry struct {
 	ToUsersHtml       template.HTML
 	CommentsCountHtml template.HTML
 	LikedByUsersHtml  template.HTML
-	ReplyOptionsHtml  template.HTML
+	NotifyOptionsHtml template.HTML
 
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
