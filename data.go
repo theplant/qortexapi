@@ -169,6 +169,7 @@ type Wiki struct {
 	Versions               []*WikiVersion
 	CurrentVersionComments []*Entry
 	OtherVersionsComments  []*Entry
+	FirstPicture           *Attachment
 }
 
 type WikiVersion struct {
@@ -240,7 +241,6 @@ type Entry struct {
 	HtmlContentPart   template.HTML
 	WatchlistHtml     template.HTML
 	ToUsersHtml       template.HTML
-	CommentsCountHtml template.HTML
 	LikedByUsersHtml  template.HTML
 	NotifyOptionsHtml template.HTML
 
@@ -275,6 +275,7 @@ type Entry struct {
 
 	AllAttachmentsCount int
 	CommentsCount       int
+	AllLikesCount       int
 
 	Author            EmbedUser
 	Group             *Group

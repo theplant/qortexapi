@@ -7,7 +7,7 @@ import (
 
 type AuthUserService interface {
 	NewEntry(groupId string) (r *Entry, err error)
-	QortexMessages(messsageType string, before time.Time, limit int) (r []*Entry, newestBumpedupTime int64, lastestBumpedupTime int64, hasMore bool, unreadEntryIds []string, err error) // when messageType is empty or equals "all", return all kinds of messages
+	QortexMessages(messsageType string, before time.Time, limit int) (r []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
 	CreateBroadcast(input *BroadcastInput) (r *Entry, validated *govalidations.Validated, err error)
 	CreateBroadcastComment(input *BroadcastInput) (r *Entry, validated *govalidations.Validated, err error)
 	EditBroadcast(entryId string) (r *Entry, err error)
@@ -26,18 +26,22 @@ type AuthUserService interface {
 	GetWikiByTitle(title string, groupId string, updateAtUnixNano string, searchKeyWords string) (r *Entry, err error)
 	UpdateWiki(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	GetEntry(entryId string, groupId string, searchKeyWords string) (r *Entry, err error)
-	// CreatePostWithTask() (err error)
-	// UpdatePostWithTask() (err error)
+
+	GroupUnreadEntryIds(entryIds []string, groupId string) (r []string)
+	GroupEntries(groupId string, entryType string, before time.Time, limit int) (r []*Entry, err error)
 	// MyFeedEntries(entryType string, before time.Time, limit int) (r []*Entry, err error)
-	GroupEntries(groupId string, entryType string, before time.Time, limit int) (g *Group, r []*Entry, err error)
+	// NewMyFeedEntries(entryType string, after time.Time, limit int) (r []*Entry, err error)
 	MyTasks(active bool, before time.Time, limit int) (myTask *MyTask, err error)
 	// UserEntries(userId string, entryType string, before time.Time, limit int) (u *User, r []*Entry, err error)
 	// LoadEntry(groupId string, entryId string) (g *Group, r *Entry, err error)
+
+	// watchlist related
 	GetWatchList(before time.Time, limit int) (r *WatchList, err error)
 	AddToWatchList(entryId string, groupId string) (added bool, err error)
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
 
+	// draft related
 	GetDraftList(before time.Time, limit int) (r *DraftList, err error)
 	DeleteDraft(entryId string, groupId string) (err error)
 
