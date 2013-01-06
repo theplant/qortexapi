@@ -28,8 +28,9 @@ type AuthUserService interface {
 	GetEntry(entryId string, groupId string, searchKeyWords string) (r *Entry, err error)
 
 	GroupUnreadEntryIds(entryIds []string, groupId string) (r []string)
+	UnreadEntryIds(entryIds []string, groupIds []string) (r []string)
 	GroupEntries(groupId string, entryType string, before time.Time, limit int) (r []*Entry, err error)
-	// MyFeedEntries(entryType string, before time.Time, limit int) (r []*Entry, err error)
+	MyFeed(entryType string, before time.Time, limit int) (r []*Entry, err error)
 	// NewMyFeedEntries(entryType string, after time.Time, limit int) (r []*Entry, err error)
 	MyTasks(active bool, before time.Time, limit int) (myTask *MyTask, err error)
 	// UserEntries(userId string, entryType string, before time.Time, limit int) (u *User, r []*Entry, err error)
