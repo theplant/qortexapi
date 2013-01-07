@@ -7,7 +7,7 @@ import (
 
 type AuthUserService interface {
 	NewEntry(groupId string) (r *Entry, err error)
-	QortexMessages(messsageType string, before time.Time, limit int) (r []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
+	QortexMessages(messsageType string, before string, limit int) (r []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
 	CreateBroadcast(input *BroadcastInput) (r *Entry, validated *govalidations.Validated, err error)
 	CreateBroadcastComment(input *BroadcastInput) (r *Entry, validated *govalidations.Validated, err error)
 	EditBroadcast(entryId string) (r *Entry, err error)
@@ -29,10 +29,11 @@ type AuthUserService interface {
 
 	GroupUnreadEntryIds(entryIds []string, groupId string) (r []string)
 	UnreadEntryIds(entryIds []string, groupIds []string) (r []string)
-	GroupEntries(groupId string, entryType string, before time.Time, limit int) (r []*Entry, err error)
-	MyFeed(entryType string, before time.Time, limit int) (r []*Entry, err error)
+	GroupEntries(groupId string, entryType string, before string, limit int) (r []*Entry, err error)
+	MyFeedEntries(entryType string, before string, limit int) (r []*Entry, err error)
 	// NewMyFeedEntries(entryType string, after time.Time, limit int) (r []*Entry, err error)
-	MyTasks(active bool, before time.Time, limit int) (myTask *MyTask, err error)
+	MyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
+	MyChatEntries(before string, limit int) (r []*Entry, err error)
 	// UserEntries(userId string, entryType string, before time.Time, limit int) (u *User, r []*Entry, err error)
 	// LoadEntry(groupId string, entryId string) (g *Group, r *Entry, err error)
 

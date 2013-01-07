@@ -213,6 +213,35 @@ type Request struct {
 	SharedOrgIdHex string
 }
 
+type Conversation struct {
+	Id                  string
+	Title               string
+	UserIds             []string
+	Participants        []EmbedUser
+	CreatedAt           time.Time
+	EndedAt             time.Time
+	LocalHumanCreatedAt string
+	Topic               string
+	Private             bool
+	IsClose             bool
+	IsShared            bool
+	SharedMessageIds    []string
+	MessagesCount       int
+	Messages            []*Message
+}
+
+type Message struct {
+	Id                 string
+	ConversationId     string
+	UserId             string
+	Content            string
+	HtmlContent        template.HTML
+	CreatedAt          time.Time
+	EmbedUser          EmbedUser
+	ShowUser           bool
+	HighlightedContent template.HTML
+}
+
 type Entry struct {
 	Id         string
 	EType      string
@@ -283,6 +312,7 @@ type Entry struct {
 	Task              *Task
 	Wiki              *Wiki
 	ShareGroupRequest *ShareGroupRequest
+	Conversation      *Conversation
 
 	ToUsers        []EmbedUser
 	MentionedUsers []EmbedUser
@@ -303,6 +333,13 @@ type MyTask struct {
 	TasksForMe     []*Entry
 	MyCreatedTasks []*Entry
 	AboutTodos     bool
+}
+
+type MyChats struct {
+	ChatEntries      []*Entry
+	HasMore          bool
+	LatestCreateTime int64
+	WhatChats        bool
 }
 
 type WatchItem struct {
