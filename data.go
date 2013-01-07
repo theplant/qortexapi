@@ -260,6 +260,7 @@ type Entry struct {
 
 	IsWiki             bool
 	IsPost             bool
+	IsComment          bool
 	IsTask             bool
 	IsChat             bool
 	IsTaskToDo         bool
