@@ -286,6 +286,7 @@ type Entry struct {
 	ToOrgsHtml                 template.HTML
 	IsRequest                  bool
 	Request                    *Request
+	ToBeCreatedBySupserOrg     bool
 
 	IsWiki             bool
 	IsPost             bool
