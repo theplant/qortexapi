@@ -120,6 +120,7 @@ type Attachment struct {
 	FileIconURL  template.HTMLAttr
 	HumanSize    string
 	IsImage      bool
+	FileKind     string
 }
 
 type Task struct {
