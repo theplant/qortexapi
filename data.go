@@ -50,6 +50,12 @@ type User struct {
 	FollowingGroups      []*Group
 }
 
+type EmbedOrg struct {
+	Id      string
+	Name    string
+	LogoURL string
+}
+
 type EmbedUser struct {
 	Id             string
 	Email          string
@@ -203,11 +209,11 @@ type LinkedEntry struct {
 type Request struct {
 	Info           template.HTML
 	ActionButton   template.HTML
-	FromOrg        *Organization
-	ToOrgs         []*Organization
-	AcceptedOrgs   []*Organization
-	RejectedOrgs   []*Organization
-	PendingOrgs    []*Organization
+	FromOrg        EmbedOrg
+	ToOrgs         []EmbedOrg
+	AcceptedOrgs   []EmbedOrg
+	RejectedOrgs   []EmbedOrg
+	PendingOrgs    []EmbedOrg
 	AcceptedComma  string
 	RejectedComma  string
 	SharedGroup    *Group
@@ -282,8 +288,8 @@ type Entry struct {
 	IsBroadcastTypeToAllAdmins        bool
 	IsBroadcastTypeToAllUsers         bool
 	IsBroadcastTypeToSomeOrgs         bool
-	FromOrg                           *Organization
-	ToOrgs                            []*Organization
+	FromOrg                           EmbedOrg
+	ToOrgs                            []EmbedOrg
 	ToOrgsHtml                        template.HTML
 	IsRequest                         bool
 	Request                           *Request
