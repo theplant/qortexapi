@@ -288,6 +288,7 @@ type Entry struct {
 	IsBroadcastTypeToAllAdmins        bool
 	IsBroadcastTypeToAllUsers         bool
 	IsBroadcastTypeToSomeOrgs         bool
+	IsFromSuperOrg                    bool
 	FromOrg                           EmbedOrg
 	ToOrgs                            []EmbedOrg
 	ToOrgsHtml                        template.HTML

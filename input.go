@@ -34,10 +34,9 @@ const (
 )
 
 type BroadcastInput struct {
-	Id      string
-	Title   string
-	Content string
-	//ToOrgIds      string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	Id            string
+	Title         string
+	Content       string
 	ToOrgIds      []string
 	BroadcastType string
 	RootId        string
