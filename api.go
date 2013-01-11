@@ -38,9 +38,12 @@ type AuthUserService interface {
 	MyFeedEntries(entryType string, before string, limit int) (entries []*Entry, err error)
 	// NewMyFeedEntries(entryType string, after time.Time, limit int) (entries []*Entry, err error)
 	MyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
+
 	MyChatEntries(before string, limit int) (entries []*Entry, err error)
 	// UserEntries(userId string, entryType string, before time.Time, limit int) (u *User, entries []*Entry, err error)
 	// LoadEntry(groupId string, entryId string) (g *Group, entry *Entry, err error)
+
+	MyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
 
 	// watchlist related
 	GetWatchList(before time.Time, limit int) (watchlist *WatchList, err error)

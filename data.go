@@ -333,6 +333,17 @@ type Entry struct {
 	GroupSlector   *GroupSelector
 }
 
+type EmbedEntry struct {
+	Id        string
+	GroupId   string
+	Title     string
+	HtmlTitle template.HTML
+	EType     string
+	Author    EmbedUser
+	ToUsers   []EmbedUser
+	Link      template.HTMLAttr
+}
+
 type WatchList struct {
 	Items         []*WatchItem
 	WhatWatchList bool
@@ -349,6 +360,26 @@ type MyChats struct {
 	HasMore          bool
 	LatestCreateTime int64
 	WhatChats        bool
+}
+
+type MyNotifications struct {
+	NotificationItems []*NotificationItem
+	HasMore           bool
+	LatestNotifyTime  int64
+}
+
+type NotificationItem struct {
+	Id            string
+	GroupId       string
+	ToUser        EmbedUser
+	ForEntry      EmbedEntry
+	FromUser      EmbedUser
+	CausedByEntry EmbedEntry
+	NotifiedAt    time.Time
+	ReadAt        time.Time
+	Readed        bool
+	Type          string
+	Link          template.HTMLAttr
 }
 
 type WatchItem struct {
