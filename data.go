@@ -311,6 +311,7 @@ type Entry struct {
 	HasInlineTask      bool
 	TaskIsCompleted    bool
 	IsRoot             bool
+	IsUnread           bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
