@@ -295,6 +295,7 @@ type Entry struct {
 	IsRequest                         bool
 	Request                           *Request
 	ToBeCreatedBySuperUserInSupserOrg bool
+	ToBeCreatedByUserInSupserOrg      bool
 
 	IsWiki             bool
 	IsPost             bool
