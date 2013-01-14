@@ -416,3 +416,13 @@ type GroupCount struct {
 	GroupId     string
 	UnreadCount int
 }
+
+type GroupHeaderItem struct {
+	HasToFollow     bool
+	IsFollowing     bool
+	IsManaging      bool
+	HasFileTab      bool
+	HasToDoTab      bool
+	IsSystemMessage bool
+	SelectedGroup   bool
+}

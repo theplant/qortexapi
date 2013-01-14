@@ -66,6 +66,7 @@ type AuthUserService interface {
 	GetPublicGroups(keyword string) (groups []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
+	GetGroupHeaderItem(groupId string) (ghi *GroupHeaderItem)
 
 	//User related
 	OrganizationUsers(query string, pageNumber int, countPerPage int) (users []*User, pageCount int, err error)
