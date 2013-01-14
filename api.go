@@ -34,8 +34,8 @@ type AuthUserService interface {
 	UpdateWiki(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetEntry(entryId string, groupId string, searchKeyWords string) (entry *Entry, err error)
 
-	GroupUnreadEntryIds(entryIds []string, groupId string) (unreadEntryIds []string, err error)
-	UnreadEntryIds(entryIds []string, groupIds []string) (unreadEntryIds []string, err error)
+	// GroupUnreadEntryIds(entryIds []string, groupId string) (unreadEntryIds []string, err error)
+	// UnreadEntryIds(entryIds []string, groupIds []string) (unreadEntryIds []string, err error)
 	GroupEntries(groupId string, entryType string, before string, limit int) (entries []*Entry, err error)
 	MyFeedEntries(entryType string, before string, limit int) (entries []*Entry, err error)
 	// NewMyFeedEntries(entryType string, after time.Time, limit int) (entries []*Entry, err error)
@@ -66,7 +66,7 @@ type AuthUserService interface {
 	GetPublicGroups(keyword string) (groups []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
-	GetGroupHeaderItem(groupId string) (ghi *GroupHeaderItem)
+	GetGroupHeaderItem(groupId string) (ghi *GroupHeaderItem, err error)
 
 	//User related
 	OrganizationUsers(query string, pageNumber int, countPerPage int) (users []*User, pageCount int, err error)
