@@ -283,19 +283,19 @@ type Entry struct {
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
 
-	IsSystemMessage                   bool
-	IsBroadcast                       bool
-	IsBroadcastTypeToAllAdmins        bool
-	IsBroadcastTypeToAllUsers         bool
-	IsBroadcastTypeToSomeOrgs         bool
-	IsFromSuperOrg                    bool
-	FromOrg                           EmbedOrg
-	ToOrgs                            []EmbedOrg
-	ToOrgsHtml                        template.HTML
-	IsRequest                         bool
-	Request                           *Request
-	ToBeCreatedBySuperUserInSupserOrg bool
-	ToBeCreatedByUserInSupserOrg      bool
+	IsSystemMessage               bool
+	IsBroadcast                   bool
+	IsBroadcastTypeToAllAdmins    bool
+	IsBroadcastTypeToAllUsers     bool
+	IsBroadcastTypeToSomeOrgs     bool
+	IsFromSuperOrg                bool
+	FromOrg                       EmbedOrg
+	ToOrgs                        []EmbedOrg
+	ToOrgsHtml                    template.HTML
+	IsRequest                     bool
+	Request                       *Request
+	VisibleForSuperUserInSuperOrg bool
+	VisibleForSuperOrg            bool
 
 	IsWiki             bool
 	IsPost             bool

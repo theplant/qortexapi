@@ -26,6 +26,7 @@ var (
 	NonStandardOrganizationError   = errors.New("this organization is not standard")
 	GroupNotFoundError             = errors.New("group not found")
 	GroupsNotFoundError            = errors.New("groups not found")
+	MemberNotFoundError            = errors.New("member not found")
 	UserNotFoundError              = errors.New("user not found")
 	UsersNotFoundError             = errors.New("users not found")
 	PermissionDeniedError          = errors.New("permiession denied")
