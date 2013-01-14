@@ -402,3 +402,17 @@ type DraftList struct {
 	// UserId     string
 	DraftItems []*Entry
 }
+
+type MyCount struct {
+	UserId                 string
+	FollowedUnreadCount    int
+	NotificationReadCount  int
+	NotificationTotalCount int
+	ActiveTasksCount       int
+	GroupCounts            []*GroupCount
+}
+
+type GroupCount struct {
+	GroupId     string
+	UnreadCount int
+}
