@@ -80,8 +80,11 @@ type AuthUserService interface {
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
 
-	//Organization Related
+	// Count related
+	MyCount() (myCount *MyCount)
+	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
 
+	//Organization Related
 	OrganizationsInfo(orgIds []string) (orgs []*Organization, err error)
 	OrganizationInfo(orgId string) (org *Organization, err error)
 	SearchOrganizations(query string) (org []*Organization, err error)

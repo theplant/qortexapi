@@ -2,7 +2,6 @@ package qortexapi
 
 import (
 	"html/template"
-	// "text/template"
 	"time"
 )
 
