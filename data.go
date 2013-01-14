@@ -403,12 +403,11 @@ type DraftList struct {
 }
 
 type MyCount struct {
-	UserId                 string
-	FollowedUnreadCount    int
-	NotificationReadCount  int
-	NotificationTotalCount int
-	ActiveTasksCount       int
-	GroupCounts            []*GroupCount
+	UserId                  string
+	FollowedUnreadCount     int
+	NotificationUnreadCount int
+	ActiveTasksCount        int
+	GroupCounts             []*GroupCount
 }
 
 type GroupCount struct {
