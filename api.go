@@ -81,7 +81,7 @@ type AuthUserService interface {
 	UnfollowUser(userId string) (err error)
 
 	// Count related
-	MyCount() (myCount *MyCount)
+	MyCount() (myCount *MyCount, err error)
 	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
 
 	//Organization Related
