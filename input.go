@@ -64,6 +64,7 @@ type GroupInput struct {
 	IsShared      bool
 	GroupOwners   []string
 	InvitedOrgIds []string
+	ActionOrgId   string
 }
 
 type OrganizationInput struct {
