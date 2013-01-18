@@ -282,6 +282,9 @@ type Entry struct {
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
 
+	IsShared    bool
+	Uncommentable bool
+
 	IsSystemMessage               bool
 	IsBroadcast                   bool
 	IsBroadcastTypeToAllAdmins    bool
