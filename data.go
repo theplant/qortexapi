@@ -424,3 +424,18 @@ type GroupHeaderItem struct {
 	IsSystemMessage bool
 	SelectedGroup   bool
 }
+
+type InlineHelp struct {
+	WhatFeed        bool
+	WhatGroup       bool
+	WhatNext        bool
+	WhatChats       bool
+	WhatWatchList   bool
+	CreateGroups    bool
+	InviteOthers    bool
+	AboutTodos      bool
+	GettingOut      bool
+	InviteOthersURL string
+	WhatNextURL     string
+	WhatChatsURL    string
+}
