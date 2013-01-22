@@ -160,7 +160,8 @@ type Task struct {
 	PendingUsers   []EmbedUser
 	CompletedUsers []EmbedUser
 
-	TaskBarHtml template.HTML
+	ColorCssClass string
+	TaskBarHtml   template.HTML
 }
 
 type Wiki struct {
@@ -282,7 +283,7 @@ type Entry struct {
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
 
-	IsShared    bool
+	IsShared      bool
 	Uncommentable bool
 
 	IsSystemMessage               bool
