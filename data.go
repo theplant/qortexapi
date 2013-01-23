@@ -89,6 +89,7 @@ type Group struct {
 	LogoURL             string
 	IconName            string
 	Link                string
+	Slug                string
 	Author              EmbedUser
 	IsAdmin             bool
 	IsPrivate           bool
