@@ -71,6 +71,16 @@ type EmbedUser struct {
 	ProfileURL     template.HTMLAttr
 }
 
+type PanelStatus struct {
+	AsideGroupsCollapse      bool
+	AsideOtherGroupsCollapse bool
+	HasToDo                  bool
+	HasDraft                 bool
+	HasWatchList             bool
+	HasChat                  bool
+	ShowMarkUnreadThreshold  int
+}
+
 type Group struct {
 	Id                string
 	Name              string

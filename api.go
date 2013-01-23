@@ -81,6 +81,7 @@ type AuthUserService interface {
 	DemoteFromSuperUser(userId string) (err error)
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
+	PanelStatus() (panelStatus *PanelStatus, err error)
 
 	// Count related
 	MyCount() (myCount *MyCount, err error)
@@ -95,4 +96,5 @@ type AuthUserService interface {
 	AcceptSharedGroupRequest(sharedOrgId string, sharedGroupId string) (req *Request, err error)
 	RejectSharedGroupRequest(sharedOrgId string, sharedGroupId string) (req *Request, err error)
 	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (entry *Entry, err error)
+
 }
