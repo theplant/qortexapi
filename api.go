@@ -69,6 +69,7 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetGroupHeaderItem(groupId string) (ghi *GroupHeaderItem, err error)
+	ClassifyMyGroups() (publicGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
 
 	//User related
 	OrganizationUsers(query string, pageNumber int, countPerPage int) (users []*User, pageCount int, err error)
@@ -81,6 +82,7 @@ type AuthUserService interface {
 	DemoteFromSuperUser(userId string) (err error)
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
+	PanelStatus() (panelStatus *PanelStatus, err error)
 
 	// Count related
 	MyCount() (myCount *MyCount, err error)
@@ -95,4 +97,5 @@ type AuthUserService interface {
 	AcceptSharedGroupRequest(sharedOrgId string, sharedGroupId string) (req *Request, err error)
 	RejectSharedGroupRequest(sharedOrgId string, sharedGroupId string) (req *Request, err error)
 	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (entry *Entry, err error)
+
 }
