@@ -60,6 +60,7 @@ type GroupInput struct {
 	Type          string
 	LogoURL       string
 	IconName      string
+	Slug          string
 	IsPrivate     bool
 	IsShared      bool
 	GroupOwners   []string
