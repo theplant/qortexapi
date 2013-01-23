@@ -71,26 +71,37 @@ type EmbedUser struct {
 	ProfileURL     template.HTMLAttr
 }
 
+type PanelStatus struct {
+	AsideGroupsCollapse      bool
+	AsideOtherGroupsCollapse bool
+	HasToDo                  bool
+	HasDraft                 bool
+	HasWatchList             bool
+	HasChat                  bool
+	ShowMarkUnreadThreshold  int
+}
+
 type Group struct {
-	Id                string
-	Name              string
-	Description       string
-	GType             string
-	LogoURL           string
-	IconName          string
-	Link              string
-	Slug              string
-	Author            EmbedUser
-	IsAdmin           bool
-	IsPrivate         bool
-	Editable          bool
-	Managable         bool
-	FollowedByMe      bool
-	AdministratedByMe bool
-	IsShared          bool
-	HostOrgName       string
-	EntriesCount      int
-	FollowersCount    int
+	Id                  string
+	Name                string
+	Description         string
+	GType               string
+	LogoURL             string
+	IconName            string
+	Link                string
+	Slug                string
+	Author              EmbedUser
+	IsAdmin             bool
+	IsPrivate           bool
+	Editable            bool
+	Managable           bool
+	FollowedByMe        bool
+	AdministratedByMe   bool
+	IsShared            bool
+	HostOrgName         string
+	IsDispayHostOrgName bool
+	EntriesCount        int
+	FollowersCount      int
 }
 
 type GroupSelectorItem struct {
