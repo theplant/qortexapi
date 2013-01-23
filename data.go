@@ -82,24 +82,25 @@ type PanelStatus struct {
 }
 
 type Group struct {
-	Id                string
-	Name              string
-	Description       string
-	GType             string
-	LogoURL           string
-	IconName          string
-	Link              string
-	Author            EmbedUser
-	IsAdmin           bool
-	IsPrivate         bool
-	Editable          bool
-	Managable         bool
-	FollowedByMe      bool
-	AdministratedByMe bool
-	IsShared          bool
-	HostOrgName       string
-	EntriesCount      int
-	FollowersCount    int
+	Id                  string
+	Name                string
+	Description         string
+	GType               string
+	LogoURL             string
+	IconName            string
+	Link                string
+	Author              EmbedUser
+	IsAdmin             bool
+	IsPrivate           bool
+	Editable            bool
+	Managable           bool
+	FollowedByMe        bool
+	AdministratedByMe   bool
+	IsShared            bool
+	HostOrgName         string
+	IsDispayHostOrgName bool
+	EntriesCount        int
+	FollowersCount      int
 }
 
 type GroupSelectorItem struct {
