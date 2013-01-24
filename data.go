@@ -193,12 +193,12 @@ type Wiki struct {
 }
 
 type WikiVersion struct {
-	Id                string
-	GroupId           string
-	UpdatedAt         time.Time
-	LocalUpdatedAt    string
-	UpdatedAtUnixNano string
-	CurVerEditor      EmbedUser
+	Id                   string
+	GroupId              string
+	UpdatedAt            time.Time
+	LocalUpdatedAt       string
+	UpdatedAtUnixNano    string
+	CurrentVersionEditor EmbedUser
 }
 
 type ShareGroupRequest struct {
@@ -329,17 +329,19 @@ type Entry struct {
 	TaskIsCompleted    bool
 	IsRoot             bool
 	IsUnread           bool
+	IsUpdated          bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
 	AllLikesCount       int
 
-	Author            EmbedUser
-	Group             *Group
-	Task              *Task
-	Wiki              *Wiki
-	ShareGroupRequest *ShareGroupRequest
-	Conversation      *Conversation
+	Author               EmbedUser
+	CurrentVersionEditor EmbedUser
+	Group                *Group
+	Task                 *Task
+	Wiki                 *Wiki
+	ShareGroupRequest    *ShareGroupRequest
+	Conversation         *Conversation
 
 	ToUsers        []EmbedUser
 	MentionedUsers []EmbedUser
