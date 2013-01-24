@@ -34,7 +34,7 @@ type AuthUserService interface {
 	UpdateWiki(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetEntry(entryId string, groupId string, searchKeyWords string) (entry *Entry, err error)
 
-	GetEntryAttachs(entryId string, groupId string) (attachments []*Attachment, err error)
+	EntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 
 	// GroupUnreadEntryIds(entryIds []string, groupId string) (unreadEntryIds []string, err error)
 	// UnreadEntryIds(entryIds []string, groupIds []string) (unreadEntryIds []string, err error)
