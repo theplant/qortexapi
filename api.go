@@ -85,6 +85,8 @@ type AuthUserService interface {
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
 	PanelStatus() (panelStatus *PanelStatus, err error)
+	Preferences() (preference *Preferences)
+	UpdatePreferences(input *PreferencesInput) (preference *Preferences, validated *govalidations.Validated, err error)
 
 	// Count related
 	MyCount() (myCount *MyCount, err error)
