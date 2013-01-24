@@ -123,6 +123,7 @@ type Attachment struct {
 	OwnerId       []string
 	Category      string
 	Filename      string
+	ShortFilename string
 	ContentType   string
 	MD5           string
 	ContentLength int64
