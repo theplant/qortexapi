@@ -47,6 +47,19 @@ type User struct {
 	AdminingTheGroup     bool
 	FollowingTheGroup    bool
 	FollowingGroups      []*Group
+	Preferences          *Preferences
+}
+
+type Preferences struct {
+	Timezone                 string
+	PreferFullName           bool
+	EnterForNewLine          bool
+	AsideGroupsCollapse      bool
+	AsideOtherGroupsCollapse bool
+	ShowMarkUnreadThreshold  int
+	AdminModeOn              bool
+	PreferMarkdown           bool
+	AutoFollowPublicGroup    bool
 }
 
 type EmbedOrg struct {
