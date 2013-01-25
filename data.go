@@ -46,6 +46,8 @@ type User struct {
 	AdminingAGroup       bool
 	AdminingTheGroup     bool
 	FollowingTheGroup    bool
+	Department           string
+	Location             string
 	FollowingGroups      []*Group
 	Preferences          *Preferences
 }
