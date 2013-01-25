@@ -91,6 +91,7 @@ type OrganizationInput struct {
 
 type PreferencesInput struct {
 	Timezone                 string
+	TimezoneOffset           string
 	PreferFullName           bool
 	EnterForNewLine          bool
 	AsideGroupsCollapse      bool

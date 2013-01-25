@@ -52,6 +52,7 @@ type User struct {
 
 type Preferences struct {
 	Timezone                 string
+	TimezoneOffset           string
 	PreferFullName           bool
 	EnterForNewLine          bool
 	AsideGroupsCollapse      bool
