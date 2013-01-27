@@ -88,3 +88,10 @@ type OrganizationInput struct {
 	ChatToken                string
 	RegistrationMode         int
 }
+
+// Like or Unlike an entry action input
+type LikeInput struct {
+	EntryId string
+	GroupId string
+	Like    string // "0" for Unlike, "1" for Like
+}
