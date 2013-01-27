@@ -46,4 +46,5 @@ var (
 	AlreadyJoinedOrganizationError = errors.New("already joined the organization")
 	SystemMessagesNotFoundError    = errors.New("system messages not found")
 	DatabaseNotExistError          = errors.New("no such database")
+	UpdateLikeError                = errors.New("update like error")
 )
