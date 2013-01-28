@@ -214,6 +214,7 @@ type WikiVersion struct {
 	LocalUpdatedAt       string
 	UpdatedAtUnixNano    string
 	CurrentVersionEditor EmbedUser
+	IsNewVersion         bool
 }
 
 type ShareGroupRequest struct {

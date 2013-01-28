@@ -25,6 +25,9 @@ type EntryInput struct {
 
 	// convert to wiki
 	BaseOnEntryId string
+
+	//update
+	NewVersion string
 }
 
 const (
