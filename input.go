@@ -92,12 +92,12 @@ type OrganizationInput struct {
 type PreferencesInput struct {
 	Timezone                 string
 	TimezoneOffset           string
-	PreferFullName           bool
-	EnterForNewLine          bool
-	AsideGroupsCollapse      bool
-	AsideOtherGroupsCollapse bool
-	ShowMarkUnreadThreshold  int
-	AdminModeOn              bool
-	PreferMarkdown           bool
-	AutoFollowPublicGroup    bool
+	PreferFullName           string
+	EnterForNewLine          string
+	AsideGroupsCollapse      string
+	AsideOtherGroupsCollapse string
+	ShowMarkUnreadThreshold  string
+	AdminModeOn              string
+	PreferMarkdown           string
+	AutoFollowPublicGroup    string
 }
