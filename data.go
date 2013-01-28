@@ -391,6 +391,7 @@ type NotificationItem struct {
 	ToUser        EmbedUser
 	ForEntry      EmbedEntry
 	FromUser      EmbedUser
+	FromOrg       EmbedOrg
 	CausedByEntry EmbedEntry
 	NotifiedAt    time.Time
 	ReadAt        time.Time
