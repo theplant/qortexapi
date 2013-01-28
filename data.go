@@ -366,6 +366,7 @@ type MyChats struct {
 	HasMore          bool
 	LatestCreateTime int64
 	WhatChats        bool
+	WhatChatsURL     string
 }
 
 type MyNotifications struct {
