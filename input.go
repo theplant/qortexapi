@@ -91,3 +91,16 @@ type OrganizationInput struct {
 	ChatToken                string
 	RegistrationMode         int
 }
+
+type PreferencesInput struct {
+	Timezone                 string
+	TimezoneOffset           string
+	PreferFullName           string
+	EnterForNewLine          string
+	AsideGroupsCollapse      string
+	AsideOtherGroupsCollapse string
+	ShowMarkUnreadThreshold  string
+	AdminModeOn              string
+	PreferMarkdown           string
+	AutoFollowPublicGroup    string
+}
