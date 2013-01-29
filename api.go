@@ -34,7 +34,6 @@ type AuthUserService interface {
 	GetWikiByTitle(title string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 	UpdateWiki(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetEntry(entryId string, groupId string, searchKeyWords string) (entry *Entry, err error)
-	UpdateLike(entryId string, groupId string, removeLike bool) (entry *Entry, err error)
 
 	EntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 
