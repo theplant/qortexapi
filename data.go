@@ -46,7 +46,23 @@ type User struct {
 	AdminingAGroup       bool
 	AdminingTheGroup     bool
 	FollowingTheGroup    bool
+	Department           string
+	Location             string
 	FollowingGroups      []*Group
+	Preferences          *Preferences
+}
+
+type Preferences struct {
+	Timezone                 string
+	TimezoneOffset           string
+	PreferFullName           bool
+	EnterForNewLine          bool
+	AsideGroupsCollapse      bool
+	AsideOtherGroupsCollapse bool
+	ShowMarkUnreadThreshold  int
+	AdminModeOn              bool
+	PreferMarkdown           bool
+	AutoFollowPublicGroup    bool
 }
 
 type EmbedOrg struct {
@@ -123,6 +139,7 @@ type Attachment struct {
 	OwnerId       []string
 	Category      string
 	Filename      string
+	ShortFilename string
 	ContentType   string
 	MD5           string
 	ContentLength int64
@@ -192,12 +209,13 @@ type Wiki struct {
 }
 
 type WikiVersion struct {
-	Id                string
-	GroupId           string
-	UpdatedAt         time.Time
-	LocalUpdatedAt    string
-	UpdatedAtUnixNano string
-	CurVerEditor      EmbedUser
+	Id                   string
+	GroupId              string
+	UpdatedAt            time.Time
+	LocalUpdatedAt       string
+	UpdatedAtUnixNano    string
+	CurrentVersionEditor EmbedUser
+	IsNewVersion         bool
 }
 
 type ShareGroupRequest struct {
@@ -328,17 +346,19 @@ type Entry struct {
 	TaskIsCompleted    bool
 	IsRoot             bool
 	IsUnread           bool
+	IsUpdated          bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
 	AllLikesCount       int
 
-	Author            EmbedUser
-	Group             *Group
-	Task              *Task
-	Wiki              *Wiki
-	ShareGroupRequest *ShareGroupRequest
-	Conversation      *Conversation
+	Author               EmbedUser
+	CurrentVersionEditor EmbedUser
+	Group                *Group
+	Task                 *Task
+	Wiki                 *Wiki
+	ShareGroupRequest    *ShareGroupRequest
+	Conversation         *Conversation
 
 	ToUsers        []EmbedUser
 	MentionedUsers []EmbedUser

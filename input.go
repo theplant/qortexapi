@@ -25,6 +25,9 @@ type EntryInput struct {
 
 	// convert to wiki
 	BaseOnEntryId string
+
+	//update
+	NewVersion string
 }
 
 const (
@@ -94,4 +97,17 @@ type LikeInput struct {
 	EntryId string
 	GroupId string
 	Like    string // "0" for Unlike, "1" for Like
+}
+
+type PreferencesInput struct {
+	Timezone                 string
+	TimezoneOffset           string
+	PreferFullName           string
+	EnterForNewLine          string
+	AsideGroupsCollapse      string
+	AsideOtherGroupsCollapse string
+	ShowMarkUnreadThreshold  string
+	AdminModeOn              string
+	PreferMarkdown           string
+	AutoFollowPublicGroup    string
 }
