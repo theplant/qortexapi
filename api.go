@@ -103,4 +103,7 @@ type AuthUserService interface {
 	RejectSharedGroupRequest(sharedOrgId string, sharedGroupId string) (req *Request, err error)
 	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (entry *Entry, err error)
 
+	//Settings related
+	GetOrgSettings() (*OrgSettings, error)
+	UpdateOrgSettings(*OrgSettingsInput) error
 }

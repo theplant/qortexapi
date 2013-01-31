@@ -5,6 +5,11 @@ import (
 	"time"
 )
 
+type OrgSettings struct {
+	AllowUsersCreateGroups bool
+	AllowUsersInvitePeople bool
+}
+
 type Organization struct {
 	Id                       string
 	Name                     string

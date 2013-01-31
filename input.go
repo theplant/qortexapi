@@ -1,9 +1,5 @@
 package qortexapi
 
-import (
-	"time"
-)
-
 type EntryInput struct {
 	Id               string
 	EType            string
@@ -71,6 +67,11 @@ type GroupInput struct {
 	ActionOrgId   string
 }
 
+type OrgSettingsInput struct {
+	AllowUsersCreateGroups bool
+	AllowUsersInvitePeople bool
+}
+
 type OrganizationInput struct {
 	Id                       string
 	OType                    string
@@ -82,7 +83,6 @@ type OrganizationInput struct {
 	Domain                   string
 	Domains                  []string
 	RestrictSubscriptionMail bool
-	CreatedAt                time.Time
 	AuthorId                 string
 	MemberIds                []string
 	GroupIds                 []string
