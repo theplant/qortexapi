@@ -104,3 +104,9 @@ type PreferencesInput struct {
 	PreferMarkdown           string
 	AutoFollowPublicGroup    string
 }
+
+type MemberAccountInput struct {
+	FirstName string
+	LastName  string
+	AvatarURL string
+}
