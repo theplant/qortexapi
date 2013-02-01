@@ -10,6 +10,10 @@ type Global interface {
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
 }
 
+type NoAuthUserService interface {
+	CancelChangingEmail(token string) (err error)
+}
+
 type AuthUserService interface {
 	NewEntry(groupId string) (entry *Entry, err error)
 	QortexMessages(messsageType string, before string, limit int) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
