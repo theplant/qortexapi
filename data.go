@@ -475,3 +475,8 @@ type InlineHelp struct {
 	WhatNextURL     string
 	WhatChatsURL    string
 }
+
+type EmailChanger struct {
+	Token string
+	Email string
+}

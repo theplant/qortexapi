@@ -12,6 +12,8 @@ type Global interface {
 
 type NoAuthUserService interface {
 	CancelChangingEmail(token string) (err error)
+	ChangeEmail(token string) (activationToken string, err error)
+	PrepareChangeEmail(memberId string, newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
 }
 
 type AuthUserService interface {
@@ -107,4 +109,6 @@ type AuthUserService interface {
 	RejectSharedGroupRequest(sharedOrgId string, sharedGroupId string) (req *Request, err error)
 	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (entry *Entry, err error)
 
+	PrepareChangeEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
+	ChangeEmail(token string) (err error)
 }
