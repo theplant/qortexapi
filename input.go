@@ -28,6 +28,9 @@ type EntryInput struct {
 
 	//update
 	NewVersion string
+
+	KnowledgeBase bool
+	AnyoneCanEdit bool
 }
 
 const (

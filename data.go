@@ -302,13 +302,14 @@ type Entry struct {
 	MentionedUserIds     string
 	DomainURL            string
 
-	HtmlTitle         template.HTML
-	HtmlContent       template.HTML
-	HtmlContentPart   template.HTML
-	WatchlistHtml     template.HTML
-	ToUsersHtml       template.HTML
-	LikedByUsersHtml  template.HTML
-	NotifyOptionsHtml template.HTML
+	HtmlTitle           template.HTML
+	HtmlContent         template.HTML
+	HtmlContentPart     template.HTML
+	TaskHtmlContentPart template.HTML
+	WatchlistHtml       template.HTML
+	ToUsersHtml         template.HTML
+	LikedByUsersHtml    template.HTML
+	NotifyOptionsHtml   template.HTML
 
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
@@ -330,7 +331,7 @@ type Entry struct {
 	VisibleForSuperUserInSuperOrg bool
 	VisibleForSuperOrg            bool
 
-	IsWiki             bool
+	IsKnowledgeBase    bool
 	IsPost             bool
 	IsComment          bool
 	IsTask             bool
