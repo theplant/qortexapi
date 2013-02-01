@@ -56,6 +56,7 @@ type AuthUserService interface {
 	// LoadEntry(groupId string, entryId string) (g *Group, entry *Entry, err error)
 
 	MyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
+	MarkAllAsRead(groupId string) (*MyCount, error)
 
 	// watchlist related
 	GetWatchList(before time.Time, limit int) (watchlist *WatchList, err error)
