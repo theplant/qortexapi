@@ -57,7 +57,7 @@ type AuthUserService interface {
 	// LoadEntry(groupId string, entryId string) (g *Group, entry *Entry, err error)
 
 	MyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
-	MarkAllAsRead(groupId string) (*MyCount, error)
+	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
 
 	// watchlist related
 	GetWatchList(before time.Time, limit int) (watchlist *WatchList, err error)
@@ -66,7 +66,7 @@ type AuthUserService interface {
 	ReadWatching(entryId string, groupId string) (err error)
 
 	// Like action
-	UpdateLike(*LikeInput) (*Entry, error)
+	UpdateLike(*LikeInput) (entry *Entry, err error)
 
 	// draft related
 	GetDraftList(before time.Time, limit int) (draftlist *DraftList, err error)
