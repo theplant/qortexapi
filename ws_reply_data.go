@@ -21,6 +21,7 @@ type TaskState struct {
 	Method  string
 	TaskBar string
 	EntryId string
+	MyCount *MyCount
 }
 
 //**************

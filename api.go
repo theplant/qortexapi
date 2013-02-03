@@ -21,6 +21,7 @@ type AuthUserService interface {
 	QortexMessages(messsageType string, before string, limit int) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
 	CreateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
+	GetRequest(entryId string) (entry *Entry, err error)
 	EditBroadcast(entryId string) (entry *Entry, err error)
 	EditBroadcastComment(entryId string) (entry *Entry, err error)
 	UpdateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
@@ -63,6 +64,9 @@ type AuthUserService interface {
 	AddToWatchList(entryId string, groupId string) (added bool, err error)
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
+
+	// Like action
+	UpdateLike(*LikeInput) (*Entry, error)
 
 	// draft related
 	GetDraftList(before time.Time, limit int) (draftlist *DraftList, err error)
