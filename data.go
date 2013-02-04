@@ -52,6 +52,11 @@ type User struct {
 	Preferences          *Preferences
 }
 
+type GroupUsers struct {
+	GroupId    string
+	EmbedUsers []EmbedUser
+}
+
 type Preferences struct {
 	Timezone                 string
 	TimezoneOffset           string

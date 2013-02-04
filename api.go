@@ -99,6 +99,8 @@ type AuthUserService interface {
 	PanelStatus() (panelStatus *PanelStatus, err error)
 	Preferences() (preference *Preferences, err error)
 	UpdatePreferences(input *PreferencesInput) (preference *Preferences, validated *govalidations.Validated, err error)
+	AllEmbedUsers() (users []*EmbedUser, err error)
+	GroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 
 	// Count related
 	MyCount() (myCount *MyCount, err error)
