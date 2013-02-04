@@ -104,6 +104,6 @@ type AuthUserService interface {
 	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (entry *Entry, err error)
 
 	//Settings related
-	GetOrgSettings() (*OrgSettings, error)
-	UpdateOrgSettings(*OrgSettingsInput) error
+	GetOrgSettings() (orgSetting *OrgSettings, err error)
+	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 }
