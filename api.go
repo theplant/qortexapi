@@ -66,7 +66,7 @@ type AuthUserService interface {
 	ReadWatching(entryId string, groupId string) (err error)
 
 	// Like action
-	UpdateLike(*LikeInput) (entry *Entry, err error)
+	UpdateLike(input *LikeInput) (entry *Entry, err error)
 
 	// draft related
 	GetDraftList(before time.Time, limit int) (draftlist *DraftList, err error)
