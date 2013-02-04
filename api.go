@@ -106,4 +106,6 @@ type AuthUserService interface {
 	//Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
+	CanCreateGroup() (r bool)
+	InvitePeople(emails []string) (err error)
 }
