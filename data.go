@@ -306,6 +306,7 @@ type Entry struct {
 	LastUpdateAtAgo      string
 	MentionedUserIds     string
 	DomainURL            string
+	UpdatedAtUnixNano    string
 
 	HtmlTitle           template.HTML
 	HtmlContent         template.HTML
@@ -370,6 +371,7 @@ type Entry struct {
 	MentionedUsers []EmbedUser
 	LikedByUsers   []EmbedUser
 	Attachments    []*Attachment
+	FirstPicture   *Attachment
 	Comments       []*Entry
 	NewComment     *Entry
 	NewEntry       *Entry
