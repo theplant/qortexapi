@@ -28,7 +28,7 @@ type AuthUserService interface {
 	UpdateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreatePost(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	// GetPost(entryId string, groupId string) (entry *Entry, err error)
-	UpdatePost(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	// UpdatePost(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreateTask(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	// GetTask(entryId string, groupId string) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string) (entry *Task, err error)
@@ -38,7 +38,7 @@ type AuthUserService interface {
 	// CreateWiki(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	// GetWiki(entryId string, groupId string, versionUpdateat string) (entry *Entry, err error)
 	// GetWikiByTitle(title string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
-	UpdateWiki(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	UpdateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 
 	EntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
