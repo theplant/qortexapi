@@ -198,22 +198,22 @@ type Task struct {
 	TaskBarHtml   template.HTML
 }
 
-type Wiki struct {
-	IsLastVersion          bool
-	LocalUpdatedAt         string
-	UpdatedAtUnixNano      string
-	CurrentVersionEditor   EmbedUser
-	LinkedEntries          []*LinkedEntry
-	BaseOnEntryId          string
-	BaseOnEntryTitle       string
-	BaseOnEntryLink        template.HTMLAttr
-	Versions               []*WikiVersion
-	CurrentVersionComments []*Entry
-	OtherVersionsComments  []*Entry
-	FirstPicture           *Attachment
-}
+// type Wiki struct {
+// 	IsLastVersion          bool
+// 	LocalUpdatedAt         string
+// 	UpdatedAtUnixNano      string
+// 	CurrentVersionEditor   EmbedUser
+// 	LinkedEntries          []*LinkedEntry
+// 	BaseOnEntryId          string
+// 	BaseOnEntryTitle       string
+// 	BaseOnEntryLink        template.HTMLAttr
+// 	Versions               []*WikiVersion
+// 	CurrentVersionComments []*Entry
+// 	OtherVersionsComments  []*Entry
+// 	FirstPicture           *Attachment
+// }
 
-type WikiVersion struct {
+type EntryVersion struct {
 	Id                   string
 	GroupId              string
 	UpdatedAt            time.Time
@@ -354,6 +354,7 @@ type Entry struct {
 	IsRoot             bool
 	IsUnread           bool
 	IsUpdated          bool
+	IsLastVersion      bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
@@ -363,19 +364,24 @@ type Entry struct {
 	CurrentVersionEditor EmbedUser
 	Group                *Group
 	Task                 *Task
-	Wiki                 *Wiki
-	ShareGroupRequest    *ShareGroupRequest
-	Conversation         *Conversation
+	// Wiki                 *Wiki
+	ShareGroupRequest *ShareGroupRequest
+	Conversation      *Conversation
 
-	ToUsers        []EmbedUser
-	MentionedUsers []EmbedUser
-	LikedByUsers   []EmbedUser
-	Attachments    []*Attachment
-	FirstPicture   *Attachment
-	Comments       []*Entry
-	NewComment     *Entry
-	NewEntry       *Entry
-	GroupSlector   *GroupSelector
+	LinkedEntries []*LinkedEntry
+	Versions      []*EntryVersion
+
+	ToUsers                []EmbedUser
+	MentionedUsers         []EmbedUser
+	LikedByUsers           []EmbedUser
+	Attachments            []*Attachment
+	FirstPicture           *Attachment
+	Comments               []*Entry
+	CurrentVersionComments []*Entry
+	OtherVersionsComments  []*Entry
+	NewComment             *Entry
+	NewEntry               *Entry
+	GroupSlector           *GroupSelector
 }
 
 type EmbedEntry struct {
