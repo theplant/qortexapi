@@ -73,6 +73,7 @@ type AuthUserService interface {
 	DeleteDraft(entryId string, groupId string) (err error)
 
 	//Group related
+	GetGroup(groupId string) (group *Group, err error)
 	CreateGroup(input *GroupInput) (group *Group, validated *govalidations.Validated, err error)
 	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)

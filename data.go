@@ -123,6 +123,8 @@ type Group struct {
 	IsDispayHostOrgName bool
 	EntriesCount        int
 	FollowersCount      int
+	IsAnnoucement       bool
+	GroupOwners         []EmbedUser
 }
 
 type GroupSelectorItem struct {
