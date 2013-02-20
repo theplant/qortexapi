@@ -10,28 +10,35 @@ type Global interface {
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
 }
 
+type NoAuthUserService interface {
+	CancelChangingEmail(token string) (err error)
+	ChangeEmail(token string) (activationToken string, err error)
+	PrepareChangeEmail(memberId string, newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
+}
+
 type AuthUserService interface {
 	NewEntry(groupId string) (entry *Entry, err error)
 	QortexMessages(messsageType string, before string, limit int) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
 	CreateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
+	GetRequest(entryId string) (entry *Entry, err error)
 	EditBroadcast(entryId string) (entry *Entry, err error)
 	EditBroadcastComment(entryId string) (entry *Entry, err error)
 	UpdateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	UpdateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreatePost(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	// GetPost(entryId string, groupId string) (entry *Entry, err error)
-	UpdatePost(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	// UpdatePost(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreateTask(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	// GetTask(entryId string, groupId string) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string) (entry *Task, err error)
 	CreateComment(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetComment(entryId string, groupId string) (entry *Entry, err error)
 	UpdateComment(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
-	CreateWiki(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	// CreateWiki(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	// GetWiki(entryId string, groupId string, versionUpdateat string) (entry *Entry, err error)
 	// GetWikiByTitle(title string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
-	UpdateWiki(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	UpdateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 
 	EntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
@@ -44,18 +51,22 @@ type AuthUserService interface {
 	NewFeedEntries(entryType string, From string, limit int) (entries []*Entry, err error)
 	// NewMyFeedEntries(entryType string, after time.Time, limit int) (entries []*Entry, err error)
 	MyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
+	UserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
 
 	MyChatEntries(before string, limit int) (entries []*Entry, err error)
-	// UserEntries(userId string, entryType string, before time.Time, limit int) (u *User, entries []*Entry, err error)
 	// LoadEntry(groupId string, entryId string) (g *Group, entry *Entry, err error)
 
 	MyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
+	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
 
 	// watchlist related
 	GetWatchList(before time.Time, limit int) (watchlist *WatchList, err error)
 	AddToWatchList(entryId string, groupId string) (added bool, err error)
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
+
+	// Like action
+	UpdateLike(input *LikeInput) (entry *Entry, err error)
 
 	// draft related
 	GetDraftList(before time.Time, limit int) (draftlist *DraftList, err error)
@@ -66,6 +77,7 @@ type AuthUserService interface {
 	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
 	DeleteGroup(groupId string) (err error)
+	GroupBySlug(slug string) (group *Group, err error)
 	ConvertToSharedGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	GetAllGroups(keyword string) (groups []*Group, err error)
 	GetPublicGroups(keyword string) (groups []*Group, err error)
@@ -88,6 +100,8 @@ type AuthUserService interface {
 	PanelStatus() (panelStatus *PanelStatus, err error)
 	Preferences() (preference *Preferences, err error)
 	UpdatePreferences(input *PreferencesInput) (preference *Preferences, validated *govalidations.Validated, err error)
+	AllEmbedUsers() (users []*EmbedUser, err error)
+	GroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 
 	// Count related
 	MyCount() (myCount *MyCount, err error)
@@ -109,4 +123,8 @@ type AuthUserService interface {
 	CanCreateGroup() (r bool)
 	CanInvitePeople() (r bool)
 	InvitePeople(emails []string) (validated *govalidations.Validated, err error)
+
+	PrepareChangeEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
+	ChangeEmail(token string) (err error)
+	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
 }

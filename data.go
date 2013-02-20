@@ -57,6 +57,11 @@ type User struct {
 	Preferences          *Preferences
 }
 
+type GroupUsers struct {
+	GroupId    string
+	EmbedUsers []EmbedUser
+}
+
 type Preferences struct {
 	Timezone                 string
 	TimezoneOffset           string
@@ -198,22 +203,22 @@ type Task struct {
 	TaskBarHtml   template.HTML
 }
 
-type Wiki struct {
-	IsLastVersion          bool
-	LocalUpdatedAt         string
-	UpdatedAtUnixNano      string
-	CurrentVersionEditor   EmbedUser
-	LinkedEntries          []*LinkedEntry
-	BaseOnEntryId          string
-	BaseOnEntryTitle       string
-	BaseOnEntryLink        template.HTMLAttr
-	Versions               []*WikiVersion
-	CurrentVersionComments []*Entry
-	OtherVersionsComments  []*Entry
-	FirstPicture           *Attachment
-}
+// type Wiki struct {
+// 	IsLastVersion          bool
+// 	LocalUpdatedAt         string
+// 	UpdatedAtUnixNano      string
+// 	CurrentVersionEditor   EmbedUser
+// 	LinkedEntries          []*LinkedEntry
+// 	BaseOnEntryId          string
+// 	BaseOnEntryTitle       string
+// 	BaseOnEntryLink        template.HTMLAttr
+// 	Versions               []*WikiVersion
+// 	CurrentVersionComments []*Entry
+// 	OtherVersionsComments  []*Entry
+// 	FirstPicture           *Attachment
+// }
 
-type WikiVersion struct {
+type EntryVersion struct {
 	Id                   string
 	GroupId              string
 	UpdatedAt            time.Time
@@ -306,14 +311,16 @@ type Entry struct {
 	LastUpdateAtAgo      string
 	MentionedUserIds     string
 	DomainURL            string
+	UpdatedAtUnixNano    string
 
-	HtmlTitle         template.HTML
-	HtmlContent       template.HTML
-	HtmlContentPart   template.HTML
-	WatchlistHtml     template.HTML
-	ToUsersHtml       template.HTML
-	LikedByUsersHtml  template.HTML
-	NotifyOptionsHtml template.HTML
+	HtmlTitle           template.HTML
+	HtmlContent         template.HTML
+	HtmlContentPart     template.HTML
+	TaskHtmlContentPart template.HTML
+	WatchlistHtml       template.HTML
+	ToUsersHtml         template.HTML
+	LikedByUsersHtml    template.HTML
+	NotifyOptionsHtml   template.HTML
 
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
@@ -335,7 +342,7 @@ type Entry struct {
 	VisibleForSuperUserInSuperOrg bool
 	VisibleForSuperOrg            bool
 
-	IsWiki             bool
+	IsKnowledgeBase    bool
 	IsPost             bool
 	IsComment          bool
 	IsTask             bool
@@ -352,6 +359,7 @@ type Entry struct {
 	IsRoot             bool
 	IsUnread           bool
 	IsUpdated          bool
+	IsLastVersion      bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
@@ -361,18 +369,24 @@ type Entry struct {
 	CurrentVersionEditor EmbedUser
 	Group                *Group
 	Task                 *Task
-	Wiki                 *Wiki
-	ShareGroupRequest    *ShareGroupRequest
-	Conversation         *Conversation
+	// Wiki                 *Wiki
+	ShareGroupRequest *ShareGroupRequest
+	Conversation      *Conversation
 
-	ToUsers        []EmbedUser
-	MentionedUsers []EmbedUser
-	LikedByUsers   []EmbedUser
-	Attachments    []*Attachment
-	Comments       []*Entry
-	NewComment     *Entry
-	NewEntry       *Entry
-	GroupSlector   *GroupSelector
+	LinkedEntries []*LinkedEntry
+	Versions      []*EntryVersion
+
+	ToUsers                []EmbedUser
+	MentionedUsers         []EmbedUser
+	LikedByUsers           []EmbedUser
+	Attachments            []*Attachment
+	FirstPicture           *Attachment
+	Comments               []*Entry
+	CurrentVersionComments []*Entry
+	OtherVersionsComments  []*Entry
+	NewComment             *Entry
+	NewEntry               *Entry
+	GroupSlector           *GroupSelector
 }
 
 type EmbedEntry struct {
@@ -416,6 +430,7 @@ type NotificationItem struct {
 	ToUser        EmbedUser
 	ForEntry      EmbedEntry
 	FromUser      EmbedUser
+	FromOrg       EmbedOrg
 	CausedByEntry EmbedEntry
 	NotifiedAt    time.Time
 	ReadAt        time.Time
@@ -479,4 +494,9 @@ type InlineHelp struct {
 	InviteOthersURL string
 	WhatNextURL     string
 	WhatChatsURL    string
+}
+
+type EmailChanger struct {
+	Token string
+	Email string
 }

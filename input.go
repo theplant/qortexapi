@@ -24,6 +24,9 @@ type EntryInput struct {
 
 	//update
 	NewVersion string
+
+	KnowledgeBase bool
+	AnyoneCanEdit bool
 }
 
 const (
@@ -92,6 +95,13 @@ type OrganizationInput struct {
 	RegistrationMode         int
 }
 
+// Like or Unlike an entry action input
+type LikeInput struct {
+	EntryId string
+	GroupId string
+	Like    string // "0" for Unlike, "1" for Like
+}
+
 type PreferencesInput struct {
 	Timezone                 string
 	TimezoneOffset           string
@@ -103,4 +113,10 @@ type PreferencesInput struct {
 	AdminModeOn              string
 	PreferMarkdown           string
 	AutoFollowPublicGroup    string
+}
+
+type MemberAccountInput struct {
+	FirstName string
+	LastName  string
+	AvatarURL string
 }
