@@ -384,6 +384,7 @@ type Entry struct {
 	Attachments            []*Attachment
 	FirstPicture           *Attachment
 	Comments               []*Entry
+	ExternalComments       []*Entry
 	CurrentVersionComments []*Entry
 	OtherVersionsComments  []*Entry
 	NewComment             *Entry
