@@ -121,4 +121,6 @@ type AuthUserService interface {
 	PrepareChangeEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
 	ChangeEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
+
+	SendSharingInvitation(groupId string, email string)(validated *govalidations.Validated, err error)
 }
