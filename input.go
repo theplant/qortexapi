@@ -4,11 +4,13 @@ type EntryInput struct {
 	Id               string
 	EType            string
 	Title            string
+	Slug             string
 	Content          string
 	GroupId          string
 	IsToGroup        string
 	ToUserIds        string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	MentionedUserIds string
+	IsPublished      string
 
 	//task
 	IsAcknowledgement string
@@ -27,6 +29,10 @@ type EntryInput struct {
 
 	KnowledgeBase bool
 	AnyoneCanEdit bool
+
+	//External Comment
+	Email string
+	Name  string
 }
 
 const (

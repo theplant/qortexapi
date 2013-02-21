@@ -14,6 +14,11 @@ type NoAuthUserService interface {
 	CancelChangingEmail(token string) (err error)
 	ChangeEmail(token string) (activationToken string, err error)
 	PrepareChangeEmail(memberId string, newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
+
+	/* Blog */
+	BlogEntries(pageNum int, limit int) (totalPageNum int, r []*Entry, err error)
+	BlogEntryBySlug(slug string) (r *Entry, err error)
+	CreateExternalComment(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 }
 
 type AuthUserService interface {

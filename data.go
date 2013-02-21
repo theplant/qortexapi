@@ -293,6 +293,7 @@ type Entry struct {
 	Id         string
 	EType      string
 	Title      string
+	Slug       string
 	Content    string
 	TypeTitle  string
 	RootId     string
@@ -326,6 +327,7 @@ type Entry struct {
 	UploadURL template.HTMLAttr
 
 	IsShared      bool
+	IsPublished   bool
 	Uncommentable bool
 
 	IsSystemMessage               bool
