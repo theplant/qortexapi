@@ -77,7 +77,7 @@ type AuthUserService interface {
 	CreateGroup(input *GroupInput) (group *Group, validated *govalidations.Validated, err error)
 	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
-	UpdateGroupSlug(id string, slug string) (validated *govalidations.Validated, err error)
+	// UpdateGroupSlug(id string, slug string) (validated *govalidations.Validated, err error)
 	DeleteGroup(groupId string) (err error)
 	GroupBySlug(slug string) (group *Group, err error)
 	ConvertToSharedGroup(input *GroupInput) (validated *govalidations.Validated, err error)
