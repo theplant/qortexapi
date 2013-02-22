@@ -39,6 +39,7 @@ type AuthUserService interface {
 	// GetWiki(entryId string, groupId string, versionUpdateat string) (entry *Entry, err error)
 	// GetWikiByTitle(title string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (r string, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 
