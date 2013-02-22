@@ -503,3 +503,7 @@ type EmailChanger struct {
 	Token string
 	Email string
 }
+
+type Newsletter struct {
+	Email string
+}

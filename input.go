@@ -126,3 +126,7 @@ type MemberAccountInput struct {
 	LastName  string
 	AvatarURL string
 }
+
+type NewsletterInput struct {
+	Email string
+}

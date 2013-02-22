@@ -19,6 +19,7 @@ type NoAuthUserService interface {
 	BlogEntries(pageNum int, limit int) (totalPageNum int, r []*Entry, err error)
 	BlogEntryBySlug(slug string) (r *Entry, err error)
 	CreateExternalComment(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
+	CreateNewsletter(input *NewsletterInput) (r *Newsletter, validated *govalidations.Validated, err error)
 }
 
 type AuthUserService interface {
