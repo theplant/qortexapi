@@ -74,6 +74,8 @@ type AuthUserService interface {
 	DeleteDraft(entryId string, groupId string) (err error)
 
 	//Group related
+	NewGroup() (group *Group, err error)
+	GetGroup(groupId string) (group *Group, err error)
 	CreateGroup(input *GroupInput) (group *Group, validated *govalidations.Validated, err error)
 	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
@@ -129,4 +131,6 @@ type AuthUserService interface {
 	PrepareChangeEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
 	ChangeEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
+
+	SendSharingInvitation(groupId string, email string) (validated *govalidations.Validated, err error)
 }
