@@ -23,6 +23,15 @@ type Organization struct {
 	RestrictSubscriptionMail bool
 }
 
+type SharingInvitation struct {
+	FromOrgId    string
+	GroupId      string
+	IsNewAccount bool
+	Email        string
+	Token        string
+	JoinedOrgs   []EmbedOrg
+}
+
 type User struct {
 	Id                   string
 	Email                string
@@ -76,9 +85,10 @@ type Preferences struct {
 }
 
 type EmbedOrg struct {
-	Id      string
-	Name    string
-	LogoURL string
+	Id            string
+	Name          string
+	LogoURL       string
+	NoNeedToShare bool
 }
 
 type EmbedUser struct {
@@ -128,6 +138,8 @@ type Group struct {
 	IsDispayHostOrgName bool
 	EntriesCount        int
 	FollowersCount      int
+	IsAnnoucement       bool
+	GroupOwners         []EmbedUser
 }
 
 type GroupSelectorItem struct {

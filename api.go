@@ -14,6 +14,8 @@ type NoAuthUserService interface {
 	CancelChangingEmail(token string) (err error)
 	ChangeEmail(token string) (activationToken string, err error)
 	PrepareChangeEmail(memberId string, newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
+	GetSharingInviation(sharingInviationToken string) (r *SharingInvitation, err error)
+	ResponseSharingRequest(token string, fromOrgId string, forSharingOrgId string, groupId string) (validated *govalidations.Validated, err error)
 
 	/* Blog */
 	BlogEntries(pageNum int, limit int) (totalPageNum int, r []*Entry, err error)
@@ -46,6 +48,7 @@ type AuthUserService interface {
 	// GetWiki(entryId string, groupId string, versionUpdateat string) (entry *Entry, err error)
 	// GetWikiByTitle(title string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (r string, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 
@@ -81,6 +84,8 @@ type AuthUserService interface {
 	DeleteDraft(entryId string, groupId string) (err error)
 
 	//Group related
+	NewGroup() (group *Group, err error)
+	GetGroup(groupId string) (group *Group, err error)
 	CreateGroup(input *GroupInput) (group *Group, validated *govalidations.Validated, err error)
 	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
@@ -136,4 +141,6 @@ type AuthUserService interface {
 	PrepareChangeEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
 	ChangeEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
+
+	SendSharingInvitation(groupId string, email string) (validated *govalidations.Validated, err error)
 }
