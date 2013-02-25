@@ -340,6 +340,7 @@ type Entry struct {
 
 	IsShared      bool
 	IsPublished   bool
+	IsCanPublish  bool
 	Uncommentable bool
 
 	IsSystemMessage               bool
