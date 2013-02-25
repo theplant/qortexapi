@@ -4,8 +4,8 @@ type CountNotification struct {
 	Method           string
 	GroupId          string
 	NewEntry         bool
-	DeleteEntry      bool
 	EntryId          string
+	DelType          string
 	MyCount          *MyCount
 	NewMessageNumber int
 }
