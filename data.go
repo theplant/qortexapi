@@ -306,6 +306,7 @@ type Entry struct {
 	Id         string
 	EType      string
 	Title      string
+	Slug       string
 	Content    string
 	TypeTitle  string
 	RootId     string
@@ -339,6 +340,8 @@ type Entry struct {
 	UploadURL template.HTMLAttr
 
 	IsShared      bool
+	IsPublished   bool
+	IsCanPublish  bool
 	Uncommentable bool
 
 	IsSystemMessage               bool
@@ -395,6 +398,7 @@ type Entry struct {
 	Attachments            []*Attachment
 	FirstPicture           *Attachment
 	Comments               []*Entry
+	ExternalComments       []*Entry
 	CurrentVersionComments []*Entry
 	OtherVersionsComments  []*Entry
 	NewComment             *Entry
@@ -511,5 +515,9 @@ type InlineHelp struct {
 
 type EmailChanger struct {
 	Token string
+	Email string
+}
+
+type Newsletter struct {
 	Email string
 }
