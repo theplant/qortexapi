@@ -163,6 +163,7 @@ type Attachment struct {
 	Filename      string
 	ShortFilename string
 	ContentType   string
+	ContentId     string
 	MD5           string
 	ContentLength int64
 	Error         string
