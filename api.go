@@ -100,6 +100,7 @@ type AuthUserService interface {
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetGroupHeaderItem(groupId string) (ghi *GroupHeaderItem, err error)
 	ClassifyMyGroups() (publicGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
+	StopSharingGroup(toStopOrgId string, GroupId string) (validated *govalidations.Validated, err error)
 
 	//User related
 	OrganizationUsers(query string, pageNumber int, countPerPage int) (users []*User, pageCount int, err error)
