@@ -14,9 +14,9 @@ type NoAuthUserService interface {
 	CancelChangingEmail(token string) (err error)
 	ChangeEmail(token string) (activationToken string, err error)
 	PrepareChangeEmail(memberId string, newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
-	GetSharingInviation(sharingInviationToken string) (r *SharingInvitation, err error)
+	GetSharingInviation(sharingInviationToken string) (r *SharingInvitationItem, err error)
 
-	ResponseSharingRequest(token string, fromOrgId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
+	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
 
 	/* Blog */
 	BlogEntries(pageNum int, limit int) (totalPageNum int, r []*Entry, err error)
@@ -24,7 +24,6 @@ type NoAuthUserService interface {
 	CreateExternalComment(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
 	CheckSlug(slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (r *Newsletter, validated *govalidations.Validated, err error)
-
 }
 
 type AuthUserService interface {
@@ -144,5 +143,6 @@ type AuthUserService interface {
 	ChangeEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
 
-	SendSharingInvitation(groupId string, email string) (validated *govalidations.Validated, err error)
+	SendSharingInvitation(groupId string, email string) (si *SharingInvitationItem, validated *govalidations.Validated, err error)
+	GetSharingInvitationItems(groupId string) (sis []*SharingInvitationItem, err error)
 }

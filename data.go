@@ -23,13 +23,20 @@ type Organization struct {
 	RestrictSubscriptionMail bool
 }
 
-type SharingInvitation struct {
-	FromOrgId    string
-	GroupId      string
-	IsNewAccount bool
-	Email        string
-	Token        string
-	JoinedOrgs   []EmbedOrg
+type SharingInvitationItem struct {
+	FromOrgId       string
+	FromUserId      string
+	GroupId         string
+	IsNewAccount    bool
+	Email           string
+	Token           string
+	JoinedOrgs      []EmbedOrg
+	IsAccepted      bool
+	IsRejected      bool
+	IsPending       bool
+	IsForwarded     bool
+	PendingDuration string
+	ToOrgName       string
 }
 
 type User struct {
