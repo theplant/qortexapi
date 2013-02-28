@@ -100,7 +100,6 @@ type AuthUserService interface {
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetGroupHeaderItem(groupId string) (ghi *GroupHeaderItem, err error)
 	ClassifyMyGroups() (publicGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
-	StopSharingGroup(toStopOrgId string, GroupId string) (validated *govalidations.Validated, err error)
 
 	//User related
 	OrganizationUsers(query string, pageNumber int, countPerPage int) (users []*User, pageCount int, err error)
@@ -147,4 +146,6 @@ type AuthUserService interface {
 	SendSharingInvitation(groupId string, email string) (si *SharingInvitationItem, validated *govalidations.Validated, err error)
 	GetSharingInvitationItems(groupId string) (sis []*SharingInvitationItem, err error)
 	CancelSharing(groupId string, email string) (err error)
+	StopSharingGroup(GroupId string, toStopOrgId string) (validated *govalidations.Validated, err error)
+	LeaveSharingGroup(GroupId string) (validated *govalidations.Validated, err error)
 }
