@@ -23,6 +23,25 @@ type Organization struct {
 	RestrictSubscriptionMail bool
 }
 
+type Blog struct {
+	Title       string
+	Description string
+	SideContent template.HTML
+}
+
+type BlogEntry struct {
+	Id               string
+	Title            string
+	Slug             string
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
+	Permalink        string
+	CreateCommentURL string
+	HtmlContent      template.HTML
+	Author           EmbedUser
+	Comments         []*BlogEntry
+}
+
 type SharingInvitationItem struct {
 	FromOrgId       string
 	FromUserId      string

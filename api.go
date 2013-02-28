@@ -19,10 +19,10 @@ type NoAuthUserService interface {
 	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
 
 	/* Blog */
-	BlogEntries(pageNum int, limit int) (totalPageNum int, r []*Entry, err error)
-	BlogEntryBySlug(slug string) (r *Entry, err error)
-	CreateExternalComment(input *EntryInput) (r *Entry, validated *govalidations.Validated, err error)
-	CheckSlug(slug string) (validSlug string, err error)
+	BlogEntries(doi string, pageNum int, limit int) (blog *Blog, r []*BlogEntry, totalPageNum int, err error)
+	BlogEntryBySlug(doi string, slug string) (blog *Blog, r *BlogEntry, err error)
+	CreateExternalComment(doi string, input *EntryInput) (r *BlogEntry, validated *govalidations.Validated, err error)
+	CheckSlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (r *Newsletter, validated *govalidations.Validated, err error)
 }
 
