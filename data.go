@@ -56,6 +56,7 @@ type SharingInvitationItem struct {
 	IsForwarded     bool
 	PendingDuration string
 	ToOrgName       string
+	ToOrgId         string
 }
 
 type User struct {
