@@ -29,6 +29,7 @@ type EntryInput struct {
 
 	KnowledgeBase bool
 	AnyoneCanEdit bool
+	Presentation  bool
 
 	//External Comment
 	Email string

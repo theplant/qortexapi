@@ -403,6 +403,7 @@ type Entry struct {
 	IsUnread           bool
 	IsUpdated          bool
 	IsLastVersion      bool
+	Presentation       bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
