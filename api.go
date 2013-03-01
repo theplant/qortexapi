@@ -93,7 +93,6 @@ type AuthUserService interface {
 	// UpdateGroupSlug(id string, slug string) (validated *govalidations.Validated, err error)
 	DeleteGroup(groupId string) (err error)
 	GroupBySlug(slug string) (group *Group, err error)
-	ConvertToSharedGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	GetAllGroups(keyword string) (groups []*Group, err error)
 	GetPublicGroups(keyword string) (groups []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
