@@ -298,6 +298,7 @@ type Request struct {
 	RejectedComma  string
 	SharedGroup    *Group
 	SharedOrgIdHex string
+	FromUserIdHex  string
 }
 
 type Conversation struct {

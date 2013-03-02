@@ -127,8 +127,8 @@ type AuthUserService interface {
 	SearchOrganizations(query string) (org []*Organization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
-	AcceptSharedGroupRequest(sharedOrgId string, sharedGroupId string) (req *Request, err error)
-	RejectSharedGroupRequest(sharedOrgId string, sharedGroupId string) (req *Request, err error)
+	AcceptSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
+	RejectSharedGroupRequest(fromOrgId string, sharedOrgIdHex string, sharedGroupIdHex string, fromUserId string) (req *Request, err error)
 	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (entry *Entry, err error)
 
 	//Settings related
