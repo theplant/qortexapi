@@ -241,21 +241,6 @@ type Task struct {
 	TaskBarHtml   template.HTML
 }
 
-// type Wiki struct {
-// 	IsLastVersion          bool
-// 	LocalUpdatedAt         string
-// 	UpdatedAtUnixNano      string
-// 	CurrentVersionEditor   EmbedUser
-// 	LinkedEntries          []*LinkedEntry
-// 	BaseOnEntryId          string
-// 	BaseOnEntryTitle       string
-// 	BaseOnEntryLink        template.HTMLAttr
-// 	Versions               []*WikiVersion
-// 	CurrentVersionComments []*Entry
-// 	OtherVersionsComments  []*Entry
-// 	FirstPicture           *Attachment
-// }
-
 type EntryVersion struct {
 	Id                   string
 	GroupId              string
@@ -412,9 +397,8 @@ type Entry struct {
 	CurrentVersionEditor EmbedUser
 	Group                *Group
 	Task                 *Task
-	// Wiki                 *Wiki
-	ShareGroupRequest *ShareGroupRequest
-	Conversation      *Conversation
+	ShareGroupRequest    *ShareGroupRequest
+	Conversation         *Conversation
 
 	LinkedEntries []*LinkedEntry
 	Versions      []*EntryVersion
@@ -498,7 +482,6 @@ type WatchItem struct {
 }
 
 type DraftList struct {
-	// UserId     string
 	DraftItems []*Entry
 }
 
