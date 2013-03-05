@@ -101,7 +101,7 @@ type AuthUserService interface {
 	ClassifyMyGroups() (publicGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
 
 	//User related
-	OrganizationUsers(query string, pageNumber int, countPerPage int) (users []*User, pageCount int, err error)
+	OrganizationUsers(query string, sortKey string, countPerPage int) (users []*User, newSortKey string, err error)
 	GroupUsers(groupId string, query string, OnlyFollowers bool, sortKey string, countPerPage int) (users []*User, newSortKey string, err error)
 	GetUser(userId string) (user *User, err error)
 	EnableUser(userId string) (err error)
