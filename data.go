@@ -394,6 +394,7 @@ type Entry struct {
 	IsToGroup          bool
 	CurrentUserCanEdit bool
 	CanEdit            bool
+	CanReply           bool
 	ManagerCanEdit     bool
 	LikedByMe          bool
 	HasInlineTask      bool
