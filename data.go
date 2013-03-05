@@ -405,6 +405,7 @@ type Entry struct {
 	IsUpdated          bool
 	IsLastVersion      bool
 	Presentation       bool
+	AnyoneCanEdit      bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
