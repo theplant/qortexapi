@@ -147,5 +147,5 @@ type AuthUserService interface {
 	GetSharingInvitationItems(groupId string) (sis []*SharingInvitationItem, err error)
 	CancelSharing(groupId string, email string) (err error)
 	StopSharingGroup(GroupId string, toStopOrgId string) (err error)
-	LeaveSharingGroup(GroupId string) (validated *govalidations.Validated, err error)
+	LeaveSharingGroup(GroupId string) (err error)
 }
