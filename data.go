@@ -290,15 +290,13 @@ type Request struct {
 	Info           template.HTML
 	ActionButton   template.HTML
 	FromOrg        EmbedOrg
-	ToOrgs         []EmbedOrg
-	AcceptedOrgs   []EmbedOrg
-	RejectedOrgs   []EmbedOrg
-	PendingOrgs    []EmbedOrg
-	AcceptedComma  string
-	RejectedComma  string
+	ToOrg          EmbedOrg
 	SharedGroup    *Group
 	SharedOrgIdHex string
 	FromUserIdHex  string
+	SharedInvitee  EmbedUser
+	SharedInviter  EmbedUser
+	ToEmail        string
 }
 
 type Conversation struct {
