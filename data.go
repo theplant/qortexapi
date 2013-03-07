@@ -84,8 +84,6 @@ type User struct {
 	Editable             bool
 	Followable           bool
 	FollowedByMe         bool
-	AdminingAGroup       bool
-	AdminingTheGroup     bool
 	FollowingTheGroup    bool
 	Department           string
 	Location             string
