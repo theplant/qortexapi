@@ -360,6 +360,7 @@ type Entry struct {
 	IsBroadcastTypeToAllUsers     bool
 	IsBroadcastTypeToSomeOrgs     bool
 	IsFromSuperOrg                bool
+	IsFeedback                    bool
 	FromOrg                       EmbedOrg
 	ToOrgs                        []EmbedOrg
 	ToOrgsHtml                    template.HTML
