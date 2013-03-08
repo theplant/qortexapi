@@ -354,6 +354,8 @@ type Entry struct {
 	Uncommentable bool
 
 	IsSystemMessage               bool
+	SystemMessageType             string
+	BroadcastType                 string
 	IsBroadcast                   bool
 	IsBroadcastTypeToAllAdmins    bool
 	IsBroadcastTypeToAllUsers     bool
