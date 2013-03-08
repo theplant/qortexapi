@@ -64,7 +64,7 @@ type User struct {
 	Email                string
 	Firstame             string
 	LastName             string
-	FullName             string
+	Name                 string
 	Title                string
 	Avatar               string
 	JID                  string
