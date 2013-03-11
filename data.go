@@ -270,16 +270,17 @@ type LinkedEntry struct {
 }
 
 type Request struct {
-	Info           template.HTML
-	ActionButton   template.HTML
-	FromOrg        EmbedOrg
-	ToOrg          EmbedOrg
-	SharedGroup    *Group
-	SharedOrgIdHex string
-	FromUserIdHex  string
-	SharedInvitee  EmbedUser
-	SharedInviter  EmbedUser
-	ToEmail        string
+	Info            template.HTML
+	ActionButton    template.HTML
+	FromOrg         EmbedOrg
+	ToOrg           EmbedOrg
+	SharedGroup     *Group
+	SharedOrgIdHex  string
+	FromUserIdHex   string
+	SharedInvitee   EmbedUser
+	SharedInviter   EmbedUser
+	SharedResponsor EmbedUser
+	ToEmail         string
 }
 
 type Conversation struct {
