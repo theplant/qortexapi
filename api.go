@@ -148,4 +148,7 @@ type AuthUserService interface {
 	CancelSharing(groupId string, email string) (err error)
 	StopSharingGroup(GroupId string, toStopOrgId string) (err error)
 	LeaveSharingGroup(GroupId string) (err error)
+
+	//chat
+	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
 }

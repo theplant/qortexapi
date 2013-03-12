@@ -131,3 +131,11 @@ type MemberAccountInput struct {
 type NewsletterInput struct {
 	Email string
 }
+
+type ShareChatInput struct {
+	Title         string
+	Content       string
+	BasedConvId   string
+	BaseOnEntryId string
+	GroupId       string
+}
