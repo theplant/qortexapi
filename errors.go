@@ -49,4 +49,5 @@ var (
 	DatabaseNotExistError          = errors.New("no such database")
 	UnknownEntryType               = errors.New("unknown entry type")
 	UpdateLikeError                = errors.New("update like error")
+	TokenInvalid                   = errors.New("token is not available")
 )

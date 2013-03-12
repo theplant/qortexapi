@@ -55,7 +55,7 @@ type AuthUserService interface {
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 
 	EntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
-	OtherComments(entryId string, groupId string, versionUpdateat string) (comments []*Entry, err error)
+	OtherComments(entryId string, groupId string, versionUpdateat string, searchKeyWords string) (comments []*Entry, err error)
 
 	// GroupUnreadEntryIds(entryIds []string, groupId string) (unreadEntryIds []string, err error)
 	// UnreadEntryIds(entryIds []string, groupIds []string) (unreadEntryIds []string, err error)
