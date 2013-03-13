@@ -123,6 +123,7 @@ type AuthUserService interface {
 	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
 
 	//Organization Related
+	GetInvitationsInfo()(invitaions []*Invitation, err error)
 	OrganizationsInfo(orgIds []string) (orgs []*Organization, err error)
 	OrganizationInfo(orgId string) (org *Organization, err error)
 	SearchOrganizations(query string) (org []*Organization, err error)

@@ -536,3 +536,10 @@ type EmailChanger struct {
 type Newsletter struct {
 	Email string
 }
+
+type Invitation struct {
+	Email   string
+	Token   string
+	SentAgo string
+	ByUser  EmbedUser
+}
