@@ -54,6 +54,8 @@ type SharingInvitationItem struct {
 	IsRejected      bool
 	IsPending       bool
 	IsForwarded     bool
+	IsCanceled      bool
+	IsStopped       bool
 	PendingDuration string
 	ToOrgName       string
 	ToOrgId         string
