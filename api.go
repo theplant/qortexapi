@@ -123,7 +123,7 @@ type AuthUserService interface {
 	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
 
 	//Organization Related
-	GetInvitationsInfo()(invitaions []*Invitation, err error)
+	GetInvitationsInfo() (invitaions []*Invitation, err error)
 	OrganizationsInfo(orgIds []string) (orgs []*Organization, err error)
 	OrganizationInfo(orgId string) (org *Organization, err error)
 	SearchOrganizations(query string) (org []*Organization, err error)
@@ -139,6 +139,8 @@ type AuthUserService interface {
 	CanCreateGroup() (r bool, err error)
 	CanInvitePeople() (r bool, err error)
 	InvitePeople(emails []string) (validated *govalidations.Validated, err error)
+	CancelInvitation(email string) (err error)
+	ResendInvitation(email string) (err error)
 
 	PrepareChangeEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
 	ChangeEmail(token string) (err error)

@@ -51,6 +51,6 @@ var (
 	UnknownEntryType               = errors.New("unknown entry type")
 	UpdateLikeError                = errors.New("update like error")
 	TokenInvalid                   = errors.New("token is not available")
-	InvitationCanceled             = errors.New("invitation was canceled")
+	InvitationAlreadyCanceled      = errors.New("invitation was canceled")
 	AccountNotActicated            = errors.New("account was not activated yet")
 )
