@@ -83,6 +83,7 @@ type AuthUserService interface {
 
 	// draft related
 	GetDraftList(before time.Time, limit int) (draftlist *DraftList, err error)
+	GetDraft(entryId string, groupId string) (entry *Entry, err error)
 	DeleteDraft(entryId string, groupId string) (err error)
 
 	//Group related
