@@ -19,6 +19,8 @@ type NoAuthUserService interface {
 
 	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
 
+	AskHelp(input *HelpInput) (help *HelpInput, validated *govalidations.Validated, err error)
+
 	/* Blog */
 	BlogEntries(doi string, pageNum int, limit int) (blog *Blog, r []*BlogEntry, totalPageNum int, err error)
 	BlogEntryBySlug(doi string, slug string) (blog *Blog, r *BlogEntry, err error)

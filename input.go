@@ -139,3 +139,15 @@ type ShareChatInput struct {
 	BaseOnEntryId string
 	GroupId       string
 }
+
+type HelpInput struct {
+	FirstName   string
+	LastName    string
+	CompanyName string
+	CompanySize int
+	Email       string
+	Phone       string
+	Country     string
+	City        string
+	Content     string
+}
