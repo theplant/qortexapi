@@ -144,7 +144,7 @@ type HelpInput struct {
 	FirstName   string
 	LastName    string
 	CompanyName string
-	CompanySize int
+	CompanySize string
 	Email       string
 	Phone       string
 	Country     string
