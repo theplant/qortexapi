@@ -161,6 +161,7 @@ type Group struct {
 	FollowedByMe        bool
 	AdministratedByMe   bool
 	IsShared            bool
+	IsDefaultLogoURL    bool
 	HostOrgName         string
 	IsDispayHostOrgName bool
 	EntriesCount        int
@@ -451,6 +452,7 @@ type MyChats struct {
 	HasMore          bool
 	LatestCreateTime int64
 	WhatChats        bool
+	PrefixURL        string
 }
 
 type MyNotifications struct {
