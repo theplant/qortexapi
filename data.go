@@ -545,3 +545,11 @@ type Invitation struct {
 	SentAgo string
 	ByUser  EmbedUser
 }
+
+type AbandonUserInfo struct {
+	CurrentDisabledFromOrg EmbedOrg
+	CurrentDeletedFromOrg  EmbedOrg
+	AvailableOrgs          []EmbedOrg
+	DisabledFromOrgs       []EmbedOrg
+	DeletedFromOrgs        []EmbedOrg
+}

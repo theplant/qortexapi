@@ -40,6 +40,7 @@ var (
 	RemoveIndexError               = errors.New("can not remove index")
 	SaveEntryError                 = errors.New("can not save entry")
 	UserIsDeletedError             = errors.New("user is already deleted")
+	UserIsStillAvailableError      = errors.New("user is still available")
 	SelfActionError                = errors.New("can not do this for your self")
 	FollowUserError                = errors.New("can not follow user")
 	UnfollowUserError              = errors.New("can not unfollow user")

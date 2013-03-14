@@ -27,6 +27,11 @@ type NoAuthUserService interface {
 	CreateNewsletter(input *NewsletterInput) (r *Newsletter, validated *govalidations.Validated, err error)
 }
 
+type AuthMemberService interface {
+	GetAbandonUserInfo(organizationId string, memberId string) (info *AbandonUserInfo, err error)
+	SwitchOrganization(orgId string) (err error)
+}
+
 type AuthUserService interface {
 	NewEntry(groupId string) (entry *Entry, err error)
 	QortexMessages(messsageType string, before string, limit int) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
