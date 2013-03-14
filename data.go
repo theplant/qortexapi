@@ -565,5 +565,5 @@ type HelpInfo struct {
 	Phone       string
 	Country     string
 	City        string
-	Content     string
+	HelpContent     string
 }
