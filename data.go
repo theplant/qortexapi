@@ -396,6 +396,7 @@ type Entry struct {
 	IsLastVersion      bool
 	Presentation       bool
 	AnyoneCanEdit      bool
+	IsInGroup          bool
 
 	AllAttachmentsCount int
 	CommentsCount       int
