@@ -382,7 +382,7 @@ type Entry struct {
 	IsTaskToDo         bool
 	IsTaskAck          bool
 	IsInWatchList      bool
-	IsToGroup          bool
+	IsToGroup          string
 	CurrentUserCanEdit bool
 	CanEdit            bool
 	CanReply           bool
