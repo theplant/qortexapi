@@ -230,6 +230,7 @@ type Task struct {
 	LocalCreatedDate  string
 	LocalDue          string
 	LocalDueShortDate string
+	DueInputValue     string
 
 	TotalUsersCount     int
 	CompletedUsersCount int
