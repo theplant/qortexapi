@@ -398,6 +398,7 @@ type Entry struct {
 	Presentation       bool
 	AnyoneCanEdit      bool
 	IsInGroup          bool
+	IsFromEmail        bool
 
 	AllAttachmentsCount int
 	CommentsCount       int

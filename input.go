@@ -31,6 +31,9 @@ type EntryInput struct {
 	AnyoneCanEdit bool
 	Presentation  bool
 
+	//incoming mail
+	IsFromEmail bool
+
 	//External Comment
 	Email string
 	Name  string
