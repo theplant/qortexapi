@@ -120,6 +120,7 @@ type AuthUserService interface {
 	DemoteFromSuperUser(userId string) (err error)
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
+	MyFollowingUsers() (followingPeople []*User, err error)
 	PanelStatus() (panelStatus *PanelStatus, err error)
 	Preferences() (preference *Preferences, err error)
 	UpdatePreferences(input *PreferencesInput) (preference *Preferences, validated *govalidations.Validated, err error)
