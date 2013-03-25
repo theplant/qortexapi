@@ -403,6 +403,7 @@ type Entry struct {
 	AllAttachmentsCount int
 	CommentsCount       int
 	AllLikesCount       int
+	VersionCount        int
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
