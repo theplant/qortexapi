@@ -527,8 +527,6 @@ type InlineHelp struct {
 	WhatNext        bool
 	WhatChats       bool
 	WhatWatchList   bool
-	CreateGroups    bool
-	InviteOthers    bool
 	AboutTodos      bool
 	GettingOut      bool
 	InviteOthersURL string
