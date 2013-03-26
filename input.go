@@ -154,3 +154,20 @@ type HelpInput struct {
 	City        string
 	HelpContent string
 }
+
+type UserProfileInput struct {
+	Summary       string
+	Title         string
+	Department    string
+	Location      string
+	Expertise     string
+	Interests     string
+	BirthMonth    string
+	BirthDay      string
+	WorkPhone     string
+	Mobile        string
+	Twitter       string
+	Skype         string
+	Facebook      string
+	OtherWebsites []string
+}

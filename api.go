@@ -126,6 +126,7 @@ type AuthUserService interface {
 	UpdatePreferences(input *PreferencesInput) (preference *Preferences, validated *govalidations.Validated, err error)
 	AllEmbedUsers() (users []*EmbedUser, err error)
 	GroupEmbedUsers() (groupUsers []*GroupUsers, err error)
+	UpdateUserProfile(input *UserProfileInput) (validated *govalidations.Validated, err error)
 
 	// Count related
 	MyCount() (myCount *MyCount, err error)
