@@ -402,6 +402,7 @@ type Entry struct {
 	AllAttachmentsCount int
 	CommentsCount       int
 	AllLikesCount       int
+	VersionCount        int
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
@@ -525,8 +526,6 @@ type InlineHelp struct {
 	WhatNext        bool
 	WhatChats       bool
 	WhatWatchList   bool
-	CreateGroups    bool
-	InviteOthers    bool
 	AboutTodos      bool
 	GettingOut      bool
 	InviteOthersURL string
