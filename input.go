@@ -26,6 +26,7 @@ type EntryInput struct {
 
 	//update
 	NewVersion string
+	OldGroupId string
 
 	KnowledgeBase bool
 	AnyoneCanEdit bool
