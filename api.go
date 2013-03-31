@@ -18,8 +18,6 @@ type NoAuthUserService interface {
 
 	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
 
-	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
-
 	AskHelp(input *HelpInput) (help *HelpInfo, validated *govalidations.Validated, err error)
 
 	/* Blog */
@@ -34,6 +32,8 @@ type AuthMemberService interface {
 	GetAbandonUserInfo(organizationId string, memberId string) (info *AbandonUserInfo, err error)
 	SwitchOrganization(orgId string) (err error)
 	GetSharingInviationByToken(sharingInviationToken string) (r *SharingInvitationItem, err error)
+	RejectSharingBeforeForwarding(groupId string, email string) (err error)
+	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
 }
 
 type AuthUserService interface {
