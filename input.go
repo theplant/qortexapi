@@ -26,6 +26,7 @@ type EntryInput struct {
 
 	//update
 	NewVersion string
+	OldGroupId string
 
 	KnowledgeBase bool
 	AnyoneCanEdit bool
@@ -153,4 +154,21 @@ type HelpInput struct {
 	Country     string
 	City        string
 	HelpContent string
+}
+
+type UserProfileInput struct {
+	Summary       string
+	Title         string
+	Department    string
+	Location      string
+	Expertise     string
+	Interests     string
+	BirthMonth    string
+	BirthDay      string
+	WorkPhone     string
+	Mobile        string
+	Twitter       string
+	Skype         string
+	Facebook      string
+	OtherWebsites []string
 }

@@ -15,9 +15,8 @@ type NoAuthUserService interface {
 	ChangeEmail(token string) (activationToken string, err error)
 	PrepareChangeEmail(memberId string, newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
 	GetSharingInviation(sharingInviationToken string, memberId string) (r *SharingInvitationItem, err error)
-	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
 
-	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
+	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
 
 	AskHelp(input *HelpInput) (help *HelpInfo, validated *govalidations.Validated, err error)
 
@@ -32,6 +31,9 @@ type NoAuthUserService interface {
 type AuthMemberService interface {
 	GetAbandonUserInfo(organizationId string, memberId string) (info *AbandonUserInfo, err error)
 	SwitchOrganization(orgId string) (err error)
+	GetSharingInviationByToken(sharingInviationToken string) (r *SharingInvitationItem, err error)
+	RejectSharingBeforeForwarding(groupId string, email string) (err error)
+	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
 }
 
 type AuthUserService interface {
@@ -126,6 +128,7 @@ type AuthUserService interface {
 	UpdatePreferences(input *PreferencesInput) (preference *Preferences, validated *govalidations.Validated, err error)
 	AllEmbedUsers() (users []*EmbedUser, err error)
 	GroupEmbedUsers() (groupUsers []*GroupUsers, err error)
+	UpdateUserProfile(input *UserProfileInput) (validated *govalidations.Validated, err error)
 
 	// Count related
 	MyCount() (myCount *MyCount, err error)

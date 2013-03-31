@@ -353,10 +353,9 @@ type Entry struct {
 	Link      template.HTMLAttr
 	UploadURL template.HTMLAttr
 
-	IsShared      bool
-	IsPublished   bool
-	IsCanPublish  bool
-	Uncommentable bool
+	IsShared     bool
+	IsPublished  bool
+	IsCanPublish bool
 
 	IsSystemMessage               bool
 	SystemMessageType             string
