@@ -255,12 +255,6 @@ type EntryVersion struct {
 	IsNewVersion         bool
 }
 
-type ShareGroupRequest struct {
-	IsCurrentOrgSent     bool
-	IsCurrentOrgAccepted bool
-	IsCurrentOrgRejected bool
-}
-
 type LinkedEntry struct {
 	Id             string
 	EType          string
@@ -286,6 +280,7 @@ type Request struct {
 	SharedInviter    EmbedUser
 	SharedResponsor  EmbedUser
 	ToEmail          string
+	State            string
 }
 
 type Conversation struct {
@@ -409,7 +404,6 @@ type Entry struct {
 	CurrentVersionEditor EmbedUser
 	Group                *Group
 	Task                 *Task
-	ShareGroupRequest    *ShareGroupRequest
 	Conversation         *Conversation
 
 	LinkedEntries []*LinkedEntry
