@@ -460,18 +460,19 @@ type MyNotifications struct {
 }
 
 type NotificationItem struct {
-	Id            string
-	GroupId       string
-	ToUser        EmbedUser
-	ForEntry      EmbedEntry
-	FromUser      EmbedUser
-	FromOrg       EmbedOrg
-	CausedByEntry EmbedEntry
-	NotifiedAt    time.Time
-	ReadAt        time.Time
-	Readed        bool
-	Type          string
-	Link          template.HTMLAttr
+	Id                    string
+	GroupId               string
+	ToUser                EmbedUser
+	ForEntry              EmbedEntry
+	FromUser              EmbedUser
+	FromOrg               EmbedOrg
+	CausedByEntry         EmbedEntry
+	NotifiedAt            time.Time
+	ReadAt                time.Time
+	Readed                bool
+	Type                  string
+	Link                  template.HTMLAttr
+	SharingRequestToEmail string
 }
 
 type WatchItem struct {
