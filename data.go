@@ -43,9 +43,9 @@ type BlogEntry struct {
 }
 
 type SharingInvitationItem struct {
-	FromOrgId       string
+	FromOrg         EmbedOrg
 	FromUserId      string
-	GroupId         string
+	SharedGroup     *Group
 	IsNewAccount    bool
 	Email           string
 	Token           string
