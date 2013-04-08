@@ -160,6 +160,7 @@ type Group struct {
 	Managable           bool
 	FollowedByMe        bool
 	AdministratedByMe   bool
+	IsPreShared         bool
 	IsShared            bool
 	IsDefaultLogoURL    bool
 	HostOrgName         string
