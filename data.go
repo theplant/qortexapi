@@ -346,8 +346,9 @@ type Entry struct {
 	LikedByUsersHtml    template.HTML
 	NotifyOptionsHtml   template.HTML
 
-	Link      template.HTMLAttr
-	UploadURL template.HTMLAttr
+	Link             template.HTMLAttr
+	PresentationLink template.HTMLAttr
+	UploadURL        template.HTMLAttr
 
 	IsShared     bool
 	IsPublished  bool
