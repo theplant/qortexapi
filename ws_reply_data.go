@@ -1,5 +1,9 @@
 package qortexapi
 
+import (
+	"html/template"
+)
+
 type CountNotification struct {
 	Method           string
 	GroupId          string
@@ -45,22 +49,25 @@ func NewUserDeleted(embedUser EmbedUser) *AvailableUser {
 //**************
 // Group related
 const (
-	REPLY_GROUP_CREATED = "Reply.GroupCreated"
-	REPLY_GROUP_DELETED = "Reply.GroupDeleted"
+	REPLY_GROUP_CREATED       = "Reply.GroupCreated"
+	REPLY_GROUP_DELETED       = "Reply.GroupDeleted"
+	REPLY_GROUP_STATE_CHANGED = "Reply.GroupStateChanged"
 )
 
 type GroupState struct {
-	Method     string
-	IsFollowed bool
-	GroupMenu  string
-	GroupId    string
+	Method               string
+	GroupId              string
+	IsFollowed           bool
+	GroupMenu            string
+	GroupAside           template.HTML
+	GroupHeaderUnderInfo template.HTML
 }
 
-func NewGroupCreated(isFollowed bool, groupMenu string) *GroupState {
+func NewGroupCreated(isFollowed bool, groupAside string) *GroupState {
 	return &GroupState{
 		Method:     REPLY_GROUP_CREATED,
 		IsFollowed: isFollowed,
-		GroupMenu:  groupMenu,
+		GroupMenu:  groupAside,
 	}
 }
 
@@ -68,5 +75,14 @@ func NewGroupDeleted(groupId string) *GroupState {
 	return &GroupState{
 		Method:  REPLY_GROUP_DELETED,
 		GroupId: groupId,
+	}
+}
+
+func NewGroupStateChanged(groupId string, groupAside string, groupHeaderUnderInfo string) *GroupState {
+	return &GroupState{
+		Method:               REPLY_GROUP_STATE_CHANGED,
+		GroupId:              groupId,
+		GroupAside:           template.HTML(groupAside),
+		GroupHeaderUnderInfo: template.HTML(groupHeaderUnderInfo),
 	}
 }

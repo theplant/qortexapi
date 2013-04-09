@@ -169,6 +169,8 @@ type Group struct {
 	FollowersCount      int
 	IsAnnoucement       bool
 	GroupOwners         []EmbedUser
+	SharedGroupFromOrg  EmbedOrg
+	PreSharingEmails    []string
 }
 
 type GroupSelectorItem struct {
