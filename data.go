@@ -170,7 +170,10 @@ type Group struct {
 	IsAnnoucement       bool
 	GroupOwners         []EmbedUser
 	SharedGroupFromOrg  EmbedOrg
+	AcceptedEmbedOrgs   []EmbedOrg
 	PreSharingEmails    []string
+	ForwardedOrgs       []EmbedOrg
+	HasPendingItems     bool
 }
 
 type GroupSelectorItem struct {
