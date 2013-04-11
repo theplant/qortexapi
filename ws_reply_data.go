@@ -61,6 +61,7 @@ type GroupState struct {
 	GroupMenu            string
 	GroupAside           template.HTML
 	GroupHeaderUnderInfo template.HTML
+	IsNormal             bool
 }
 
 func NewGroupCreated(isFollowed bool, groupAside string) *GroupState {
@@ -78,11 +79,12 @@ func NewGroupDeleted(groupId string) *GroupState {
 	}
 }
 
-func NewGroupStateChanged(groupId string, groupAside string, groupHeaderUnderInfo string) *GroupState {
+func NewGroupStateChanged(groupId string, groupAside string, groupHeaderUnderInfo string, isNormal bool) *GroupState {
 	return &GroupState{
 		Method:               REPLY_GROUP_STATE_CHANGED,
 		GroupId:              groupId,
 		GroupAside:           template.HTML(groupAside),
 		GroupHeaderUnderInfo: template.HTML(groupHeaderUnderInfo),
+		IsNormal:             isNormal,
 	}
 }
