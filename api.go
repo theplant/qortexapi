@@ -62,6 +62,8 @@ type AuthUserService interface {
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (r string, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
+	MuteEntry(entryId string, groupId string) (err error)
+	UndoMuteEntry(entryId string, groupId string) (err error)
 
 	EntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 	OtherComments(entryId string, groupId string, versionUpdateat string, searchKeyWords string) (comments []*Entry, err error)

@@ -353,6 +353,7 @@ type Entry struct {
 	IsShared     bool
 	IsPublished  bool
 	IsCanPublish bool
+	IsMuted      bool
 
 	IsSystemMessage               bool
 	SystemMessageType             string
