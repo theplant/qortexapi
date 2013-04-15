@@ -153,6 +153,7 @@ type AuthUserService interface {
 	InvitePeople(emails []string) (validated *govalidations.Validated, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
+	UpdateMailUpdates(input *MailUpdatesInput) (err error)
 
 	PrepareChangeEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
 	ChangeEmail(token string) (err error)

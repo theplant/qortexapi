@@ -172,3 +172,27 @@ type UserProfileInput struct {
 	Facebook      string
 	OtherWebsites []string
 }
+
+type MailUpdatesInput struct {
+	IndividualIsOn    bool
+	SendLag           int
+	AckRequest        bool
+	AckConfirmation   bool
+	Todo              bool
+	TodoConfirmation  bool
+	SystemMessage     bool
+	EntryNotification bool
+	Like              bool
+	SendTimeIsOn      bool
+	Mon               bool
+	Tue               bool
+	Wed               bool
+	Thu               bool
+	Fri               bool
+	Sat               bool
+	Sun               bool
+	SendHoursIsOn     bool
+	StartAt           int
+	EndAt             int
+	DailyIsOn         bool
+}
