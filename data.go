@@ -42,7 +42,7 @@ type BlogEntry struct {
 	Comments         []*BlogEntry
 }
 
-type SharingInvitationItem struct {
+type SharingInvitation struct {
 	FromOrg         EmbedOrg
 	FromUserId      string
 	SharedGroup     *Group
@@ -113,6 +113,7 @@ type Preferences struct {
 
 type EmbedOrg struct {
 	Id            string
+	QortexURL     string
 	Name          string
 	LogoURL       string
 	NoNeedToShare bool
@@ -134,7 +135,7 @@ type EmbedUser struct {
 	ProfileURL     template.HTMLAttr
 }
 
-type PanelStatus struct {
+type AsideStatus struct {
 	AsideGroupsCollapse      bool
 	AsideOtherGroupsCollapse bool
 	HasToDo                  bool
@@ -507,7 +508,7 @@ type GroupCount struct {
 	UnreadCount int
 }
 
-type GroupHeaderItem struct {
+type GroupHeader struct {
 	HasToFollow     bool
 	IsFollowing     bool
 	IsManaging      bool
@@ -546,15 +547,13 @@ type Invitation struct {
 	ByUser  EmbedUser
 }
 
-type AbandonUserInfo struct {
-	CurrentDisabledFromOrg EmbedOrg
-	CurrentDeletedFromOrg  EmbedOrg
-	AvailableOrgs          []EmbedOrg
-	DisabledFromOrgs       []EmbedOrg
-	DeletedFromOrgs        []EmbedOrg
+// Abandon = User is Deleted or Disabled from the org
+type AbandonInfo struct {
+	AbandonFromOrg EmbedOrg
+	AvailableOrgs  []EmbedOrg
 }
 
-type HelpInfo struct {
+type ContactInfo struct {
 	FirstName   string
 	LastName    string
 	CompanyName string
@@ -563,6 +562,5 @@ type HelpInfo struct {
 	Phone       string
 	Country     string
 	City        string
-	HelpContent string
+	Content     string
 }
-
