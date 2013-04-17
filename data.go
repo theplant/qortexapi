@@ -42,7 +42,7 @@ type BlogEntry struct {
 	Comments         []*BlogEntry
 }
 
-type SharingInvitationItem struct {
+type SharingInvitation struct {
 	FromOrg         EmbedOrg
 	FromUserId      string
 	SharedGroup     *Group
@@ -359,6 +359,7 @@ type Entry struct {
 	IsShared     bool
 	IsPublished  bool
 	IsCanPublish bool
+	IsMuted      bool
 
 	IsSystemMessage               bool
 	SystemMessageType             string
@@ -513,7 +514,7 @@ type GroupCount struct {
 	UnreadCount int
 }
 
-type GroupHeaderItem struct {
+type GroupHeader struct {
 	HasToFollow     bool
 	IsFollowing     bool
 	IsManaging      bool
@@ -552,7 +553,7 @@ type Invitation struct {
 	ByUser  EmbedUser
 }
 
-type AbandonUserInfo struct {
+type AbandonInfo struct {
 	CurrentDisabledFromOrg EmbedOrg
 	CurrentDeletedFromOrg  EmbedOrg
 	AvailableOrgs          []EmbedOrg
@@ -560,7 +561,7 @@ type AbandonUserInfo struct {
 	DeletedFromOrgs        []EmbedOrg
 }
 
-type HelpInfo struct {
+type ContactInfo struct {
 	FirstName   string
 	LastName    string
 	CompanyName string

@@ -28,6 +28,10 @@ type TaskState struct {
 	MyCount *MyCount
 }
 
+type PulseReply struct {
+	Method string
+}
+
 //**************
 // User related
 const (
