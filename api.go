@@ -104,8 +104,8 @@ type AuthUserService interface {
 	GetClassifiedGroups() (anouncementGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
 
 	//User related
-	OrganizationUsers(query string, sortKey string, countPerPage int) (users []*User, newSortKey string, err error)
-	GroupUsers(groupId string, query string, OnlyFollowers bool, sortKey string, countPerPage int) (users []*User, newSortKey string, err error)
+	GetOrgUsers(keyword string, startFullName string, limit int) (users []*User, nextFullName string, err error)
+	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []*User, nextFullName string, err error)
 	GetUser(userId string) (user *User, err error)
 	EnableUser(userId string) (err error)
 	DisableUser(userId string) (err error)
