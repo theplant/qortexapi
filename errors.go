@@ -4,20 +4,6 @@ import (
 	"errors"
 )
 
-type CanNotBlankError struct {
-	Field string
-}
-
-func NewCanNotBlankError(field string) *CanNotBlankError {
-	return &CanNotBlankError{
-		Field: field,
-	}
-}
-
-func (this *CanNotBlankError) Error() string {
-	return this.Field + " can't be blank"
-}
-
 var (
 	ServerError                    = errors.New("Oops, something is wrong!")
 	OrganizationNotFoundError      = errors.New("organization not found")
@@ -54,4 +40,7 @@ var (
 	TokenInvalid                   = errors.New("token is not available")
 	InvitationAlreadyCanceled      = errors.New("invitation was canceled")
 	AccountNotActicated            = errors.New("account was not activated yet")
+	EntryBlankError                = errors.New("Entry can not be blank")
+	GroupBlankError                = errors.New("Group can not be blank")
+	UserBlankError                 = errors.New("User can not be blank")
 )
