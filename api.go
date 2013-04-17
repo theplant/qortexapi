@@ -70,7 +70,7 @@ type AuthUserService interface {
 
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
 
-	MyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
+	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
 	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
 
 	// watchlist related
@@ -88,20 +88,20 @@ type AuthUserService interface {
 	DeleteDraft(entryId string, groupId string) (err error)
 
 	//Group related
-	NewGroup() (group *Group, err error)
+	GetNewGroup() (group *Group, err error)
 	GetGroup(groupId string) (group *Group, err error)
 	CreateGroup(input *GroupInput) (group *Group, validated *govalidations.Validated, err error)
 	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
 	// UpdateGroupSlug(id string, slug string) (validated *govalidations.Validated, err error)
 	DeleteGroup(groupId string) (err error)
-	GroupBySlug(slug string) (group *Group, err error)
-	GetAllGroups(keyword string) (groups []*Group, err error)
+	GetGroupBySlug(slug string) (group *Group, err error)
+	GetGroups(keyword string) (groups []*Group, err error)
 	GetPublicGroups(keyword string) (groups []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
-	GetGroupHeaderItem(groupId string) (ghi *GroupHeaderItem, err error)
-	ClassifyMyGroups() (publicGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
+	GetGroupHeader(groupId string) (header *GroupHeader, err error)
+	GetClassifiedGroups() (anouncementGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
 
 	//User related
 	OrganizationUsers(query string, sortKey string, countPerPage int) (users []*User, newSortKey string, err error)

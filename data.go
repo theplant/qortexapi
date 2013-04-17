@@ -507,7 +507,7 @@ type GroupCount struct {
 	UnreadCount int
 }
 
-type GroupHeaderItem struct {
+type GroupHeader struct {
 	HasToFollow     bool
 	IsFollowing     bool
 	IsManaging      bool
