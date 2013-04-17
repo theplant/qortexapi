@@ -20,7 +20,7 @@ type PublicService interface {
 
 	ContactUs(input *ContactInput) (contact *ContactInfo, validated *govalidations.Validated, err error)
 
-	/* Blog */
+	// Blog
 	GetBlogEntries(doi string, pageNum int, limit int) (blog *Blog, blogEntries []*BlogEntry, totalPageNum int, err error)
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
 	CreateExternalComment(doi string, input *EntryInput) (blogEntry *BlogEntry, validated *govalidations.Validated, err error)
@@ -28,14 +28,16 @@ type PublicService interface {
 	CreateNewsletter(input *NewsletterInput) (r *Newsletter, validated *govalidations.Validated, err error)
 }
 
+// User registered and confirmed email and logged in but haven't join or create any organization.
 type AuthMemberService interface {
-	GetAbandonUserInfo(organizationId string, memberId string) (info *AbandonUserInfo, err error)
 	SwitchOrganization(orgId string) (err error)
+	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
 	GetSharingInviationByToken(sharingInviationToken string) (r *SharingInvitation, err error)
 	RejectSharingBeforeForwarding(groupId string, email string) (err error)
-	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
+	RespondSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
 }
 
+// Normal user and joined organization.
 type AuthUserService interface {
 	NewEntry(groupId string) (entry *Entry, err error)
 	QortexMessages(messsageType string, before string, limit int) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages

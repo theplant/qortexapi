@@ -546,7 +546,7 @@ type Invitation struct {
 	ByUser  EmbedUser
 }
 
-type AbandonUserInfo struct {
+type AbandonInfo struct {
 	CurrentDisabledFromOrg EmbedOrg
 	CurrentDeletedFromOrg  EmbedOrg
 	AvailableOrgs          []EmbedOrg
