@@ -136,8 +136,7 @@ type AuthUserService interface {
 	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
 	AcceptSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
-	RejectSharedGroupRequest(fromOrgId string, sharedOrgIdHex string, sharedGroupIdHex string, fromUserId string) (req *Request, err error)
-	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (entry *Entry, err error)
+	RejectSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
 
 	//Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
@@ -154,10 +153,10 @@ type AuthUserService interface {
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
 
 	SendSharingInvitation(groupId string, email string, isResend bool) (si *SharingInvitation, validated *govalidations.Validated, err error)
-	GetSharingInvitationItems(groupId string) (sis []*SharingInvitation, err error)
-	CancelSharing(groupId string, email string) (err error)
-	StopSharingGroup(GroupId string, toStopOrgId string) (err error)
-	LeaveSharingGroup(GroupId string) (err error)
+	GetSharingInvitations(groupId string) (sis []*SharingInvitation, err error)
+	CancelSharingInvitation(groupId string, email string) (err error)
+	StopSharedGroup(groupId string, toStopOrgId string) (err error)
+	LeaveSharedGroup(groupId string) (err error)
 
 	//chat
 	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
