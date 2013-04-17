@@ -144,7 +144,7 @@ type ShareChatInput struct {
 	GroupId       string
 }
 
-type HelpInput struct {
+type ContactInput struct {
 	FirstName   string
 	LastName    string
 	CompanyName string

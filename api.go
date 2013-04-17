@@ -8,14 +8,16 @@ import (
 type PublicService interface {
 	GetSession(email string, password string) (session string, validated *govalidations.Validated, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
+
+	// Change Email
+	PrepareChangingEmail(memberId string, newEmail string) (changer *EmailChanger, validated *govalidations.Validated, err error)
+	ConfirmChangingEmail(token string) (activationToken string, err error)
 	CancelChangingEmail(token string) (err error)
-	ChangeEmail(token string) (activationToken string, err error)
-	PrepareChangeEmail(memberId string, newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
-	GetSharingInviation(sharingInviationToken string, memberId string) (r *SharingInvitationItem, err error)
 
+	// Sharing Flow
 	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
-
-	AskHelp(input *HelpInput) (help *HelpInfo, validated *govalidations.Validated, err error)
+	GetSharingInviation(sharingInviationToken string, memberId string) (invitation *SharingInvitation, err error)
+	ContactUs(input *ContactInput) (contact *ContactInfo, validated *govalidations.Validated, err error)
 
 	/* Blog */
 	BlogEntries(doi string, pageNum int, limit int) (blog *Blog, r []*BlogEntry, totalPageNum int, err error)
@@ -28,7 +30,7 @@ type PublicService interface {
 type AuthMemberService interface {
 	GetAbandonUserInfo(organizationId string, memberId string) (info *AbandonUserInfo, err error)
 	SwitchOrganization(orgId string) (err error)
-	GetSharingInviationByToken(sharingInviationToken string) (r *SharingInvitationItem, err error)
+	GetSharingInviationByToken(sharingInviationToken string) (r *SharingInvitation, err error)
 	RejectSharingBeforeForwarding(groupId string, email string) (err error)
 	ResponseSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
 }
@@ -152,12 +154,12 @@ type AuthUserService interface {
 	ResendInvitation(email string) (err error)
 	UpdateMailUpdates(input *MailUpdatesInput) (err error)
 
-	PrepareChangeEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
-	ChangeEmail(token string) (err error)
+	PrepareChangingEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
+	ConfirmChangingEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
 
-	SendSharingInvitation(groupId string, email string, isResend bool) (si *SharingInvitationItem, validated *govalidations.Validated, err error)
-	GetSharingInvitationItems(groupId string) (sis []*SharingInvitationItem, err error)
+	SendSharingInvitation(groupId string, email string, isResend bool) (si *SharingInvitation, validated *govalidations.Validated, err error)
+	GetSharingInvitationItems(groupId string) (sis []*SharingInvitation, err error)
 	CancelSharing(groupId string, email string) (err error)
 	StopSharingGroup(GroupId string, toStopOrgId string) (err error)
 	LeaveSharingGroup(GroupId string) (err error)

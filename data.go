@@ -42,7 +42,7 @@ type BlogEntry struct {
 	Comments         []*BlogEntry
 }
 
-type SharingInvitationItem struct {
+type SharingInvitation struct {
 	FromOrg         EmbedOrg
 	FromUserId      string
 	SharedGroup     *Group
@@ -554,7 +554,7 @@ type AbandonUserInfo struct {
 	DeletedFromOrgs        []EmbedOrg
 }
 
-type HelpInfo struct {
+type ContactInfo struct {
 	FirstName   string
 	LastName    string
 	CompanyName string
@@ -565,4 +565,3 @@ type HelpInfo struct {
 	City        string
 	HelpContent string
 }
-
