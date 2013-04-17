@@ -17,13 +17,14 @@ type PublicService interface {
 	// Sharing Flow
 	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
 	GetSharingInviation(sharingInviationToken string, memberId string) (invitation *SharingInvitation, err error)
+
 	ContactUs(input *ContactInput) (contact *ContactInfo, validated *govalidations.Validated, err error)
 
 	/* Blog */
-	BlogEntries(doi string, pageNum int, limit int) (blog *Blog, r []*BlogEntry, totalPageNum int, err error)
-	BlogEntryBySlug(doi string, slug string) (blog *Blog, r *BlogEntry, err error)
-	CreateExternalComment(doi string, input *EntryInput) (r *BlogEntry, validated *govalidations.Validated, err error)
-	CheckSlug(doi string, slug string) (validSlug string, err error)
+	GetBlogEntries(doi string, pageNum int, limit int) (blog *Blog, blogEntries []*BlogEntry, totalPageNum int, err error)
+	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
+	CreateExternalComment(doi string, input *EntryInput) (blogEntry *BlogEntry, validated *govalidations.Validated, err error)
+	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (r *Newsletter, validated *govalidations.Validated, err error)
 }
 
