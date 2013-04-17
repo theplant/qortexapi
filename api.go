@@ -114,12 +114,12 @@ type AuthUserService interface {
 	DemoteFromSuperUser(userId string) (err error)
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
-	MyFollowingUsers() (followingPeople []*User, err error)
-	PanelStatus() (panelStatus *PanelStatus, err error)
-	Preferences() (preference *Preferences, err error)
-	UpdatePreferences(input *PreferencesInput) (preference *Preferences, validated *govalidations.Validated, err error)
-	AllEmbedUsers() (users []*EmbedUser, err error)
-	GroupEmbedUsers() (groupUsers []*GroupUsers, err error)
+	GetMyFollowingUsers() (followingUsers []*User, err error)
+	GetPanelStatus() (panelStatus *PanelStatus, err error)
+	GetUserPreferences() (preferences *Preferences, err error)
+	UpdateUserPreferences(input *PreferencesInput) (preferences *Preferences, validated *govalidations.Validated, err error)
+	GetOrgEmbedUsers() (users []*EmbedUser, err error)
+	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (validated *govalidations.Validated, err error)
 
 	// Count related
