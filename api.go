@@ -125,14 +125,14 @@ type AuthUserService interface {
 	UpdateUserProfile(input *UserProfileInput) (validated *govalidations.Validated, err error)
 
 	// Count related
-	MyCount() (myCount *MyCount, err error)
+	GetMyCount() (myCount *MyCount, err error)
 	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
 
 	//Organization Related
-	GetInvitationsInfo() (invitaions []*Invitation, err error)
-	OrganizationsInfo(orgIds []string) (orgs []*Organization, err error)
-	OrganizationInfo(orgId string) (org *Organization, err error)
-	SearchOrganizations(query string) (org []*Organization, err error)
+	GetJoinOrgInvitations() (invitations []*Invitation, err error)
+	GetOrganization(orgId string) (org *Organization, err error)
+	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
+	SearchOrganizations(keyword string) (orgs []*Organization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
 	AcceptSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
