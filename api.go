@@ -5,12 +5,9 @@ import (
 	"time"
 )
 
-type Global interface {
+type PublicService interface {
 	GetSession(email string, password string) (session string, validated *govalidations.Validated, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
-}
-
-type NoAuthUserService interface {
 	CancelChangingEmail(token string) (err error)
 	ChangeEmail(token string) (activationToken string, err error)
 	PrepareChangeEmail(memberId string, newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
