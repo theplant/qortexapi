@@ -25,14 +25,14 @@ type PublicService interface {
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
 	CreateExternalComment(doi string, input *EntryInput) (blogEntry *BlogEntry, validated *govalidations.Validated, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
-	CreateNewsletter(input *NewsletterInput) (r *Newsletter, validated *govalidations.Validated, err error)
+	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
 type AuthMemberService interface {
 	SwitchOrganization(orgId string) (err error)
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
-	GetSharingInviationByToken(sharingInviationToken string) (r *SharingInvitation, err error)
+	GetSharingInviationByToken(sharingInviationToken string) (invitation *SharingInvitation, err error)
 	RejectSharingBeforeForwarding(groupId string, email string) (err error)
 	RespondSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
 }
@@ -44,11 +44,11 @@ type AuthUserService interface {
 	CreateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetSharingRequestEntry(entryId string) (entry *Entry, err error)
-	EditBroadcast(entryId string) (entry *Entry, err error)
-	EditBroadcastComment(entryId string) (entry *Entry, err error)
+	GetBroadcast(entryId string) (entry *Entry, err error)
+	GetBroadcastComment(entryId string) (entry *Entry, err error)
 	UpdateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	UpdateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
-	CreatePost(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	CreateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	// GetPost(entryId string, groupId string) (entry *Entry, err error)
 	// UpdatePost(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreateTask(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
@@ -61,8 +61,8 @@ type AuthUserService interface {
 	// GetWiki(entryId string, groupId string, versionUpdateat string) (entry *Entry, err error)
 	// GetWikiByTitle(title string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
-	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (r string, err error)
-	GetEntry(entryId string, groupId string, updateAtUnixNano string, searchKeyWords string) (entry *Entry, err error)
+	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
+	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (entry *Entry, err error)
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 
 	EntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
@@ -150,14 +150,14 @@ type AuthUserService interface {
 	//Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
-	CanCreateGroup() (r bool, err error)
-	CanInvitePeople() (r bool, err error)
+	CanCreateGroup() (ok bool, err error)
+	CanInvitePeople() (ok bool, err error)
 	InvitePeople(emails []string) (validated *govalidations.Validated, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	UpdateMailUpdates(input *MailUpdatesInput) (err error)
 
-	PrepareChangingEmail(newEmail string) (r *EmailChanger, validated *govalidations.Validated, err error)
+	PrepareChangingEmail(newEmail string) (changer *EmailChanger, validated *govalidations.Validated, err error)
 	ConfirmChangingEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
 
