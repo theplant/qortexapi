@@ -548,11 +548,8 @@ type Invitation struct {
 }
 
 type AbandonInfo struct {
-	CurrentDisabledFromOrg EmbedOrg
-	CurrentDeletedFromOrg  EmbedOrg
-	AvailableOrgs          []EmbedOrg
-	DisabledFromOrgs       []EmbedOrg
-	DeletedFromOrgs        []EmbedOrg
+	AbandonFromOrg EmbedOrg
+	AvailableOrgs  []EmbedOrg
 }
 
 type ContactInfo struct {
