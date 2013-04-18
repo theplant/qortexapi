@@ -6,7 +6,7 @@ import (
 )
 
 type PublicService interface {
-	GetSession(email string, password string) (session string, validated *govalidations.Validated, err error)
+	GetSession(email string, password string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
 
 	// Change Email
@@ -125,19 +125,18 @@ type AuthUserService interface {
 	UpdateUserProfile(input *UserProfileInput) (validated *govalidations.Validated, err error)
 
 	// Count related
-	MyCount() (myCount *MyCount, err error)
+	GetMyCount() (myCount *MyCount, err error)
 	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
 
 	//Organization Related
-	GetInvitationsInfo() (invitaions []*Invitation, err error)
-	OrganizationsInfo(orgIds []string) (orgs []*Organization, err error)
-	OrganizationInfo(orgId string) (org *Organization, err error)
-	SearchOrganizations(query string) (org []*Organization, err error)
+	GetJoinOrgInvitations() (invitations []*Invitation, err error)
+	GetOrganization(orgId string) (org *Organization, err error)
+	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
+	SearchOrganizations(keyword string) (orgs []*Organization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
 	AcceptSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
-	RejectSharedGroupRequest(fromOrgId string, sharedOrgIdHex string, sharedGroupIdHex string, fromUserId string) (req *Request, err error)
-	//GetSharedGroupRequest(sharedOrgId string, sharedGroupId string) (entry *Entry, err error)
+	RejectSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
 
 	//Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
@@ -154,10 +153,10 @@ type AuthUserService interface {
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
 
 	SendSharingInvitation(groupId string, email string, isResend bool) (si *SharingInvitation, validated *govalidations.Validated, err error)
-	GetSharingInvitationItems(groupId string) (sis []*SharingInvitation, err error)
-	CancelSharing(groupId string, email string) (err error)
-	StopSharingGroup(GroupId string, toStopOrgId string) (err error)
-	LeaveSharingGroup(GroupId string) (err error)
+	GetSharingInvitations(groupId string) (sis []*SharingInvitation, err error)
+	CancelSharingInvitation(groupId string, email string) (err error)
+	StopSharedGroup(groupId string, toStopOrgId string) (err error)
+	LeaveSharedGroup(groupId string) (err error)
 
 	//chat
 	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
