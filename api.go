@@ -6,7 +6,7 @@ import (
 )
 
 type PublicService interface {
-	GetSession(email string, password string) (session string, validated *govalidations.Validated, err error)
+	GetSession(email string, password string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
 
 	// Change Email
