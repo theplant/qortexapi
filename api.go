@@ -13,6 +13,7 @@ type PublicService interface {
 	PrepareChangingEmail(memberId string, newEmail string) (changer *EmailChanger, validated *govalidations.Validated, err error)
 	ConfirmChangingEmail(token string) (activationToken string, err error)
 	CancelChangingEmail(token string) (err error)
+	UpdatePendingInvitationEmail(orgId string, invitationToken string, newEmail string) (err error)
 
 	// Sharing Flow
 	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
