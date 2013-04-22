@@ -35,7 +35,7 @@ type AuthMemberService interface {
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
 	GetSharingInviationByToken(sharingInviationToken string) (invitation *SharingInvitation, err error)
 	RejectSharingBeforeForwarding(groupId string, email string) (err error)
-	RespondSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
+	RespondSharingRequest(token string, toOrgId string) (prefixURL string, validated *govalidations.Validated, err error)
 }
 
 // Normal user and joined organization.
