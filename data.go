@@ -186,19 +186,19 @@ type GroupSelector struct {
 
 type Attachment struct {
 	Id            string
-	OwnerId       []string `json:",omitempty"`
-	Category      string   `json:",omitempty"`
-	Filename      string   `json:",omitempty"`
-	ShortFilename string   `json:",omitempty"`
-	ContentType   string   `json:",omitempty"`
-	ContentId     string   `json:",omitempty"`
-	MD5           string   `json:",omitempty"`
-	ContentLength int64    `json:",omitempty"`
-	Error         string   `json:",omitempty"`
-	GroupId       []string `json:",omitempty"`
-	UploadTime    time.Time
-	Width         int `json:",omitempty"`
-	Height        int `json:",omitempty"`
+	OwnerId       []string  `json:",omitempty"`
+	Category      string    `json:",omitempty"`
+	Filename      string    `json:",omitempty"`
+	ShortFilename string    `json:",omitempty"`
+	ContentType   string    `json:",omitempty"`
+	ContentId     string    `json:",omitempty"`
+	MD5           string    `json:",omitempty"`
+	ContentLength int64     `json:",omitempty"`
+	Error         string    `json:",omitempty"`
+	GroupId       []string  `json:",omitempty"`
+	UploadTime    time.Time `json:",omitempty"`
+	Width         int       `json:",omitempty"`
+	Height        int       `json:",omitempty"`
 
 	URL          template.HTMLAttr `json:",omitempty"`
 	ImageIconURL template.HTMLAttr `json:",omitempty"`
@@ -224,20 +224,20 @@ type Task struct {
 	IsDueToday bool `json:",omitempty"`
 	IsOverDue  bool `json:",omitempty"`
 
-	CreatedAt         time.Time
-	Due               time.Time
-	CompletedAt       time.Time
-	LocalCreatedDate  string `json:",omitempty"`
-	LocalDue          string `json:",omitempty"`
-	LocalDueShortDate string `json:",omitempty"`
-	DueInputValue     string `json:",omitempty"`
+	CreatedAt         time.Time `json:",omitempty"`
+	Due               time.Time `json:",omitempty"`
+	CompletedAt       time.Time `json:",omitempty"`
+	LocalCreatedDate  string    `json:",omitempty"`
+	LocalDue          string    `json:",omitempty"`
+	LocalDueShortDate string    `json:",omitempty"`
+	DueInputValue     string    `json:",omitempty"`
 
 	TotalUsersCount     int `json:",omitempty"`
 	CompletedUsersCount int `json:",omitempty"`
 	PendingUsersCount   int `json:",omitempty"`
 
 	Owner          EmbedUser   `json:",omitempty"`
-	ToUsers        []EmbedUser `json:",omitempty"`
+	ToUsers        []EmbedUser `json:"-"`
 	PendingUsers   []EmbedUser `json:",omitempty"`
 	CompletedUsers []EmbedUser `json:",omitempty"`
 
@@ -314,17 +314,17 @@ type Message struct {
 
 type Entry struct {
 	Id         string
-	EType      string
-	Title      string `json:"-"`
-	Slug       string `json:",omitempty"`
-	Content    string `json:"-"`
-	TypeTitle  string
-	RootId     string `json:",omitempty"`
-	GroupId    string
-	AuthorId   string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
-	BumpedUpAt time.Time
+	EType      string    `json:",omitempty"`
+	Title      string    `json:"-"`
+	Slug       string    `json:",omitempty"`
+	Content    string    `json:"-"`
+	TypeTitle  string    `json:",omitempty"`
+	RootId     string    `json:",omitempty"`
+	GroupId    string    `json:",omitempty"`
+	AuthorId   string    `json:",omitempty"`
+	CreatedAt  time.Time `json:",omitempty"`
+	UpdatedAt  time.Time `json:",omitempty"`
+	BumpedUpAt time.Time `json:",omitempty"`
 
 	AllAttachmentsURL    string `json:",omitempty"`
 	Permalink            string `json:",omitempty"`
