@@ -8,6 +8,8 @@ import (
 type PublicService interface {
 	GetSession(email string, password string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
+	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
+	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
 	// Change Email
 	PrepareChangingEmail(memberId string, newEmail string) (changer *EmailChanger, validated *govalidations.Validated, err error)
@@ -160,4 +162,9 @@ type AuthUserService interface {
 
 	//chat
 	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
+}
+
+type AuthAdminService interface {
+	GetTotalStats() (totalStat *TotalStats, err error)
+	GetOrgStats() (orgStats []*OrgStats, err error)
 }

@@ -563,3 +563,22 @@ type ContactInfo struct {
 	City        string
 	HelpContent string
 }
+
+type TotalStats struct {
+	OrgCount     int
+	MemberCount  int
+	GroupCount   int
+	EntryCount   int
+	CommentCount int
+	ChatCount    int
+}
+
+type OrgStats struct {
+	Organization     *Organization
+	UserCount        int
+	GroupCount       int
+	SharedGroupCount int
+	EntryCount       int
+	CommentCount     int
+	ChatCount        int
+}
