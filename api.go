@@ -27,6 +27,9 @@ type PublicService interface {
 	CreateExternalComment(doi string, input *EntryInput) (blogEntry *BlogEntry, validated *govalidations.Validated, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
+	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
+	RequestNewInvitationToken(orgId string, email string) (validated *govalidations.Validated, err error)
+	RequestNewSharingToken( email string) (validated *govalidations.Validated, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
