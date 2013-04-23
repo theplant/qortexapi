@@ -41,7 +41,7 @@ type AuthMemberService interface {
 // Normal user and joined organization.
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
-	GetQortexMessages(messsageType string, before string, limit int) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
+	GetQortexMessages(messsageType string, before string, limit int, withComments bool) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
 	CreateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetSharingRequestEntry(entryId string) (entry *Entry, err error)
@@ -65,8 +65,8 @@ type AuthUserService interface {
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 	GetOtherVersionsComments(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (comments []*Entry, err error)
 
-	GetGroupEntries(groupId string, entryType string, before string, limit int) (entries []*Entry, err error)
-	GetMyFeedEntries(entryType string, before string, limit int) (entries []*Entry, err error)
+	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
+	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetNewFeedEntries(entryType string, From string, limit int) (entries []*Entry, err error)
 	GetMyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
