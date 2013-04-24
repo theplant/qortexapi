@@ -8,11 +8,14 @@ import (
 type PublicService interface {
 	GetSession(email string, password string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
+	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
+	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
 	// Change Email
 	PrepareChangingEmail(memberId string, newEmail string) (changer *EmailChanger, validated *govalidations.Validated, err error)
 	ConfirmChangingEmail(token string) (activationToken string, err error)
 	CancelChangingEmail(token string) (err error)
+	UpdatePendingInvitationEmail(orgId string, invitationToken string, newEmail string) (err error)
 
 	// Sharing Flow
 	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
@@ -26,6 +29,9 @@ type PublicService interface {
 	CreateExternalComment(doi string, input *EntryInput) (blogEntry *BlogEntry, validated *govalidations.Validated, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
+	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
+	RequestNewInvitationToken(orgId string, email string) (validated *govalidations.Validated, err error)
+	RequestNewSharingToken( email string) (validated *govalidations.Validated, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -34,13 +40,13 @@ type AuthMemberService interface {
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
 	GetSharingInviationByToken(sharingInviationToken string) (invitation *SharingInvitation, err error)
 	RejectSharingBeforeForwarding(groupId string, email string) (err error)
-	RespondSharingRequest(token string, fromOrgId string, fromUserId string, forSharingOrgId string, groupId string) (prefixURL string, validated *govalidations.Validated, err error)
+	RespondSharingRequest(token string, toOrgId string) (prefixURL string, validated *govalidations.Validated, err error)
 }
 
 // Normal user and joined organization.
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
-	GetQortexMessages(messsageType string, before string, limit int) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
+	GetQortexMessages(messsageType string, before string, limit int, withComments bool) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
 	CreateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CreateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetSharingRequestEntry(entryId string) (entry *Entry, err error)
@@ -64,8 +70,8 @@ type AuthUserService interface {
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 	GetOtherVersionsComments(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (comments []*Entry, err error)
 
-	GetGroupEntries(groupId string, entryType string, before string, limit int) (entries []*Entry, err error)
-	GetMyFeedEntries(entryType string, before string, limit int) (entries []*Entry, err error)
+	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
+	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetNewFeedEntries(entryType string, From string, limit int) (entries []*Entry, err error)
 	GetMyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
@@ -160,4 +166,9 @@ type AuthUserService interface {
 
 	//chat
 	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
+}
+
+type AuthAdminService interface {
+	GetTotalStats() (totalStat *TotalStats, err error)
+	GetOrgStats() (orgStats []*OrgStats, err error)
 }

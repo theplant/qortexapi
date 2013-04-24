@@ -122,16 +122,16 @@ type EmbedUser struct {
 	Id             string
 	Email          string
 	Name           string
-	Title          string
-	Avatar16       string
-	Avatar32       string
-	JID            string
-	Timezone       string
-	IsSuperUser    bool
-	IsShare        bool
-	OrganizationId string
-	OriginalOrgId  string
-	ProfileURL     template.HTMLAttr
+	Title          string            `json:",omitempty"`
+	Avatar16       string            `json:",omitempty"`
+	Avatar32       string            `json:",omitempty"`
+	JID            string            `json:",omitempty"`
+	Timezone       string            `json:",omitempty"`
+	IsSuperUser    bool              `json:",omitempty"`
+	IsShare        bool              `json:",omitempty"`
+	OrganizationId string            `json:",omitempty"`
+	OriginalOrgId  string            `json:",omitempty"`
+	ProfileURL     template.HTMLAttr `json:",omitempty"`
 }
 
 type PanelStatus struct {
@@ -145,35 +145,35 @@ type PanelStatus struct {
 }
 
 type Group struct {
-	Id                  string
-	Name                string
-	Description         string
-	GType               string
-	LogoURL             string
-	IconName            string
-	Link                string
-	Slug                string
+	Id                  string `json:",omitempty"`
+	Name                string `json:",omitempty"`
+	Description         string `json:",omitempty"`
+	GType               string `json:",omitempty"`
+	LogoURL             string `json:",omitempty"`
+	IconName            string `json:",omitempty"`
+	Link                string `json:",omitempty"`
+	Slug                string `json:",omitempty"`
 	Author              EmbedUser
-	IsAdmin             bool
-	IsPrivate           bool
-	Editable            bool
-	Managable           bool
-	FollowedByMe        bool
-	AdministratedByMe   bool
-	IsPreShared         bool
-	IsShared            bool
-	IsDefaultLogoURL    bool
-	HostOrgName         string
-	IsDispayHostOrgName bool
-	EntriesCount        int
-	FollowersCount      int
-	IsAnnoucement       bool
-	GroupOwners         []EmbedUser
+	IsAdmin             bool        `json:",omitempty"`
+	IsPrivate           bool        `json:",omitempty"`
+	Editable            bool        `json:",omitempty"`
+	Managable           bool        `json:",omitempty"`
+	FollowedByMe        bool        `json:",omitempty"`
+	AdministratedByMe   bool        `json:",omitempty"`
+	IsPreShared         bool        `json:",omitempty"`
+	IsShared            bool        `json:",omitempty"`
+	IsDefaultLogoURL    bool        `json:",omitempty"`
+	HostOrgName         string      `json:",omitempty"`
+	IsDispayHostOrgName bool        `json:",omitempty"`
+	EntriesCount        int         `json:",omitempty"`
+	FollowersCount      int         `json:",omitempty"`
+	IsAnnoucement       bool        `json:",omitempty"`
+	GroupOwners         []EmbedUser `json:",omitempty"`
 	SharedGroupFromOrg  EmbedOrg
-	AcceptedEmbedOrgs   []EmbedOrg
-	PreSharingEmails    []string
-	ForwardedOrgs       []EmbedOrg
-	HasPendingItems     bool
+	AcceptedEmbedOrgs   []EmbedOrg `json:",omitempty"`
+	PreSharingEmails    []string   `json:",omitempty"`
+	ForwardedOrgs       []EmbedOrg `json:",omitempty"`
+	HasPendingItems     bool       `json:",omitempty"`
 }
 
 type GroupSelectorItem struct {
@@ -192,63 +192,63 @@ type GroupSelector struct {
 
 type Attachment struct {
 	Id            string
-	OwnerId       []string
-	Category      string
-	Filename      string
-	ShortFilename string
-	ContentType   string
-	ContentId     string
-	MD5           string
-	ContentLength int64
-	Error         string
-	GroupId       []string
-	UploadTime    time.Time
-	Width         int
-	Height        int
+	OwnerId       []string  `json:",omitempty"`
+	Category      string    `json:",omitempty"`
+	Filename      string    `json:",omitempty"`
+	ShortFilename string    `json:",omitempty"`
+	ContentType   string    `json:",omitempty"`
+	ContentId     string    `json:",omitempty"`
+	MD5           string    `json:",omitempty"`
+	ContentLength int64     `json:",omitempty"`
+	Error         string    `json:",omitempty"`
+	GroupId       []string  `json:",omitempty"`
+	UploadTime    time.Time `json:",omitempty"`
+	Width         int       `json:",omitempty"`
+	Height        int       `json:",omitempty"`
 
-	URL          template.HTMLAttr
-	ImageIconURL template.HTMLAttr
-	FileIconURL  template.HTMLAttr
-	HumanSize    string
-	IsImage      bool
-	FileKind     string
+	URL          template.HTMLAttr `json:",omitempty"`
+	ImageIconURL template.HTMLAttr `json:",omitempty"`
+	FileIconURL  template.HTMLAttr `json:",omitempty"`
+	HumanSize    string            `json:",omitempty"`
+	IsImage      bool              `json:",omitempty"`
+	FileKind     string            `json:",omitempty"`
 }
 
 type Task struct {
-	IsTaskOwner       bool
-	IsTaskAssignee    bool
-	IsOthers          bool
-	IsCurrentUserDone bool
+	IsTaskOwner       bool `json:",omitempty"`
+	IsTaskAssignee    bool `json:",omitempty"`
+	IsOthers          bool `json:",omitempty"`
+	IsCurrentUserDone bool `json:",omitempty"`
 
-	IsAcknowledgement bool
-	IsTodoForOne      bool
-	IsTodoForAll      bool
+	IsAcknowledgement bool `json:",omitempty"`
+	IsTodoForOne      bool `json:",omitempty"`
+	IsTodoForAll      bool `json:",omitempty"`
 
-	IsCompleted bool
-	IsClosed    bool
+	IsCompleted bool `json:",omitempty"`
+	IsClosed    bool `json:",omitempty"`
 
-	IsDueToday bool
-	IsOverDue  bool
+	IsDueToday bool `json:",omitempty"`
+	IsOverDue  bool `json:",omitempty"`
 
-	CreatedAt         time.Time
-	Due               time.Time
-	CompletedAt       time.Time
-	LocalCreatedDate  string
-	LocalDue          string
-	LocalDueShortDate string
-	DueInputValue     string
+	CreatedAt         time.Time `json:",omitempty"`
+	Due               time.Time `json:",omitempty"`
+	CompletedAt       time.Time `json:",omitempty"`
+	LocalCreatedDate  string    `json:",omitempty"`
+	LocalDue          string    `json:",omitempty"`
+	LocalDueShortDate string    `json:",omitempty"`
+	DueInputValue     string    `json:",omitempty"`
 
-	TotalUsersCount     int
-	CompletedUsersCount int
-	PendingUsersCount   int
+	TotalUsersCount     int `json:",omitempty"`
+	CompletedUsersCount int `json:",omitempty"`
+	PendingUsersCount   int `json:",omitempty"`
 
-	Owner          EmbedUser
-	ToUsers        []EmbedUser
-	PendingUsers   []EmbedUser
-	CompletedUsers []EmbedUser
+	Owner          EmbedUser   `json:",omitempty"`
+	ToUsers        []EmbedUser `json:"-"`
+	PendingUsers   []EmbedUser `json:",omitempty"`
+	CompletedUsers []EmbedUser `json:",omitempty"`
 
-	ColorCssClass string
-	TaskBarHtml   template.HTML
+	ColorCssClass string        `json:",omitempty"`
+	TaskBarHtml   template.HTML `json:",omitempty"`
 }
 
 type EntryVersion struct {
@@ -320,115 +320,115 @@ type Message struct {
 
 type Entry struct {
 	Id         string
-	EType      string
-	Title      string
-	Slug       string
-	Content    string
-	TypeTitle  string
-	RootId     string
-	GroupId    string
-	AuthorId   string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
-	BumpedUpAt time.Time
+	EType      string    `json:",omitempty"`
+	Title      string    `json:"-"`
+	Slug       string    `json:",omitempty"`
+	Content    string    `json:"-"`
+	TypeTitle  string    `json:",omitempty"`
+	RootId     string    `json:",omitempty"`
+	GroupId    string    `json:",omitempty"`
+	AuthorId   string    `json:",omitempty"`
+	CreatedAt  time.Time `json:",omitempty"`
+	UpdatedAt  time.Time `json:",omitempty"`
+	BumpedUpAt time.Time `json:",omitempty"`
 
-	AllAttachmentsURL    string
-	Permalink            string
-	IconName             string
-	LocalHumanCreatedAt  string
-	LocalHumanUpdatedAt  string
-	WholeLastUpdateAtAgo string
-	LastUpdateAtAgo      string
-	MentionedUserIds     string
-	DomainURL            string
-	UpdatedAtUnixNano    string
+	AllAttachmentsURL    string `json:",omitempty"`
+	Permalink            string `json:",omitempty"`
+	IconName             string `json:",omitempty"`
+	LocalHumanCreatedAt  string `json:",omitempty"`
+	LocalHumanUpdatedAt  string `json:",omitempty"`
+	WholeLastUpdateAtAgo string `json:",omitempty"`
+	LastUpdateAtAgo      string `json:",omitempty"`
+	MentionedUserIds     string `json:",omitempty"`
+	DomainURL            string `json:",omitempty"`
+	UpdatedAtUnixNano    string `json:",omitempty"`
 
-	HtmlTitle           template.HTML
-	HtmlContent         template.HTML
-	HtmlContentPart     template.HTML
-	TaskHtmlContentPart template.HTML
-	WatchlistHtml       template.HTML
-	ToUsersHtml         template.HTML
-	LikedByUsersHtml    template.HTML
-	NotifyOptionsHtml   template.HTML
+	HtmlTitle           template.HTML `json:",omitempty"`
+	HtmlContent         template.HTML `json:",omitempty"`
+	HtmlContentPart     template.HTML `json:",omitempty"`
+	TaskHtmlContentPart template.HTML `json:",omitempty"`
+	WatchlistHtml       template.HTML `json:",omitempty"`
+	ToUsersHtml         template.HTML `json:",omitempty"`
+	LikedByUsersHtml    template.HTML `json:",omitempty"`
+	NotifyOptionsHtml   template.HTML `json:",omitempty"`
 
-	Link             template.HTMLAttr
-	PresentationLink template.HTMLAttr
-	UploadURL        template.HTMLAttr
+	Link             template.HTMLAttr `json:",omitempty"`
+	PresentationLink template.HTMLAttr `json:",omitempty"`
+	UploadURL        template.HTMLAttr `json:",omitempty"`
 
-	IsShared     bool
-	IsPublished  bool
-	IsCanPublish bool
-	IsMuted      bool
+	IsShared     bool `json:",omitempty"`
+	IsPublished  bool `json:",omitempty"`
+	IsCanPublish bool `json:",omitempty"`
+	IsMuted      bool `json:",omitempty"`
 
-	IsSystemMessage               bool
-	SystemMessageType             string
-	BroadcastType                 string
-	IsBroadcast                   bool
-	IsBroadcastTypeToAllAdmins    bool
-	IsBroadcastTypeToAllUsers     bool
-	IsBroadcastTypeToSomeOrgs     bool
-	IsFromSuperOrg                bool
-	IsFeedback                    bool
-	FromOrg                       EmbedOrg
-	ToOrgs                        []EmbedOrg
-	ToOrgsHtml                    template.HTML
-	IsRequest                     bool
-	Request                       *Request
-	VisibleForSuperUserInSuperOrg bool
-	VisibleForSuperOrg            bool
+	IsSystemMessage               bool          `json:",omitempty"`
+	SystemMessageType             string        `json:",omitempty"`
+	BroadcastType                 string        `json:",omitempty"`
+	IsBroadcast                   bool          `json:",omitempty"`
+	IsBroadcastTypeToAllAdmins    bool          `json:",omitempty"`
+	IsBroadcastTypeToAllUsers     bool          `json:",omitempty"`
+	IsBroadcastTypeToSomeOrgs     bool          `json:",omitempty"`
+	IsFromSuperOrg                bool          `json:",omitempty"`
+	IsFeedback                    bool          `json:",omitempty"`
+	FromOrg                       EmbedOrg      `json:",omitempty"`
+	ToOrgs                        []EmbedOrg    `json:",omitempty"`
+	ToOrgsHtml                    template.HTML `json:",omitempty"`
+	IsRequest                     bool          `json:",omitempty"`
+	Request                       *Request      `json:",omitempty"`
+	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
+	VisibleForSuperOrg            bool          `json:",omitempty"`
 
-	IsKnowledgeBase    bool
-	IsPost             bool
-	IsComment          bool
-	IsTask             bool
-	IsChat             bool
-	IsTaskToDo         bool
-	IsTaskAck          bool
-	IsInWatchList      bool
-	IsToGroup          string
-	CurrentUserCanEdit bool
-	CanEdit            bool
-	CanReply           bool
-	ManagerCanEdit     bool
-	LikedByMe          bool
-	HasInlineTask      bool
-	TaskIsCompleted    bool
-	IsRoot             bool
-	IsUnread           bool
-	IsUpdated          bool
-	IsLastVersion      bool
-	Presentation       bool
-	AnyoneCanEdit      bool
-	IsInGroup          bool
-	IsFromEmail        bool
+	IsKnowledgeBase    bool   `json:",omitempty"`
+	IsPost             bool   `json:",omitempty"`
+	IsComment          bool   `json:",omitempty"`
+	IsTask             bool   `json:",omitempty"`
+	IsChat             bool   `json:",omitempty"`
+	IsTaskToDo         bool   `json:",omitempty"`
+	IsTaskAck          bool   `json:",omitempty"`
+	IsInWatchList      bool   `json:",omitempty"`
+	IsToGroup          string `json:",omitempty"`
+	CurrentUserCanEdit bool   `json:",omitempty"`
+	CanEdit            bool   `json:",omitempty"`
+	CanReply           bool   `json:",omitempty"`
+	ManagerCanEdit     bool   `json:",omitempty"`
+	LikedByMe          bool   `json:",omitempty"`
+	HasInlineTask      bool   `json:",omitempty"`
+	TaskIsCompleted    bool   `json:",omitempty"`
+	IsRoot             bool   `json:",omitempty"`
+	IsUnread           bool   `json:",omitempty"`
+	IsUpdated          bool   `json:",omitempty"`
+	IsLastVersion      bool   `json:",omitempty"`
+	Presentation       bool   `json:",omitempty"`
+	AnyoneCanEdit      bool   `json:",omitempty"`
+	IsInGroup          bool   `json:",omitempty"`
+	IsFromEmail        bool   `json:",omitempty"`
 
-	AllAttachmentsCount int
-	CommentsCount       int
-	AllLikesCount       int
-	VersionCount        int
+	AllAttachmentsCount int `json:",omitempty"`
+	CommentsCount       int `json:",omitempty"`
+	AllLikesCount       int `json:",omitempty"`
+	VersionCount        int `json:",omitempty"`
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
-	Group                *Group
-	Task                 *Task
-	Conversation         *Conversation
+	Group                *Group        `json:",omitempty"`
+	Task                 *Task         `json:",omitempty"`
+	Conversation         *Conversation `json:",omitempty"`
 
-	LinkedEntries []*LinkedEntry
-	Versions      []*EntryVersion
+	LinkedEntries []*LinkedEntry  `json:",omitempty"`
+	Versions      []*EntryVersion `json:",omitempty"`
 
-	ToUsers                []EmbedUser
-	MentionedUsers         []EmbedUser
-	LikedByUsers           []EmbedUser
-	Attachments            []*Attachment
-	FirstPicture           *Attachment
-	Comments               []*Entry
-	ExternalComments       []*Entry
-	CurrentVersionComments []*Entry
-	OtherVersionsComments  []*Entry
-	NewComment             *Entry
-	NewEntry               *Entry
-	GroupSlector           *GroupSelector
+	ToUsers                []EmbedUser    `json:",omitempty"`
+	MentionedUsers         []EmbedUser    `json:",omitempty"`
+	LikedByUsers           []EmbedUser    `json:",omitempty"`
+	Attachments            []*Attachment  `json:",omitempty"`
+	FirstPicture           *Attachment    `json:",omitempty"`
+	Comments               []*Entry       `json:",omitempty"`
+	ExternalComments       []*Entry       `json:",omitempty"`
+	CurrentVersionComments []*Entry       `json:",omitempty"`
+	OtherVersionsComments  []*Entry       `json:",omitempty"`
+	NewComment             *Entry         `json:",omitempty"`
+	NewEntry               *Entry         `json:",omitempty"`
+	GroupSlector           *GroupSelector `json:",omitempty"`
 }
 
 type EmbedEntry struct {
@@ -568,4 +568,23 @@ type ContactInfo struct {
 	Country     string
 	City        string
 	HelpContent string
+}
+
+type TotalStats struct {
+	OrgCount     int
+	MemberCount  int
+	GroupCount   int
+	EntryCount   int
+	CommentCount int
+	ChatCount    int
+}
+
+type OrgStats struct {
+	Organization     *Organization
+	UserCount        int
+	GroupCount       int
+	SharedGroupCount int
+	EntryCount       int
+	CommentCount     int
+	ChatCount        int
 }
