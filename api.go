@@ -31,7 +31,7 @@ type PublicService interface {
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
 	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
 	RequestNewInvitationToken(orgId string, email string) (validated *govalidations.Validated, err error)
-	RequestNewSharingToken( email string) (validated *govalidations.Validated, err error)
+	RequestNewSharingToken(email string) (validated *govalidations.Validated, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -72,7 +72,7 @@ type AuthUserService interface {
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
-	GetNewFeedEntries(entryType string, From string, limit int) (entries []*Entry, err error)
+	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
 	GetMyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
 
