@@ -183,11 +183,13 @@ type GroupSelectorItem struct {
 }
 
 type GroupSelector struct {
-	Header            template.HTML
-	SelectedGroupId   string
-	SysMessage        *GroupSelectorItem
-	FollowingGroups   []*GroupSelectorItem
-	UnFollowingGroups []*GroupSelectorItem
+	Header                  template.HTML
+	SelectedGroupId         string
+	SysMessage              *GroupSelectorItem
+	FollowingNormalGroups   []*GroupSelectorItem
+	FollowingSharedGroups   []*GroupSelectorItem
+	UnFollowingNormalGroups []*GroupSelectorItem
+	UnFollowingSharedGroups []*GroupSelectorItem
 }
 
 type Attachment struct {
