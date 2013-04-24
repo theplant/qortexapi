@@ -31,7 +31,7 @@ type PublicService interface {
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
 	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
 	RequestNewInvitationToken(orgId string, email string) (validated *govalidations.Validated, err error)
-	RequestNewSharingToken( email string) (validated *govalidations.Validated, err error)
+	RequestNewSharingToken(email string) (validated *govalidations.Validated, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -109,7 +109,7 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetGroupHeader(groupId string) (header *GroupHeader, err error)
-	GetClassifiedGroups() (anouncementGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
+	GetClassifiedGroups() (anouncementGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
 
 	//User related
 	GetOrgUsers(keyword string, startFullName string, limit int) (users []*User, nextFullName string, err error)
