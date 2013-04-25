@@ -31,7 +31,7 @@ type PublicService interface {
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
 	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
 	RequestNewInvitationToken(orgId string, email string) (validated *govalidations.Validated, err error)
-	RequestNewSharingToken( email string) (validated *govalidations.Validated, err error)
+	RequestNewSharingToken(email string) (validated *govalidations.Validated, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -169,6 +169,11 @@ type AuthUserService interface {
 }
 
 type AuthAdminService interface {
+	// Get the overall statistics (excluding ThePlant)
 	GetTotalStats() (totalStat *TotalStats, err error)
+	// Get all the Organizations' statistics
 	GetOrgStats() (orgStats []*OrgStats, err error)
+	// Get all closed beta access requests
+	GetAccessRequests() (accessReqs []*AccessReq, err error)
+	ApproveAccess(email string) (err error)
 }
