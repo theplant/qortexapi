@@ -54,7 +54,7 @@ type AuthUserService interface {
 	GetBroadcastComment(entryId string) (entry *Entry, err error)
 	UpdateBroadcast(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
 	UpdateBroadcastComment(input *BroadcastInput) (entry *Entry, validated *govalidations.Validated, err error)
-	CreateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	CloseTask(entryId string, groupId string) (entry *Task, err error)
 	CreateComment(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
@@ -63,6 +63,8 @@ type AuthUserService interface {
 	UpdateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (entry *Entry, err error)
+
+	//dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
@@ -72,6 +74,9 @@ type AuthUserService interface {
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
+
+	// Get Unread entries for type entryType since the fromTimeUnixNano unix nanoseconds, and return max limit entries.
+	// entryType could be:	"post", "knowledge", "task"
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
 	GetMyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
