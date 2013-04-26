@@ -160,6 +160,7 @@ type Group struct {
 	Managable           bool        `json:",omitempty"`
 	FollowedByMe        bool        `json:",omitempty"`
 	AdministratedByMe   bool        `json:",omitempty"`
+	IsPreShared         bool        `json:",omitempty"`
 	IsShared            bool        `json:",omitempty"`
 	IsDefaultLogoURL    bool        `json:",omitempty"`
 	HostOrgName         string      `json:",omitempty"`
@@ -168,6 +169,11 @@ type Group struct {
 	FollowersCount      int         `json:",omitempty"`
 	IsAnnoucement       bool        `json:",omitempty"`
 	GroupOwners         []EmbedUser `json:",omitempty"`
+	SharedGroupFromOrg  EmbedOrg
+	AcceptedEmbedOrgs   []EmbedOrg `json:",omitempty"`
+	PreSharingEmails    []string   `json:",omitempty"`
+	ForwardedOrgs       []EmbedOrg `json:",omitempty"`
+	HasPendingItems     bool       `json:",omitempty"`
 }
 
 type GroupSelectorItem struct {
@@ -177,11 +183,13 @@ type GroupSelectorItem struct {
 }
 
 type GroupSelector struct {
-	Header            template.HTML
-	SelectedGroupId   string
-	SysMessage        *GroupSelectorItem
-	FollowingGroups   []*GroupSelectorItem
-	UnFollowingGroups []*GroupSelectorItem
+	Header                  template.HTML
+	SelectedGroupId         string
+	SysMessage              *GroupSelectorItem
+	FollowingNormalGroups   []*GroupSelectorItem
+	FollowingSharedGroups   []*GroupSelectorItem
+	UnFollowingNormalGroups []*GroupSelectorItem
+	UnFollowingSharedGroups []*GroupSelectorItem
 }
 
 type Attachment struct {
