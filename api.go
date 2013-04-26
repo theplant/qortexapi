@@ -32,6 +32,8 @@ type PublicService interface {
 	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
 	RequestNewInvitationToken(orgId string, email string) (validated *govalidations.Validated, err error)
 	RequestNewSharingToken(email string) (validated *govalidations.Validated, err error)
+
+	InviteMe(organizationId string, email string) (validated *govalidations.Validated, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
