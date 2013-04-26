@@ -114,7 +114,7 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetGroupHeader(groupId string) (header *GroupHeader, err error)
-	GetClassifiedGroups() (anouncementGroup *Group, followedGroups []*Group, unFollowedGroups []*Group, err error)
+	GetClassifiedGroups() (anouncementGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
 
 	//User related
 	GetOrgUsers(keyword string, startFullName string, limit int) (users []*User, nextFullName string, err error)
