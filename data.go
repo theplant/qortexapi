@@ -564,6 +564,7 @@ type ContactInfo struct {
 	HelpContent string
 }
 
+// Following are for Admin Service
 type TotalStats struct {
 	OrgCount     int
 	MemberCount  int
@@ -581,4 +582,13 @@ type OrgStats struct {
 	EntryCount       int
 	CommentCount     int
 	ChatCount        int
+}
+
+type AccessReq struct {
+	Email      string
+	AccessCode string
+	Status     string
+	ApprovedBy string
+	CreatedAt  string
+	UpdatedAt  string
 }

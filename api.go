@@ -174,6 +174,11 @@ type AuthUserService interface {
 }
 
 type AuthAdminService interface {
+	// Get the overall statistics (excluding ThePlant)
 	GetTotalStats() (totalStat *TotalStats, err error)
+	// Get all the Organizations' statistics
 	GetOrgStats() (orgStats []*OrgStats, err error)
+	// Get all closed beta access requests
+	GetAccessRequests() (accessReqs []*AccessReq, err error)
+	ApproveAccess(email string) (err error)
 }
