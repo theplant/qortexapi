@@ -38,6 +38,8 @@ type EntryInput struct {
 	//External Comment
 	Email string
 	Name  string
+
+	IsInnerMessage bool
 }
 
 const (
