@@ -590,6 +590,8 @@ type OrgStats struct {
 	EntryCount       int
 	CommentCount     int
 	ChatCount        int
+	CreatedAt        string
+	LastUpdate       string
 }
 
 type AccessReq struct {
