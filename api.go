@@ -187,5 +187,8 @@ type AuthAdminService interface {
 	GetOrgStats() (orgStats []*OrgStats, err error)
 	// Get all closed beta access requests
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
+	// Approve user access request for closed beta
 	ApproveAccess(email string) (err error)
+	// Get all members
+	GetAllMembers() (members []*Member, err error)
 }

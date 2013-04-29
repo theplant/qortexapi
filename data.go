@@ -572,6 +572,15 @@ type ContactInfo struct {
 	HelpContent string
 }
 
+type Member struct {
+	Name               string
+	Email              string
+	ComfirmationSentAt string
+	SignupConfirmedAt  string
+	SignupStatus       string
+	JoinedOrgs         []*Organization
+}
+
 // Following are for Admin Service
 type TotalStats struct {
 	OrgCount     int
