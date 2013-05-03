@@ -602,6 +602,7 @@ type OrgStats struct {
 	ChatCount        int
 	CreatedAt        string
 	LastUpdate       string
+	Author           EmbedUser
 }
 
 type AccessReq struct {
