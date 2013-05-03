@@ -32,12 +32,14 @@ type Blog struct {
 type BlogEntry struct {
 	Id               string
 	Title            string
+	HtmlTitle        template.HTML
 	Slug             string
 	CreatedAt        time.Time
 	UpdatedAt        time.Time
 	Permalink        string
 	CreateCommentURL string
 	HtmlContent      template.HTML
+	HtmlContentPart  template.HTML
 	Author           EmbedUser
 	Comments         []*BlogEntry
 }
