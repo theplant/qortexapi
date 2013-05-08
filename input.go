@@ -1,43 +1,38 @@
 package qortexapi
 
 type EntryInput struct {
-	Id               string
-	EType            string
-	Title            string
-	Slug             string
-	Content          string
-	GroupId          string
-	IsToGroup        string
-	ToUserIds        string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
-	MentionedUserIds string
-	IsPublished      string
+	Id string
+	// "post": normal entry
+	// "task":  acknowledgement or To-Do (IsAcknowledgement == true ,IsToGroup == "2")
+	// "comment":  entry's comment
+	EType   string
+	Title   string
+	Content string
+	GroupId string
 
-	//task
-	IsAcknowledgement string
-	TaskRequireType   string
-	TaskDue           string
+	IsToGroup        string // “0”:Notify People ,“1”:Notify Group, “2”:To-Do
+	ToUserIds        string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	MentionedUserIds string // @users        seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 
-	//comment
-	RootId                   string
-	IsCommentAcknowledgement string
+	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
+	TaskDue           string // if IsToGroup == "2" and want to set a deadline. format:20130507
 
-	// convert to wiki
-	BaseOnEntryId string
+	RootId                   string // if etype == "comment"  required
+	IsCommentAcknowledgement string // if etype == "comment"  required
 
-	//update
-	NewVersion string
-	OldGroupId string
+	NewVersion string // if NewVersion == "1"  will create new version.
+	OldGroupId string // when update entry  required
 
-	KnowledgeBase bool
-	AnyoneCanEdit bool
-	Presentation  bool
+	KnowledgeBase bool // if KnowledgeBase == true, this entry is KnowledgeBase.
+	AnyoneCanEdit bool // if AnyoneCanEdit == true, anyone can edit this entry.
+	Presentation  bool // if Presentation == true, this entry is a Presentation
 
-	//incoming mail
-	IsFromEmail bool
+	IsFromEmail bool // IsFromEmail == true, entry create through email.
 
-	//External Comment
-	Email string
-	Name  string
+	IsPublished bool   // if IsPublished == true, this entry is a public blog.
+	Slug        string // if IsPublished == true required
+	Email       string // Blog Comment required
+	Name        string // Blog Comment required
 }
 
 const (
