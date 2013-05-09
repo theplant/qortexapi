@@ -86,8 +86,6 @@ type AuthUserService interface {
 	GetMyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
 
-	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
-
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
 	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
 
@@ -175,7 +173,9 @@ type AuthUserService interface {
 	LeaveSharedGroup(groupId string) (err error)
 
 	//chat
+	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
 	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
+	GetPrivateChat(entryId string, searchKeyWords string) (chatEntry *Entry, err error)
 }
 
 type AuthAdminService interface {
