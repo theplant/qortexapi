@@ -207,15 +207,15 @@ type Attachment struct {
 	Error         string    `json:",omitempty"`
 	GroupId       []string  `json:",omitempty"`
 	UploadTime    time.Time `json:",omitempty"`
-	Width         int       `json:",omitempty"`
-	Height        int       `json:",omitempty"`
+	Width         int
+	Height        int
 
 	URL          template.HTMLAttr `json:",omitempty"`
 	ImageIconURL template.HTMLAttr `json:",omitempty"`
 	FileIconURL  template.HTMLAttr `json:",omitempty"`
 	HumanSize    string            `json:",omitempty"`
-	IsImage      bool              `json:",omitempty"`
-	FileKind     string            `json:",omitempty"`
+	IsImage      bool
+	FileKind     string `json:",omitempty"`
 }
 
 type Task struct {
