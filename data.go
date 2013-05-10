@@ -210,7 +210,10 @@ type Attachment struct {
 	Width         int
 	Height        int
 
-	URL          template.HTMLAttr `json:",omitempty"`
+	URL          template.HTMLAttr `json:",omitempty"` // origin
+	S1ThumbURL   template.HTMLAttr `json:",omitempty"` // width 240
+	MThumbURL    template.HTMLAttr `json:",omitempty"` // width 640
+	LThumbURL    template.HTMLAttr `json:",omitempty"` // width 720
 	ImageIconURL template.HTMLAttr `json:",omitempty"`
 	FileIconURL  template.HTMLAttr `json:",omitempty"`
 	HumanSize    string            `json:",omitempty"`
