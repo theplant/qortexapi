@@ -369,6 +369,7 @@ type Entry struct {
 	IsMuted      bool `json:",omitempty"`
 
 	IsSystemMessage               bool          `json:",omitempty"`
+	IsInnerMessage                bool          `json:",omitempty"`
 	SystemMessageType             string        `json:",omitempty"`
 	BroadcastType                 string        `json:",omitempty"`
 	IsBroadcast                   bool          `json:",omitempty"`
