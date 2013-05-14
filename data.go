@@ -545,8 +545,8 @@ type InlineHelp struct {
 }
 
 type EmailChanger struct {
-	Token string
-	Email string
+	Token        string
+	Email        string
 	SharingToken string
 }
 

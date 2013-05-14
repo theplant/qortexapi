@@ -12,10 +12,9 @@ type PublicService interface {
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
 	// Change Email
-	PrepareChangingEmail(memberId string, newEmail string, sharingToken string) (changer *EmailChanger, validated *govalidations.Validated, err error)
+	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, validated *govalidations.Validated, err error)
 	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, err error)
 	CancelChangingEmail(token string) (err error)
-	UpdatePendingInvitationEmail(orgId string, invitationToken string, newEmail string) (err error)
 
 	// Sharing Flow
 	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
