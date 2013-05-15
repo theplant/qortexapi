@@ -218,7 +218,7 @@ type Attachment struct {
 	FileIconURL  template.HTMLAttr `json:",omitempty"`
 	HumanSize    string            `json:",omitempty"`
 	IsImage      bool
-	FileKind     string `json:",omitempty"`
+	FileKind     string
 }
 
 type Task struct {
