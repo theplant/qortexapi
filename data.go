@@ -555,10 +555,11 @@ type Newsletter struct {
 }
 
 type Invitation struct {
-	Email   string
-	Token   string
-	SentAgo string
-	ByUser  EmbedUser
+	Email             string
+	Token             string
+	SentAgo           string
+	ByUser            EmbedUser
+	HideInPendingList bool
 }
 
 type AbandonInfo struct {
