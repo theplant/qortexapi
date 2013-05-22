@@ -415,6 +415,7 @@ type Entry struct {
 	CommentsCount       int `json:",omitempty"`
 	AllLikesCount       int `json:",omitempty"`
 	VersionCount        int `json:",omitempty"`
+	UnreadCommnetCount  int
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
