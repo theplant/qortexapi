@@ -25,7 +25,6 @@ type PublicService interface {
 	// Blog
 	GetBlogEntries(doi string, pageNum int, limit int) (blog *Blog, blogEntries []*BlogEntry, totalPageNum int, err error)
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
-	CreateExternalComment(doi string, input *EntryInput) (blogEntry *BlogEntry, validated *govalidations.Validated, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
 	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
