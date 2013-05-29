@@ -20,8 +20,9 @@ type EntryInput struct {
 	RootId                   string // if etype == "comment"  required
 	IsCommentAcknowledgement string // if etype == "comment"  required
 
-	NewVersion string // if NewVersion == "1"  will create new version.
-	OldGroupId string // when update entry  required
+	NewVersion   string // if NewVersion == "1"  will create new version.
+	OldGroupId   string // when update entry  required
+	LastUpdateAt string
 
 	KnowledgeBase bool // if KnowledgeBase == true, this entry is KnowledgeBase.
 	AnyoneCanEdit bool // if AnyoneCanEdit == true, anyone can edit this entry.

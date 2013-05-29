@@ -349,6 +349,8 @@ type Entry struct {
 	MentionedUserIds     string `json:",omitempty"`
 	DomainURL            string `json:",omitempty"`
 	UpdatedAtUnixNano    string `json:",omitempty"`
+	// last version's update time
+	LastUpdateAt string `json:",omitempty"`
 
 	HtmlTitle           template.HTML `json:",omitempty"`
 	HtmlContent         template.HTML `json:",omitempty"`
