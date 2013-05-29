@@ -536,15 +536,10 @@ type GroupHeader struct {
 }
 
 type InlineHelp struct {
-	WhatFeed        bool
-	WhatGroup       bool
+	QortexOverview  bool
 	WhatNext        bool
 	WhatChats       bool
-	WhatWatchList   bool
-	AboutTodos      bool
-	GettingOut      bool
 	InviteOthersURL string
-	WhatNextURL     string
 	WhatChatsURL    string
 }
 
