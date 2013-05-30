@@ -125,8 +125,7 @@ type EmbedUser struct {
 	Email          string
 	Name           string
 	Title          string            `json:",omitempty"`
-	Avatar16       string            `json:",omitempty"`
-	Avatar32       string            `json:",omitempty"`
+	Avatar         string            `json:",omitempty"`
 	JID            string            `json:",omitempty"`
 	Timezone       string            `json:",omitempty"`
 	IsSuperUser    bool              `json:",omitempty"`
