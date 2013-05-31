@@ -133,6 +133,7 @@ type EmbedUser struct {
 	OrganizationId string            `json:",omitempty"`
 	OriginalOrgId  string            `json:",omitempty"`
 	ProfileURL     template.HTMLAttr `json:",omitempty"`
+	NoDetail       bool              `json:",omitempty"`
 }
 
 type PanelStatus struct {
@@ -427,15 +428,15 @@ type Entry struct {
 	LinkedEntries []*LinkedEntry  `json:",omitempty"`
 	Versions      []*EntryVersion `json:",omitempty"`
 
-	ToUsers                []EmbedUser    `json:",omitempty"`
-	MentionedUsers         []EmbedUser    `json:",omitempty"`
-	LikedByUsers           []EmbedUser    `json:",omitempty"`
-	Attachments            []*Attachment  `json:",omitempty"`
-	FirstPicture           *Attachment    `json:",omitempty"`
-	Comments               []*Entry       `json:",omitempty"`
-	ExternalComments       []*Entry       `json:",omitempty"`
-	CurrentVersionComments []*Entry       `json:",omitempty"`
-	OtherVersionsComments  []*Entry       `json:",omitempty"`
+	ToUsers                []EmbedUser   `json:",omitempty"`
+	MentionedUsers         []EmbedUser   `json:",omitempty"`
+	LikedByUsers           []EmbedUser   `json:",omitempty"`
+	Attachments            []*Attachment `json:",omitempty"`
+	FirstPicture           *Attachment   `json:",omitempty"`
+	Comments               []*Entry
+	ExternalComments       []*Entry `json:",omitempty"`
+	CurrentVersionComments []*Entry
+	OtherVersionsComments  []*Entry
 	NewComment             *Entry         `json:",omitempty"`
 	NewEntry               *Entry         `json:",omitempty"`
 	GroupSlector           *GroupSelector `json:",omitempty"`
