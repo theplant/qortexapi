@@ -93,6 +93,7 @@ type User struct {
 	Location             string
 	FollowingGroups      []*Group
 	Preferences          *Preferences
+	NoDetail             bool `json:",omitempty"`
 }
 
 type GroupUsers struct {
