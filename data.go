@@ -112,6 +112,7 @@ type Preferences struct {
 	AdminModeOn              bool
 	PreferMarkdown           bool
 	AutoFollowPublicGroup    bool
+	EnableHTML5Notification  bool
 }
 
 type EmbedOrg struct {

@@ -119,6 +119,7 @@ type PreferencesInput struct {
 	AdminModeOn              string
 	PreferMarkdown           string
 	AutoFollowPublicGroup    string
+	EnableHTML5Notification  string
 }
 
 type MemberAccountInput struct {
