@@ -7,7 +7,7 @@ import (
 
 type PublicService interface {
 	GetSession(email string, password string) (session string, err error)
-	GetAuthUserService(session string) (authUserService AuthUserService, apiEmbedUser EmbedUser, err error)
+	GetAuthUserService(session string) (authUserService AuthUserService, err error)
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
@@ -118,6 +118,7 @@ type AuthUserService interface {
 	GetClassifiedGroups() (anouncementGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
 
 	//User related
+	GetAuthUser() (user *User, err error)
 	GetOrgUsers(keyword string, startFullName string, limit int) (users []*User, nextFullName string, err error)
 	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []*User, nextFullName string, err error)
 	GetUser(userId string) (user *User, err error)
