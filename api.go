@@ -92,7 +92,7 @@ type AuthUserService interface {
 	AddToWatchList(entryId string, groupId string) (added bool, err error)
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
-	RemindMe(organizationId string, userId string) (err error)
+	RemindMe() (reminded bool, err error)
 
 	// Like action
 	UpdateLike(input *LikeInput) (entry *Entry, err error)
