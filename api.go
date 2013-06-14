@@ -165,7 +165,7 @@ type AuthUserService interface {
 	ConfirmChangingEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
 
-	SendSharingInvitation(groupId string, email string, isResend bool) (si *SharingInvitation, validated *govalidations.Validated, err error)
+	SendSharingInvitation(groupId string, email string, isResend bool) (si *SharingInvitation, err error)
 	GetSharingInvitations(groupId string) (sis []*SharingInvitation, err error)
 	CancelSharingInvitation(groupId string, email string) (err error)
 	StopSharedGroup(groupId string, toStopOrgId string) (err error)
