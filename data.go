@@ -507,6 +507,9 @@ type WatchItem struct {
 
 	WatchTime time.Time
 
+	IsSmartReminding bool
+	IsNoReminding    bool
+
 	WatchEntry *Entry
 }
 
