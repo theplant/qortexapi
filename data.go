@@ -368,11 +368,13 @@ type Entry struct {
 	PresentationLink template.HTMLAttr `json:",omitempty"`
 	UploadURL        template.HTMLAttr `json:",omitempty"`
 
-	IsShared     bool `json:",omitempty"`
-	IsPublished  bool `json:",omitempty"`
-	IsCanPublish bool `json:",omitempty"`
-	IsMuted      bool `json:",omitempty"`
-	IsReminding  bool `json:",omitempty"`
+	IsShared         bool `json:",omitempty"`
+	IsPublished      bool `json:",omitempty"`
+	IsCanPublish     bool `json:",omitempty"`
+	IsMuted          bool `json:",omitempty"`
+	IsReminding      bool `json:",omitempty"`
+	IsSmartReminding bool `json:",omitempty"`
+	IsNoReminding    bool `json:",omitempty"`
 
 	IsSystemMessage               bool          `json:",omitempty"`
 	IsInnerMessage                bool          `json:",omitempty"`
