@@ -372,6 +372,7 @@ type Entry struct {
 	IsPublished  bool `json:",omitempty"`
 	IsCanPublish bool `json:",omitempty"`
 	IsMuted      bool `json:",omitempty"`
+	IsReminding  bool `json:",omitempty"`
 
 	IsSystemMessage               bool          `json:",omitempty"`
 	IsInnerMessage                bool          `json:",omitempty"`
