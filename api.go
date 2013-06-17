@@ -93,8 +93,8 @@ type AuthUserService interface {
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
 	RemindMe() (reminded bool, err error)
-	StartSmartReminding(groupId string, watchItemId string) (watchItem *WatchItem, stopped bool, err error)
-	StopReminding(groupId string, watchItemId string) (watchItem *WatchItem, stopped bool, err error)
+	StartSmartReminding(groupId string, watchItemId string) (stopped bool, err error)
+	StopReminding(groupId string, watchItemId string) (stopped bool, err error)
 
 	// Like action
 	UpdateLike(input *LikeInput) (entry *Entry, err error)
