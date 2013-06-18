@@ -89,7 +89,7 @@ type AuthUserService interface {
 
 	// watchlist related
 	GetWatchList(before time.Time, limit int) (watchlist *WatchList, err error)
-	AddToWatchList(entryId string, groupId string) (added bool, err error)
+	AddToWatchList(entryId string, groupId string, remindMode string) (added bool, err error)
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
 	RemindMe() (reminded bool, err error)
