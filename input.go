@@ -51,16 +51,15 @@ type BroadcastInput struct {
 	RootId        string
 }
 
-//type RequestInput struct {
-//Title          string
-//Content        string
-//SharedGroupId  string
-//SharedOrgId    string
-//HostOrgId      string
-//ToOrgIds       []string
-//AcceptedOrgIds []string
-//RejectedOrgIds []string
-//}
+// TODO: Explaination needed.
+type QortexSupportInput struct {
+	Id       string
+	Title    string
+	Content  string
+	ToOrgIds []string
+	RootId   string
+	Audiance string
+}
 
 type GroupInput struct {
 	Id            string

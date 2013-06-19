@@ -363,7 +363,6 @@ type Entry struct {
 	WatchlistHtml       template.HTML `json:",omitempty"`
 	ToUsersHtml         template.HTML `json:",omitempty"`
 	LikedByUsersHtml    template.HTML `json:",omitempty"`
-	NotifyOptionsHtml   template.HTML `json:",omitempty"`
 
 	Link             template.HTMLAttr `json:",omitempty"`
 	PresentationLink template.HTMLAttr `json:",omitempty"`
@@ -447,6 +446,10 @@ type Entry struct {
 	NewComment             *Entry         `json:",omitempty"`
 	NewEntry               *Entry         `json:",omitempty"`
 	GroupSlector           *GroupSelector `json:",omitempty"`
+
+	// Aaron New Added
+	QortexSupportNotifyOptions map[string]string `json:",omitempty"`
+	IsQortexSupport            bool
 }
 
 type EmbedEntry struct {

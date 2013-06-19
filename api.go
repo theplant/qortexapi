@@ -180,6 +180,9 @@ type AuthUserService interface {
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
 	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
 	GetPrivateChat(entryId string, searchKeyWords string) (chatEntry *Entry, err error)
+
+	// Qortex Support
+	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 }
 
 type AuthAdminService interface {
