@@ -66,7 +66,6 @@ type GroupInput struct {
 	Id            string
 	Name          string
 	Description   string
-	Type          string
 	LogoURL       string
 	IconName      string
 	Slug          string
