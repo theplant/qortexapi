@@ -191,6 +191,8 @@ type AuthAdminService interface {
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
 	// Approve user access request for closed beta
 	ApproveAccess(email string) (err error)
+	// Resend the approved mail
+	ResendApprovedMail(email string) (err error)
 	// Get all members
 	GetAllMembers() (members []*Member, err error)
 }
