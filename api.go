@@ -89,9 +89,12 @@ type AuthUserService interface {
 
 	// watchlist related
 	GetWatchList(before time.Time, limit int) (watchlist *WatchList, err error)
-	AddToWatchList(entryId string, groupId string) (added bool, err error)
+	AddToWatchList(entryId string, groupId string, remindMode string) (added bool, err error)
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
+	RemindMe() (reminded bool, err error)
+	StartSmartReminding(groupId string, watchItemId string) (stopped bool, err error)
+	StopReminding(groupId string, watchItemId string) (stopped bool, err error)
 
 	// Like action
 	UpdateLike(input *LikeInput) (entry *Entry, err error)
@@ -156,7 +159,7 @@ type AuthUserService interface {
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
-	InvitePeople(emails []string, skipInvalidEmail bool) (sendedEmails []string, validated *govalidations.Validated, err error)
+	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, validated *govalidations.Validated, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	UpdateMailUpdates(input *MailUpdatesInput) (err error)
@@ -191,6 +194,8 @@ type AuthAdminService interface {
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
 	// Approve user access request for closed beta
 	ApproveAccess(email string) (err error)
+	// Resend the approved mail
+	ResendApprovedMail(email string) (err error)
 	// Get all members
 	GetAllMembers() (members []*Member, err error)
 }

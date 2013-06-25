@@ -348,6 +348,8 @@ type Entry struct {
 	LocalHumanUpdatedAt  string `json:",omitempty"`
 	WholeLastUpdateAtAgo string `json:",omitempty"`
 	LastUpdateAtAgo      string `json:",omitempty"`
+	WatchedAtAgo         string `json:",omitempty"`
+	NextRemindAtLater    string `json:",omitempty"`
 	MentionedUserIds     string `json:",omitempty"`
 	DomainURL            string `json:",omitempty"`
 	UpdatedAtUnixNano    string `json:",omitempty"`
@@ -366,10 +368,13 @@ type Entry struct {
 	PresentationLink template.HTMLAttr `json:",omitempty"`
 	UploadURL        template.HTMLAttr `json:",omitempty"`
 
-	IsShared     bool `json:",omitempty"`
-	IsPublished  bool `json:",omitempty"`
-	IsCanPublish bool `json:",omitempty"`
-	IsMuted      bool `json:",omitempty"`
+	IsShared         bool `json:",omitempty"`
+	IsPublished      bool `json:",omitempty"`
+	IsCanPublish     bool `json:",omitempty"`
+	IsMuted          bool `json:",omitempty"`
+	IsReminding      bool `json:",omitempty"`
+	IsSmartReminding bool `json:",omitempty"`
+	IsNoReminding    bool `json:",omitempty"`
 
 	IsSystemMessage               bool          `json:",omitempty"`
 	IsInnerMessage                bool          `json:",omitempty"`
@@ -509,6 +514,9 @@ type WatchItem struct {
 	LikeCntStr    template.HTML
 
 	WatchTime time.Time
+
+	IsSmartReminding bool
+	IsNoReminding    bool
 
 	WatchEntry *Entry
 }
