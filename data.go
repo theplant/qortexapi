@@ -35,13 +35,12 @@ type BlogEntry struct {
 	HtmlTitle        template.HTML
 	Slug             string
 	CreatedAt        time.Time
-	UpdatedAt        time.Time
+	LocalCreatedAt   string
 	Permalink        string
 	CreateCommentURL string
 	HtmlContent      template.HTML
 	HtmlContentPart  template.HTML
 	Author           EmbedUser
-	Comments         []*BlogEntry
 }
 
 type SharingInvitation struct {
