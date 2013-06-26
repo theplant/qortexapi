@@ -49,7 +49,7 @@ type AuthMemberService interface {
 // Normal user and joined organization.
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
-	GetQortexMessages(messsageType string, before string, limit int, withComments bool) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
+	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
 	CreateBroadcast(input *BroadcastInput) (entry *Entry, err error)
 	CreateBroadcastComment(input *BroadcastInput) (entry *Entry, err error)
 	GetSharingRequestEntry(entryId string) (entry *Entry, err error)
