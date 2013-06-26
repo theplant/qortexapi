@@ -177,6 +177,7 @@ type Group struct {
 	PreSharingEmails    []string   `json:",omitempty"`
 	ForwardedOrgs       []EmbedOrg `json:",omitempty"`
 	HasPendingItems     bool       `json:",omitempty"`
+	GroupEmailAddress   string
 }
 
 type GroupSelectorItem struct {
