@@ -73,6 +73,7 @@ type GroupInput struct {
 	IsShared      bool
 	GroupOwners   []string
 	InvitedOrgIds []string
+	AutoGenSlug   bool
 }
 
 type OrgSettingsInput struct {
