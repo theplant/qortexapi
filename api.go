@@ -159,7 +159,7 @@ type AuthUserService interface {
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
-	InvitePeople(emails []string, skipInvalidEmail bool) (sendedEmails []string, validated *govalidations.Validated, err error)
+	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, validated *govalidations.Validated, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	UpdateMailUpdates(input *MailUpdatesInput) (err error)
@@ -191,6 +191,8 @@ type AuthAdminService interface {
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
 	// Approve user access request for closed beta
 	ApproveAccess(email string) (err error)
+	// Resend the approved mail
+	ResendApprovedMail(email string) (err error)
 	// Get all members
 	GetAllMembers() (members []*Member, err error)
 }

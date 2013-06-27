@@ -35,13 +35,12 @@ type BlogEntry struct {
 	HtmlTitle        template.HTML
 	Slug             string
 	CreatedAt        time.Time
-	UpdatedAt        time.Time
+	LocalCreatedAt   string
 	Permalink        string
 	CreateCommentURL string
 	HtmlContent      template.HTML
 	HtmlContentPart  template.HTML
 	Author           EmbedUser
-	Comments         []*BlogEntry
 }
 
 type SharingInvitation struct {
@@ -178,6 +177,7 @@ type Group struct {
 	PreSharingEmails    []string   `json:",omitempty"`
 	ForwardedOrgs       []EmbedOrg `json:",omitempty"`
 	HasPendingItems     bool       `json:",omitempty"`
+	GroupEmailAddress   string
 }
 
 type GroupSelectorItem struct {
@@ -349,6 +349,7 @@ type Entry struct {
 	WholeLastUpdateAtAgo string `json:",omitempty"`
 	LastUpdateAtAgo      string `json:",omitempty"`
 	WatchedAtAgo         string `json:",omitempty"`
+	NextRemindAtLater    string `json:",omitempty"`
 	MentionedUserIds     string `json:",omitempty"`
 	DomainURL            string `json:",omitempty"`
 	UpdatedAtUnixNano    string `json:",omitempty"`
@@ -423,7 +424,7 @@ type Entry struct {
 	CommentsCount       int `json:",omitempty"`
 	AllLikesCount       int `json:",omitempty"`
 	VersionCount        int `json:",omitempty"`
-	UnreadCommnetCount  int
+	UnreadCommentCount  int
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
