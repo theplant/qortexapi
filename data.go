@@ -450,6 +450,17 @@ type Entry struct {
 	// Aaron New Added
 	QortexSupportNotifyOptions map[string]string `json:",omitempty"`
 	IsQortexSupport            bool
+	QortexSupport              *QortexSupport `json:",omitempty"`
+}
+
+type QortexSupport struct {
+	IsToOffical       bool          `json:",omitempty"`
+	IsToAllUsers      bool          `json:",omitempty"`
+	IsToAllAdmins     bool          `json:",omitempty"`
+	IsToOrganizations bool          `json:",omitempty"`
+	FromOrg           EmbedOrg      `json:",omitempty"`
+	ToOrgs            []EmbedOrg    `json:",omitempty"`
+	ToOrgsHtml        template.HTML `json:",omitempty"`
 }
 
 type EmbedEntry struct {
