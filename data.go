@@ -454,6 +454,7 @@ type Entry struct {
 }
 
 type QortexSupport struct {
+	Audience          string        `json:",omitempty"`
 	IsToOffical       bool          `json:",omitempty"`
 	IsToAllUsers      bool          `json:",omitempty"`
 	IsToAllAdmins     bool          `json:",omitempty"`
