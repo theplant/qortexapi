@@ -163,6 +163,7 @@ type AuthUserService interface {
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	UpdateMailUpdates(input *MailUpdatesInput) (err error)
+	ChangeLocale(localeName string) (err error)
 
 	PrepareChangingEmail(newEmail string) (changer *EmailChanger, validated *govalidations.Validated, err error)
 	ConfirmChangingEmail(token string) (err error)

@@ -13,6 +13,7 @@ var (
 	GroupNotFoundError             = errors.New("group not found")
 	GroupsNotFoundError            = errors.New("groups not found")
 	MemberNotFoundError            = errors.New("member not found")
+	MemberNotLogginError           = errors.New("member not loggin yet")
 	UserNotFoundError              = errors.New("user not found")
 	UsersNotFoundError             = errors.New("users not found")
 	PermissionDeniedError          = errors.New("permiession denied")
