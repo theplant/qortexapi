@@ -148,6 +148,7 @@ type AuthUserService interface {
 	GetJoinOrgInvitations() (invitations []*Invitation, err error)
 	GetOrganization(orgId string) (org *Organization, err error)
 	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
+	MyJoinedOrganizations() (orgs []*Organization, err error)
 	SearchOrganizations(keyword string) (orgs []*Organization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
