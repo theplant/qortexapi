@@ -22,7 +22,6 @@ type PublicService interface {
 
 	ContactUs(input *ContactInput) (contact *ContactInfo, validated *govalidations.Validated, err error)
 
-	// Blog
 	GetBlogEntries(doi string, pageNum int, limit int) (blog *Blog, blogEntries []*BlogEntry, totalPageNum int, err error)
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
@@ -86,6 +85,10 @@ type AuthUserService interface {
 
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
 	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
+
+	// Blog Related
+	LoadWordpressConfig(groupId string, entryId string) (r *WordpressFormData, err error)
+	PublishToWordpress(groupId string, entryId string, categoryIds []string, tagNames []string, authorId string) (err error)
 
 	// watchlist related
 	GetWatchList(before time.Time, limit int) (watchlist *WatchList, err error)

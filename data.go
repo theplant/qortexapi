@@ -628,3 +628,17 @@ type AccessReq struct {
 	CreatedAt  string
 	UpdatedAt  string
 }
+
+type WordpressFormData struct {
+	PrefixURL  string
+	Tags       []WPItem
+	Authors    []WPItem
+	Categories []WPItem
+	GroupId    string
+	EntryId    string
+}
+
+type WPItem struct {
+	Id   string
+	Name string
+}
