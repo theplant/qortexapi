@@ -13,6 +13,7 @@ type PublicService interface {
 
 	// Find Password
 	FindPassword(email string) (validated *govalidations.Validated, err error)
+	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, validated *govalidations.Validated, err error)
 
 	// Change Email
 	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, validated *govalidations.Validated, err error)
