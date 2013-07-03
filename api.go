@@ -11,6 +11,9 @@ type PublicService interface {
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
+	// Find Password
+	FindPassword(email string) (validated *govalidations.Validated, err error)
+
 	// Change Email
 	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, validated *govalidations.Validated, err error)
 	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, err error)
