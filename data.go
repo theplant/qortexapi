@@ -449,9 +449,12 @@ type Entry struct {
 
 	// Aaron New Added
 	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
-	IsQortexSupport              bool
-	QortexSupport                *QortexSupport `json:",omitempty"`
-	IsQortexSupportKnowledgeBase bool
+	IsQortexSupport              bool              `json:",omitempty"`
+	QortexSupport                *QortexSupport    `json:",omitempty"`
+	IsQortexSupportKnowledgeBase bool              `json:",omitempty"`
+	//only in single entry
+	IsSuperOrg  bool `json:",omitempty"`
+	IsSuperUser bool `json:",omitempty"`
 }
 
 type QortexSupport struct {
