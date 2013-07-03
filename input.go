@@ -53,12 +53,13 @@ type BroadcastInput struct {
 
 // TODO: Explaination needed.
 type QortexSupportInput struct {
-	Id       string
-	Title    string
-	Content  string
-	ToOrgIds []string
-	RootId   string
-	Audiance string
+	Id            string
+	Title         string
+	Content       string
+	ToOrgIds      []string
+	RootId        string
+	Audiance      string
+	KnowledgeBase bool
 }
 
 type GroupInput struct {

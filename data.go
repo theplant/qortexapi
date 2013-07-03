@@ -448,9 +448,10 @@ type Entry struct {
 	GroupSlector           *GroupSelector `json:",omitempty"`
 
 	// Aaron New Added
-	QortexSupportNotifyOptions map[string]string `json:",omitempty"`
-	IsQortexSupport            bool
-	QortexSupport              *QortexSupport `json:",omitempty"`
+	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
+	IsQortexSupport              bool
+	QortexSupport                *QortexSupport `json:",omitempty"`
+	IsQortexSupportKnowledgeBase bool
 }
 
 type QortexSupport struct {
