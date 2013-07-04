@@ -21,6 +21,7 @@ type Organization struct {
 	Website                  string
 	Domains                  []string
 	RestrictSubscriptionMail bool
+	IsActive                 bool
 }
 
 type Blog struct {
