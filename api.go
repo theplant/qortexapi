@@ -189,6 +189,7 @@ type AuthUserService interface {
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
 	GetQortexSupport(entryId string) (entry *Entry, err error)
+	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 }
 
 type AuthAdminService interface {
