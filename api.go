@@ -18,7 +18,9 @@ type PublicService interface {
 
 	// Sharing Flow
 	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
+	// To be removed
 	GetSharingInviation(sharingInviationToken string, memberId string) (invitation *SharingInvitation, err error)
+	GetShareRequest(token string, memberId string) (shareRequest *ShareRequest, err error)
 
 	ContactUs(input *ContactInput) (contact *ContactInfo, validated *govalidations.Validated, err error)
 
@@ -42,8 +44,10 @@ type AuthMemberService interface {
 	SwitchOrganization(orgId string) (err error)
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
 	GetSharingInviationByToken(sharingInviationToken string) (invitation *SharingInvitation, err error)
-	RejectSharingBeforeForwarding(groupId string, email string) (err error)
-	RespondSharingRequest(token string, toOrgId string) (prefixURL string, validated *govalidations.Validated, err error)
+
+	RejectShareRequestByInvitee(token string) (err error)
+	AcceptShareRequest(token string, toOrgId string) (err error)
+	RespondSharingRequest(token string, toOrgId string) (prefixURL string, validated *govalidations.Validated, err error) // Old method
 }
 
 // Normal user and joined organization.
@@ -152,7 +156,8 @@ type AuthUserService interface {
 	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
 	AcceptSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
-	RejectSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
+
+	RejectShareRequestByAdmin(requestId string) (err error)
 
 	//Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
@@ -168,9 +173,10 @@ type AuthUserService interface {
 	ConfirmChangingEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
 
-	SendSharingInvitation(groupId string, email string, isResend bool) (si *SharingInvitation, validated *govalidations.Validated, err error)
-	GetSharingInvitations(groupId string) (sis []*SharingInvitation, err error)
-	CancelSharingInvitation(groupId string, email string) (err error)
+	SendShareRequest(groupId string, email string) (shareRequest *ShareRequest, err error)
+	GetShareRequests(groupId string) (sis []*ShareRequest, err error)
+	CancelShareRequest(requestId string) (err error)
+
 	StopSharedGroup(groupId string, toStopOrgId string) (err error)
 	LeaveSharedGroup(groupId string) (err error)
 
