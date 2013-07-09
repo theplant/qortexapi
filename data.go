@@ -44,6 +44,7 @@ type BlogEntry struct {
 	Author           EmbedUser
 }
 
+// TODO: Deprecated! Remove me later. ShareRequest is the new one
 type SharingInvitation struct {
 	FromOrg         EmbedOrg
 	FromUserId      string
@@ -181,6 +182,11 @@ type Group struct {
 	GroupEmailAddress   string
 }
 
+type EmbedGroup struct {
+	Id   string
+	Name string
+}
+
 type GroupSelectorItem struct {
 	Id         string
 	Name       string
@@ -283,13 +289,15 @@ type LinkedEntry struct {
 	Link           template.HTMLAttr
 }
 
+// TODO: should be replaced by ShareRequest
 type Request struct {
+	Id               string
 	CurrentPrefixURL string
 	Info             template.HTML
 	ActionButton     template.HTML
 	FromOrg          EmbedOrg
 	ToOrg            EmbedOrg
-	SharedGroup      *Group
+	SharedGroup      EmbedGroup
 	SharedOrgIdHex   string
 	FromUserIdHex    string
 	SharedInvitee    EmbedUser
@@ -297,6 +305,25 @@ type Request struct {
 	SharedResponsor  EmbedUser
 	ToEmail          string
 	State            string
+}
+
+type ShareRequest struct {
+	Id              string
+	FromUser        EmbedUser
+	FromOrg         EmbedOrg
+	ToOrg           EmbedOrg
+	JoinedOrgs      []EmbedOrg
+	SharedGroup     EmbedGroup
+	Token           string
+	ToEmail         string
+	PendingDuration string
+	IsNewAccount    bool
+	IsPending       bool
+	IsAccepted      bool
+	IsRejected      bool
+	IsForwarded     bool
+	IsCanceled      bool
+	IsStopped       bool
 }
 
 type Conversation struct {
@@ -377,23 +404,25 @@ type Entry struct {
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
 
-	IsSystemMessage               bool          `json:",omitempty"`
-	IsInnerMessage                bool          `json:",omitempty"`
-	SystemMessageType             string        `json:",omitempty"`
-	BroadcastType                 string        `json:",omitempty"`
-	IsBroadcast                   bool          `json:",omitempty"`
-	IsBroadcastTypeToAllAdmins    bool          `json:",omitempty"`
-	IsBroadcastTypeToAllUsers     bool          `json:",omitempty"`
-	IsBroadcastTypeToSomeOrgs     bool          `json:",omitempty"`
-	IsFromSuperOrg                bool          `json:",omitempty"`
-	IsFeedback                    bool          `json:",omitempty"`
-	FromOrg                       EmbedOrg      `json:",omitempty"`
-	ToOrgs                        []EmbedOrg    `json:",omitempty"`
-	ToOrgsHtml                    template.HTML `json:",omitempty"`
-	IsRequest                     bool          `json:",omitempty"`
-	Request                       *Request      `json:",omitempty"`
-	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
-	VisibleForSuperOrg            bool          `json:",omitempty"`
+	IsSystemMessage            bool          `json:",omitempty"`
+	IsInnerMessage             bool          `json:",omitempty"`
+	SystemMessageType          string        `json:",omitempty"`
+	BroadcastType              string        `json:",omitempty"`
+	IsBroadcast                bool          `json:",omitempty"`
+	IsBroadcastTypeToAllAdmins bool          `json:",omitempty"`
+	IsBroadcastTypeToAllUsers  bool          `json:",omitempty"`
+	IsBroadcastTypeToSomeOrgs  bool          `json:",omitempty"`
+	IsFromSuperOrg             bool          `json:",omitempty"`
+	IsFeedback                 bool          `json:",omitempty"`
+	FromOrg                    EmbedOrg      `json:",omitempty"`
+	ToOrgs                     []EmbedOrg    `json:",omitempty"`
+	ToOrgsHtml                 template.HTML `json:",omitempty"`
+
+	// Should be removed
+	IsRequest                     bool     `json:",omitempty"`
+	Request                       *Request `json:",omitempty"`
+	VisibleForSuperUserInSuperOrg bool     `json:",omitempty"`
+	VisibleForSuperOrg            bool     `json:",omitempty"`
 
 	IsKnowledgeBase    bool   `json:",omitempty"`
 	IsPost             bool   `json:",omitempty"`
