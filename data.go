@@ -21,6 +21,7 @@ type Organization struct {
 	Website                  string
 	Domains                  []string
 	RestrictSubscriptionMail bool
+	IsActive                 bool
 }
 
 type Blog struct {
@@ -477,9 +478,13 @@ type Entry struct {
 	GroupSlector           *GroupSelector `json:",omitempty"`
 
 	// Aaron New Added
-	QortexSupportNotifyOptions map[string]string `json:",omitempty"`
-	IsQortexSupport            bool              `json:",omitempty"`
-	QortexSupport              *QortexSupport    `json:",omitempty"`
+	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
+	IsQortexSupport              bool              `json:",omitempty"`
+	QortexSupport                *QortexSupport    `json:",omitempty"`
+	IsQortexSupportKnowledgeBase bool              `json:",omitempty"`
+	//only in single entry
+	IsSuperOrg  bool `json:",omitempty"`
+	IsSuperUser bool `json:",omitempty"`
 }
 
 type QortexSupport struct {

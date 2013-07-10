@@ -11,6 +11,10 @@ type PublicService interface {
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
+	// Find Password
+	FindPassword(email string) (validated *govalidations.Validated, err error)
+	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, validated *govalidations.Validated, err error)
+
 	// Change Email
 	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, validated *govalidations.Validated, err error)
 	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, err error)
@@ -152,6 +156,8 @@ type AuthUserService interface {
 	GetJoinOrgInvitations() (invitations []*Invitation, err error)
 	GetOrganization(orgId string) (org *Organization, err error)
 	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
+	GetMyJoinedOrganizations() (orgs []*Organization, err error)
+	GetCurrentOrganization() (org *Organization, err error)
 	SearchOrganizations(keyword string) (orgs []*Organization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
@@ -188,6 +194,8 @@ type AuthUserService interface {
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
+	GetQortexSupport(entryId string) (entry *Entry, err error)
+	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 }
 
 type AuthAdminService interface {
