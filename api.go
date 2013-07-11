@@ -50,7 +50,7 @@ type AuthMemberService interface {
 	GetSharingInviationByToken(sharingInviationToken string) (invitation *SharingInvitation, err error)
 
 	RejectShareRequestByInvitee(token string) (err error)
-	AcceptShareRequest(token string, toOrgId string) (err error)
+	AcceptShareRequestByInvitee(token string, toOrgId string) (err error)
 	RespondSharingRequest(token string, toOrgId string) (prefixURL string, validated *govalidations.Validated, err error) // Old method
 }
 
@@ -161,8 +161,8 @@ type AuthUserService interface {
 	SearchOrganizations(keyword string) (orgs []*Organization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
 	SwitchOrganization(orgId string) (err error)
-	AcceptSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
 
+	AcceptShareRequestByAdmin(requestId string) (err error)
 	RejectShareRequestByAdmin(requestId string) (err error)
 
 	//Settings related
