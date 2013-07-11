@@ -58,13 +58,7 @@ type AuthMemberService interface {
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
 	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
-	CreateBroadcast(input *BroadcastInput) (entry *Entry, err error)
-	CreateBroadcastComment(input *BroadcastInput) (entry *Entry, err error)
 	GetSharingRequestEntry(entryId string) (entry *Entry, err error)
-	GetBroadcast(entryId string) (entry *Entry, err error)
-	GetBroadcastComment(entryId string) (entry *Entry, err error)
-	UpdateBroadcast(input *BroadcastInput) (entry *Entry, err error)
-	UpdateBroadcastComment(input *BroadcastInput) (entry *Entry, err error)
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string) (entry *Task, err error)
@@ -195,7 +189,9 @@ type AuthUserService interface {
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
 	GetQortexSupport(entryId string) (entry *Entry, err error)
+	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
+	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
 }
 
 type AuthAdminService interface {
