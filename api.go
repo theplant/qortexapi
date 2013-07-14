@@ -49,6 +49,7 @@ type AuthMemberService interface {
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
 	GetSharingInviationByToken(sharingInviationToken string) (invitation *SharingInvitation, err error)
 
+	GetShareRequest(token string) (shareRequest *ShareRequest, err error)
 	RejectShareRequestByInvitee(token string) (err error)
 	AcceptShareRequestByInvitee(token string, toOrgId string) (err error)
 	RespondSharingRequest(token string, toOrgId string) (prefixURL string, validated *govalidations.Validated, err error) // Old method
