@@ -453,11 +453,12 @@ type Entry struct {
 	IsInGroup          bool   `json:",omitempty"`
 	IsFromEmail        bool   `json:",omitempty"`
 
-	AllAttachmentsCount int `json:",omitempty"`
-	CommentsCount       int `json:",omitempty"`
-	AllLikesCount       int `json:",omitempty"`
-	VersionCount        int `json:",omitempty"`
-	UnreadCommentCount  int
+	AllAttachmentsCount         int `json:",omitempty"`
+	CommentsCount               int `json:",omitempty"`
+	CurrentVersionCommentsCount int `json:",omitempty"`
+	AllLikesCount               int `json:",omitempty"`
+	VersionCount                int `json:",omitempty"`
+	UnreadCommentCount          int `json:",omitempty"`
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
