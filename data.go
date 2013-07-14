@@ -44,26 +44,6 @@ type BlogEntry struct {
 	Author           EmbedUser
 }
 
-// TODO: Deprecated! Remove me later. ShareRequest is the new one
-type SharingInvitation struct {
-	FromOrg         EmbedOrg
-	FromUserId      string
-	SharedGroup     *Group
-	IsNewAccount    bool
-	Email           string
-	Token           string
-	JoinedOrgs      []EmbedOrg
-	IsAccepted      bool
-	IsRejected      bool
-	IsPending       bool
-	IsForwarded     bool
-	IsCanceled      bool
-	IsStopped       bool
-	PendingDuration string
-	ToOrgName       string
-	ToOrgId         string
-}
-
 type User struct {
 	Id                   string
 	Email                string
@@ -159,26 +139,22 @@ type Group struct {
 	Link                string `json:",omitempty"`
 	Slug                string `json:",omitempty"`
 	Author              EmbedUser
-	IsAdmin             bool        `json:",omitempty"`
-	IsPrivate           bool        `json:",omitempty"`
-	Editable            bool        `json:",omitempty"`
-	Managable           bool        `json:",omitempty"`
-	FollowedByMe        bool        `json:",omitempty"`
-	AdministratedByMe   bool        `json:",omitempty"`
-	IsPreShared         bool        `json:",omitempty"`
-	IsShared            bool        `json:",omitempty"`
-	IsDefaultLogoURL    bool        `json:",omitempty"`
-	HostOrgName         string      `json:",omitempty"`
-	IsDispayHostOrgName bool        `json:",omitempty"`
-	EntriesCount        int         `json:",omitempty"`
-	FollowersCount      int         `json:",omitempty"`
-	IsAnnoucement       bool        `json:",omitempty"`
-	GroupOwners         []EmbedUser `json:",omitempty"`
-	SharedGroupFromOrg  EmbedOrg
-	AcceptedEmbedOrgs   []EmbedOrg `json:",omitempty"`
-	PreSharingEmails    []string   `json:",omitempty"`
-	ForwardedOrgs       []EmbedOrg `json:",omitempty"`
-	HasPendingItems     bool       `json:",omitempty"`
+	IsAdmin             bool              `json:",omitempty"`
+	IsPrivate           bool              `json:",omitempty"`
+	Editable            bool              `json:",omitempty"`
+	Managable           bool              `json:",omitempty"`
+	FollowedByMe        bool              `json:",omitempty"`
+	AdministratedByMe   bool              `json:",omitempty"`
+	IsPreShared         bool              `json:",omitempty"`
+	IsShared            bool              `json:",omitempty"`
+	IsDefaultLogoURL    bool              `json:",omitempty"`
+	HostOrgName         string            `json:",omitempty"`
+	IsDispayHostOrgName bool              `json:",omitempty"`
+	EntriesCount        int               `json:",omitempty"`
+	FollowersCount      int               `json:",omitempty"`
+	IsAnnoucement       bool              `json:",omitempty"`
+	GroupOwners         []EmbedUser       `json:",omitempty"`
+	SharingInfo         *GroupSharingInfo `json:",omitempty"`
 	GroupEmailAddress   string
 }
 
@@ -295,21 +271,44 @@ type Request struct {
 	CurrentPrefixURL string
 	Info             template.HTML
 	ActionButton     template.HTML
-	FromOrg          EmbedOrg
-	ToOrg            EmbedOrg
-	SharedGroup      EmbedGroup
-	SharedOrgIdHex   string
-	FromUserIdHex    string
-	SharedInvitee    EmbedUser
-	SharedInviter    EmbedUser
-	SharedResponsor  EmbedUser
-	ToEmail          string
-	State            string
+
+	FromOrg         EmbedOrg
+	ToOrg           EmbedOrg
+	SharedGroup     EmbedGroup
+	SharedOrgIdHex  string
+	FromUserIdHex   string
+	SharedInvitee   EmbedUser
+	SharedInviter   EmbedUser
+	SharedResponsor EmbedUser
+	ToEmail         string
+	State           string
+}
+
+// TODO: Deprecated! Remove me later. ShareRequest is the new one
+type SharingInvitation struct {
+	FromOrg         EmbedOrg
+	FromUserId      string
+	SharedGroup     *Group
+	IsNewAccount    bool
+	Email           string
+	Token           string
+	JoinedOrgs      []EmbedOrg
+	IsAccepted      bool
+	IsRejected      bool
+	IsPending       bool
+	IsForwarded     bool
+	IsCanceled      bool
+	IsStopped       bool
+	PendingDuration string
+	ToOrgName       string
+	ToOrgId         string
 }
 
 type ShareRequest struct {
 	Id              string
 	FromUser        EmbedUser
+	ToUser          EmbedUser
+	Responser       EmbedUser
 	FromOrg         EmbedOrg
 	ToOrg           EmbedOrg
 	JoinedOrgs      []EmbedOrg
@@ -324,6 +323,17 @@ type ShareRequest struct {
 	IsForwarded     bool
 	IsCanceled      bool
 	IsStopped       bool
+	Info            template.HTML `json:",omitempty"`
+	ActionButton    template.HTML `json:",omitempty"`
+	RequestBarHtml  template.HTML `json:",omitempty"`
+}
+
+type GroupSharingInfo struct {
+	IsSharing       bool
+	FromOrg         EmbedOrg
+	AccpetedOrg     []EmbedOrg
+	ForwardedOrgs   []EmbedOrg
+	PendingToEmails []string
 }
 
 type Conversation struct {
@@ -418,12 +428,6 @@ type Entry struct {
 	ToOrgs                     []EmbedOrg    `json:",omitempty"`
 	ToOrgsHtml                 template.HTML `json:",omitempty"`
 
-	// Should be removed
-	IsRequest                     bool     `json:",omitempty"`
-	Request                       *Request `json:",omitempty"`
-	VisibleForSuperUserInSuperOrg bool     `json:",omitempty"`
-	VisibleForSuperOrg            bool     `json:",omitempty"`
-
 	IsKnowledgeBase    bool   `json:",omitempty"`
 	IsPost             bool   `json:",omitempty"`
 	IsComment          bool   `json:",omitempty"`
@@ -486,6 +490,12 @@ type Entry struct {
 	//only in single entry
 	IsSuperOrg  bool `json:",omitempty"`
 	IsSuperUser bool `json:",omitempty"`
+
+	// Should be removed
+	IsRequest                     bool          `json:",omitempty"`
+	ShareRequest                  *ShareRequest `json:",omitempty"`
+	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
+	VisibleForSuperOrg            bool          `json:",omitempty"`
 }
 
 type QortexSupport struct {
