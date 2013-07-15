@@ -690,13 +690,3 @@ type AccessReq struct {
 	CreatedAt    string
 	UpdatedAt    string
 }
-
-type InnerMessage struct {
-	ByUser                string
-	GroupName             string
-	GroupLink             string
-	OrgName               string
-	IsDeletedGroupMessage bool
-	IsCreatedGroupMessage bool
-	IsSetupOrgMessage     bool
-}
