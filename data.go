@@ -414,6 +414,7 @@ type Entry struct {
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
 
+	InnerMessage               *InnerMessage `json:",omitempty"`
 	IsSystemMessage            bool          `json:",omitempty"`
 	IsInnerMessage             bool          `json:",omitempty"`
 	SystemMessageType          string        `json:",omitempty"`
@@ -688,4 +689,14 @@ type AccessReq struct {
 	ApprovedBy   string
 	CreatedAt    string
 	UpdatedAt    string
+}
+
+type InnerMessage struct {
+	ByUser                string
+	GroupName             string
+	GroupLink             string
+	OrgName               string
+	IsDeletedGroupMessage bool
+	IsCreatedGroupMessage bool
+	IsSetupOrgMessage     bool
 }
