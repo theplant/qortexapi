@@ -700,3 +700,16 @@ type InnerMessage struct {
 	IsCreatedGroupMessage bool
 	IsSetupOrgMessage     bool
 }
+
+type GroupAside struct {
+	IsMyGroupsCollapse     bool
+	IsOtherGroupsCollapse  bool
+	ShowNewGroupButton     bool
+	HaveOtherGroup         bool
+	AnnounGroup            *Group
+	SMGroup                *Group
+	FollowingNormalGroups  []*Group
+	FollowingSharedGroups  []*Group
+	UnfollowedNormalGroups []*Group
+	UnfollowedSharedGroups []*Group
+}
