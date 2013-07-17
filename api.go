@@ -211,4 +211,6 @@ type AuthAdminService interface {
 	ResendApprovedMail(email string) (err error)
 	// Get all members
 	GetAllMembers() (members []*Member, err error)
+	// Ignore the access
+	IgnoreAccess(email string) (err error)
 }
