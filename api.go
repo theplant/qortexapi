@@ -152,7 +152,7 @@ type AuthUserService interface {
 	GetJoinOrgInvitations() (invitations []*Invitation, err error)
 	GetOrganization(orgId string) (org *Organization, err error)
 	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
-	GetMyOrgsUnreadInfo() (unreadInfo map[string]int, err error)
+	GetMyOrgsUnreadInfo() (unreadInfo []*OrgUnreadInfo, err error)
 	GetMyJoinedOrganizations() (orgs []*Organization, err error)
 	GetCurrentOrganization() (org *Organization, err error)
 	SearchOrganizations(keyword string) (orgs []*Organization, err error)

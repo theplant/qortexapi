@@ -631,3 +631,8 @@ type AccessReq struct {
 	CreatedAt    string
 	UpdatedAt    string
 }
+
+type OrgUnreadInfo struct {
+	OrgId           string
+	FeedUnreadCount int
+}
