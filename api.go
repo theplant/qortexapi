@@ -80,6 +80,7 @@ type AuthUserService interface {
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
+	GetGroupAside() (ga *GroupAside, err error)
 
 	// Get Unread entries for type entryType since the fromTimeUnixNano unix nanoseconds, and return max limit entries.
 	// entryType could be:	"post", "knowledge", "task"
@@ -121,7 +122,7 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetGroupHeader(groupId string) (header *GroupHeader, err error)
-	GetClassifiedGroups() (anouncementGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
+	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
 
 	//User related
 	GetAuthUser() (user *User, err error)

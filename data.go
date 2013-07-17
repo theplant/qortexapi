@@ -695,3 +695,16 @@ type OrgUnreadInfo struct {
 	OrgId           string
 	FeedUnreadCount int
 }
+
+type GroupAside struct {
+	IsMyGroupsCollapse     bool
+	IsOtherGroupsCollapse  bool
+	ShowNewGroupButton     bool
+	HaveOtherGroup         bool
+	AnnounGroup            *Group
+	SMGroup                *Group
+	FollowingNormalGroups  []*Group
+	FollowingSharedGroups  []*Group
+	UnfollowedNormalGroups []*Group
+	UnfollowedSharedGroups []*Group
+}
