@@ -454,12 +454,12 @@ type Entry struct {
 	IsInGroup          bool   `json:",omitempty"`
 	IsFromEmail        bool   `json:",omitempty"`
 
-	AllAttachmentsCount         int `json:",omitempty"`
-	CommentsCount               int `json:",omitempty"`
-	CurrentVersionCommentsCount int `json:",omitempty"`
-	AllLikesCount               int `json:",omitempty"`
-	VersionCount                int `json:",omitempty"`
-	UnreadCommentCount          int `json:",omitempty"`
+	AllAttachmentsCount         int
+	CommentsCount               int
+	CurrentVersionCommentsCount int
+	AllLikesCount               int
+	VersionCount                int
+	UnreadCommentCount          int
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
@@ -712,4 +712,9 @@ type GroupAside struct {
 	FollowingSharedGroups  []*Group
 	UnfollowedNormalGroups []*Group
 	UnfollowedSharedGroups []*Group
+}
+
+type OrgUnreadInfo struct {
+	OrgId           string
+	FeedUnreadCount int
 }
