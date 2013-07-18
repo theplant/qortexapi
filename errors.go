@@ -45,4 +45,5 @@ var (
 	GroupBlankError                = errors.New("Group can not be blank")
 	UserBlankError                 = errors.New("User can not be blank")
 	TakeActionError                = errors.New("Can not take the action")
+	HighFrequencyError             = errors.New("High frequency requests")
 )
