@@ -702,16 +702,17 @@ type InnerMessage struct {
 }
 
 type GroupAside struct {
-	IsMyGroupsCollapse     bool
-	IsOtherGroupsCollapse  bool
-	ShowNewGroupButton     bool
-	HaveOtherGroup         bool
-	AnnounGroup            *Group
-	SMGroup                *Group
-	FollowingNormalGroups  []*Group
-	FollowingSharedGroups  []*Group
-	UnfollowedNormalGroups []*Group
-	UnfollowedSharedGroups []*Group
+	IsMyGroupsCollapse      bool
+	IsOtherGroupsCollapse   bool
+	ShowNewGroupButton      bool
+	HaveOtherGroup          bool
+	ShowSharedExternallyBar bool
+	AnnounGroup             *Group
+	SMGroup                 *Group
+	FollowingNormalGroups   []*Group
+	FollowingSharedGroups   []*Group
+	UnfollowedNormalGroups  []*Group
+	UnfollowedSharedGroups  []*Group
 }
 
 type OrgUnreadInfo struct {
