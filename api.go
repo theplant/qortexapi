@@ -180,7 +180,11 @@ type AuthUserService interface {
 	GetShareRequests(groupId string) (sis []*ShareRequest, err error)
 	CancelShareRequest(requestId string) (err error)
 
+	StopSharingGroup(requestId string) (err error)
+
+	// Deprecated!
 	StopSharedGroup(groupId string, toStopOrgId string) (err error)
+
 	LeaveSharedGroup(groupId string) (err error)
 
 	//chat
