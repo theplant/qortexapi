@@ -441,6 +441,7 @@ type Entry struct {
 	MentionedUsers         []EmbedUser   `json:",omitempty"`
 	LikedByUsers           []EmbedUser   `json:",omitempty"`
 	Attachments            []*Attachment `json:",omitempty"`
+	CommentsAttachments    []*Attachment `json:",omitempty"`
 	FirstPicture           *Attachment   `json:",omitempty"`
 	Comments               []*Entry
 	ExternalComments       []*Entry `json:",omitempty"`
