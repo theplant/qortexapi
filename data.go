@@ -409,6 +409,7 @@ type Entry struct {
 	IsShared         bool `json:",omitempty"`
 	IsPublished      bool `json:",omitempty"`
 	IsCanPublish     bool `json:",omitempty"`
+	IsPreferMarkdown bool `json:",omitempty"`
 	IsMuted          bool `json:",omitempty"`
 	IsReminding      bool `json:",omitempty"`
 	IsSmartReminding bool `json:",omitempty"`
