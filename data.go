@@ -378,6 +378,8 @@ type Entry struct {
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
 
+	IsHidePresentationTip bool `json:",omitempty"`
+
 	IsSystemMessage               bool          `json:",omitempty"`
 	IsInnerMessage                bool          `json:",omitempty"`
 	SystemMessageType             string        `json:",omitempty"`

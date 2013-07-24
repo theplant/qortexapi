@@ -181,6 +181,9 @@ type AuthUserService interface {
 	StopSharedGroup(groupId string, toStopOrgId string) (err error)
 	LeaveSharedGroup(groupId string) (err error)
 
+	//preferences
+	DismissPresentationTip() (err error)
+
 	//chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
 	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
