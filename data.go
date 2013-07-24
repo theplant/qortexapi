@@ -415,20 +415,25 @@ type Entry struct {
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
 
-	InnerMessage               *InnerMessage `json:",omitempty"`
-	IsSystemMessage            bool          `json:",omitempty"`
-	IsInnerMessage             bool          `json:",omitempty"`
-	SystemMessageType          string        `json:",omitempty"`
-	BroadcastType              string        `json:",omitempty"`
-	IsBroadcast                bool          `json:",omitempty"`
-	IsBroadcastTypeToAllAdmins bool          `json:",omitempty"`
-	IsBroadcastTypeToAllUsers  bool          `json:",omitempty"`
-	IsBroadcastTypeToSomeOrgs  bool          `json:",omitempty"`
-	IsFromSuperOrg             bool          `json:",omitempty"`
-	IsFeedback                 bool          `json:",omitempty"`
-	FromOrg                    EmbedOrg      `json:",omitempty"`
-	ToOrgs                     []EmbedOrg    `json:",omitempty"`
-	ToOrgsHtml                 template.HTML `json:",omitempty"`
+	IsHidePresentationTip bool `json:",omitempty"`
+
+	IsSystemMessage               bool          `json:",omitempty"`
+	IsInnerMessage                bool          `json:",omitempty"`
+	SystemMessageType             string        `json:",omitempty"`
+	BroadcastType                 string        `json:",omitempty"`
+	IsBroadcast                   bool          `json:",omitempty"`
+	IsBroadcastTypeToAllAdmins    bool          `json:",omitempty"`
+	IsBroadcastTypeToAllUsers     bool          `json:",omitempty"`
+	IsBroadcastTypeToSomeOrgs     bool          `json:",omitempty"`
+	IsFromSuperOrg                bool          `json:",omitempty"`
+	IsFeedback                    bool          `json:",omitempty"`
+	FromOrg                       EmbedOrg      `json:",omitempty"`
+	ToOrgs                        []EmbedOrg    `json:",omitempty"`
+	ToOrgsHtml                    template.HTML `json:",omitempty"`
+	IsRequest                     bool          `json:",omitempty"`
+	Request                       *Request      `json:",omitempty"`
+	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
+	VisibleForSuperOrg            bool          `json:",omitempty"`
 
 	IsKnowledgeBase    bool   `json:",omitempty"`
 	IsPost             bool   `json:",omitempty"`
