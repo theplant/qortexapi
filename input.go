@@ -34,6 +34,8 @@ type EntryInput struct {
 	Slug        string // if IsPublished == true required
 	Email       string // Blog Comment required
 	Name        string // Blog Comment required
+
+	InlineHelp bool
 }
 
 const (
@@ -60,6 +62,7 @@ type QortexSupportInput struct {
 	RootId        string
 	Audiance      string
 	KnowledgeBase bool
+	InlineHelp    bool
 }
 
 type GroupInput struct {

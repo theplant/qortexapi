@@ -453,6 +453,7 @@ type Entry struct {
 	AnyoneCanEdit      bool   `json:",omitempty"`
 	IsInGroup          bool   `json:",omitempty"`
 	IsFromEmail        bool   `json:",omitempty"`
+	InlineHelp         bool   `json:",omitempty"`
 
 	AllAttachmentsCount         int
 	CommentsCount               int
