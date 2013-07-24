@@ -218,4 +218,8 @@ type AuthAdminService interface {
 	GetAllMembers() (members []*Member, err error)
 	// Ignore the access
 	IgnoreAccess(email string) (err error)
+
+	GetAutoApproveAccess() (enabled bool, err error)
+
+	SetAutoApproveAccess(enable bool) (err error)
 }
