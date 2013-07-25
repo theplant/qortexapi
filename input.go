@@ -172,6 +172,7 @@ type UserProfileInput struct {
 	OtherWebsites []string
 }
 
+// TODO: mail-updates: remove it
 type MailUpdatesInput struct {
 	IndividualIsOn    bool
 	SendLag           int
@@ -194,4 +195,10 @@ type MailUpdatesInput struct {
 	StartAt           int
 	EndAt             int
 	DailyIsOn         bool
+}
+
+type MailPreferenceInput struct {
+	Expecting    bool
+	SendInterval int
+	SendLag      int
 }
