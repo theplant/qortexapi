@@ -429,6 +429,8 @@ type Entry struct {
 	ToOrgs                     []EmbedOrg    `json:",omitempty"`
 	ToOrgsHtml                 template.HTML `json:",omitempty"`
 
+	IsHidePresentationTip bool `json:",omitempty"`
+
 	IsKnowledgeBase    bool   `json:",omitempty"`
 	IsPost             bool   `json:",omitempty"`
 	IsComment          bool   `json:",omitempty"`
@@ -720,4 +722,22 @@ type GroupAside struct {
 type OrgUnreadInfo struct {
 	OrgId           string
 	FeedUnreadCount int
+}
+
+const (
+	MS_RECEIVE_JOIN_ORG_INVITATION        = "receive join org inviation but not activate"
+	MS_RECEIVE_SHARED_GROUP_INVITATION    = "receive shared group inviation but not activate"
+	MS_APPROVED                           = "approve access but not setup account"
+	MS_SETUP_ACCOUNT                      = "setup account but not create organization"
+	MS_ACTIVATE_BY_JOIN_ORG_INVITATION    = "only activate account from join org inviation but not join the org"
+	MS_ACTIVATE_BY_SHARE_GROUP_INVITATION = "only activate account from shared group inviation but not create any organization"
+	MS_CREATE_ORG                         = "create first organization after setup account"
+	MS_JOIN_ORG                           = "join first organization after activate account"
+)
+
+type MarketableMemberInfo struct {
+	Email     string
+	FirstName string
+	LastName  string
+	Status    string
 }

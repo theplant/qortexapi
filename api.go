@@ -187,6 +187,9 @@ type AuthUserService interface {
 
 	LeaveSharedGroup(groupId string) (err error)
 
+	//preferences
+	DismissPresentationTip() (err error)
+
 	//chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
 	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
@@ -222,4 +225,6 @@ type AuthAdminService interface {
 	GetAutoApproveAccess() (enabled bool, err error)
 
 	SetAutoApproveAccess(enable bool) (err error)
+
+	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 }
