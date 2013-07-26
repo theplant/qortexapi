@@ -733,6 +733,9 @@ const (
 	MS_ACTIVATE_BY_SHARE_GROUP_INVITATION = "only activate account from shared group inviation but not create any organization"
 	MS_CREATE_ORG                         = "create first organization after setup account"
 	MS_JOIN_ORG                           = "join first organization after activate account"
+	MS_INACTIVE_DURING_BETA               = "InactiveDuringFreeTrialNudgeToAdmin"
+	MS_INACTIVE_NEAR_BETA                 = "InactiveNearTrialEndNudgeToAdmin"
+	MS_ACTIVE                             = "ActiveNearTrialEndNudgeToAdmin"
 )
 
 type MarketableMemberInfo struct {
