@@ -44,25 +44,6 @@ type BlogEntry struct {
 	Author           EmbedUser
 }
 
-type SharingInvitation struct {
-	FromOrg         EmbedOrg
-	FromUserId      string
-	SharedGroup     *Group
-	IsNewAccount    bool
-	Email           string
-	Token           string
-	JoinedOrgs      []EmbedOrg
-	IsAccepted      bool
-	IsRejected      bool
-	IsPending       bool
-	IsForwarded     bool
-	IsCanceled      bool
-	IsStopped       bool
-	PendingDuration string
-	ToOrgName       string
-	ToOrgId         string
-}
-
 type User struct {
 	Id                   string
 	Email                string
@@ -158,27 +139,28 @@ type Group struct {
 	Link                string `json:",omitempty"`
 	Slug                string `json:",omitempty"`
 	Author              EmbedUser
-	IsAdmin             bool        `json:",omitempty"`
-	IsPrivate           bool        `json:",omitempty"`
-	Editable            bool        `json:",omitempty"`
-	Managable           bool        `json:",omitempty"`
-	FollowedByMe        bool        `json:",omitempty"`
-	AdministratedByMe   bool        `json:",omitempty"`
-	IsPreShared         bool        `json:",omitempty"`
-	IsShared            bool        `json:",omitempty"`
-	IsDefaultLogoURL    bool        `json:",omitempty"`
-	HostOrgName         string      `json:",omitempty"`
-	IsDispayHostOrgName bool        `json:",omitempty"`
-	EntriesCount        int         `json:",omitempty"`
-	FollowersCount      int         `json:",omitempty"`
-	IsAnnoucement       bool        `json:",omitempty"`
-	GroupOwners         []EmbedUser `json:",omitempty"`
-	SharedGroupFromOrg  EmbedOrg
-	AcceptedEmbedOrgs   []EmbedOrg `json:",omitempty"`
-	PreSharingEmails    []string   `json:",omitempty"`
-	ForwardedOrgs       []EmbedOrg `json:",omitempty"`
-	HasPendingItems     bool       `json:",omitempty"`
+	IsAdmin             bool              `json:",omitempty"`
+	IsPrivate           bool              `json:",omitempty"`
+	Editable            bool              `json:",omitempty"`
+	Managable           bool              `json:",omitempty"`
+	FollowedByMe        bool              `json:",omitempty"`
+	AdministratedByMe   bool              `json:",omitempty"`
+	IsPreShared         bool              `json:",omitempty"`
+	IsShared            bool              `json:",omitempty"`
+	IsDefaultLogoURL    bool              `json:",omitempty"`
+	HostOrgName         string            `json:",omitempty"`
+	IsDispayHostOrgName bool              `json:",omitempty"`
+	EntriesCount        int               `json:",omitempty"`
+	FollowersCount      int               `json:",omitempty"`
+	IsAnnoucement       bool              `json:",omitempty"`
+	GroupOwners         []EmbedUser       `json:",omitempty"`
+	SharingInfo         *GroupSharingInfo `json:",omitempty"`
 	GroupEmailAddress   string
+}
+
+type EmbedGroup struct {
+	Id   string
+	Name string
 }
 
 type GroupSelectorItem struct {
@@ -283,20 +265,75 @@ type LinkedEntry struct {
 	Link           template.HTMLAttr
 }
 
+// TODO: should be replaced by ShareRequest
 type Request struct {
+	Id               string
 	CurrentPrefixURL string
 	Info             template.HTML
 	ActionButton     template.HTML
-	FromOrg          EmbedOrg
-	ToOrg            EmbedOrg
-	SharedGroup      *Group
-	SharedOrgIdHex   string
-	FromUserIdHex    string
-	SharedInvitee    EmbedUser
-	SharedInviter    EmbedUser
-	SharedResponsor  EmbedUser
-	ToEmail          string
-	State            string
+
+	FromOrg         EmbedOrg
+	ToOrg           EmbedOrg
+	SharedGroup     EmbedGroup
+	SharedOrgIdHex  string
+	FromUserIdHex   string
+	SharedInvitee   EmbedUser
+	SharedInviter   EmbedUser
+	SharedResponsor EmbedUser
+	ToEmail         string
+	State           string
+}
+
+// TODO: Deprecated! Remove me later. ShareRequest is the new one
+type SharingInvitation struct {
+	FromOrg         EmbedOrg
+	FromUserId      string
+	SharedGroup     *Group
+	IsNewAccount    bool
+	Email           string
+	Token           string
+	JoinedOrgs      []EmbedOrg
+	IsAccepted      bool
+	IsRejected      bool
+	IsPending       bool
+	IsForwarded     bool
+	IsCanceled      bool
+	IsStopped       bool
+	PendingDuration string
+	ToOrgName       string
+	ToOrgId         string
+}
+
+type ShareRequest struct {
+	Id              string
+	FromUser        EmbedUser
+	ToUser          EmbedUser
+	Responser       EmbedUser
+	FromOrg         EmbedOrg
+	ToOrg           EmbedOrg
+	JoinedOrgs      []EmbedOrg
+	SharedGroup     EmbedGroup
+	Token           string
+	ToEmail         string
+	PendingDuration string
+	IsNewAccount    bool
+	IsPending       bool
+	IsAccepted      bool
+	IsRejected      bool
+	IsForwarded     bool
+	IsCanceled      bool
+	IsStopped       bool
+	Info            template.HTML `json:",omitempty"`
+	ActionButton    template.HTML `json:",omitempty"`
+	RequestBarHtml  template.HTML `json:",omitempty"`
+}
+
+type GroupSharingInfo struct {
+	IsSharing       bool
+	FromOrg         EmbedOrg
+	AccpetedOrg     []EmbedOrg
+	ForwardedOrgs   []EmbedOrg
+	PendingToEmails []string
 }
 
 type Conversation struct {
@@ -364,7 +401,6 @@ type Entry struct {
 	WatchlistHtml       template.HTML `json:",omitempty"`
 	ToUsersHtml         template.HTML `json:",omitempty"`
 	LikedByUsersHtml    template.HTML `json:",omitempty"`
-	NotifyOptionsHtml   template.HTML `json:",omitempty"`
 
 	Link             template.HTMLAttr `json:",omitempty"`
 	PresentationLink template.HTMLAttr `json:",omitempty"`
@@ -379,23 +415,22 @@ type Entry struct {
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
 
-	IsSystemMessage               bool          `json:",omitempty"`
-	IsInnerMessage                bool          `json:",omitempty"`
-	SystemMessageType             string        `json:",omitempty"`
-	BroadcastType                 string        `json:",omitempty"`
-	IsBroadcast                   bool          `json:",omitempty"`
-	IsBroadcastTypeToAllAdmins    bool          `json:",omitempty"`
-	IsBroadcastTypeToAllUsers     bool          `json:",omitempty"`
-	IsBroadcastTypeToSomeOrgs     bool          `json:",omitempty"`
-	IsFromSuperOrg                bool          `json:",omitempty"`
-	IsFeedback                    bool          `json:",omitempty"`
-	FromOrg                       EmbedOrg      `json:",omitempty"`
-	ToOrgs                        []EmbedOrg    `json:",omitempty"`
-	ToOrgsHtml                    template.HTML `json:",omitempty"`
-	IsRequest                     bool          `json:",omitempty"`
-	Request                       *Request      `json:",omitempty"`
-	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
-	VisibleForSuperOrg            bool          `json:",omitempty"`
+	InnerMessage               *InnerMessage `json:",omitempty"`
+	IsSystemMessage            bool          `json:",omitempty"`
+	IsInnerMessage             bool          `json:",omitempty"`
+	SystemMessageType          string        `json:",omitempty"`
+	BroadcastType              string        `json:",omitempty"`
+	IsBroadcast                bool          `json:",omitempty"`
+	IsBroadcastTypeToAllAdmins bool          `json:",omitempty"`
+	IsBroadcastTypeToAllUsers  bool          `json:",omitempty"`
+	IsBroadcastTypeToSomeOrgs  bool          `json:",omitempty"`
+	IsFromSuperOrg             bool          `json:",omitempty"`
+	IsFeedback                 bool          `json:",omitempty"`
+	FromOrg                    EmbedOrg      `json:",omitempty"`
+	ToOrgs                     []EmbedOrg    `json:",omitempty"`
+	ToOrgsHtml                 template.HTML `json:",omitempty"`
+
+	IsHidePresentationTip bool `json:",omitempty"`
 
 	IsKnowledgeBase    bool   `json:",omitempty"`
 	IsPost             bool   `json:",omitempty"`
@@ -421,6 +456,7 @@ type Entry struct {
 	AnyoneCanEdit      bool   `json:",omitempty"`
 	IsInGroup          bool   `json:",omitempty"`
 	IsFromEmail        bool   `json:",omitempty"`
+	InlineHelp         bool   `json:",omitempty"`
 
 	AllAttachmentsCount         int
 	CommentsCount               int
@@ -442,6 +478,7 @@ type Entry struct {
 	MentionedUsers         []EmbedUser   `json:",omitempty"`
 	LikedByUsers           []EmbedUser   `json:",omitempty"`
 	Attachments            []*Attachment `json:",omitempty"`
+	CommentsAttachments    []*Attachment `json:",omitempty"`
 	FirstPicture           *Attachment   `json:",omitempty"`
 	Comments               []*Entry
 	ExternalComments       []*Entry `json:",omitempty"`
@@ -450,6 +487,32 @@ type Entry struct {
 	NewComment             *Entry         `json:",omitempty"`
 	NewEntry               *Entry         `json:",omitempty"`
 	GroupSlector           *GroupSelector `json:",omitempty"`
+
+	// Aaron New Added
+	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
+	IsQortexSupport              bool              `json:",omitempty"`
+	QortexSupport                *QortexSupport    `json:",omitempty"`
+	IsQortexSupportKnowledgeBase bool              `json:",omitempty"`
+	//only in single entry
+	IsSuperOrg  bool `json:",omitempty"`
+	IsSuperUser bool `json:",omitempty"`
+
+	// Should be removed
+	IsRequest                     bool          `json:",omitempty"`
+	ShareRequest                  *ShareRequest `json:",omitempty"`
+	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
+	VisibleForSuperOrg            bool          `json:",omitempty"`
+}
+
+type QortexSupport struct {
+	Audience          string        `json:",omitempty"`
+	IsToOffical       bool          `json:",omitempty"`
+	IsToAllUsers      bool          `json:",omitempty"`
+	IsToAllAdmins     bool          `json:",omitempty"`
+	IsToOrganizations bool          `json:",omitempty"`
+	FromOrg           EmbedOrg      `json:",omitempty"`
+	ToOrgs            []EmbedOrg    `json:",omitempty"`
+	ToOrgsHtml        template.HTML `json:",omitempty"`
 }
 
 type EmbedEntry struct {
@@ -633,7 +696,52 @@ type AccessReq struct {
 	UpdatedAt    string
 }
 
+type InnerMessage struct {
+	ByUser                string
+	GroupName             string
+	GroupLink             string
+	OrgName               string
+	IsDeletedGroupMessage bool
+	IsCreatedGroupMessage bool
+	IsSetupOrgMessage     bool
+}
+
+type GroupAside struct {
+	IsMyGroupsCollapse      bool
+	IsOtherGroupsCollapse   bool
+	ShowNewGroupButton      bool
+	HaveOtherGroup          bool
+	ShowSharedExternallyBar bool
+	AnnounGroup             *Group
+	SMGroup                 *Group
+	FollowingNormalGroups   []*Group
+	FollowingSharedGroups   []*Group
+	UnfollowedNormalGroups  []*Group
+	UnfollowedSharedGroups  []*Group
+}
+
 type OrgUnreadInfo struct {
 	OrgId           string
 	FeedUnreadCount int
+}
+
+const (
+	MS_RECEIVE_JOIN_ORG_INVITATION        = "InvitedNotSignedUpNudgeToUser"
+	MS_RECEIVE_SHARED_GROUP_INVITATION    = "InvitedToSharedGroupNotSignedUpNudge"
+	MS_APPROVED                           = "ReceivedBetaInvitationNotSignedUpNudge"
+	MS_SETUP_ACCOUNT                      = "JustSignedUpNudgeToAdmin"
+	MS_ACTIVATE_BY_JOIN_ORG_INVITATION    = "only activate account from join org inviation but not join the org"
+	MS_ACTIVATE_BY_SHARE_GROUP_INVITATION = "only activate account from shared group inviation but not create any organization"
+	MS_CREATE_ORG                         = "create first organization after setup account"
+	MS_JOIN_ORG                           = "join first organization after activate account"
+	MS_INACTIVE_DURING_BETA               = "InactiveDuringFreeTrialNudgeToAdmin"
+	MS_INACTIVE_NEAR_BETA                 = "InactiveNearTrialEndNudgeToAdmin"
+	MS_ACTIVE                             = "ActiveNearTrialEndNudgeToAdmin"
+)
+
+type MarketableMemberInfo struct {
+	Email     string
+	FirstName string
+	LastName  string
+	Status    string
 }

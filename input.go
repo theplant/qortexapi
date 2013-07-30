@@ -34,6 +34,8 @@ type EntryInput struct {
 	Slug        string // if IsPublished == true required
 	Email       string // Blog Comment required
 	Name        string // Blog Comment required
+
+	InlineHelp bool
 }
 
 const (
@@ -51,16 +53,17 @@ type BroadcastInput struct {
 	RootId        string
 }
 
-//type RequestInput struct {
-//Title          string
-//Content        string
-//SharedGroupId  string
-//SharedOrgId    string
-//HostOrgId      string
-//ToOrgIds       []string
-//AcceptedOrgIds []string
-//RejectedOrgIds []string
-//}
+// TODO: Explaination needed.
+type QortexSupportInput struct {
+	Id            string
+	Title         string
+	Content       string
+	ToOrgIds      []string
+	RootId        string
+	Audiance      string
+	KnowledgeBase bool
+	InlineHelp    bool
+}
 
 type GroupInput struct {
 	Id            string
@@ -169,6 +172,7 @@ type UserProfileInput struct {
 	OtherWebsites []string
 }
 
+// TODO: mail-updates: remove it
 type MailUpdatesInput struct {
 	IndividualIsOn    bool
 	SendLag           int
@@ -191,4 +195,10 @@ type MailUpdatesInput struct {
 	StartAt           int
 	EndAt             int
 	DailyIsOn         bool
+}
+
+type MailPreferenceInput struct {
+	Expecting    bool
+	SendInterval int
+	SendLag      int
 }
