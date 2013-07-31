@@ -58,6 +58,7 @@ type AuthMemberService interface {
 // Normal user and joined organization.
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
+	GetNewChatEntry(chatId string) (entry *Entry, err error)
 	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetSharingRequestEntry(entryId string) (entry *Entry, err error)
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
