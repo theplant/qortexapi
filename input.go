@@ -36,6 +36,8 @@ type EntryInput struct {
 	Name        string // Blog Comment required
 
 	InlineHelp bool
+
+	BaseOnEntryId string // when share chat,BaseOnEntryId = chat entry id
 }
 
 const (
