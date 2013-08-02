@@ -143,6 +143,7 @@ type AuthUserService interface {
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (validated *govalidations.Validated, err error)
+	DeleteAccount() (err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
