@@ -379,18 +379,19 @@ type Entry struct {
 	UpdatedAt  time.Time `json:",omitempty"`
 	BumpedUpAt time.Time `json:",omitempty"`
 
-	AllAttachmentsURL    string `json:",omitempty"`
-	Permalink            string `json:",omitempty"`
-	IconName             string `json:",omitempty"`
-	LocalHumanCreatedAt  string `json:",omitempty"`
-	LocalHumanUpdatedAt  string `json:",omitempty"`
-	WholeLastUpdateAtAgo string `json:",omitempty"`
-	LastUpdateAtAgo      string `json:",omitempty"`
-	WatchedAtAgo         string `json:",omitempty"`
-	NextRemindAtLater    string `json:",omitempty"`
-	MentionedUserIds     string `json:",omitempty"`
-	DomainURL            string `json:",omitempty"`
-	UpdatedAtUnixNano    string `json:",omitempty"`
+	AllAttachmentsURL    string    `json:",omitempty"`
+	Permalink            string    `json:",omitempty"`
+	IconName             string    `json:",omitempty"`
+	LocalHumanCreatedAt  string    `json:",omitempty"`
+	LocalHumanUpdatedAt  string    `json:",omitempty"`
+	WholeLastUpdateAtAgo string    `json:",omitempty"`
+	WholeLastUpdateAt    time.Time `json:",omitempty"`
+	LastUpdateAtAgo      string    `json:",omitempty"`
+	WatchedAtAgo         string    `json:",omitempty"`
+	NextRemindAtLater    string    `json:",omitempty"`
+	MentionedUserIds     string    `json:",omitempty"`
+	DomainURL            string    `json:",omitempty"`
+	UpdatedAtUnixNano    string    `json:",omitempty"`
 	// last version's update time
 	LastUpdateAt string `json:",omitempty"`
 
