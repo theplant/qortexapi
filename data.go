@@ -557,6 +557,8 @@ type NotificationItem struct {
 	ToUser                EmbedUser
 	ForEntry              EmbedEntry
 	FromUser              EmbedUser
+	FromUsers             []EmbedUser // like, comment users
+	FromUsersHtml         template.HTML
 	FromOrg               EmbedOrg
 	CausedByEntry         EmbedEntry
 	NotifiedAt            time.Time
