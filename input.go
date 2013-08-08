@@ -36,8 +36,8 @@ type EntryInput struct {
 	Name        string // Blog Comment required
 
 	InlineHelp bool
-
 	BaseOnEntryId string // when share chat,BaseOnEntryId = chat entry id
+	PublishedToUsers bool
 }
 
 const (
@@ -57,14 +57,15 @@ type BroadcastInput struct {
 
 // TODO: Explaination needed.
 type QortexSupportInput struct {
-	Id            string
-	Title         string
-	Content       string
-	ToOrgIds      []string
-	RootId        string
-	Audiance      string
-	KnowledgeBase bool
-	InlineHelp    bool
+	Id               string
+	Title            string
+	Content          string
+	ToOrgIds         []string
+	RootId           string
+	Audiance         string
+	KnowledgeBase    bool
+	InlineHelp       bool
+	PublishedToUsers bool
 }
 
 type GroupInput struct {
