@@ -35,7 +35,8 @@ type EntryInput struct {
 	Email       string // Blog Comment required
 	Name        string // Blog Comment required
 
-	InlineHelp bool
+	InlineHelp       bool
+	PublishedToUsers bool
 }
 
 const (
@@ -55,14 +56,15 @@ type BroadcastInput struct {
 
 // TODO: Explaination needed.
 type QortexSupportInput struct {
-	Id            string
-	Title         string
-	Content       string
-	ToOrgIds      []string
-	RootId        string
-	Audiance      string
-	KnowledgeBase bool
-	InlineHelp    bool
+	Id               string
+	Title            string
+	Content          string
+	ToOrgIds         []string
+	RootId           string
+	Audiance         string
+	KnowledgeBase    bool
+	InlineHelp       bool
+	PublishedToUsers bool
 }
 
 type GroupInput struct {

@@ -407,8 +407,11 @@ type Entry struct {
 	PresentationLink template.HTMLAttr `json:",omitempty"`
 	UploadURL        template.HTMLAttr `json:",omitempty"`
 
-	IsShared         bool `json:",omitempty"`
-	IsPublished      bool `json:",omitempty"`
+	IsShared bool `json:",omitempty"`
+	// blog
+	IsPublished bool `json:",omitempty"`
+	// qortex support knowledge base
+	PublishedToUsers bool `json:",omitempty"`
 	IsCanPublish     bool `json:",omitempty"`
 	IsMuted          bool `json:",omitempty"`
 	IsReminding      bool `json:",omitempty"`
@@ -736,7 +739,7 @@ const (
 	MS_JOIN_ORG                           = "JustJoinedOrgNudgeToAdmin"
 	MS_CREATE_ORG_VIA_SHARE_GROUP         = "JustCreatedOrgViaSharedGroupNudgeToAdmin"
 	MS_INACTIVE_DURING_TRIAL              = "InactiveDuringFreeTrialNudgeToAdmin"
-	MS_INACTIVE_AT_TRIAL                = "InactiveAtTrialEndNudgeToAdmin"
+	MS_INACTIVE_AT_TRIAL                  = "InactiveAtTrialEndNudgeToAdmin"
 	MS_ACTIVE_AT_TRIAL                    = "ActiveAtTrialEndNudgeToAdmin"
 	MS_ACTIVE_NEAR_TRIAL                  = "ActiveNearTrialEndNudgeToAdmin"
 )
