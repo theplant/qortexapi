@@ -749,4 +749,6 @@ type MarketableMemberInfo struct {
 	FirstName string
 	LastName  string
 	Status    string
+	InvitOrg  string
+	GotoURL   string
 }
