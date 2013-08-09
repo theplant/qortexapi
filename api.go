@@ -6,7 +6,7 @@ import (
 )
 
 type PublicService interface {
-	GetSession(email string, password string) (session string, err error)
+	GetSession(email string, password string, locale string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
