@@ -155,6 +155,7 @@ type ContactInput struct {
 	Country     string
 	City        string
 	HelpContent string
+	Fake        bool // always false
 }
 
 type UserProfileInput struct {
