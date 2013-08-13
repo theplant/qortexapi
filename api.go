@@ -21,7 +21,7 @@ type PublicService interface {
 	CancelChangingEmail(token string) (err error)
 
 	// Sharing Flow
-	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
+	ChangeEmailToAcceptSharing(token string, newEmail string) (err error)
 	// To be removed
 	GetSharingInviation(sharingInviationToken string, memberId string) (invitation *SharingInvitation, err error)
 	GetShareRequest(token string, memberId string) (shareRequest *ShareRequest, err error)
