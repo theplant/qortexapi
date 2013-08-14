@@ -380,18 +380,19 @@ type Entry struct {
 	BumpedUpAt    time.Time `json:",omitempty"`
 	BaseOnEntryId string    `json:",omitempty"`
 
-	AllAttachmentsURL    string `json:",omitempty"`
-	Permalink            string `json:",omitempty"`
-	IconName             string `json:",omitempty"`
-	LocalHumanCreatedAt  string `json:",omitempty"`
-	LocalHumanUpdatedAt  string `json:",omitempty"`
-	WholeLastUpdateAtAgo string `json:",omitempty"`
-	LastUpdateAtAgo      string `json:",omitempty"`
-	WatchedAtAgo         string `json:",omitempty"`
-	NextRemindAtLater    string `json:",omitempty"`
-	MentionedUserIds     string `json:",omitempty"`
-	DomainURL            string `json:",omitempty"`
-	UpdatedAtUnixNano    string `json:",omitempty"`
+	AllAttachmentsURL    string    `json:",omitempty"`
+	Permalink            string    `json:",omitempty"`
+	IconName             string    `json:",omitempty"`
+	LocalHumanCreatedAt  string    `json:",omitempty"`
+	LocalHumanUpdatedAt  string    `json:",omitempty"`
+	WholeLastUpdateAtAgo string    `json:",omitempty"`
+	WholeLastUpdateAt    time.Time `json:",omitempty"`
+	LastUpdateAtAgo      string    `json:",omitempty"`
+	WatchedAtAgo         string    `json:",omitempty"`
+	NextRemindAtLater    string    `json:",omitempty"`
+	MentionedUserIds     string    `json:",omitempty"`
+	DomainURL            string    `json:",omitempty"`
+	UpdatedAtUnixNano    string    `json:",omitempty"`
 	// last version's update time
 	LastUpdateAt string `json:",omitempty"`
 
@@ -409,8 +410,11 @@ type Entry struct {
 	PresentationLink template.HTMLAttr `json:",omitempty"`
 	UploadURL        template.HTMLAttr `json:",omitempty"`
 
-	IsShared         bool `json:",omitempty"`
-	IsPublished      bool `json:",omitempty"`
+	IsShared bool `json:",omitempty"`
+	// blog
+	IsPublished bool `json:",omitempty"`
+	// qortex support knowledge base
+	PublishedToUsers bool `json:",omitempty"`
 	IsCanPublish     bool `json:",omitempty"`
 	IsMuted          bool `json:",omitempty"`
 	IsReminding      bool `json:",omitempty"`
@@ -731,14 +735,16 @@ const (
 	MS_RECEIVE_JOIN_ORG_INVITATION        = "InvitedNotSignedUpNudgeToUser"
 	MS_RECEIVE_SHARED_GROUP_INVITATION    = "InvitedToSharedGroupNotSignedUpNudge"
 	MS_APPROVED                           = "ReceivedBetaInvitationNotSignedUpNudge"
-	MS_SETUP_ACCOUNT                      = "JustSignedUpNudgeToAdmin"
-	MS_ACTIVATE_BY_JOIN_ORG_INVITATION    = "only activate account from join org inviation but not join the org"
-	MS_ACTIVATE_BY_SHARE_GROUP_INVITATION = "only activate account from shared group inviation but not create any organization"
-	MS_CREATE_ORG                         = "create first organization after setup account"
-	MS_JOIN_ORG                           = "join first organization after activate account"
-	MS_INACTIVE_DURING_BETA               = "InactiveDuringFreeTrialNudgeToAdmin"
-	MS_INACTIVE_NEAR_BETA                 = "InactiveNearTrialEndNudgeToAdmin"
-	MS_ACTIVE                             = "ActiveNearTrialEndNudgeToAdmin"
+	MS_SETUP_ACCOUNT                      = "JustSignedUpDirectlyNudgeToAdmin"
+	MS_ACTIVATE_BY_JOIN_ORG_INVITATION    = "JustSignedUpViaInvitedNudgeToAdmin"
+	MS_ACTIVATE_BY_SHARE_GROUP_INVITATION = "JustSignedUpViaSharedGroupNudgeToAdmin"
+	MS_CREATE_ORG                         = "JustCreatedOrgNudgeToAdmin"
+	MS_JOIN_ORG                           = "JustJoinedOrgNudgeToAdmin"
+	MS_CREATE_ORG_VIA_SHARE_GROUP         = "JustCreatedOrgViaSharedGroupNudgeToAdmin"
+	MS_INACTIVE_DURING_TRIAL              = "InactiveDuringFreeTrialNudgeToAdmin"
+	MS_INACTIVE_AT_TRIAL                  = "InactiveAtTrialEndNudgeToAdmin"
+	MS_ACTIVE_AT_TRIAL                    = "ActiveAtTrialEndNudgeToAdmin"
+	MS_ACTIVE_NEAR_TRIAL                  = "ActiveNearTrialEndNudgeToAdmin"
 )
 
 type MarketableMemberInfo struct {
@@ -746,4 +752,6 @@ type MarketableMemberInfo struct {
 	FirstName string
 	LastName  string
 	Status    string
+	InvitOrg  string
+	GotoURL   string
 }
