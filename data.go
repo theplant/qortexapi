@@ -348,6 +348,8 @@ type Conversation struct {
 	Private             bool
 	IsClose             bool
 	IsShared            bool
+	HasOfflineMessage   bool
+	OfflineLocalTime    string
 	SharedMessageIds    []string
 	MessagesCount       int
 	Messages            []*Message
@@ -362,6 +364,7 @@ type Message struct {
 	CreatedAt          time.Time
 	EmbedUser          EmbedUser
 	ShowUser           bool
+	IsOffline          bool
 	HighlightedContent template.HTML
 }
 
