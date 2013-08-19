@@ -349,6 +349,7 @@ type Conversation struct {
 	IsClose             bool
 	IsShared            bool
 	HasOfflineMessage   bool
+	HasOnlineMessage    bool
 	OfflineLocalTime    string
 	SharedMessageIds    []string
 	MessagesCount       int
@@ -602,6 +603,7 @@ type MyCount struct {
 	FollowedUnreadCount     int
 	NotificationUnreadCount int
 	ActiveTasksCount        int
+	OfflineMessageCount     int
 	GroupCounts             []*GroupCount
 }
 
