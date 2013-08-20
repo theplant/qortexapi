@@ -349,7 +349,6 @@ type Conversation struct {
 	IsClose             bool
 	IsShared            bool
 	HasOfflineMessage   bool
-	HasOnlineMessage    bool
 	OfflineLocalTime    string
 	SharedMessageIds    []string
 	MessagesCount       int
