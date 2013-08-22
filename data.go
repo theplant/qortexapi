@@ -104,19 +104,20 @@ type EmbedOrg struct {
 }
 
 type EmbedUser struct {
-	Id             string
-	Email          string
-	Name           string
-	Title          string            `json:",omitempty"`
-	Avatar         string            `json:",omitempty"`
-	JID            string            `json:",omitempty"`
-	Timezone       string            `json:",omitempty"`
-	IsSuperUser    bool              `json:",omitempty"`
-	IsShare        bool              `json:",omitempty"`
-	OrganizationId string            `json:",omitempty"`
-	OriginalOrgId  string            `json:",omitempty"`
-	ProfileURL     template.HTMLAttr `json:",omitempty"`
-	NoDetail       bool              `json:",omitempty"`
+	Id                  string
+	Email               string
+	Name                string
+	Title               string            `json:",omitempty"`
+	Avatar              string            `json:",omitempty"`
+	JID                 string            `json:",omitempty"`
+	Timezone            string            `json:",omitempty"`
+	IsSuperUser         bool              `json:",omitempty"`
+	IsShare             bool              `json:",omitempty"`
+	OrganizationId      string            `json:",omitempty"`
+	OriginalOrgId       string            `json:",omitempty"`
+	ProfileURL          template.HTMLAttr `json:",omitempty"`
+	NoDetail            bool              `json:",omitempty"`
+	UnfollowSharedGroup bool              `json:",omitempty"`
 }
 
 type PanelStatus struct {
