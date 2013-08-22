@@ -349,6 +349,8 @@ type Conversation struct {
 	Private             bool
 	IsClose             bool
 	IsShared            bool
+	HasOfflineMessage   bool
+	OfflineLocalTime    string
 	SharedMessageIds    []string
 	MessagesCount       int
 	Messages            []*Message
@@ -363,22 +365,24 @@ type Message struct {
 	CreatedAt          time.Time
 	EmbedUser          EmbedUser
 	ShowUser           bool
+	IsOffline          bool
 	HighlightedContent template.HTML
 }
 
 type Entry struct {
-	Id         string
-	EType      string    `json:",omitempty"`
-	Title      string    `json:"-"`
-	Slug       string    `json:",omitempty"`
-	Content    string    `json:"-"`
-	TypeTitle  string    `json:",omitempty"`
-	RootId     string    `json:",omitempty"`
-	GroupId    string    `json:",omitempty"`
-	AuthorId   string    `json:",omitempty"`
-	CreatedAt  time.Time `json:",omitempty"`
-	UpdatedAt  time.Time `json:",omitempty"`
-	BumpedUpAt time.Time `json:",omitempty"`
+	Id            string
+	EType         string    `json:",omitempty"`
+	Title         string    `json:"-"`
+	Slug          string    `json:",omitempty"`
+	Content       string    `json:"-"`
+	TypeTitle     string    `json:",omitempty"`
+	RootId        string    `json:",omitempty"`
+	GroupId       string    `json:",omitempty"`
+	AuthorId      string    `json:",omitempty"`
+	CreatedAt     time.Time `json:",omitempty"`
+	UpdatedAt     time.Time `json:",omitempty"`
+	BumpedUpAt    time.Time `json:",omitempty"`
+	BaseOnEntryId string    `json:",omitempty"`
 
 	AllAttachmentsURL    string    `json:",omitempty"`
 	Permalink            string    `json:",omitempty"`
@@ -405,6 +409,8 @@ type Entry struct {
 	LikedByUsersHtml    template.HTML `json:",omitempty"`
 
 	Link             template.HTMLAttr `json:",omitempty"`
+	BaseOnLink       template.HTMLAttr `json:",omitempty"`
+	BaseOnLinkTitle  string            `json:",omitempty"`
 	PresentationLink template.HTMLAttr `json:",omitempty"`
 	UploadURL        template.HTMLAttr `json:",omitempty"`
 
@@ -597,6 +603,7 @@ type MyCount struct {
 	FollowedUnreadCount     int
 	NotificationUnreadCount int
 	ActiveTasksCount        int
+	OfflineMessageCount     int
 	GroupCounts             []*GroupCount
 }
 
