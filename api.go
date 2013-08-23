@@ -164,6 +164,7 @@ type AuthUserService interface {
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 	CanCreateGroup() (ok bool, err error)
+	CanLeaveOrg() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
 	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, validated *govalidations.Validated, err error)
 	CancelInvitation(email string) (err error)
