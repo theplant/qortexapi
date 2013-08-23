@@ -6,7 +6,7 @@ import (
 )
 
 type PublicService interface {
-	GetSession(email string, password string) (session string, err error)
+	GetSession(email string, password string, locale string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
@@ -21,9 +21,8 @@ type PublicService interface {
 	CancelChangingEmail(token string) (err error)
 
 	// Sharing Flow
-	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
-	// To be removed
-	GetSharingInviation(sharingInviationToken string, memberId string) (invitation *SharingInvitation, err error)
+	ChangeEmailToAcceptSharing(token string, newEmail string) (err error)
+
 	GetShareRequest(token string, memberId string) (shareRequest *ShareRequest, err error)
 
 	ContactUs(input *ContactInput) (contact *ContactInfo, validated *govalidations.Validated, err error)
@@ -47,19 +46,17 @@ type PublicService interface {
 type AuthMemberService interface {
 	SwitchOrganization(orgId string) (err error)
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
-	GetSharingInviationByToken(sharingInviationToken string) (invitation *SharingInvitation, err error)
 
 	GetShareRequest(token string) (shareRequest *ShareRequest, err error)
 	RejectShareRequestByInvitee(token string) (err error)
 	AcceptShareRequestByInvitee(token string, toOrgId string) (err error)
-	RespondSharingRequest(token string, toOrgId string) (prefixURL string, validated *govalidations.Validated, err error) // Old method
 }
 
 // Normal user and joined organization.
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
+	GetNewChatEntry(chatId string) (entry *Entry, err error)
 	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
-	GetSharingRequestEntry(entryId string) (entry *Entry, err error)
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string) (entry *Task, err error)
@@ -186,17 +183,11 @@ type AuthUserService interface {
 
 	StopSharingGroup(requestId string) (err error)
 
-	// Deprecated!
-	StopSharedGroup(groupId string, toStopOrgId string) (err error)
-
-	LeaveSharedGroup(groupId string) (err error)
-
 	//preferences
 	DismissPresentationTip() (err error)
 
 	//chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
-	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
 	GetPrivateChat(entryId string, searchKeyWords string) (chatEntry *Entry, err error)
 
 	// Qortex Support
