@@ -55,6 +55,7 @@ type AuthMemberService interface {
 // Normal user and joined organization.
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
+	GetNewChatEntry(chatId string) (entry *Entry, err error)
 	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
@@ -188,7 +189,6 @@ type AuthUserService interface {
 
 	//chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
-	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
 	GetPrivateChat(entryId string, searchKeyWords string) (chatEntry *Entry, err error)
 
 	// Qortex Support
