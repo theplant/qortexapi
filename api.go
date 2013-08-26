@@ -187,7 +187,7 @@ type AuthUserService interface {
 
 	//chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
-	GetPrivateChat(entryId string, searchKeyWords string) (chatEntry *Entry, err error)
+	GetPrivateChat(conversationId string, searchKeyWords string) (chatEntry *Entry, err error)
 
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
