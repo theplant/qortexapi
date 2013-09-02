@@ -1,7 +1,6 @@
 package qortexapi
 
 import (
-	"github.com/sunfmin/govalidations"
 	"time"
 )
 
@@ -12,11 +11,11 @@ type PublicService interface {
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
 	// Find Password
-	FindPassword(email string) (validated *govalidations.Validated, err error)
-	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, validated *govalidations.Validated, err error)
+	FindPassword(email string) (err error)
+	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, err error)
 
 	// Change Email
-	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, validated *govalidations.Validated, err error)
+	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, err error)
 	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, err error)
 	CancelChangingEmail(token string) (err error)
 
@@ -25,18 +24,18 @@ type PublicService interface {
 
 	GetShareRequest(token string, memberId string) (shareRequest *ShareRequest, err error)
 
-	ContactUs(input *ContactInput) (contact *ContactInfo, validated *govalidations.Validated, err error)
+	ContactUs(input *ContactInput) (contact *ContactInfo, err error)
 
 	// Blog
 	GetBlogEntries(doi string, pageNum int, limit int) (blog *Blog, blogEntries []*BlogEntry, totalPageNum int, err error)
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
-	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
-	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
-	RequestNewInvitationToken(orgId string, email string) (validated *govalidations.Validated, err error)
-	RequestNewSharingToken(email string) (validated *govalidations.Validated, err error)
+	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, err error)
+	RequestNewSignupToken(email string) (err error)
+	RequestNewInvitationToken(orgId string, email string) (err error)
+	RequestNewSharingToken(email string) (err error)
 
-	InviteMe(organizationId string, email string) (validated *govalidations.Validated, err error)
+	InviteMe(organizationId string, email string) (err error)
 
 	// Signup
 	RequestSignup(email string) (err error)
@@ -60,10 +59,10 @@ type AuthUserService interface {
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string) (entry *Task, err error)
-	CreateComment(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	CreateComment(input *EntryInput) (entry *Entry, err error)
 	GetComment(entryId string, groupId string) (entry *Entry, err error)
-	UpdateComment(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
-	UpdateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	UpdateComment(input *EntryInput) (entry *Entry, err error)
+	UpdateEntry(input *EntryInput) (entry *Entry, err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (entry *Entry, err error)
 
@@ -108,8 +107,8 @@ type AuthUserService interface {
 	//Group related
 	GetNewGroup() (group *Group, err error)
 	GetGroup(groupId string) (group *Group, err error)
-	CreateGroup(input *GroupInput) (group *Group, validated *govalidations.Validated, err error)
-	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
+	CreateGroup(input *GroupInput) (group *Group, err error)
+	UpdateGroup(input *GroupInput) (err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
 	// UpdateGroupSlug(id string, slug string) (validated *govalidations.Validated, err error)
 	DeleteGroup(groupId string) (err error)
@@ -136,10 +135,10 @@ type AuthUserService interface {
 	GetMyFollowingUsers() (followingUsers []*User, err error)
 	GetPanelStatus() (panelStatus *PanelStatus, err error)
 	GetUserPreferences() (preferences *Preferences, err error)
-	UpdateUserPreferences(input *PreferencesInput) (preferences *Preferences, validated *govalidations.Validated, err error)
+	UpdateUserPreferences(input *PreferencesInput) (preferences *Preferences, err error)
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
-	UpdateUserProfile(input *UserProfileInput) (validated *govalidations.Validated, err error)
+	UpdateUserProfile(input *UserProfileInput) (err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
@@ -153,7 +152,7 @@ type AuthUserService interface {
 	GetMyJoinedOrganizations() (orgs []*Organization, err error)
 	GetCurrentOrganization() (org *Organization, err error)
 	SearchOrganizations(keyword string) (orgs []*Organization, err error)
-	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
+	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
 
 	AcceptShareRequestByAdmin(requestId string) (err error)
@@ -164,7 +163,7 @@ type AuthUserService interface {
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
-	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, validated *govalidations.Validated, err error)
+	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	ChooseMarkdownEditor() (err error)
@@ -174,9 +173,9 @@ type AuthUserService interface {
 	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
 	UpdateMailPreference(input *MailPreferenceInput) (err error)
 
-	PrepareChangingEmail(newEmail string) (changer *EmailChanger, validated *govalidations.Validated, err error)
+	PrepareChangingEmail(newEmail string) (changer *EmailChanger, err error)
 	ConfirmChangingEmail(token string) (err error)
-	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
+	UpdateAccount(input *MemberAccountInput) (err error)
 
 	SendShareRequest(groupId string, email string) (shareRequest *ShareRequest, err error)
 	GetShareRequests(groupId string) (sis []*ShareRequest, err error)
