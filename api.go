@@ -1,41 +1,41 @@
 package qortexapi
 
 import (
-	"github.com/sunfmin/govalidations"
 	"time"
 )
 
 type PublicService interface {
-	GetSession(email string, password string) (session string, err error)
+	GetSession(email string, password string, locale string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
 	// Find Password
-	FindPassword(email string) (validated *govalidations.Validated, err error)
-	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, validated *govalidations.Validated, err error)
+	FindPassword(email string) (err error)
+	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, err error)
 
 	// Change Email
-	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, validated *govalidations.Validated, err error)
+	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, err error)
 	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, err error)
 	CancelChangingEmail(token string) (err error)
 
 	// Sharing Flow
-	ChangeEmailToAcceptSharing(token string, newEmail string) (validated *govalidations.Validated, err error)
-	GetSharingInviation(sharingInviationToken string, memberId string) (invitation *SharingInvitation, err error)
+	ChangeEmailToAcceptSharing(token string, newEmail string) (err error)
 
-	ContactUs(input *ContactInput) (contact *ContactInfo, validated *govalidations.Validated, err error)
+	GetShareRequest(token string, memberId string) (shareRequest *ShareRequest, err error)
+
+	ContactUs(input *ContactInput) (contact *ContactInfo, err error)
 
 	// Blog
 	GetBlogEntries(doi string, pageNum int, limit int) (blog *Blog, blogEntries []*BlogEntry, totalPageNum int, err error)
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
-	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, validated *govalidations.Validated, err error)
-	RequestNewSignupToken(email string) (validated *govalidations.Validated, err error)
-	RequestNewInvitationToken(orgId string, email string) (validated *govalidations.Validated, err error)
-	RequestNewSharingToken(email string) (validated *govalidations.Validated, err error)
+	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, err error)
+	RequestNewSignupToken(email string) (err error)
+	RequestNewInvitationToken(orgId string, email string) (err error)
+	RequestNewSharingToken(email string) (err error)
 
-	InviteMe(organizationId string, email string) (validated *govalidations.Validated, err error)
+	InviteMe(organizationId string, email string) (err error)
 
 	// Signup
 	RequestSignup(email string) (err error)
@@ -45,29 +45,24 @@ type PublicService interface {
 type AuthMemberService interface {
 	SwitchOrganization(orgId string) (err error)
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
-	GetSharingInviationByToken(sharingInviationToken string) (invitation *SharingInvitation, err error)
-	RejectSharingBeforeForwarding(groupId string, email string) (err error)
-	RespondSharingRequest(token string, toOrgId string) (prefixURL string, validated *govalidations.Validated, err error)
+
+	GetShareRequest(token string) (shareRequest *ShareRequest, err error)
+	RejectShareRequestByInvitee(token string) (err error)
+	AcceptShareRequestByInvitee(token string, toOrgId string) (err error)
 }
 
 // Normal user and joined organization.
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
-	GetQortexMessages(messsageType string, before string, limit int, withComments bool) (entries []*Entry, err error) // when messageType is empty or equals "all", return all kinds of messages
-	CreateBroadcast(input *BroadcastInput) (entry *Entry, err error)
-	CreateBroadcastComment(input *BroadcastInput) (entry *Entry, err error)
-	GetSharingRequestEntry(entryId string) (entry *Entry, err error)
-	GetBroadcast(entryId string) (entry *Entry, err error)
-	GetBroadcastComment(entryId string) (entry *Entry, err error)
-	UpdateBroadcast(input *BroadcastInput) (entry *Entry, err error)
-	UpdateBroadcastComment(input *BroadcastInput) (entry *Entry, err error)
+	GetNewChatEntry(chatId string) (entry *Entry, err error)
+	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string) (entry *Task, err error)
-	CreateComment(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	CreateComment(input *EntryInput) (entry *Entry, err error)
 	GetComment(entryId string, groupId string) (entry *Entry, err error)
-	UpdateComment(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
-	UpdateEntry(input *EntryInput) (entry *Entry, validated *govalidations.Validated, err error)
+	UpdateComment(input *EntryInput) (entry *Entry, err error)
+	UpdateEntry(input *EntryInput) (entry *Entry, err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (entry *Entry, err error)
 
@@ -81,6 +76,7 @@ type AuthUserService interface {
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
+	GetGroupAside() (ga *GroupAside, err error)
 
 	// Get Unread entries for type entryType since the fromTimeUnixNano unix nanoseconds, and return max limit entries.
 	// entryType could be:	"post", "knowledge", "task"
@@ -111,8 +107,8 @@ type AuthUserService interface {
 	//Group related
 	GetNewGroup() (group *Group, err error)
 	GetGroup(groupId string) (group *Group, err error)
-	CreateGroup(input *GroupInput) (group *Group, validated *govalidations.Validated, err error)
-	UpdateGroup(input *GroupInput) (validated *govalidations.Validated, err error)
+	CreateGroup(input *GroupInput) (group *Group, err error)
+	UpdateGroup(input *GroupInput) (err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
 	// UpdateGroupSlug(id string, slug string) (validated *govalidations.Validated, err error)
 	DeleteGroup(groupId string) (err error)
@@ -122,7 +118,7 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetGroupHeader(groupId string) (header *GroupHeader, err error)
-	GetClassifiedGroups() (anouncementGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
+	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
 
 	//User related
 	GetAuthUser() (user *User, err error)
@@ -139,10 +135,10 @@ type AuthUserService interface {
 	GetMyFollowingUsers() (followingUsers []*User, err error)
 	GetPanelStatus() (panelStatus *PanelStatus, err error)
 	GetUserPreferences() (preferences *Preferences, err error)
-	UpdateUserPreferences(input *PreferencesInput) (preferences *Preferences, validated *govalidations.Validated, err error)
+	UpdateUserPreferences(input *PreferencesInput) (preferences *Preferences, err error)
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
-	UpdateUserProfile(input *UserProfileInput) (validated *govalidations.Validated, err error)
+	UpdateUserProfile(input *UserProfileInput) (err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
@@ -152,39 +148,54 @@ type AuthUserService interface {
 	GetJoinOrgInvitations() (invitations []*Invitation, err error)
 	GetOrganization(orgId string) (org *Organization, err error)
 	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
+	GetMyOrgsUnreadInfo() (unreadInfo []*OrgUnreadInfo, err error)
 	GetMyJoinedOrganizations() (orgs []*Organization, err error)
 	GetCurrentOrganization() (org *Organization, err error)
 	SearchOrganizations(keyword string) (orgs []*Organization, err error)
-	UpdateOrganization(input *OrganizationInput) (org *Organization, validated *govalidations.Validated, err error)
+	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
-	AcceptSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
-	RejectSharedGroupRequest(fromOrgId string, sharedOrgId string, sharedGroupId string, fromUserId string) (req *Request, err error)
+
+	AcceptShareRequestByAdmin(requestId string) (err error)
+	RejectShareRequestByAdmin(requestId string) (err error)
 
 	//Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
-	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, validated *govalidations.Validated, err error)
+	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
-	UpdateMailUpdates(input *MailUpdatesInput) (err error)
 	ChangeLocale(localeName string) (err error)
 
-	PrepareChangingEmail(newEmail string) (changer *EmailChanger, validated *govalidations.Validated, err error)
-	ConfirmChangingEmail(token string) (err error)
-	UpdateAccount(input *MemberAccountInput) (validated *govalidations.Validated, err error)
+	// TODO: mail-updates: remove it
+	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
+	UpdateMailPreference(input *MailPreferenceInput) (err error)
 
-	SendSharingInvitation(groupId string, email string, isResend bool) (si *SharingInvitation, validated *govalidations.Validated, err error)
-	GetSharingInvitations(groupId string) (sis []*SharingInvitation, err error)
-	CancelSharingInvitation(groupId string, email string) (err error)
-	StopSharedGroup(groupId string, toStopOrgId string) (err error)
-	LeaveSharedGroup(groupId string) (err error)
+	PrepareChangingEmail(newEmail string) (changer *EmailChanger, err error)
+	ConfirmChangingEmail(token string) (err error)
+	UpdateAccount(input *MemberAccountInput) (err error)
+
+	SendShareRequest(groupId string, email string) (shareRequest *ShareRequest, err error)
+	GetShareRequests(groupId string) (sis []*ShareRequest, err error)
+	CancelShareRequest(requestId string) (err error)
+
+	StopSharingGroup(requestId string) (err error)
+
+	//preferences
+	DismissPresentationTip() (err error)
 
 	//chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
-	ShareChat(input *ShareChatInput) (chatEntry *Entry, validated *govalidations.Validated, err error)
-	GetPrivateChat(entryId string, searchKeyWords string) (chatEntry *Entry, err error)
+	GetPrivateChat(conversationId string, searchKeyWords string) (chatEntry *Entry, err error)
+
+	// Qortex Support
+	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
+	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
+	GetQortexSupport(entryId string) (entry *Entry, err error)
+	GetQortexSupportComment(entryId string) (entry *Entry, err error)
+	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
+	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
 }
 
 type AuthAdminService interface {
@@ -202,4 +213,12 @@ type AuthAdminService interface {
 	ResendApprovedMail(email string) (err error)
 	// Get all members
 	GetAllMembers() (members []*Member, err error)
+	// Ignore the access
+	IgnoreAccess(email string) (err error)
+
+	GetAutoApproveAccess() (enabled bool, err error)
+
+	SetAutoApproveAccess(enable bool) (err error)
+
+	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 }
