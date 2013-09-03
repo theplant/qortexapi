@@ -169,6 +169,7 @@ type GroupSelectorItem struct {
 	Id         string
 	Name       string
 	IsSelected bool
+        Accessible bool
 }
 
 type GroupSelector struct {
