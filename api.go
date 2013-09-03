@@ -166,6 +166,7 @@ type AuthUserService interface {
 	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
+	ChangeLocale(localeName string) (err error)
 
 	// TODO: mail-updates: remove it
 	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
