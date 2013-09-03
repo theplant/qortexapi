@@ -144,6 +144,7 @@ type Group struct {
 	IsPrivate           bool              `json:",omitempty"`
 	Editable            bool              `json:",omitempty"`
 	Managable           bool              `json:",omitempty"`
+	Accessible          bool              `json:",omitempty"`
 	FollowedByMe        bool              `json:",omitempty"`
 	AdministratedByMe   bool              `json:",omitempty"`
 	IsPreShared         bool              `json:",omitempty"`
