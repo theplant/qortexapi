@@ -121,13 +121,11 @@ type EmbedUser struct {
 }
 
 type PanelStatus struct {
-	AsideGroupsCollapse      bool
-	AsideOtherGroupsCollapse bool
-	HasToDo                  bool
-	HasDraft                 bool
-	HasWatchList             bool
-	HasChat                  bool
-	ShowMarkUnreadThreshold  int
+	HasToDo                 bool
+	HasDraft                bool
+	HasWatchList            bool
+	HasChat                 bool
+	ShowMarkUnreadThreshold int
 }
 
 type Group struct {
@@ -144,6 +142,7 @@ type Group struct {
 	IsPrivate           bool              `json:",omitempty"`
 	Editable            bool              `json:",omitempty"`
 	Managable           bool              `json:",omitempty"`
+	Accessible          bool              `json:",omitempty"`
 	FollowedByMe        bool              `json:",omitempty"`
 	AdministratedByMe   bool              `json:",omitempty"`
 	IsPreShared         bool              `json:",omitempty"`
@@ -168,6 +167,7 @@ type GroupSelectorItem struct {
 	Id         string
 	Name       string
 	IsSelected bool
+	Accessible bool
 }
 
 type GroupSelector struct {
@@ -425,6 +425,7 @@ type Entry struct {
 	// qortex support knowledge base
 	PublishedToUsers bool `json:",omitempty"`
 	IsCanPublish     bool `json:",omitempty"`
+	IsPreferMarkdown bool `json:",omitempty"`
 	IsMuted          bool `json:",omitempty"`
 	IsReminding      bool `json:",omitempty"`
 	IsSmartReminding bool `json:",omitempty"`
@@ -495,8 +496,7 @@ type Entry struct {
 	Attachments            []*Attachment `json:",omitempty"`
 	CommentsAttachments    []*Attachment `json:",omitempty"`
 	FirstPicture           *Attachment   `json:",omitempty"`
-	Comments               []*Entry
-	ExternalComments       []*Entry `json:",omitempty"`
+	ExternalComments       []*Entry      `json:",omitempty"`
 	CurrentVersionComments []*Entry
 	OtherVersionsComments  []*Entry
 	NewComment             *Entry         `json:",omitempty"`
@@ -723,17 +723,16 @@ type InnerMessage struct {
 }
 
 type GroupAside struct {
-	IsMyGroupsCollapse      bool
-	IsOtherGroupsCollapse   bool
-	ShowNewGroupButton      bool
-	HaveOtherGroup          bool
-	ShowSharedExternallyBar bool
-	AnnounGroup             *Group
-	SMGroup                 *Group
-	FollowingNormalGroups   []*Group
-	FollowingSharedGroups   []*Group
-	UnfollowedNormalGroups  []*Group
-	UnfollowedSharedGroups  []*Group
+	IsMyGroupsCollapse     bool
+	IsOtherGroupsCollapse  bool
+	ShowNewGroupButton     bool
+	HaveOtherGroup         bool
+	AnnounGroup            *Group
+	SMGroup                *Group
+	FollowingNormalGroups  []*Group
+	FollowingSharedGroups  []*Group
+	UnfollowedNormalGroups []*Group
+	UnfollowedSharedGroups []*Group
 }
 
 type OrgUnreadInfo struct {
