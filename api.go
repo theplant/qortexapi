@@ -103,6 +103,8 @@ type AuthUserService interface {
 	GetDraftList(before time.Time, limit int) (draftlist *DraftList, err error)
 	GetDraft(entryId string, groupId string) (entry *Entry, err error)
 	DeleteDraft(entryId string, groupId string) (err error)
+	ChooseMarkdownEditor() (err error)
+	ChooseStyledEditor() (err error)
 
 	//Group related
 	GetNewGroup() (group *Group, err error)
