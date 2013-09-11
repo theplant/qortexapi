@@ -205,6 +205,11 @@ type Attachment struct {
 	HumanSize    string            `json:",omitempty"`
 	IsImage      bool
 	FileKind     string
+
+	// this is 0 if the attachment has no crocodoc version
+	// (should not - because it's not an office file)
+	// for other statuses see qortex/entry/attachment_crocodoc
+	CrocodocStatus int `json:",omitempty"`
 }
 
 type Task struct {
