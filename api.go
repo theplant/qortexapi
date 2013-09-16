@@ -1,9 +1,5 @@
 package qortexapi
 
-import (
-	"time"
-)
-
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
@@ -90,7 +86,7 @@ type AuthUserService interface {
 	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
 
 	// watchlist related
-	GetWatchList(before time.Time, limit int) (watchlist *WatchList, err error)
+	GetWatchList(before string, limit int) (watchlist *WatchList, err error)
 	AddToWatchList(entryId string, groupId string, remindMode string) (added bool, err error)
 	StopWatching(entryId string, groupId string) (stopped bool, err error)
 	ReadWatching(entryId string, groupId string) (err error)
@@ -102,7 +98,7 @@ type AuthUserService interface {
 	UpdateLike(input *LikeInput) (entry *Entry, err error)
 
 	// draft related
-	GetDraftList(before time.Time, limit int) (draftlist *DraftList, err error)
+	GetDraftList(before string, limit int) (draftlist *DraftList, err error)
 	GetDraft(entryId string, groupId string) (entry *Entry, err error)
 	DeleteDraft(entryId string, groupId string) (err error)
 	ChooseMarkdownEditor() (err error)

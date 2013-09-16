@@ -377,9 +377,9 @@ type Message struct {
 type Entry struct {
 	Id            string
 	EType         string    `json:",omitempty"`
-	Title         string    `json:"-"`
+	Title         string    `json:",omitempty"`
 	Slug          string    `json:",omitempty"`
-	Content       string    `json:"-"`
+	Content       string    `json:",omitempty"`
 	TypeTitle     string    `json:",omitempty"`
 	RootId        string    `json:",omitempty"`
 	GroupId       string    `json:",omitempty"`
