@@ -448,31 +448,29 @@ type Entry struct {
 
 	IsHidePresentationTip bool `json:",omitempty"`
 
-	IsKnowledgeBase    bool   `json:",omitempty"`
-	IsPost             bool   `json:",omitempty"`
-	IsComment          bool   `json:",omitempty"`
-	IsTask             bool   `json:",omitempty"`
-	IsChat             bool   `json:",omitempty"`
-	IsTaskToDo         bool   `json:",omitempty"`
-	IsTaskAck          bool   `json:",omitempty"`
-	IsInWatchList      bool   `json:",omitempty"`
-	IsToGroup          string `json:",omitempty"`
-	CurrentUserCanEdit bool   `json:",omitempty"`
-	CanEdit            bool   `json:",omitempty"`
-	CanReply           bool   `json:",omitempty"`
-	ManagerCanEdit     bool   `json:",omitempty"`
-	LikedByMe          bool   `json:",omitempty"`
-	HasInlineTask      bool   `json:",omitempty"`
-	TaskIsCompleted    bool   `json:",omitempty"`
-	IsRoot             bool   `json:",omitempty"`
-	IsUnread           bool   `json:",omitempty"`
-	IsUpdated          bool   `json:",omitempty"`
-	IsLastVersion      bool   `json:",omitempty"`
-	Presentation       bool   `json:",omitempty"`
-	AnyoneCanEdit      bool   `json:",omitempty"`
-	IsInGroup          bool   `json:",omitempty"`
-	IsFromEmail        bool   `json:",omitempty"`
-	InlineHelp         bool   `json:",omitempty"`
+	IsKnowledgeBase bool   `json:",omitempty"`
+	IsPost          bool   `json:",omitempty"`
+	IsComment       bool   `json:",omitempty"`
+	IsTask          bool   `json:",omitempty"`
+	IsChat          bool   `json:",omitempty"`
+	IsTaskToDo      bool   `json:",omitempty"`
+	IsTaskAck       bool   `json:",omitempty"`
+	IsInWatchList   bool   `json:",omitempty"`
+	IsToGroup       string `json:",omitempty"`
+	CanEdit         bool   `json:",omitempty"`
+	CanReply        bool   `json:",omitempty"`
+	LikedByMe       bool   `json:",omitempty"`
+	HasInlineTask   bool   `json:",omitempty"`
+	TaskIsCompleted bool   `json:",omitempty"`
+	IsRoot          bool   `json:",omitempty"`
+	IsUnread        bool   `json:",omitempty"`
+	IsUpdated       bool   `json:",omitempty"`
+	IsLastVersion   bool   `json:",omitempty"`
+	Presentation    bool   `json:",omitempty"`
+	AnyoneCanEdit   bool   `json:",omitempty"`
+	IsInGroup       bool   `json:",omitempty"`
+	IsFromEmail     bool   `json:",omitempty"`
+	InlineHelp      bool   `json:",omitempty"`
 
 	AllAttachmentsCount         int
 	CommentsCount               int
