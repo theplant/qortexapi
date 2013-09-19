@@ -515,6 +515,11 @@ type Entry struct {
 	ShareRequest                  *ShareRequest `json:",omitempty"`
 	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
 	VisibleForSuperOrg            bool          `json:",omitempty"`
+
+	//Multi locales related
+	CurrentLocaleName string `json:",omitempty"`
+	LocaleTitleMap    map[string]string
+	LocaleContentMap  map[string]string
 }
 
 type QortexSupport struct {
