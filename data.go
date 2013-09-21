@@ -517,9 +517,9 @@ type Entry struct {
 	VisibleForSuperOrg            bool          `json:",omitempty"`
 
 	//Multi locales related
-	CurrentLocaleName string `json:",omitempty"`
-	LocaleTitleMap    map[string]string
-	LocaleContentMap  map[string]string
+	CurrentLocaleName string                   `json:",omitempty"`
+	LocaleTitleMap    map[string]string        `json:",omitempty"`
+	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
 }
 
 type QortexSupport struct {
