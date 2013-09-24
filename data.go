@@ -210,6 +210,8 @@ type Attachment struct {
 	// (should not - because it's not an office file)
 	// for other statuses see qortex/entry/attachment_crocodoc
 	CrocodocStatus int `json:",omitempty"`
+	// Crocodoc session Id for iframe viewer
+	SessionId string `json:",omitempty"`
 }
 
 type Task struct {
