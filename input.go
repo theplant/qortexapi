@@ -39,7 +39,7 @@ type EntryInput struct {
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
-        LocaleName string
+	LocaleName string
 }
 
 const (
@@ -56,7 +56,7 @@ type BroadcastInput struct {
 	BroadcastType string
 	RootId        string
 
-        LocaleName string
+	LocaleName string
 }
 
 // TODO: Explaination needed.
@@ -71,7 +71,7 @@ type QortexSupportInput struct {
 	InlineHelp       bool
 	PublishedToUsers bool
 
-        LocaleName string
+	LocaleName string
 }
 
 type GroupInput struct {
@@ -101,7 +101,8 @@ type OrganizationInput struct {
 	Address                  string
 	Phone                    string
 	Website                  string
-	Domain                   string
+	Country                  string
+	Size                     string
 	Domains                  []string
 	RestrictSubscriptionMail bool
 	AuthorId                 string
