@@ -95,7 +95,6 @@ type OrgSettingsInput struct {
 
 type OrganizationInput struct {
 	Id                       string
-	OType                    string
 	Name                     string
 	Summary                  string
 	Address                  string
@@ -104,14 +103,13 @@ type OrganizationInput struct {
 	Country                  string
 	Size                     string
 	Domains                  []string
-	RestrictSubscriptionMail bool
-	AuthorId                 string
-	MemberIds                []string
-	GroupIds                 []string
 	QortexURL                string
 	LogoURL                  string
-	ChatToken                string
-	RegistrationMode         int
+	SharingToken             string
+	ContactWay               string
+	NeedDemo                 bool
+	RestrictSubscriptionMail bool
+	AnyoneCanJoin            bool
 }
 
 // Like or Unlike an entry action input
