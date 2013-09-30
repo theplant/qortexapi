@@ -214,6 +214,23 @@ type Attachment struct {
 	SessionId string `json:",omitempty"`
 }
 
+// Task Chain is somthing like that
+// A -> B -> C -> D -> C-> A
+// TaskOwner: A
+// CurrentTaskAssigner: C
+// CurrentTaskAssignee: A
+// TaskWatcher: A, B, C, D
+type AdvanceTaskRole struct {
+	IsTaskOwner           bool
+	IsCurrentTaskAssigner bool
+	IsCurrentTaskAssignee bool
+	IsTaskWatcher         bool
+}
+
+type AdvanceTaskBarView struct {
+	MyRole AdvanceTaskRole
+}
+
 type Task struct {
 	IsTaskOwner       bool `json:",omitempty"`
 	IsTaskAssignee    bool `json:",omitempty"`
