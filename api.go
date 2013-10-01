@@ -196,6 +196,9 @@ type AuthUserService interface {
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
+
+	//Advand Task Related
+	GetAdvanceTask(taskId string) (at *AdvanceTask, err error)
 }
 
 type AuthAdminService interface {

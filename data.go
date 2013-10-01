@@ -227,7 +227,7 @@ type AdvanceTaskRole struct {
 	IsTaskWatcher         bool
 }
 
-type AdvanceTaskBarView struct {
+type AdvanceTask struct {
 	MyRole AdvanceTaskRole
 }
 
