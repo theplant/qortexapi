@@ -174,6 +174,7 @@ type AuthUserService interface {
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	ChangeLocale(localeName string) (err error)
+	UpdateGroupAdvancedToDoSettings() (err error)
 
 	// TODO: mail-updates: remove it
 	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
