@@ -17,11 +17,20 @@ type Organization struct {
 	Summary                  string
 	LogoURL                  string
 	Address                  string
+	Country                  string
 	Phone                    string
 	Website                  string
+	Size                     string
+	SizeText                 string
+	SharingToken             string
 	Domains                  []string
 	RestrictSubscriptionMail bool
 	IsActive                 bool
+	AnyoneCanJoin            bool
+	NeedDemo                 bool
+	ContactWay               string
+
+	SizeOptions map[string]string
 }
 
 type Blog struct {

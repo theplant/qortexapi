@@ -39,6 +39,13 @@ type PublicService interface {
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
 type AuthMemberService interface {
+	// For creating new Organization
+	GetNewOrganization(memberId string) (org *Organization, err error)
+	GetMyOrganizations() (orgs []*Organization, err error)
+	CreateOrganization(input *OrganizationInput) (apiOrg *Organization, err error)
+	JoinOrganization(orgId string) (err error)
+	LeaveOrganization(orgId string) (err error)
+
 	SwitchOrganization(orgId string) (err error)
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
 
@@ -167,6 +174,7 @@ type AuthUserService interface {
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	ChangeLocale(localeName string) (err error)
+	UpdateGroupAdvancedToDoSettings() (err error)
 
 	// TODO: mail-updates: remove it
 	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
