@@ -237,7 +237,27 @@ type AdvanceTaskRole struct {
 }
 
 type AdvanceTask struct {
-	MyRole AdvanceTaskRole
+	MyRole                  AdvanceTaskRole
+	CurrentAssigner         *EmbedUser
+	CurrentAssignee         *EmbedUser
+	IsTimeEstimationEnabled bool
+	IsTimeTrackingEnabled   bool
+	PiorityValue            float64
+	IsPendingEstimation     bool
+	IsOpen                  bool
+	IsClosed                bool
+	IsNotStartYet           bool
+	EstimatedTimeUnit       string
+	EstimatedTimeValue      float64
+	SpendTimeTrail          []*TrackTime
+	Status                  string
+	Label                   string
+}
+
+type TrackTime struct {
+	User      *EmbedUser
+	SpendTime float64
+	TimeUnit  string
 }
 
 type Task struct {
@@ -275,6 +295,8 @@ type Task struct {
 
 	ColorCssClass string        `json:",omitempty"`
 	TaskBarHtml   template.HTML `json:",omitempty"`
+
+	AdvanceTask *AdvanceTask
 }
 
 type EntryVersion struct {
