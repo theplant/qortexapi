@@ -20,7 +20,7 @@ type EntryInput struct {
 	RootId                   string // if etype == "comment"  required
 	IsCommentAcknowledgement string // if etype == "comment"  required
 
-	NewVersion   string // if NewVersion == "1"  will create new version.
+	NewVersion   bool   // if NewVersion == true  will create new version.
 	OldGroupId   string // when update entry  required
 	LastUpdateAt string
 
