@@ -165,6 +165,24 @@ type Group struct {
 	GroupOwners         []EmbedUser       `json:",omitempty"`
 	SharingInfo         *GroupSharingInfo `json:",omitempty"`
 	GroupEmailAddress   string
+	ToDoSettings        *AdvancedToDoSettings
+}
+
+type AdvancedToDoSettings struct {
+	Enabled            bool
+	EnableTimeEstimate bool
+	EnableTimeTracking bool
+	TimeUnit           int
+	ProjectManager     *EmbedUser
+	Lables             []*TagIndex
+	NotYetOpenStatuses []*TagIndex
+	OpenStatuses       []*TagIndex
+	ClosedStatuses     []*TagIndex
+}
+
+type TagIndex struct {
+	Tag   string
+	Index int
 }
 
 type EmbedGroup struct {
