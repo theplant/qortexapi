@@ -280,6 +280,7 @@ type TrackTimeItem struct {
 }
 
 type Task struct {
+	Id                string
 	IsTaskOwner       bool `json:",omitempty"`
 	IsTaskAssignee    bool `json:",omitempty"`
 	IsOthers          bool `json:",omitempty"`
