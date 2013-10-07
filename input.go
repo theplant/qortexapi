@@ -10,19 +10,21 @@ type EntryInput struct {
 	Content string
 	GroupId string
 
-	IsToGroup        string // “0”:Notify People ,“1”:Notify Group, “2”:To-Do
+	IsToGroup        string // “0”:Notify People ,“1”:Notify Group
+	AddToDo          bool   // AddToDo == true,  will create todo for entry.
 	ToUserIds        string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	TodoUserIds      string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	MentionedUserIds string // @users        seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
-	TaskDue           string // if IsToGroup == "2" and want to set a deadline. format:20130507
+	TaskDue           string // if AddToDo == true and want to set a deadline. format:20130507
+	TodoStatus        int    // set it group setting
 
-	RootId                   string // if etype == "comment"  required
-	IsCommentAcknowledgement string // if etype == "comment"  required
+	RootId string // if etype == "comment"  required
 
 	NewVersion   string // if NewVersion == "1"  will create new version.
 	OldGroupId   string // when update entry  required
-	LastUpdateAt string
+	LastUpdateAt string // when update entry  required
 
 	KnowledgeBase bool // if KnowledgeBase == true, this entry is KnowledgeBase.
 	AnyoneCanEdit bool // if AnyoneCanEdit == true, anyone can edit this entry.
