@@ -169,15 +169,18 @@ type Group struct {
 }
 
 type AdvancedToDoSettings struct {
-	Enabled            bool
-	EnableTimeEstimate bool
-	EnableTimeTracking bool
-	TimeUnit           int
-	ProjectManager     *EmbedUser
-	Lables             []*TagIndex
-	NotYetOpenStatuses []*TagIndex
-	OpenStatuses       []*TagIndex
-	ClosedStatuses     []*TagIndex
+	Enabled                 bool
+	EnableTimeEstimate      bool
+	EnableTimeTracking      bool
+	TimeUnit                int
+	ProjectManager          *EmbedUser
+	Labels                  []*TagIndex
+	NotYetOpenStatuses      []*TagIndex
+	OpenStatuses            []*TagIndex
+	ClosedStatuses          []*TagIndex
+	DefaultNotYetOpenStatus *TagIndex
+	DefaultOpenStatus       *TagIndex
+	DefaultClosedStatus     *TagIndex
 }
 
 type TagIndex struct {
