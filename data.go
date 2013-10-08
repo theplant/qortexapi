@@ -426,7 +426,7 @@ type ShareRequest struct {
 type GroupSharingInfo struct {
 	IsSharing       bool
 	FromOrg         EmbedOrg
-	AccpetedOrg     []EmbedOrg
+	AccpetedOrgs    []EmbedOrg
 	ForwardedOrgs   []EmbedOrg
 	PendingToEmails []string
 }
