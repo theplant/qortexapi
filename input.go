@@ -11,12 +11,12 @@ type EntryInput struct {
 	GroupId string
 
 	IsToGroup        string // “0”:Notify People ,“1”:Notify Group
-	AddToDo          bool   // AddToDo == true,  will create todo for entry.
 	ToUserIds        string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	TodoUserIds      string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	MentionedUserIds string // @users        seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
+	IsToDo            bool   // IsToDo == true,  will create todo for entry.
 	TaskDue           string // if AddToDo == true and want to set a deadline. format:20130507
 	TodoStatus        int    // set it in group setting
 	Priority          int    // Now :0 ,Soon :1, Someday:2
