@@ -216,3 +216,12 @@ type MailPreferenceInput struct {
 	SendInterval int
 	SendLag      int
 }
+
+type TaskInput struct {
+	Id                 string
+	AssigneeId         string
+	Status             int
+	Label              string
+	PirorityCode       int
+	EstimatedTimeValue float64
+}

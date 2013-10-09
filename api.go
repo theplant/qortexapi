@@ -208,6 +208,7 @@ type AuthUserService interface {
 	//Advand Task Related
 	GetAdvanceTask(taskId string) (at *AdvanceTask, err error)
 	ClaimTask(taskId string) (task *Task, err error)
+	UpdateTask(input *TaskInput) (task *Task, err error)
 }
 
 type AuthAdminService interface {

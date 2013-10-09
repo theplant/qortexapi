@@ -263,7 +263,7 @@ type AdvanceTask struct {
 	CurrentAssignee         *EmbedUser
 	IsTimeEstimationEnabled bool
 	IsTimeTrackingEnabled   bool
-	PiorityValue            float64
+	PiorityCode             float64
 	IsPendingEstimation     bool
 	IsOpen                  bool
 	IsClosed                bool
@@ -279,6 +279,8 @@ type AdvanceTask struct {
 	AssignableUsers         []*AssignableUser
 	IsForMultiUsersPending  bool
 	ForMultiUsersCount      int
+	TaskLabels              []*TaskLabel
+	TaskPiorities             []*TaskPiority
 }
 
 type AssignableUser struct {
@@ -287,9 +289,21 @@ type AssignableUser struct {
 	IsAssigned bool
 }
 
+type TaskPiority struct {
+	StoreKey         int
+	DisplayText      string
+	IsCurrentPiority bool
+}
+
+type TaskLabel struct {
+	StoreKey       int
+	LabelText      string
+	IsCurrentLabel bool
+}
+
 type TaskFlowStatus struct {
-	Key             string
-	Text            string
+	StoreKey        int
+	DisplayText     string
 	IsCurrentStatus bool
 }
 
