@@ -218,10 +218,10 @@ type MailPreferenceInput struct {
 }
 
 type TaskInput struct {
-	Id                 string
-	AssigneeId         string
-	Status             int
-	Label              string
-	PirorityCode       int
-	EstimatedTimeValue float64
+	Id            string
+	AssigneeId    string
+	Status        int
+	Label         int
+	Priority      int
+	EstimatedTime float64
 }

@@ -280,7 +280,7 @@ type AdvanceTask struct {
 	IsForMultiUsersPending  bool
 	ForMultiUsersCount      int
 	TaskLabels              []*TaskLabel
-	TaskPiorities             []*TaskPiority
+	TaskPriorities          []*TaskPriority
 }
 
 type AssignableUser struct {
@@ -289,10 +289,10 @@ type AssignableUser struct {
 	IsAssigned bool
 }
 
-type TaskPiority struct {
-	StoreKey         int
-	DisplayText      string
-	IsCurrentPiority bool
+type TaskPriority struct {
+	StoreKey          int
+	DisplayText       string
+	IsCurrentPriority bool
 }
 
 type TaskLabel struct {
