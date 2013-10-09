@@ -181,6 +181,10 @@ type AdvancedToDoSettings struct {
 	DefaultNotYetOpenStatus *TagIndex
 	DefaultOpenStatus       *TagIndex
 	DefaultClosedStatus     *TagIndex
+	LabelCounter            int
+	NotYetOpenStatusCounter int
+	OpenStatusCounter       int
+	ClosedStatusCounter     int
 }
 
 type TagIndex struct {
