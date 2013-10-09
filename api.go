@@ -67,7 +67,7 @@ type AuthUserService interface {
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
-	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (entry *Entry, err error)
+	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string) (entry *Entry, err error)
 
 	//dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
@@ -77,7 +77,7 @@ type AuthUserService interface {
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 	GetDocViewSession(doi string, groupId string, attachmentId string) (sessionId string, err error)
 	DeleteEntryAttachment(doi string, groupId string, attachmentId string, ownerId string) (attachments []*Attachment, err error)
-	GetOtherVersionsComments(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (comments []*Entry, err error)
+	GetOtherVersionsComments(entryId string, groupId string, updateAtUnixNanoForVersion string) (comments []*Entry, err error)
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
