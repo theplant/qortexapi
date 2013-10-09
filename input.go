@@ -18,7 +18,10 @@ type EntryInput struct {
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
 	TaskDue           string // if AddToDo == true and want to set a deadline. format:20130507
-	TodoStatus        int    // set it group setting
+	TodoStatus        int    // set it in group setting
+	Priority          int    // Now :0 ,Soon :1, Someday:2
+	Label             int    // set it in group setting
+	EstimateTime      string // task's time Estimate
 
 	RootId string // if etype == "comment"  required
 
