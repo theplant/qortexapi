@@ -876,6 +876,7 @@ type MarketableMemberInfo struct {
 
 // for My Tasks  and Group tasks
 type TaskOutline struct {
+	Id           string
 	EntryTitle   template.HTML
 	EntryLink    template.HTMLAttr
 	Asignee      *EmbedUser
@@ -885,4 +886,15 @@ type TaskOutline struct {
 	Due          string
 	Label        string
 	EstimateTime string
+}
+
+type GroupTasksOutline struct {
+	Group               *EmbedGroup
+	SimpleToDos         []*TaskOutline
+	NowToDos            []*TaskOutline
+	NowEstimateTime     string
+	SoonToDos           []*TaskOutline
+	SoonEstimateTime    string
+	SomedayToDos        []*TaskOutline
+	SomedayEstimateTime string
 }
