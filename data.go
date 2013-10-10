@@ -193,8 +193,10 @@ type TagIndex struct {
 }
 
 type EmbedGroup struct {
-	Id   string
-	Name string
+	Id       string
+	IconName string
+	Name     string
+	Link     string
 }
 
 type GroupSelectorItem struct {
@@ -870,4 +872,17 @@ type MarketableMemberInfo struct {
 	Status    string
 	InvitOrg  string
 	GotoURL   string
+}
+
+// for My Tasks  and Group tasks
+type TaskOutline struct {
+	EntryTitle   template.HTML
+	EntryLink    template.HTMLAttr
+	Asignee      *EmbedUser
+	Group        *EmbedGroup
+	Age          string
+	Status       string
+	Due          string
+	Label        string
+	EstimateTime string
 }
