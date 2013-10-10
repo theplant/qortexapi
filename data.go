@@ -293,23 +293,17 @@ type AssignableUser struct {
 	IsAssigned bool
 }
 
-type TaskPriority struct {
-	StoreKey          int
-	DisplayText       string
-	IsCurrentPriority bool
+type TaskSelectorItem struct {
+	StoreKey    int
+	DisplayText string
+	IsCurrent   bool
 }
 
-type TaskLabel struct {
-	StoreKey       int
-	LabelText      string
-	IsCurrentLabel bool
-}
+type TaskPriority TaskSelectorItem
 
-type TaskFlowStatus struct {
-	StoreKey        int
-	DisplayText     string
-	IsCurrentStatus bool
-}
+type TaskLabel TaskSelectorItem
+
+type TaskFlowStatus TaskSelectorItem
 
 type TrackTimeItem struct {
 	Tracker     *EmbedUser
