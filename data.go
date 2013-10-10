@@ -194,9 +194,9 @@ type TagIndex struct {
 
 type EmbedGroup struct {
 	Id       string
-	IconName string
 	Name     string
-	Link     string
+	IconName string `json:",omitempty"`
+	Link     string `json:",omitempty"`
 }
 
 type GroupSelectorItem struct {
@@ -876,20 +876,22 @@ type MarketableMemberInfo struct {
 
 // for My Tasks  and Group tasks
 type TaskOutline struct {
-	Id           string
-	EntryTitle   template.HTML
-	EntryLink    template.HTMLAttr
-	Asignee      *EmbedUser
-	Group        *EmbedGroup
-	Age          string
-	Status       string
-	Due          string
-	Label        string
-	EstimateTime string
+	Id             string
+	EntryTitle     template.HTML
+	EntryLink      template.HTMLAttr
+	Asignee        *EmbedUser
+	Group          *EmbedGroup
+	Age            string
+	Status         string
+	Due            string
+	Label          string
+	EstimateTime   string
+	PriorityWeight float64
 }
 
 type GroupTasksOutline struct {
 	Group               *EmbedGroup
+	AcksAndPendingToDos []*TaskOutline
 	SimpleToDos         []*TaskOutline
 	NowToDos            []*TaskOutline
 	NowEstimateTime     string
