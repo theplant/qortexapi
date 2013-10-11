@@ -261,6 +261,7 @@ type AdvanceTaskRole struct {
 	IsCurrentTaskAssigner bool
 	IsCurrentTaskAssignee bool
 	IsTaskWatcher         bool
+	IsTaskCandidate       bool
 }
 
 type AdvanceTask struct {
