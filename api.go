@@ -210,6 +210,8 @@ type AuthUserService interface {
 	GetAdvanceTask(taskId string) (at *AdvanceTask, err error)
 	ClaimTask(taskId string) (task *Task, err error)
 	UpdateTask(input *TaskInput) (task *Task, err error)
+	GetTasksForMe() (prioritizePendingTodos []*TaskOutline, Acknowledgements []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
+	GetTasksIMade() (groupTasks []*GroupTasksOutline, err error)
 }
 
 type AuthAdminService interface {
