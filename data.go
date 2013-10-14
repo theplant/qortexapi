@@ -901,7 +901,6 @@ type GroupTasksOutline struct {
 	SoonEstimateTotal    float64
 	SoonEstimateUnit     string
 	SomedayToDos         []*TaskOutline
-	SomedayEstimateTime  string
 	SomedayEstimateTotal float64
 	SomedayEstimateUnit  string
 }
