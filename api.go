@@ -212,6 +212,9 @@ type AuthUserService interface {
 	UpdateTask(input *TaskInput) (task *Task, err error)
 	GetTasksForMe() (prioritizePendingTodos []*TaskOutline, Acknowledgements []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasksIMade() (groupTasks []*GroupTasksOutline, err error)
+
+	// Group
+	AllOpenTasksInGroup(groupId string) (gto *GroupTasksOutline, err error)
 }
 
 type AuthAdminService interface {
