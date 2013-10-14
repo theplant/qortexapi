@@ -266,8 +266,8 @@ type AdvanceTaskRole struct {
 
 type AdvanceTask struct {
 	MyRole                  *AdvanceTaskRole
-	CurrentAssigner         *EmbedUser
-	CurrentAssignee         *EmbedUser
+	CurrentAssigner         EmbedUser
+	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool
 	IsTimeTrackingEnabled   bool
 	PiorityCode             float64
@@ -348,10 +348,12 @@ type Task struct {
 	ToUsers        []EmbedUser `json:"-"`
 	PendingUsers   []EmbedUser `json:",omitempty"`
 	CompletedUsers []EmbedUser `json:",omitempty"`
+	Assignee       EmbedUser   `json:",omitempty"`
 
 	ColorCssClass string        `json:",omitempty"`
 	TaskBarHtml   template.HTML `json:",omitempty"`
 
+	IsClaimed     bool
 	IsAdvanceTask bool
 	AdvanceTask   *AdvanceTask
 }
