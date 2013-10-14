@@ -220,7 +220,7 @@ type MailPreferenceInput struct {
 type TaskInput struct {
 	Id            string
 	AssigneeId    string
-	Status        int
+	TodoStatus        int
 	Label         int
 	Priority      int
 	EstimatedTime float64
