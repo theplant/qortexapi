@@ -891,13 +891,17 @@ type TaskOutline struct {
 }
 
 type GroupTasksOutline struct {
-	Group               *EmbedGroup
-	AcksAndPendingToDos []*TaskOutline
-	SimpleToDos         []*TaskOutline
-	NowToDos            []*TaskOutline
-	NowEstimateTime     string
-	SoonToDos           []*TaskOutline
-	SoonEstimateTime    string
-	SomedayToDos        []*TaskOutline
-	SomedayEstimateTime string
+	Group                *EmbedGroup
+	AcksAndPendingToDos  []*TaskOutline
+	SimpleToDos          []*TaskOutline
+	NowToDos             []*TaskOutline
+	NowEstimateTotal     float64
+	NowEstimateUnit      string
+	SoonToDos            []*TaskOutline
+	SoonEstimateTotal    float64
+	SoonEstimateUnit     string
+	SomedayToDos         []*TaskOutline
+	SomedayEstimateTime  string
+	SomedayEstimateTotal float64
+	SomedayEstimateUnit  string
 }
