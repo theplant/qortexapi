@@ -659,9 +659,9 @@ type WatchList struct {
 }
 
 type MyTask struct {
-	TasksForMe     []*Entry
-	MyCreatedTasks []*Entry
-	AboutTodos     bool
+	PrioritizePendingTodos []*TaskOutline
+	Acknowledgements       []*TaskOutline
+	GroupTasks             []*GroupTasksOutline
 }
 
 type MyChats struct {
@@ -882,6 +882,7 @@ type TaskOutline struct {
 	Id             string
 	EntryTitle     template.HTML
 	EntryLink      template.HTMLAttr
+	IsComment      bool
 	Asignee        *EmbedUser
 	Group          *EmbedGroup
 	Age            string
