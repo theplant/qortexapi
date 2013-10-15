@@ -353,8 +353,8 @@ type Task struct {
 	ColorCssClass string        `json:",omitempty"`
 	TaskBarHtml   template.HTML `json:",omitempty"`
 
-	TaskFlow      int
-	IsClaimed     bool
+	TaskFlow       int
+	IsClaimed      bool
 	IsAdvancedTask bool
 	AdvancedTask   *AdvancedTask
 }
@@ -880,18 +880,20 @@ type MarketableMemberInfo struct {
 
 // for My Tasks  and Group tasks
 type TaskOutline struct {
-	Id             string
-	EntryTitle     template.HTML
-	EntryLink      template.HTMLAttr
-	IsComment      bool
-	Asignee        *EmbedUser
-	Group          *EmbedGroup
-	Age            string
-	Status         string
-	Due            string
-	Label          string
-	EstimateTime   string
-	PriorityWeight float64
+	Id                 string
+	EntryTitle         template.HTML
+	EntryLink          template.HTMLAttr
+	IsComment          bool
+	Asignee            *EmbedUser
+	Group              *EmbedGroup
+	Age                string
+	Status             string
+	Due                string
+	Label              string
+	EstimateTime       string
+	PriorityWeight     float64
+	CompleteAtStr      string
+	CompleteAtUnixNano int64
 }
 
 type GroupTasksOutline struct {

@@ -215,6 +215,7 @@ type AuthUserService interface {
 
 	// Group
 	AllOpenTasksInGroup(groupId string) (gto *GroupTasksOutline, err error)
+	ClosedTasksInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
 }
 
 type AuthAdminService interface {
