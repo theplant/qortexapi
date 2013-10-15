@@ -256,7 +256,7 @@ type Attachment struct {
 // CurrentTaskAssigner: C
 // CurrentTaskAssignee: A
 // TaskWatcher: A, B, C, D
-type AdvanceTaskRole struct {
+type AdvancedTaskRole struct {
 	IsTaskOwner           bool
 	IsCurrentTaskAssigner bool
 	IsCurrentTaskAssignee bool
@@ -264,8 +264,8 @@ type AdvanceTaskRole struct {
 	IsTaskCandidate       bool
 }
 
-type AdvanceTask struct {
-	MyRole                  *AdvanceTaskRole
+type AdvancedTask struct {
+	MyRole                  *AdvancedTaskRole
 	CurrentAssigner         EmbedUser
 	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool
@@ -355,8 +355,8 @@ type Task struct {
 
 	TaskFlow      int
 	IsClaimed     bool
-	IsAdvanceTask bool
-	AdvanceTask   *AdvanceTask
+	IsAdvancedTask bool
+	AdvancedTask   *AdvancedTask
 }
 
 type EntryVersion struct {

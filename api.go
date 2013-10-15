@@ -207,7 +207,7 @@ type AuthUserService interface {
 
 	//Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
-	GetAdvanceTask(taskId string) (at *AdvanceTask, err error)
+	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
 	ClaimTask(taskId string) (task *Task, err error)
 	UpdateTask(input *TaskInput) (task *Task, err error)
 	GetTasksForMe() (prioritizePendingTodos []*TaskOutline, Acknowledgements []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
