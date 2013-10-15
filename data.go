@@ -353,6 +353,7 @@ type Task struct {
 	ColorCssClass string        `json:",omitempty"`
 	TaskBarHtml   template.HTML `json:",omitempty"`
 
+	TaskFlow      int
 	IsClaimed     bool
 	IsAdvanceTask bool
 	AdvanceTask   *AdvanceTask
