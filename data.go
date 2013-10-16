@@ -910,3 +910,18 @@ type GroupTasksOutline struct {
 	SomedayEstimateTotal float64
 	SomedayEstimateUnit  string
 }
+
+type AssigneeTasksOutline struct {
+	Assignee             *EmbedUser
+	AcksAndPendingToDos  []*TaskOutline
+	SimpleToDos          []*TaskOutline
+	NowToDos             []*TaskOutline
+	NowEstimateTotal     float64
+	NowEstimateUnit      string
+	SoonToDos            []*TaskOutline
+	SoonEstimateTotal    float64
+	SoonEstimateUnit     string
+	SomedayToDos         []*TaskOutline
+	SomedayEstimateTotal float64
+	SomedayEstimateUnit  string
+}
