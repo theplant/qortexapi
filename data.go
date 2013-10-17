@@ -580,7 +580,22 @@ type MyNotifications struct {
 	LatestNotifyTime  int64
 }
 
+// The new notification item
 type NotificationItem struct {
+	Id             string
+	RootId         string
+	GroupId        string
+	Type           string
+	FromUser       *EmbedUser
+	Title          template.HTML
+	Content        template.HTML
+	HasRead        bool
+	IsRoot         bool // False when it is caused from a comment
+	Link           template.HTMLAttr
+	RequestToEmail string // Not blank if it is sharing, which is the invitee's email
+}
+
+type NotificationItem_old struct {
 	Id                    string
 	GroupId               string
 	ToUser                EmbedUser
@@ -630,6 +645,21 @@ type GroupCount struct {
 	GroupId     string
 	UnreadCount int
 }
+
+// TODO: Change above MyCount and GroupCount to following to make it more meaningful.
+// type MyCount struct {
+// 	UserId           string
+// 	MyFeedNum        int
+// 	MyChatsNum       int
+// 	MyTasksNum       int
+// 	NotificationsNum int
+// 	GroupCounts      []*GroupCount
+// }
+
+// type GroupCount struct {
+// 	GroupId   string
+// 	UnreadNum int
+// }
 
 type GroupHeader struct {
 	HasToFollow     bool
