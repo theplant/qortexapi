@@ -898,30 +898,36 @@ type TaskOutline struct {
 
 type GroupTasksOutline struct {
 	Group                *EmbedGroup
+	AdvancedToDoEnabled  bool
 	AcksAndPendingToDos  []*TaskOutline
 	SimpleToDos          []*TaskOutline
 	NowToDos             []*TaskOutline
 	NowEstimateTotal     float64
 	NowEstimateUnit      string
 	SoonToDos            []*TaskOutline
+	LenOfSoonToDos       int
 	SoonEstimateTotal    float64
 	SoonEstimateUnit     string
 	SomedayToDos         []*TaskOutline
+	LenOfSomedayToDos    int
 	SomedayEstimateTotal float64
 	SomedayEstimateUnit  string
 }
 
 type AssigneeTasksOutline struct {
 	Assignee             *EmbedUser
+	AdvancedToDoEnabled  bool
 	AcksAndPendingToDos  []*TaskOutline
 	SimpleToDos          []*TaskOutline
 	NowToDos             []*TaskOutline
 	NowEstimateTotal     float64
 	NowEstimateUnit      string
 	SoonToDos            []*TaskOutline
+	LenOfSoonToDos       int
 	SoonEstimateTotal    float64
 	SoonEstimateUnit     string
 	SomedayToDos         []*TaskOutline
+	LenOfSomedayToDos    int
 	SomedayEstimateTotal float64
 	SomedayEstimateUnit  string
 }
