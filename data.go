@@ -576,9 +576,11 @@ type Entry struct {
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
-	Group                *Group        `json:",omitempty"`
-	Task                 *Task         `json:",omitempty"`
-	Conversation         *Conversation `json:",omitempty"`
+	Group                *Group `json:",omitempty"`
+	// Task                 *Task         `json:",omitempty"`
+	Todo         *Task         `json:",omitempty"`
+	Ack          *Task         `json:",omitempty"`
+	Conversation *Conversation `json:",omitempty"`
 
 	LinkedEntries []*LinkedEntry  `json:",omitempty"`
 	Versions      []*EntryVersion `json:",omitempty"`

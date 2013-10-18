@@ -61,7 +61,7 @@ type AuthUserService interface {
 	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
-	CloseTask(entryId string, groupId string) (entry *Task, err error)
+	CloseTask(entryId string, groupId string, taskId string) (entry *Task, err error)
 	CreateComment(input *EntryInput) (entry *Entry, err error)
 	GetComment(entryId string, groupId string) (entry *Entry, err error)
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
@@ -216,7 +216,7 @@ type AuthUserService interface {
 	// Group
 	AllOpenTasksInGroup(groupId string) (gto *GroupTasksOutline, group *Group, err error)
 	ClosedTasksInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
-	AllOpenTasksCategoriedByUserInGroup(groupId string) (atos map[string]*AssigneeTasksOutline, err error)
+	// AllOpenTasksCategoriedByUserInGroup(groupId string) (atos map[string]*AssigneeTasksOutline, err error)
 	AdvancedToDosOfBucketInGroup(groupId, bucket string) (taskOutlines []*TaskOutline, timeUnit string, timeTotal float64, err error)
 }
 
