@@ -270,7 +270,7 @@ type AdvancedTask struct {
 	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool
 	IsTimeTrackingEnabled   bool
-	PiorityCode             float64
+	PriorityCode            int
 	IsPendingEstimation     bool
 	IsOpen                  bool
 	IsClosed                bool
@@ -282,10 +282,10 @@ type AdvancedTask struct {
 	TaskFlowNewStatuses     []*TaskFlowStatus
 	TaskFlowOpenStatuses    []*TaskFlowStatus
 	TaskFlowClosedStatuses  []*TaskFlowStatus
-	Label                   string
 	AssignableUsers         []*AssignableUser
 	IsForMultiUsersPending  bool
 	ForMultiUsersCount      int
+	Label                   string
 	TaskLabels              []*TaskLabel
 	TaskPriorities          []*TaskPriority
 }
