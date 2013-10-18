@@ -217,6 +217,7 @@ type AuthUserService interface {
 	AllOpenTasksInGroup(groupId string) (gto *GroupTasksOutline, group *Group, err error)
 	ClosedTasksInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
 	AllOpenTasksCategoriedByUserInGroup(groupId string) (atos map[string]*AssigneeTasksOutline, err error)
+	AdvancedToDosOfBucketInGroup(groupId, bucket string) (taskOutlines []*TaskOutline, timeUnit string, timeTotal float64, err error)
 }
 
 type AuthAdminService interface {
