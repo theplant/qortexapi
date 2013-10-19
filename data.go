@@ -280,7 +280,8 @@ type AdvancedTask struct {
 	IsNotStartYet           bool
 	EstimatedTimeUnit       string
 	EstimatedTimeValue      float64
-	SpendTimeTrail          []*TrackTimeItem
+	SpentTimeTracking       []*TimeTrackingItem
+	TotalSpentTime          string
 	Status                  string
 	TaskFlowNewStatuses     []*TaskFlowStatus
 	TaskFlowOpenStatuses    []*TaskFlowStatus
@@ -311,15 +312,17 @@ type TaskLabel TaskSelectorItem
 
 type TaskFlowStatus TaskSelectorItem
 
-type TrackTimeItem struct {
-	Tracker     *EmbedUser
-	SpendTime   float64
-	TimeUnit    string
-	TrackedDate time.Time
+type TimeTrackingItem struct {
+	Id         string
+	UserName   string
+	FinishDate string
+	SpentTime  float64
+	TimeUnit   string
 }
 
 type Task struct {
 	Id                string
+	GroupId           string
 	IsTaskOwner       bool `json:",omitempty"`
 	IsTaskAssignee    bool `json:",omitempty"`
 	IsOthers          bool `json:",omitempty"`
