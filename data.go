@@ -287,8 +287,6 @@ type AdvancedTask struct {
 	TaskFlowOpenStatuses    []*TaskFlowStatus
 	TaskFlowClosedStatuses  []*TaskFlowStatus
 	AssignableUsers         []*AssignableUser
-	IsForMultiUsersPending  bool
-	ForMultiUsersCount      int
 	Label                   string
 	TaskLabels              []*TaskLabel
 	TaskPriorities          []*TaskPriority

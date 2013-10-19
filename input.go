@@ -218,7 +218,7 @@ type MailPreferenceInput struct {
 }
 
 type TaskInput struct {
-	Id            string
+	TaskId            string
 	GroupId       string
 	AssigneeId    string
 	TodoStatus    int
