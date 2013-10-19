@@ -86,7 +86,6 @@ type AuthUserService interface {
 	// Get Unread entries for type entryType since the fromTimeUnixNano unix nanoseconds, and return max limit entries.
 	// entryType could be:	"post", "knowledge", "task"
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
-	GetMyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
 
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
