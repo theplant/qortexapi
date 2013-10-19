@@ -185,11 +185,29 @@ type AdvancedToDoSettings struct {
 	NotYetOpenStatusCounter int
 	OpenStatusCounter       int
 	ClosedStatusCounter     int
+	EnabledSharingOrgs      []string
+
+	ShowedThrowawayStatusSuggestion bool
 }
 
 type TagIndex struct {
 	Tag   string
 	Index int
+}
+
+type GroupAdvancedSettingPage struct {
+	Group       *Group
+	Followers   []*EmbedUser
+	CurrentOrg  *Organization
+	SharingInfo *GroupSharingInfo
+
+	CreatingGroup bool
+
+	// Shit...
+	ThrowawayStatusSuggestions    map[string]string
+	ThrowawayNotYetOpenTagIndexes map[string][]string
+	ThrowawayOpenTagIndexes       map[string][]string
+	ThrowawayClosedTagIndexes     map[string][]string
 }
 
 type EmbedGroup struct {

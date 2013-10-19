@@ -212,11 +212,12 @@ type AuthUserService interface {
 	GetTasksForMe() (prioritizePendingTodos []*TaskOutline, Acknowledgements []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasksIMade() (groupTasks []*GroupTasksOutline, err error)
 
-	// Group
+	// Group: Advanced To-Dos Related
 	AllOpenTasksInGroup(groupId string) (gto *GroupTasksOutline, group *Group, err error)
 	ClosedTasksInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
-	// AllOpenTasksCategoriedByUserInGroup(groupId string) (atos map[string]*AssigneeTasksOutline, err error)
+	AllOpenTasksCategoriedByUserInGroup(groupId string) (atos []*AssigneeTasksOutline, err error)
 	AdvancedToDosOfBucketInGroup(groupId, bucket string) (taskOutlines []*TaskOutline, timeUnit string, timeTotal float64, err error)
+	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
 }
 
 type AuthAdminService interface {
