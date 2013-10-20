@@ -165,11 +165,56 @@ type Group struct {
 	GroupOwners         []EmbedUser       `json:",omitempty"`
 	SharingInfo         *GroupSharingInfo `json:",omitempty"`
 	GroupEmailAddress   string
+	ToDoSettings        *AdvancedToDoSettings
+}
+
+type AdvancedToDoSettings struct {
+	Enabled                 bool
+	EnableTimeEstimate      bool
+	EnableTimeTracking      bool
+	TimeUnit                int
+	ProjectManager          *EmbedUser
+	Labels                  []*TagIndex
+	NotYetOpenStatuses      []*TagIndex
+	OpenStatuses            []*TagIndex
+	ClosedStatuses          []*TagIndex
+	DefaultNotYetOpenStatus *TagIndex
+	DefaultOpenStatus       *TagIndex
+	DefaultClosedStatus     *TagIndex
+	LabelCounter            int
+	NotYetOpenStatusCounter int
+	OpenStatusCounter       int
+	ClosedStatusCounter     int
+	EnabledSharingOrgs      []string
+
+	ShowedThrowawayStatusSuggestion bool
+}
+
+type TagIndex struct {
+	Tag   string
+	Index int
+}
+
+type GroupAdvancedSettingPage struct {
+	Group       *Group
+	Followers   []*EmbedUser
+	CurrentOrg  *Organization
+	SharingInfo *GroupSharingInfo
+
+	CreatingGroup bool
+
+	// Shit...
+	ThrowawayStatusSuggestions    map[string]string
+	ThrowawayNotYetOpenTagIndexes map[string][]string
+	ThrowawayOpenTagIndexes       map[string][]string
+	ThrowawayClosedTagIndexes     map[string][]string
 }
 
 type EmbedGroup struct {
-	Id   string
-	Name string
+	Id       string
+	Name     string
+	IconName string `json:",omitempty"`
+	Link     string `json:",omitempty"`
 }
 
 type GroupSelectorItem struct {
@@ -223,7 +268,59 @@ type Attachment struct {
 	SessionId string `json:",omitempty"`
 }
 
+type AdvancedTask struct {
+	CurrentAssigner         EmbedUser
+	CurrentAssignee         EmbedUser
+	IsTimeEstimationEnabled bool
+	IsTimeTrackingEnabled   bool
+	PriorityCode            int
+	IsPendingEstimation     bool
+	IsOpen                  bool
+	IsClosed                bool
+	IsNotStartYet           bool
+	EstimatedTimeUnit       string
+	EstimatedTimeValue      float64
+	SpentTimeTracking       []*TimeTrackingItem
+	TotalSpentTime          string
+	Status                  string
+	TaskFlowNewStatuses     []*TaskFlowStatus
+	TaskFlowOpenStatuses    []*TaskFlowStatus
+	TaskFlowClosedStatuses  []*TaskFlowStatus
+	AssignableUsers         []*AssignableUser
+	Label                   string
+	TaskLabels              []*TaskLabel
+	TaskPriorities          []*TaskPriority
+}
+
+type AssignableUser struct {
+	UserId     string
+	Name       string
+	IsAssigned bool
+}
+
+type TaskSelectorItem struct {
+	StoreKey    int
+	DisplayText string
+	IsCurrent   bool
+}
+
+type TaskPriority TaskSelectorItem
+
+type TaskLabel TaskSelectorItem
+
+type TaskFlowStatus TaskSelectorItem
+
+type TimeTrackingItem struct {
+	Id         string
+	UserName   string
+	FinishDate string
+	SpentTime  float64
+	TimeUnit   string
+}
+
 type Task struct {
+	Id                string
+	GroupId           string
 	IsTaskOwner       bool `json:",omitempty"`
 	IsTaskAssignee    bool `json:",omitempty"`
 	IsOthers          bool `json:",omitempty"`
@@ -255,9 +352,15 @@ type Task struct {
 	ToUsers        []EmbedUser `json:"-"`
 	PendingUsers   []EmbedUser `json:",omitempty"`
 	CompletedUsers []EmbedUser `json:",omitempty"`
+	Assignee       EmbedUser   `json:",omitempty"`
 
 	ColorCssClass string        `json:",omitempty"`
 	TaskBarHtml   template.HTML `json:",omitempty"`
+
+	TaskFlow       int
+	IsClaimed      bool
+	IsAdvancedTask bool
+	AdvancedTask   *AdvancedTask
 }
 
 type EntryVersion struct {
@@ -348,7 +451,7 @@ type ShareRequest struct {
 type GroupSharingInfo struct {
 	IsSharing       bool
 	FromOrg         EmbedOrg
-	AccpetedOrg     []EmbedOrg
+	AccpetedOrgs    []EmbedOrg
 	ForwardedOrgs   []EmbedOrg
 	PendingToEmails []string
 }
@@ -492,9 +595,11 @@ type Entry struct {
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
-	Group                *Group        `json:",omitempty"`
-	Task                 *Task         `json:",omitempty"`
-	Conversation         *Conversation `json:",omitempty"`
+	Group                *Group `json:",omitempty"`
+	// Task                 *Task         `json:",omitempty"`
+	Todo         *Task         `json:",omitempty"`
+	Ack          *Task         `json:",omitempty"`
+	Conversation *Conversation `json:",omitempty"`
 
 	LinkedEntries []*LinkedEntry  `json:",omitempty"`
 	Versions      []*EntryVersion `json:",omitempty"`
@@ -561,9 +666,9 @@ type WatchList struct {
 }
 
 type MyTask struct {
-	TasksForMe     []*Entry
-	MyCreatedTasks []*Entry
-	AboutTodos     bool
+	PrioritizePendingTodos []*TaskOutline
+	Acknowledgements       []*TaskOutline
+	GroupTasks             []*GroupTasksOutline
 }
 
 type MyChats struct {
@@ -807,4 +912,67 @@ type MarketableMemberInfo struct {
 	Status    string
 	InvitOrg  string
 	GotoURL   string
+}
+
+// for My Tasks  and Group tasks
+type TaskOutline struct {
+	Id                 string
+	EntryTitle         template.HTML
+	EntryLink          template.HTMLAttr
+	IsComment          bool
+	Asignee            *EmbedUser
+	Group              *EmbedGroup
+	Age                string
+	Status             string
+	Due                string
+	Label              string
+	EstimateTime       string
+	PriorityWeight     float64
+	CompleteAtStr      string
+	CompleteAtUnixNano int64
+}
+
+type GroupTasksOutline struct {
+	Group                *EmbedGroup
+	AdvancedToDoEnabled  bool
+	AcksAndPendingToDos  []*TaskOutline
+	SimpleToDos          []*TaskOutline
+	NowToDos             []*TaskOutline
+	NowEstimateTotal     float64
+	NowEstimateUnit      string
+	SoonToDos            []*TaskOutline
+	LenOfSoonToDos       int
+	SoonEstimateTotal    float64
+	SoonEstimateUnit     string
+	SomedayToDos         []*TaskOutline
+	LenOfSomedayToDos    int
+	SomedayEstimateTotal float64
+	SomedayEstimateUnit  string
+
+	// For Priority Editting
+	Editable     bool
+	ToDoSettings *AdvancedToDoSettings
+	Followers    []*EmbedUser
+	Priorities   []*TaskPriority
+}
+
+type AssigneeTasksOutline struct {
+	Assignee             *EmbedUser
+	AdvancedToDoEnabled  bool
+	AcksAndPendingToDos  []*TaskOutline
+	SimpleToDos          []*TaskOutline
+	NowToDos             []*TaskOutline
+	NowEstimateTotal     float64
+	NowEstimateUnit      string
+	SoonToDos            []*TaskOutline
+	LenOfSoonToDos       int
+	SoonEstimateTotal    float64
+	SoonEstimateUnit     string
+	SomedayToDos         []*TaskOutline
+	LenOfSomedayToDos    int
+	SomedayEstimateTotal float64
+	SomedayEstimateUnit  string
+
+	// For Priority Editting
+	Editable bool // Always False
 }

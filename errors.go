@@ -1,8 +1,6 @@
 package qortexapi
 
-import (
-	"errors"
-)
+import "errors"
 
 var (
 	ServerError                    = errors.New("Oops, something is wrong!")
@@ -48,4 +46,5 @@ var (
 	TakeActionError                = errors.New("Can not take the action")
 	HighFrequencyError             = errors.New("High frequency requests")
 	SaveTranscriptionError         = errors.New("Can not save transcription")
+	ClaimTaskError                 = errors.New("Task was already cliamed by others")
 )
