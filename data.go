@@ -918,6 +918,12 @@ type GroupTasksOutline struct {
 	LenOfSomedayToDos    int
 	SomedayEstimateTotal float64
 	SomedayEstimateUnit  string
+
+	// For Priority Editting
+	Editable     bool
+	ToDoSettings *AdvancedToDoSettings
+	Followers    []*EmbedUser
+	Priorities   []*TaskPriority
 }
 
 type AssigneeTasksOutline struct {
@@ -936,4 +942,7 @@ type AssigneeTasksOutline struct {
 	LenOfSomedayToDos    int
 	SomedayEstimateTotal float64
 	SomedayEstimateUnit  string
+
+	// For Priority Editting
+	Editable bool // Always False
 }
