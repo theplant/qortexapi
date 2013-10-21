@@ -363,6 +363,8 @@ type Task struct {
 	IsClaimed      bool
 	IsAdvancedTask bool
 	AdvancedTask   *AdvancedTask
+
+	NeedRealTimeFeedback bool
 }
 
 type EntryVersion struct {
