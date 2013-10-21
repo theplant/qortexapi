@@ -145,6 +145,7 @@ type Group struct {
 	LogoURL             string `json:",omitempty"`
 	IconName            string `json:",omitempty"`
 	Link                string `json:",omitempty"`
+	TaskLink            string `json:",omitempty"`
 	Slug                string `json:",omitempty"`
 	Author              EmbedUser
 	IsAdmin             bool              `json:",omitempty"`
@@ -215,6 +216,7 @@ type EmbedGroup struct {
 	Name     string
 	IconName string `json:",omitempty"`
 	Link     string `json:",omitempty"`
+	TaskLink string `json:",omitempty"`
 }
 
 type GroupSelectorItem struct {
@@ -943,6 +945,6 @@ type AssigneeTasksOutline struct {
 	SomedayEstimateTotal float64
 	SomedayEstimateUnit  string
 
-	// For Priority Editting
-	Editable bool // Always False
+	// For Priority Editing
+	Editable bool // Always False Acorrding to The Current Design -- 2013_10_21
 }
