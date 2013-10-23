@@ -10,19 +10,24 @@ type EntryInput struct {
 	Content string
 	GroupId string
 
-	IsToGroup        string // “0”:Notify People ,“1”:Notify Group, “2”:To-Do
+	IsToGroup        string // “0”:Notify People ,“1”:Notify Group
 	ToUserIds        string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	TodoUserIds      string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	MentionedUserIds string // @users        seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
-	TaskDue           string // if IsToGroup == "2" and want to set a deadline. format:20130507
+	IsToDo            bool   // IsToDo == true,  will create todo for entry.
+	TaskDue           string // if AddToDo == true and want to set a deadline. format:20130507
+	TodoStatus        int    // set it in group setting
+	Priority          int    // Now :0 ,Soon :1, Someday:2
+	Label             int    // set it in group setting
+	EstimateTime      string // task's time Estimate
 
-	RootId                   string // if etype == "comment"  required
-	IsCommentAcknowledgement string // if etype == "comment"  required
+	RootId string // if etype == "comment"  required
 
 	NewVersion   bool   // if NewVersion == true  will create new version.
 	OldGroupId   string // when update entry  required
-	LastUpdateAt string
+	LastUpdateAt string // when update entry  required
 
 	KnowledgeBase bool // if KnowledgeBase == true, this entry is KnowledgeBase.
 	AnyoneCanEdit bool // if AnyoneCanEdit == true, anyone can edit this entry.
@@ -210,4 +215,28 @@ type MailPreferenceInput struct {
 	Expecting    bool
 	SendInterval int
 	SendLag      int
+}
+
+type TaskInput struct {
+	TaskId       string
+	GroupId      string
+	AssigneeId   string
+	TodoStatus   int
+	Label        int
+	Priority     int
+	EstimateTime float64
+	SpentTime    float64
+}
+
+type TasksBulkInput struct {
+	Ids        []string `bson:"-"`
+	AssigneeId string   `bson:",omitempty"`
+	Status     int      `bson:",omitempty"`
+	Label      int      `bson:",omitempty"`
+	Priority   int      `bson:",omitempty"`
+}
+
+type TaskPwMap struct {
+	Id             string `bson:"-"`
+	PriorityWeight float64
 }

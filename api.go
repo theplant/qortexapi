@@ -61,7 +61,7 @@ type AuthUserService interface {
 	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
-	CloseTask(entryId string, groupId string) (entry *Task, err error)
+	CloseTask(entryId string, groupId string, taskId string) (entry *Task, err error)
 	CreateComment(input *EntryInput) (entry *Entry, err error)
 	GetComment(entryId string, groupId string) (entry *Entry, err error)
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
@@ -86,7 +86,6 @@ type AuthUserService interface {
 	// Get Unread entries for type entryType since the fromTimeUnixNano unix nanoseconds, and return max limit entries.
 	// entryType could be:	"post", "knowledge", "task"
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
-	GetMyTaskEntries(active bool, before string, limit int) (TasksForMe []*Entry, MyCreatedTasks []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
 
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
@@ -126,6 +125,7 @@ type AuthUserService interface {
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetGroupHeader(groupId string) (header *GroupHeader, err error)
 	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
+	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, bulkInput *TasksBulkInput) (err error)
 
 	//User related
 	GetAuthUser() (user *User, err error)
@@ -174,6 +174,7 @@ type AuthUserService interface {
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	ChangeLocale(localeName string) (err error)
+	UpdateGroupAdvancedToDoSettings(gId, settings string) (err error)
 
 	// TODO: mail-updates: remove it
 	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
@@ -203,6 +204,21 @@ type AuthUserService interface {
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
+
+	//Advand Task Related
+	NewTask(groupId string) (task *Task, err error)
+	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
+	ClaimTask(taskId string, groupId string) (task *Task, err error)
+	UpdateTask(input *TaskInput) (task *Task, err error)
+	GetTasksForMe() (prioritizePendingTodos []*TaskOutline, Acknowledgements []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
+	GetTasksIMade() (groupTasks []*GroupTasksOutline, err error)
+
+	// Group: Advanced To-Dos Related
+	AllOpenTasksInGroup(groupId string) (gto *GroupTasksOutline, group *Group, err error)
+	ClosedTasksInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
+	AllOpenTasksCategoriedByUserInGroup(groupId string) (atos []*AssigneeTasksOutline, err error)
+	AdvancedToDosOfBucketInGroup(groupId, bucket string) (taskOutlines []*TaskOutline, timeUnit string, timeTotal float64, err error)
+	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
 }
 
 type AuthAdminService interface {
