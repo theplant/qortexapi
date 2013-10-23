@@ -252,7 +252,7 @@ type Task struct {
 	PendingUsersCount   int `json:",omitempty"`
 
 	Owner          EmbedUser   `json:",omitempty"`
-	ToUsers        []EmbedUser `json:"-"`
+	ToUsers        []EmbedUser `json:",omitempty"`
 	PendingUsers   []EmbedUser `json:",omitempty"`
 	CompletedUsers []EmbedUser `json:",omitempty"`
 
