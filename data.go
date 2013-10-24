@@ -551,20 +551,16 @@ type Entry struct {
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
 
-	InnerMessage               *InnerMessage `json:",omitempty"`
-	IsSystemMessage            bool          `json:",omitempty"`
-	IsInnerMessage             bool          `json:",omitempty"`
-	SystemMessageType          string        `json:",omitempty"`
-	BroadcastType              string        `json:",omitempty"`
-	IsBroadcast                bool          `json:",omitempty"`
-	IsBroadcastTypeToAllAdmins bool          `json:",omitempty"`
-	IsBroadcastTypeToAllUsers  bool          `json:",omitempty"`
-	IsBroadcastTypeToSomeOrgs  bool          `json:",omitempty"`
-	IsFromSuperOrg             bool          `json:",omitempty"`
-	IsFeedback                 bool          `json:",omitempty"`
-	FromOrg                    EmbedOrg      `json:",omitempty"`
-	ToOrgs                     []EmbedOrg    `json:",omitempty"`
-	ToOrgsHtml                 template.HTML `json:",omitempty"`
+	InnerMessage    *InnerMessage `json:",omitempty"`
+	IsSystemMessage bool          `json:",omitempty"`
+	IsInnerMessage  bool          `json:",omitempty"`
+	IsBroadcast     bool          `json:",omitempty"`
+	IsFromSuperOrg  bool          `json:",omitempty"`
+	IsFromSuperUser bool          `json:",omitempty"`
+	IsFeedback      bool          `json:",omitempty"`
+	FromOrg         EmbedOrg      `json:",omitempty"`
+	ToOrgs          []EmbedOrg    `json:",omitempty"`
+	ToOrgsHtml      template.HTML `json:",omitempty"`
 
 	IsHidePresentationTip bool `json:",omitempty"`
 
@@ -628,11 +624,7 @@ type Entry struct {
 	IsQortexSupport              bool              `json:",omitempty"`
 	QortexSupport                *QortexSupport    `json:",omitempty"`
 	IsQortexSupportKnowledgeBase bool              `json:",omitempty"`
-	//only in single entry
-	IsSuperOrg  bool `json:",omitempty"`
-	IsSuperUser bool `json:",omitempty"`
 
-	// Should be removed
 	IsRequest                     bool          `json:",omitempty"`
 	ShareRequest                  *ShareRequest `json:",omitempty"`
 	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
