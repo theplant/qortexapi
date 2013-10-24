@@ -162,7 +162,8 @@ type Group struct {
 	IsDispayHostOrgName bool              `json:",omitempty"`
 	EntriesCount        int               `json:",omitempty"`
 	FollowersCount      int               `json:",omitempty"`
-	IsAnnoucement       bool              `json:",omitempty"`
+	IsAnnouncement      bool              `json:",omitempty"`
+	IsQortexSupport     bool              `json:",omitempty"`
 	GroupOwners         []EmbedUser       `json:",omitempty"`
 	SharingInfo         *GroupSharingInfo `json:",omitempty"`
 	GroupEmailAddress   string
@@ -747,7 +748,7 @@ type GroupHeader struct {
 	IsManaging      bool
 	HasFileTab      bool
 	HasToDoTab      bool
-	IsSystemMessage bool
+	IsQortexSupport bool
 	SelectedGroup   bool
 }
 
