@@ -285,6 +285,7 @@ type AdvancedTask struct {
 	SpentTimeTracking       []*TimeTrackingItem
 	TotalSpentTime          string
 	Status                  string
+	StatusCode              int
 	TaskFlowNewStatuses     []*TaskFlowStatus
 	TaskFlowOpenStatuses    []*TaskFlowStatus
 	TaskFlowClosedStatuses  []*TaskFlowStatus
