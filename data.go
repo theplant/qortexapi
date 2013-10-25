@@ -896,12 +896,14 @@ type TaskOutline struct {
 	EntryLink          template.HTMLAttr
 	IsComment          bool
 	Asignee            *EmbedUser
+	Author             *EmbedUser
 	Group              *EmbedGroup
 	Age                string
 	Status             string
 	Due                string
 	Label              string
 	EstimateTime       string
+	SpentTime          string
 	PriorityWeight     float64
 	CompleteAtStr      string
 	CompleteAtUnixNano int64
@@ -951,3 +953,14 @@ type AssigneeTasksOutline struct {
 	// For Priority Editing
 	Editable bool // Always False Acorrding to The Current Design -- 2013_10_21
 }
+
+type ClosedTasksOutline struct {
+	Status *TagIndex
+	Count  int
+	Tasks  []*TaskOutline
+}
+
+// type ClosedTasksPage struct {
+// 	Outlines []*ClosedTasksOutline
+// 	Group    *Group
+// }
