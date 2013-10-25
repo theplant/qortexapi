@@ -571,6 +571,7 @@ type Entry struct {
 	IsChat          bool   `json:",omitempty"`
 	IsTaskToDo      bool   `json:",omitempty"`
 	IsTaskAck       bool   `json:",omitempty"`
+	IsTaskLog       bool   `json:",omitempty"`
 	IsInWatchList   bool   `json:",omitempty"`
 	IsToGroup       string `json:",omitempty"`
 	CanEdit         bool   `json:",omitempty"`
