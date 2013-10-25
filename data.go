@@ -971,12 +971,8 @@ type AssigneeTasksOutline struct {
 }
 
 type ClosedTasksOutline struct {
-	Status *TagIndex
-	Count  int
-	Tasks  []*TaskOutline
+	Status           *TagIndex
+	Count            int
+	WithLoadMoreLink bool
+	Tasks            []*TaskOutline
 }
-
-// type ClosedTasksPage struct {
-// 	Outlines []*ClosedTasksOutline
-// 	Group    *Group
-// }
