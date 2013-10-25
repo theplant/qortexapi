@@ -687,9 +687,8 @@ type WatchList struct {
 }
 
 type MyTask struct {
-	PrioritizePendingTodos []*TaskOutline
-	Acknowledgements       []*TaskOutline
-	GroupTasks             []*GroupTasksOutline
+	NeedActionTasks []*TaskOutline
+	GroupTasks      []*GroupTasksOutline
 }
 
 type MyChats struct {
@@ -913,6 +912,7 @@ type TaskOutline struct {
 	IsComment          bool
 	Asignee            *EmbedUser
 	Author             *EmbedUser
+	AuthorName         string
 	Group              *EmbedGroup
 	Age                string
 	Status             string

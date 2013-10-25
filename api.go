@@ -210,7 +210,7 @@ type AuthUserService interface {
 	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
 	ClaimTask(taskId string, groupId string) (task *Task, err error)
 	UpdateTask(input *TaskInput) (task *Task, err error)
-	GetTasksForMe() (prioritizePendingTodos []*TaskOutline, Acknowledgements []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
+	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasksIMade() (groupTasks []*GroupTasksOutline, err error)
 
 	// Group: Advanced To-Dos Related
