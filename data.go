@@ -294,6 +294,28 @@ type AdvancedTask struct {
 	Label                   string
 	TaskLabels              []*TaskLabel
 	TaskPriorities          []*TaskPriority
+	TaskLogs                []*TaskLog
+}
+
+type TaskLog struct {
+	IsClaimed             bool
+	IsAssigneeChanged     bool
+	IsTimingChanged       bool
+	IsStatusChanged       bool
+	IsEstimationChanged   bool
+	IsTimeTrackingChanged bool
+	IsReopened            bool
+	IsSelfOperation       bool
+
+	CreatedAt           time.Time
+	LocalHumanCreatedAt string
+	Assigner            EmbedUser
+	Assignee            EmbedUser
+	EstimatedTimeValue  float64
+	EstimatedTimeUnit   string
+
+	Status   string
+	Priority string
 }
 
 type AssignableUser struct {
