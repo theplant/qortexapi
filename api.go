@@ -1,5 +1,9 @@
 package qortexapi
 
+import (
+	"time"
+)
+
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
 	GetAuthUserService(session string) (authUserService AuthUserService, err error)
@@ -220,6 +224,7 @@ type AuthUserService interface {
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
 	ClosedBasicToDosInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
 	ClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedTasksOutline, err error)
+	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime time.Time) (taskOutlines []*TaskOutline, apiGroup *Group, endOfTasks bool, err error)
 }
 
 type AuthAdminService interface {

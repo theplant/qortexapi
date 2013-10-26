@@ -908,12 +908,12 @@ type MarketableMemberInfo struct {
 
 // for My Tasks  and Group tasks
 type TaskOutline struct {
-	Id                 string
-	EntryTitle         template.HTML
-	EntryLink          template.HTMLAttr
-	IsComment          bool
-	Asignee            *EmbedUser
-	Author             *EmbedUser
+	Id         string
+	EntryTitle template.HTML
+	EntryLink  template.HTMLAttr
+	IsComment  bool
+	Asignee    *EmbedUser
+	// Author             *EmbedUser // To Remove?
 	AuthorName         string
 	Group              *EmbedGroup
 	Age                string
@@ -977,4 +977,5 @@ type ClosedTasksOutline struct {
 	Count            int
 	WithLoadMoreLink bool
 	Tasks            []*TaskOutline
+	Group            *Group
 }
