@@ -316,8 +316,10 @@ type TaskLog struct {
 	EstimatedTimeValue  float64
 	EstimatedTimeUnit   string
 
-	Status   string
-	Priority string
+	Status         string
+	Priority       string
+	Label          string
+	IsLabelChanged bool
 }
 
 type AssignableUser struct {
