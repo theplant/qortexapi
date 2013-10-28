@@ -216,6 +216,7 @@ type AuthUserService interface {
 	UpdateTask(input *TaskInput) (task *Task, err error)
 	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasksIMade() (groupTasks []*GroupTasksOutline, err error)
+	GetTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 
 	// Group: Advanced To-Dos Related
 	AllOpenTasksInGroup(groupId string) (gto *GroupTasksOutline, group *Group, err error)
