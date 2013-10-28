@@ -393,6 +393,7 @@ type Task struct {
 	AdvancedTask   *AdvancedTask
 
 	NeedRealTimeFeedback bool
+	NeedToBeEditMode     bool
 }
 
 type EntryVersion struct {
