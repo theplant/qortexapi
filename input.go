@@ -226,7 +226,7 @@ type TaskInput struct {
 	Label        int
 	Priority     int
 	EstimateTime float64
-	SpentTime    float64
+	SpentTime    string
 }
 
 type TasksBulkInput struct {
