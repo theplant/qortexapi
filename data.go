@@ -392,8 +392,8 @@ type Task struct {
 	IsAdvancedTask bool
 	AdvancedTask   *AdvancedTask
 
-	NeedRealTimeFeedback bool
-	NeedToBeEditMode     bool
+	NeedShowAppliedText bool
+	NeedToBeEditMode    bool
 }
 
 type EntryVersion struct {
