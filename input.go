@@ -227,6 +227,7 @@ type TaskInput struct {
 	Priority     int
 	EstimateTime float64
 	SpentTime    string
+	IsClaiming   bool
 }
 
 type TasksBulkInput struct {
