@@ -219,12 +219,16 @@ type AuthUserService interface {
 	GetTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 
 	// Group: Advanced To-Dos Related
-	AllOpenTasksInGroup(groupId string) (gto *GroupTasksOutline, group *Group, err error)
-	AllOpenTasksCategoriedByUserInGroup(groupId string) (atos []*AssigneeTasksOutline, err error)
-	AdvancedToDosOfBucketInGroup(groupId, bucket string) (taskOutlines []*TaskOutline, timeUnit string, timeTotal float64, err error)
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
+
+	AllOpenAdvancedToDosInGroup(groupId string) (page *OpenAdvancedToDosPage, err error)
+	AllOpenAdvancedToDosCategoriedByUserInGroup(groupId string) (atos []*OpenAdvancedToDosPage, err error)
+	AdvancedToDosOfBucketInGroup(groupId, bucket string) (taskOutlines []*TaskOutline, timeUnit string, timeTotal float64, err error)
+	AllOpenBasicToDosInGroup(groupId string) (taskOutlines []*TaskOutline, err error)
+	AllOpenBasicToDosCategoriedByUserInGroup(groupId string) (atos []*BasicOpenToDoOutlines, err error)
+
 	ClosedBasicToDosInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
-	ClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedTasksOutline, err error)
+	ClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime time.Time) (taskOutlines []*TaskOutline, apiGroup *Group, endOfTasks bool, err error)
 }
 

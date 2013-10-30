@@ -911,12 +911,11 @@ type MarketableMemberInfo struct {
 
 // for My Tasks  and Group tasks
 type TaskOutline struct {
-	Id         string
-	EntryTitle template.HTML
-	EntryLink  template.HTMLAttr
-	IsComment  bool
-	Asignee    *EmbedUser
-	// Author             *EmbedUser // To Remove?
+	Id                 string
+	EntryTitle         template.HTML
+	EntryLink          template.HTMLAttr
+	IsComment          bool
+	Assignee           *EmbedUser
 	AuthorName         string
 	Group              *EmbedGroup
 	Age                string
@@ -928,12 +927,12 @@ type TaskOutline struct {
 	PriorityWeight     float64
 	CompleteAtStr      string
 	CompleteAtUnixNano int64
+	TitleInfoType      int
 }
 
 type GroupTasksOutline struct {
 	Group                *EmbedGroup
-	AdvancedToDoEnabled  bool
-	AcksAndPendingToDos  []*TaskOutline
+	AcksAndPendingToDos  []*TaskOutline // Action Needed
 	SimpleToDos          []*TaskOutline
 	NowToDos             []*TaskOutline
 	NowEstimateTotal     float64
@@ -956,7 +955,6 @@ type GroupTasksOutline struct {
 
 type AssigneeTasksOutline struct {
 	Assignee             *EmbedUser
-	AdvancedToDoEnabled  bool
 	AcksAndPendingToDos  []*TaskOutline
 	SimpleToDos          []*TaskOutline
 	NowToDos             []*TaskOutline
@@ -975,7 +973,32 @@ type AssigneeTasksOutline struct {
 	Editable bool // Always False Acorrding to The Current Design -- 2013_10_21
 }
 
-type ClosedTasksOutline struct {
+type OpenAdvancedToDosBucket struct {
+	Title         string
+	Type          string
+	ToDoSettings  *AdvancedToDoSettings
+	ToDos         []*TaskOutline
+	LenOfToDos    int
+	EstimateTotal float64
+	EstimateUnit  string
+	Editable      bool
+	Priorities    []*TaskPriority
+	Followers     []*EmbedUser
+}
+
+type OpenAdvancedToDosPage struct {
+	Assignee          *EmbedUser
+	ActionNeededToDos []*TaskOutline
+	ToDosBuckets      []*OpenAdvancedToDosBucket
+}
+
+type BasicOpenToDoOutlines struct {
+	Assignee     *EmbedUser
+	TaskOutlines []*TaskOutline
+	Editable     bool
+}
+
+type ClosedAdvancedToDoOutline struct {
 	Status           *TagIndex
 	Count            int
 	WithLoadMoreLink bool
