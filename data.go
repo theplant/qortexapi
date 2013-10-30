@@ -694,6 +694,7 @@ type WatchList struct {
 type MyTask struct {
 	NeedActionTasks []*TaskOutline
 	GroupTasks      []*GroupTasksOutline
+	ClosedTasks     []*TaskOutline
 }
 
 type MyChats struct {
