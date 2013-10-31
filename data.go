@@ -923,6 +923,7 @@ type TaskOutline struct {
 	AuthorName         string
 	Group              *EmbedGroup
 	Age                string
+	CreatedAt          time.Time
 	Status             string
 	Due                string
 	Label              string
