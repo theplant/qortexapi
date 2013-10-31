@@ -316,6 +316,9 @@ type TaskLog struct {
 	EstimatedTimeValue  float64
 	EstimatedTimeUnit   string
 
+	NewSpentTime float64
+	NewSpentUnit string
+
 	Status         string
 	Priority       string
 	Label          string
