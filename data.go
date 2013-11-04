@@ -681,6 +681,7 @@ type QortexSupport struct {
 type EmbedEntry struct {
 	Id        string
 	GroupId   string
+	GroupName string
 	Title     string
 	HtmlTitle template.HTML
 	EType     string
