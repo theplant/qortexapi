@@ -230,14 +230,6 @@ type TaskInput struct {
 	IsClaiming   bool
 }
 
-type TasksBulkInput struct {
-	Ids        []string `bson:"-"`
-	AssigneeId string   `bson:",omitempty"`
-	Status     int      `bson:",omitempty"`
-	Label      int      `bson:",omitempty"`
-	Priority   int      `bson:",omitempty"`
-}
-
 type TaskPwMap struct {
 	Id             string `bson:"-"`
 	PriorityWeight float64

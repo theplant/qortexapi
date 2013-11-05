@@ -926,11 +926,14 @@ type TaskOutline struct {
 	Age                string
 	CreatedAt          time.Time
 	Status             string
+	StatusCode         int
 	Due                string
 	Label              string
+	LabelCode          int
 	EstimateTime       string
 	SpentTime          string
 	PriorityWeight     float64
+	Priority           int
 	CompleteAtStr      string
 	CompleteAtUnixNano int64
 	TitleInfoType      int
