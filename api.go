@@ -1,8 +1,6 @@
 package qortexapi
 
-import (
-	"time"
-)
+import "time"
 
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
@@ -77,6 +75,7 @@ type AuthUserService interface {
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
+	MachineTranslate(entryId string, groupId string) (translatedData *TranslatedData,  err error)
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 	GetDocViewSession(doi string, groupId string, attachmentId string) (sessionId string, err error)

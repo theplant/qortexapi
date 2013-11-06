@@ -1006,3 +1006,6 @@ type ClosedAdvancedToDoOutline struct {
 	Tasks            []*TaskOutline
 	Group            *Group
 }
+
+type TranslatedData struct {
+}
