@@ -1007,5 +1007,14 @@ type ClosedAdvancedToDoOutline struct {
 	Group            *Group
 }
 
+//TODO name it to Translated Thread will be better?
 type TranslatedData struct {
+	Title             string
+	Content           string
+	TranslatedComment []*TranslatedComment
+}
+
+type TranslatedComment struct {
+	Id      string
+	Content string
 }
