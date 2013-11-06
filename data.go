@@ -29,8 +29,9 @@ type Organization struct {
 	AnyoneCanJoin            bool
 	NeedDemo                 bool
 	ContactWay               string
-
-	SizeOptions map[string]string
+	EnableMultilingual       bool
+	LanguageSelectors        []*LanguageSelector
+	SizeOptions              map[string]string
 }
 
 type Blog struct {
@@ -1017,4 +1018,16 @@ type TranslatedData struct {
 type TranslatedComment struct {
 	Id      string
 	Content string
+}
+
+type LanguageSelector struct {
+	Index               string
+	Code                string
+	SupporetedLangauges []*SupportedLanguage
+}
+
+type SupportedLanguage struct {
+	StoreKey    string
+	DisplayText string
+	IsCurrent   bool
 }
