@@ -941,12 +941,12 @@ type TaskOutline struct {
 }
 
 type GroupTasksOutline struct {
-	Group                *EmbedGroup
-	AcksAndPendingToDos  []*TaskOutline // Action Needed
-	SimpleToDos          []*TaskOutline
-	NowToDos             []*TaskOutline
-	NowEstimateTotal     float64
-	NowEstimateUnit      string
+	Group               *EmbedGroup
+	AcksAndPendingToDos []*TaskOutline // Action Needed
+	SimpleToDos         []*TaskOutline
+	// NowToDos             []*TaskOutline
+	// NowEstimateTotal     float64
+	// NowEstimateUnit      string
 	SoonToDos            []*TaskOutline
 	LenOfSoonToDos       int
 	SoonEstimateTotal    float64
@@ -958,12 +958,12 @@ type GroupTasksOutline struct {
 }
 
 type AssigneeTasksOutline struct {
-	Assignee             *EmbedUser
-	AcksAndPendingToDos  []*TaskOutline
-	SimpleToDos          []*TaskOutline
-	NowToDos             []*TaskOutline
-	NowEstimateTotal     float64
-	NowEstimateUnit      string
+	Assignee            *EmbedUser
+	AcksAndPendingToDos []*TaskOutline
+	SimpleToDos         []*TaskOutline
+	// NowToDos             []*TaskOutline
+	// NowEstimateTotal     float64
+	// NowEstimateUnit      string
 	SoonToDos            []*TaskOutline
 	LenOfSoonToDos       int
 	SoonEstimateTotal    float64
