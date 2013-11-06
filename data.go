@@ -282,7 +282,7 @@ type AdvancedTask struct {
 	IsOpen                  bool
 	IsClosed                bool
 	IsNotStartYet           bool
-	EstimatedTimeUnit       string
+	TimeUnit                string
 	EstimatedTimeValue      float64
 	SpentTimeTracking       []*TimeTrackingItem
 	TotalSpentTime          string
@@ -314,10 +314,10 @@ type TaskLog struct {
 	Assigner            EmbedUser
 	Assignee            EmbedUser
 	EstimatedTimeValue  float64
-	EstimatedTimeUnit   string
+	TimeUnit            string
 
 	NewSpentTime float64
-	NewSpentUnit string
+	// NewSpentUnit string
 
 	Status         string
 	Priority       string
