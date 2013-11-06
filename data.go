@@ -1007,8 +1007,7 @@ type ClosedAdvancedToDoOutline struct {
 	Group            *Group
 }
 
-//TODO name it to Translated Thread will be better?
-type TranslatedData struct {
+type TranslatedThread struct {
 	Title             string
 	Content           string
 	TranslatedComment []*TranslatedComment
