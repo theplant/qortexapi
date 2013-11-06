@@ -937,7 +937,7 @@ type TaskOutline struct {
 	Priority            int
 	CompleteAtStr       string
 	CompleteAtUnixNano  int64
-	TitleInfoType       int
+	IsTitleCreatedBy    bool
 }
 
 type GroupTasksOutline struct {
