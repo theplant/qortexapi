@@ -665,6 +665,22 @@ type Entry struct {
 	CurrentLocaleName string                   `json:",omitempty"`
 	LocaleTitleMap    map[string]string        `json:",omitempty"`
 	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
+
+	// For Advanced To-Dos
+	DerivedToDoEntries  []*ReleatedEntry // For Comment
+	ReleatedToDoEntries []*ReleatedEntry // For Entry
+	BasedOnComment      *BasedOnComment
+}
+
+type ReleatedEntry struct {
+	HtmlTitle           template.HTML
+	Link                template.HTMLAttr
+	LocalHumanCreatedAt string
+}
+
+type BasedOnComment struct {
+	RootHtmlTitle template.HTML
+	Link          template.HTMLAttr
 }
 
 type QortexSupport struct {
