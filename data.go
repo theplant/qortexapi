@@ -383,6 +383,7 @@ type Task struct {
 
 	Owner          EmbedUser   `json:",omitempty"`
 	ToUsers        []EmbedUser `json:",omitempty"`
+	ToUsersText    string      `json:",omitempty"`
 	PendingUsers   []EmbedUser `json:",omitempty"`
 	CompletedUsers []EmbedUser `json:",omitempty"`
 	Assignee       EmbedUser   `json:",omitempty"`
