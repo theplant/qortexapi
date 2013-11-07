@@ -1020,8 +1020,9 @@ type TranslatedComment struct {
 }
 
 type LanguageSelector struct {
-	Index               string
-	Code                string
+	IsFirst            bool
+	Index              string
+	Code               string
 	SupportedLanguages []*SupportedLanguage
 }
 
