@@ -1009,9 +1009,9 @@ type ClosedAdvancedToDoOutline struct {
 }
 
 type TranslatedThread struct {
-	Title             string
-	Content           string
-	TranslatedComment []*TranslatedComment
+	Title    string
+	Content  string
+	Comments []*TranslatedComment
 }
 
 type TranslatedComment struct {
