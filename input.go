@@ -234,6 +234,7 @@ type TaskInput struct {
 	EstimateTime float64
 	SpentTime    string
 	IsClaiming   bool
+	ToUserIds    string
 }
 
 type TaskPwMap struct {
