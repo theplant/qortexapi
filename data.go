@@ -1022,7 +1022,7 @@ type TranslatedComment struct {
 type LanguageSelector struct {
 	Index               string
 	Code                string
-	SupporetedLangauges []*SupportedLanguage
+	SupportedLanguages []*SupportedLanguage
 }
 
 type SupportedLanguage struct {
