@@ -283,7 +283,7 @@ type AdvancedTask struct {
 	IsOpen                  bool
 	IsClosed                bool
 	IsNotStartYet           bool
-	EstimatedTimeUnit       string
+	TimeUnit                string
 	EstimatedTimeValue      float64
 	SpentTimeTracking       []*TimeTrackingItem
 	TotalSpentTime          string
@@ -315,10 +315,10 @@ type TaskLog struct {
 	Assigner            EmbedUser
 	Assignee            EmbedUser
 	EstimatedTimeValue  float64
-	EstimatedTimeUnit   string
+	TimeUnit            string
 
 	NewSpentTime float64
-	NewSpentUnit string
+	// NewSpentUnit string
 
 	Status         string
 	Priority       string
@@ -384,6 +384,7 @@ type Task struct {
 
 	Owner          EmbedUser   `json:",omitempty"`
 	ToUsers        []EmbedUser `json:",omitempty"`
+	ToUsersText    string      `json:",omitempty"`
 	PendingUsers   []EmbedUser `json:",omitempty"`
 	CompletedUsers []EmbedUser `json:",omitempty"`
 	Assignee       EmbedUser   `json:",omitempty"`
@@ -666,6 +667,22 @@ type Entry struct {
 	CurrentLocaleName string                   `json:",omitempty"`
 	LocaleTitleMap    map[string]string        `json:",omitempty"`
 	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
+
+	// For Advanced To-Dos
+	DerivedToDoEntries  []*ReleatedEntry // For Comment
+	ReleatedToDoEntries []*ReleatedEntry // For Entry
+	BasedOnComment      *BasedOnComment
+}
+
+type ReleatedEntry struct {
+	HtmlTitle           template.HTML
+	Link                template.HTMLAttr
+	LocalHumanCreatedAt string
+}
+
+type BasedOnComment struct {
+	RootHtmlTitle template.HTML
+	Link          template.HTMLAttr
 }
 
 type QortexSupport struct {
@@ -938,16 +955,16 @@ type TaskOutline struct {
 	Priority            int
 	CompleteAtStr       string
 	CompleteAtUnixNano  int64
-	TitleInfoType       int
+	IsTitleCreatedBy    bool
 }
 
 type GroupTasksOutline struct {
-	Group                *EmbedGroup
-	AcksAndPendingToDos  []*TaskOutline // Action Needed
-	SimpleToDos          []*TaskOutline
-	NowToDos             []*TaskOutline
-	NowEstimateTotal     float64
-	NowEstimateUnit      string
+	Group               *EmbedGroup
+	AcksAndPendingToDos []*TaskOutline // Action Needed
+	SimpleToDos         []*TaskOutline
+	// NowToDos             []*TaskOutline
+	// NowEstimateTotal     float64
+	// NowEstimateUnit      string
 	SoonToDos            []*TaskOutline
 	LenOfSoonToDos       int
 	SoonEstimateTotal    float64
@@ -959,12 +976,12 @@ type GroupTasksOutline struct {
 }
 
 type AssigneeTasksOutline struct {
-	Assignee             *EmbedUser
-	AcksAndPendingToDos  []*TaskOutline
-	SimpleToDos          []*TaskOutline
-	NowToDos             []*TaskOutline
-	NowEstimateTotal     float64
-	NowEstimateUnit      string
+	Assignee            *EmbedUser
+	AcksAndPendingToDos []*TaskOutline
+	SimpleToDos         []*TaskOutline
+	// NowToDos             []*TaskOutline
+	// NowEstimateTotal     float64
+	// NowEstimateUnit      string
 	SoonToDos            []*TaskOutline
 	LenOfSoonToDos       int
 	SoonEstimateTotal    float64

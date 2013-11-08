@@ -2,10 +2,12 @@ package qortexapi
 
 type EntryInput struct {
 	Id string
+
 	// "post": normal entry
-	// "task":  acknowledgement or To-Do (IsAcknowledgement == true ,IsToGroup == "2")
-	// "comment":  entry's comment
-	EType   string
+	// "task": acknowledgement or To-Do (IsAcknowledgement == true ,IsToGroup == "2")
+	// "comment": entry's comment
+	EType string
+
 	Title   string
 	Content string
 	GroupId string
@@ -13,21 +15,21 @@ type EntryInput struct {
 	IsToGroup        string // “0”:Notify People ,“1”:Notify Group
 	ToUserIds        string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	TodoUserIds      string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
-	MentionedUserIds string // @users        seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	MentionedUserIds string // @users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
-	IsToDo            bool   // IsToDo == true,  will create todo for entry.
+	IsToDo            bool   // IsToDo == true, will create todo for entry.
 	TaskDue           string // if AddToDo == true and want to set a deadline. format:20130507
 	TodoStatus        int    // set it in group setting
 	Priority          int    // Now :0 ,Soon :1, Someday:2
 	Label             int    // set it in group setting
 	EstimateTime      string // task's time Estimate
 
-	RootId string // if etype == "comment"  required
+	RootId string // required if etype == "comment"
 
-	NewVersion   bool   // if NewVersion == true  will create new version.
-	OldGroupId   string // when update entry  required
-	LastUpdateAt string // when update entry  required
+	NewVersion   bool   // if NewVersion == true will create new version.
+	OldGroupId   string // when update entry required
+	LastUpdateAt string // when update entry required
 
 	KnowledgeBase bool // if KnowledgeBase == true, this entry is KnowledgeBase.
 	AnyoneCanEdit bool // if AnyoneCanEdit == true, anyone can edit this entry.
@@ -45,6 +47,10 @@ type EntryInput struct {
 	PublishedToUsers bool
 
 	LocaleName string
+
+	// For Creating To-Dos From Comment
+	BasedCommentId        string
+	GroupIdOfBasedComment string
 }
 
 const (
@@ -229,6 +235,7 @@ type TaskInput struct {
 	EstimateTime float64
 	SpentTime    string
 	IsClaiming   bool
+	ToUserIds    string
 }
 
 type TaskPwMap struct {
