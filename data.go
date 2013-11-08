@@ -30,7 +30,7 @@ type Organization struct {
 	NeedDemo                 bool
 	ContactWay               string
 	EnableMultilingual       bool
-	LanguageSelectors        []*LanguageSelector
+	LanguageSelectors        *LanguageSelectors
 	SizeOptions              map[string]string
 }
 
@@ -93,17 +93,18 @@ type GroupUsers struct {
 }
 
 type Preferences struct {
-	Timezone                 string
-	TimezoneOffset           string
-	PreferFullName           bool
-	EnterForNewLine          bool
-	AsideGroupsCollapse      bool
-	AsideOtherGroupsCollapse bool
-	ShowMarkUnreadThreshold  int
-	AdminModeOn              bool
-	PreferMarkdown           bool
-	AutoFollowPublicGroup    bool
-	EnableHTML5Notification  bool
+	Timezone                   string
+	TimezoneOffset             string
+	PreferFullName             bool
+	EnterForNewLine            bool
+	AsideGroupsCollapse        bool
+	AsideOtherGroupsCollapse   bool
+	ShowMarkUnreadThreshold    int
+	AdminModeOn                bool
+	PreferMarkdown             bool
+	AutoFollowPublicGroup      bool
+	EnableHTML5Notification    bool
+	PreferredLanguageSelectors *LanguageSelectors
 }
 
 type EmbedOrg struct {
@@ -1034,6 +1035,11 @@ type TranslatedThread struct {
 type TranslatedComment struct {
 	Id      string
 	Content string
+}
+
+type LanguageSelectors struct {
+	Selectors []*LanguageSelector
+	LabelText string
 }
 
 type LanguageSelector struct {
