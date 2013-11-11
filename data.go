@@ -205,6 +205,7 @@ type GroupAdvancedSettingPage struct {
 	SharingInfo *GroupSharingInfo
 
 	CreatingGroup bool
+	Editable      bool
 
 	// Shit...
 	ThrowawayStatusSuggestions    map[string]string
