@@ -274,7 +274,7 @@ type Attachment struct {
 }
 
 type AdvancedTask struct {
-	CurrentAssigner         EmbedUser
+	// CurrentAssigner         EmbedUser
 	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool
 	IsTimeTrackingEnabled   bool
