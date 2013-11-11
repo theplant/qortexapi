@@ -170,6 +170,7 @@ type Group struct {
 	SharingInfo         *GroupSharingInfo `json:",omitempty"`
 	GroupEmailAddress   string
 	ToDoSettings        *AdvancedToDoSettings
+	TodoGroupingRoute   string `json:",omitempty"`
 }
 
 type AdvancedToDoSettings struct {
