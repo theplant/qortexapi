@@ -75,6 +75,7 @@ type AuthUserService interface {
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
+	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
 	MachineTranslate(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
