@@ -211,6 +211,7 @@ type AuthUserService interface {
 
 	//Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
+	EditTask(groupId string, taskId string) (task *Task, err error)
 	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
 	ClaimTask(taskId string, groupId string) (task *Task, err error)
 	UpdateTask(input *TaskInput) (task *Task, err error)

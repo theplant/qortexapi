@@ -207,6 +207,7 @@ type GroupAdvancedSettingPage struct {
 	SharingInfo *GroupSharingInfo
 
 	CreatingGroup bool
+	Editable      bool
 
 	// Shit...
 	ThrowawayStatusSuggestions    map[string]string
@@ -275,7 +276,7 @@ type Attachment struct {
 }
 
 type AdvancedTask struct {
-	CurrentAssigner         EmbedUser
+	// CurrentAssigner         EmbedUser
 	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool
 	IsTimeTrackingEnabled   bool
@@ -401,6 +402,7 @@ type Task struct {
 
 	NeedShowAppliedText bool
 	NeedToBeEditMode    bool
+	IsEditing           bool
 }
 
 type EntryVersion struct {
