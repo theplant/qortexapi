@@ -400,6 +400,7 @@ type Task struct {
 
 	NeedShowAppliedText bool
 	NeedToBeEditMode    bool
+	IsEditing           bool
 }
 
 type EntryVersion struct {

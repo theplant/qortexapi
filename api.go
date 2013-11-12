@@ -1,8 +1,6 @@
 package qortexapi
 
-import (
-	"time"
-)
+import "time"
 
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
@@ -210,6 +208,7 @@ type AuthUserService interface {
 
 	//Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
+	EditTask(groupId string, taskId string) (task *Task, err error)
 	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
 	ClaimTask(taskId string, groupId string) (task *Task, err error)
 	UpdateTask(input *TaskInput) (task *Task, err error)
