@@ -29,8 +29,9 @@ type Organization struct {
 	AnyoneCanJoin            bool
 	NeedDemo                 bool
 	ContactWay               string
-
-	SizeOptions map[string]string
+	EnableMultilingual       bool
+	LanguageSelectors        *LanguageSelectors
+	SizeOptions              map[string]string
 }
 
 type Blog struct {
@@ -92,17 +93,18 @@ type GroupUsers struct {
 }
 
 type Preferences struct {
-	Timezone                 string
-	TimezoneOffset           string
-	PreferFullName           bool
-	EnterForNewLine          bool
-	AsideGroupsCollapse      bool
-	AsideOtherGroupsCollapse bool
-	ShowMarkUnreadThreshold  int
-	AdminModeOn              bool
-	PreferMarkdown           bool
-	AutoFollowPublicGroup    bool
-	EnableHTML5Notification  bool
+	Timezone                   string
+	TimezoneOffset             string
+	PreferFullName             bool
+	EnterForNewLine            bool
+	AsideGroupsCollapse        bool
+	AsideOtherGroupsCollapse   bool
+	ShowMarkUnreadThreshold    int
+	AdminModeOn                bool
+	PreferMarkdown             bool
+	AutoFollowPublicGroup      bool
+	EnableHTML5Notification    bool
+	PreferredLanguageSelectors *LanguageSelectors
 }
 
 type EmbedOrg struct {
@@ -1025,4 +1027,33 @@ type ClosedAdvancedToDoOutline struct {
 	WithLoadMoreLink bool
 	Tasks            []*TaskOutline
 	Group            *Group
+}
+
+type TranslatedThread struct {
+	Title    string
+	Content  string
+	Comments []*TranslatedComment
+}
+
+type TranslatedComment struct {
+	Id      string
+	Content string
+}
+
+type LanguageSelectors struct {
+	Selectors []*LanguageSelector
+	LabelText string
+}
+
+type LanguageSelector struct {
+	IsFirst            bool
+	Index              string
+	Code               string
+	SupportedLanguages []*SupportedLanguage
+}
+
+type SupportedLanguage struct {
+	StoreKey    string
+	DisplayText string
+	IsCurrent   bool
 }

@@ -75,6 +75,8 @@ type AuthUserService interface {
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
+	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
+	MachineTranslate(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 	GetDocViewSession(doi string, groupId string, attachmentId string) (sessionId string, err error)
@@ -147,6 +149,7 @@ type AuthUserService interface {
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
+	SetPreferredLanguages(languageCodes []string) (err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)

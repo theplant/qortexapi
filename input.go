@@ -121,6 +121,7 @@ type OrganizationInput struct {
 	NeedDemo                 bool
 	RestrictSubscriptionMail bool
 	AnyoneCanJoin            bool
+	LanguageCodes            []string
 }
 
 // Like or Unlike an entry action input
