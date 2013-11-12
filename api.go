@@ -215,7 +215,8 @@ type AuthUserService interface {
 	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetOpenTasksIMade() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)
-	GetTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
+	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
+	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
 
 	// Group: Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
