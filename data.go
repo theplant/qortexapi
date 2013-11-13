@@ -1046,12 +1046,12 @@ type LanguageSelectors struct {
 }
 
 type LanguageSelector struct {
-	IsFirst            bool
-	Index              string
-	Code               string
+	IsFirst bool
+	Index   string
 	SupportedLanguages []*SupportedLanguage
 	PreferredLanguages []*SupportedLanguage
 	RestLanguages      []*SupportedLanguage
+	UILanguages        []*SupportedLanguage
 }
 
 type SupportedLanguage struct {
