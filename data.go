@@ -1030,9 +1030,10 @@ type ClosedAdvancedToDoOutline struct {
 }
 
 type TranslatedThread struct {
-	Title    string
-	Content  string
-	Comments []*TranslatedComment
+	Title         string
+	Content       string
+	Comments      []*TranslatedComment
+	IsCommentOnly bool
 }
 
 type TranslatedComment struct {
@@ -1046,8 +1047,8 @@ type LanguageSelectors struct {
 }
 
 type LanguageSelector struct {
-	IsFirst bool
-	Index   string
+	IsFirst            bool
+	Index              string
 	SupportedLanguages []*SupportedLanguage
 	PreferredLanguages []*SupportedLanguage
 	RestLanguages      []*SupportedLanguage
