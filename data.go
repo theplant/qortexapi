@@ -1050,6 +1050,8 @@ type LanguageSelector struct {
 	Index              string
 	Code               string
 	SupportedLanguages []*SupportedLanguage
+	PreferredLanguages []*SupportedLanguage
+	RestLanguages      []*SupportedLanguage
 }
 
 type SupportedLanguage struct {
