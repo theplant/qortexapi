@@ -226,16 +226,17 @@ type MailPreferenceInput struct {
 }
 
 type TaskInput struct {
-	TaskId       string
-	GroupId      string
-	AssigneeId   string
-	TodoStatus   int
-	Label        int
-	Priority     int
-	EstimateTime float64
-	SpentTime    string
-	IsClaiming   bool
-	ToUserIds    string
+	TaskId                    string
+	GroupId                   string
+	AssigneeId                string
+	TodoStatus                int
+	Label                     int
+	Priority                  int
+	EstimateTime              float64
+	SpentTime                 string
+	IsClaiming                bool
+	ToUserIds                 string
+	TimetrackingHistoryUpdate string
 }
 
 type TaskPwMap struct {
