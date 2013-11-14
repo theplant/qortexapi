@@ -960,6 +960,7 @@ type TaskOutline struct {
 	CompleteAtStr       string
 	CompleteAtUnixNano  int64
 	IsTitleCreatedBy    bool
+	ActionNeeded        bool
 }
 
 type GroupTasksOutline struct {
