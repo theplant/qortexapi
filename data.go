@@ -367,10 +367,9 @@ type Task struct {
 	IsTodoForOne      bool `json:",omitempty"`
 	IsTodoForAll      bool `json:",omitempty"`
 
-	IsCompleted      bool `json:",omitempty"`
-	IsClosed         bool `json:",omitempty"`
-	IsCancelByAuthor bool `json:",omitempty"`
-	IsToGroup        bool `json:",omitempty"`
+	IsCompleted bool `json:",omitempty"`
+	IsClosed    bool `json:",omitempty"`
+	IsToGroup   bool `json:",omitempty"`
 
 	IsDueToday bool `json:",omitempty"`
 	IsOverDue  bool `json:",omitempty"`
