@@ -232,7 +232,7 @@ type TaskInput struct {
 	TodoStatus                int
 	Label                     int
 	Priority                  int
-	EstimateTime              float64
+	EstimateTime              string
 	SpentTime                 string
 	IsClaiming                bool
 	ToUserIds                 string
