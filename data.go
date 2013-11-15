@@ -276,16 +276,12 @@ type Attachment struct {
 }
 
 type AdvancedTask struct {
-	// CurrentAssigner         EmbedUser
 	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool
 	IsTimeTrackingEnabled   bool
 	PriorityCode            int
 	Priority                string
 	IsPendingEstimation     bool
-	IsOpen                  bool
-	IsClosed                bool
-	IsNotStartYet           bool
 	TimeUnit                string
 	EstimatedTimeValue      float64
 	SpentTimeTracking       []*TimeTrackingItem
