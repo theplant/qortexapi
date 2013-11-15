@@ -370,6 +370,7 @@ type Task struct {
 	IsCompleted      bool `json:",omitempty"`
 	IsClosed         bool `json:",omitempty"`
 	IsCancelByAuthor bool `json:",omitempty"`
+	IsToGroup        bool `json:",omitempty"`
 
 	IsDueToday bool `json:",omitempty"`
 	IsOverDue  bool `json:",omitempty"`
