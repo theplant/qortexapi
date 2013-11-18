@@ -305,7 +305,8 @@ type TaskLog struct {
 	IsTimingChanged       bool
 	IsStatusChanged       bool
 	IsEstimationChanged   bool
-	IsTimeTrackingChanged bool
+	IsTimeTrackingAdded   bool
+	IsTimeTrackingUpdated bool
 	IsReopened            bool
 	IsSelfOperation       bool
 
@@ -317,12 +318,22 @@ type TaskLog struct {
 	TimeUnit            string
 
 	NewSpentTime float64
-	// NewSpentUnit string
 
-	Status         string
-	Priority       string
-	Label          string
-	IsLabelChanged bool
+	Status                 string
+	Priority               string
+	Label                  string
+	IsLabelChanged         bool
+	TimeTrackingUpdateLogs []*TimeTrackingUpdateLog
+}
+
+type TimeTrackingUpdateLog struct {
+	IsUpdateLog  bool
+	IsDeleteLog  bool
+	IsSelfUpdate bool
+	OldSpentTime float64
+	NewSpentTime float64
+	Owner        EmbedUser
+	Updater      EmbedUser
 }
 
 type AssignableUser struct {
