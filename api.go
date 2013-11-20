@@ -175,7 +175,7 @@ type AuthUserService interface {
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
-	InvitePeople(emails []string, skipInvalidEmail bool, customMessage string) (sendedEmails []string, err error)
+	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string) (sendedEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	ChangeLocale(localeName string) (err error)
