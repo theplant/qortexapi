@@ -170,6 +170,8 @@ type AuthUserService interface {
 	AcceptShareRequestByAdmin(requestId string) (err error)
 	RejectShareRequestByAdmin(requestId string) (err error)
 
+	StartTrial() (err error)
+
 	//Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
