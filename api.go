@@ -263,4 +263,6 @@ type AuthAdminService interface {
 	SetAutoApproveAccess(enable bool) (err error)
 
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
+
+	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
 }
