@@ -143,6 +143,7 @@ type PreferencesInput struct {
 	PreferMarkdown           string
 	AutoFollowPublicGroup    string
 	EnableHTML5Notification  string
+	UserLocationCityName     string
 }
 
 type MemberAccountInput struct {
