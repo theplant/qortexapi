@@ -400,8 +400,9 @@ type Task struct {
 	CompletedUsers []EmbedUser `json:",omitempty"`
 	Assignee       EmbedUser   `json:",omitempty"`
 
-	ColorCssClass string        `json:",omitempty"`
-	TaskBarHtml   template.HTML `json:",omitempty"`
+	ColorCssClass       string        `json:",omitempty"`
+	ReopenColorCssClass string        `json:",omitempty"`
+	TaskBarHtml         template.HTML `json:",omitempty"`
 
 	TaskFlow       int
 	IsClaimed      bool
