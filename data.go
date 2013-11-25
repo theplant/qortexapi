@@ -308,13 +308,13 @@ type TaskLog struct {
 	IsTimeTrackingAdded   bool
 	IsTimeTrackingUpdated bool
 	IsReopened            bool
-	IsSelfOperation       bool
 
 	CreatedAt           time.Time
 	VersionAt           time.Time
 	LocalHumanCreatedAt string
 	Assigner            EmbedUser
 	Assignee            EmbedUser
+	OldAssignee         EmbedUser
 	EstimatedTimeValue  float64
 	TimeUnit            string
 
