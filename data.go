@@ -685,7 +685,7 @@ type Entry struct {
 	// For Advanced To-Dos
 	DerivedToDoEntries  []*ReleatedEntry // For Comment
 	ReleatedToDoEntries []*ReleatedEntry // For Entry
-	BasedOnComment      *BasedOnComment
+	BasedOnPost         *BasedOnPost
 }
 
 type ReleatedEntry struct {
@@ -694,9 +694,10 @@ type ReleatedEntry struct {
 	LocalHumanCreatedAt string
 }
 
-type BasedOnComment struct {
+type BasedOnPost struct {
 	RootHtmlTitle template.HTML
 	Link          template.HTMLAttr
+	IsComment     bool
 }
 
 type QortexSupport struct {

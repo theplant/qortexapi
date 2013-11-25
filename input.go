@@ -49,8 +49,8 @@ type EntryInput struct {
 	LocaleName string
 
 	// For Creating To-Dos From Comment
-	BasedCommentId        string
-	GroupIdOfBasedComment string
+	BasedPostId        string
+	GroupIdOfBasedPost string
 }
 
 const (
