@@ -311,6 +311,7 @@ type TaskLog struct {
 	IsSelfOperation       bool
 
 	CreatedAt           time.Time
+	VersionAt           time.Time
 	LocalHumanCreatedAt string
 	Assigner            EmbedUser
 	Assignee            EmbedUser
