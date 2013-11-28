@@ -46,7 +46,8 @@ type EntryInput struct {
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
-	LocaleName string
+	LocaleName   string
+	BingLanguageCode string //Bing translation code
 
 	// For Creating To-Dos From Comment
 	BasedPostId        string

@@ -681,6 +681,7 @@ type Entry struct {
 	CurrentLocaleName string                   `json:",omitempty"`
 	LocaleTitleMap    map[string]string        `json:",omitempty"`
 	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
+	BingLanguageCode  string                   `json:",omitempty"`
 
 	// For Advanced To-Dos
 	DerivedToDoEntries  []*ReleatedEntry // For Comment
