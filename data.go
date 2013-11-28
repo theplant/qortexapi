@@ -692,6 +692,7 @@ type ReleatedEntry struct {
 	HtmlTitle           template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
+	Author              *EmbedUser
 }
 
 type BasedOnPost struct {
