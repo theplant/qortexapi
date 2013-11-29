@@ -699,6 +699,8 @@ type Entry struct {
 	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
 	BingLanguageCode  string                   `json:",omitempty"`
 
+	EntryLanguages []*EntryLanguage
+
 	// For Advanced To-Dos
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
 	RelatedToDoEntries []*RelatedEntry // For Entry
@@ -710,7 +712,12 @@ type Entry struct {
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
 
-type RelatedEntry struct {
+type EntryLanguage struct {
+	Code         string
+	LanguageName string
+}
+
+type ReleatedEntry struct {
 	HtmlTitle           template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
