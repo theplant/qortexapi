@@ -715,6 +715,7 @@ type Entry struct {
 type EntryLanguage struct {
 	Code         string
 	LanguageName string
+	IsCurrent    bool
 }
 
 type ReleatedEntry struct {
