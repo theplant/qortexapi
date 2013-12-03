@@ -132,7 +132,7 @@ type EmbedUser struct {
 }
 
 type PanelStatus struct {
-	HasToDo                 bool
+	// HasToDo                 bool
 	HasDraft                bool
 	HasWatchList            bool
 	HasChat                 bool
