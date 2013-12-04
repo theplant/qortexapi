@@ -122,6 +122,7 @@ type EmbedUser struct {
 	Avatar              string            `json:",omitempty"`
 	JID                 string            `json:",omitempty"`
 	Timezone            string            `json:",omitempty"`
+	OrgName             string            `json:",omitempty"`
 	IsSuperUser         bool              `json:",omitempty"`
 	IsShare             bool              `json:",omitempty"`
 	OrganizationId      string            `json:",omitempty"`
