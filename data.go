@@ -1073,3 +1073,7 @@ type SupportedLanguage struct {
 	DisplayText string
 	IsCurrent   bool
 }
+
+type Billing struct {
+	IsSharedGroupAccount bool
+}
