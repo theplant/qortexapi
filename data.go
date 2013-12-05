@@ -683,17 +683,17 @@ type Entry struct {
 	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
 
 	// For Advanced To-Dos
-	DerivedToDoEntries  []*ReleatedEntry // For Comment
-	ReleatedToDoEntries []*ReleatedEntry // For Entry
-	BasedOnPost         *BasedOnPost
+	DerivedToDoEntries []*RelatedEntry // For Comment
+	RelatedToDoEntries []*RelatedEntry // For Entry
+	BasedOnPost        *BasedOnPost
 
-	ReleatedEntries []*ReleatedEntry
+	RelatedEntries []*RelatedEntry
 
 	// TODO: to remove
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
 
-type ReleatedEntry struct {
+type RelatedEntry struct {
 	HtmlTitle           template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
