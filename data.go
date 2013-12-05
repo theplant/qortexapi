@@ -1076,4 +1076,5 @@ type SupportedLanguage struct {
 
 type Billing struct {
 	IsSharedGroupAccount bool
+	FreeTrialLeftDays    int
 }
