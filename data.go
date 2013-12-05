@@ -651,8 +651,7 @@ type Entry struct {
 	Ack          *Task         `json:",omitempty"`
 	Conversation *Conversation `json:",omitempty"`
 
-	LinkedEntries []*LinkedEntry  `json:",omitempty"`
-	Versions      []*EntryVersion `json:",omitempty"`
+	Versions []*EntryVersion `json:",omitempty"`
 
 	ToUsers                []EmbedUser   `json:",omitempty"`
 	MentionedUsers         []EmbedUser   `json:",omitempty"`
@@ -687,6 +686,11 @@ type Entry struct {
 	DerivedToDoEntries  []*ReleatedEntry // For Comment
 	ReleatedToDoEntries []*ReleatedEntry // For Entry
 	BasedOnPost         *BasedOnPost
+
+	ReleatedEntries []*ReleatedEntry
+
+	// TODO: to remove
+	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
 
 type ReleatedEntry struct {
@@ -694,6 +698,7 @@ type ReleatedEntry struct {
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
 	Author              *EmbedUser
+	IsComment           bool
 }
 
 type BasedOnPost struct {
