@@ -122,6 +122,7 @@ type EmbedUser struct {
 	Avatar              string            `json:",omitempty"`
 	JID                 string            `json:",omitempty"`
 	Timezone            string            `json:",omitempty"`
+	OrgName             string            `json:",omitempty"`
 	IsSuperUser         bool              `json:",omitempty"`
 	IsShare             bool              `json:",omitempty"`
 	OrganizationId      string            `json:",omitempty"`
@@ -650,8 +651,7 @@ type Entry struct {
 	Ack          *Task         `json:",omitempty"`
 	Conversation *Conversation `json:",omitempty"`
 
-	LinkedEntries []*LinkedEntry  `json:",omitempty"`
-	Versions      []*EntryVersion `json:",omitempty"`
+	Versions []*EntryVersion `json:",omitempty"`
 
 	ToUsers                []EmbedUser   `json:",omitempty"`
 	MentionedUsers         []EmbedUser   `json:",omitempty"`
@@ -686,9 +686,14 @@ type Entry struct {
 	EntryLanguages []*EntryLanguage
 
 	// For Advanced To-Dos
-	DerivedToDoEntries  []*ReleatedEntry // For Comment
-	ReleatedToDoEntries []*ReleatedEntry // For Entry
-	BasedOnPost         *BasedOnPost
+	DerivedToDoEntries []*RelatedEntry // For Comment
+	RelatedToDoEntries []*RelatedEntry // For Entry
+	BasedOnPost        *BasedOnPost
+
+	RelatedEntries []*RelatedEntry
+
+	// TODO: to remove
+	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
 
 type EntryLanguage struct {
@@ -697,11 +702,12 @@ type EntryLanguage struct {
 	IsCurrent    bool
 }
 
-type ReleatedEntry struct {
+type RelatedEntry struct {
 	HtmlTitle           template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
 	Author              *EmbedUser
+	IsComment           bool
 }
 
 type BasedOnPost struct {
