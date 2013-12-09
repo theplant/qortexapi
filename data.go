@@ -671,6 +671,7 @@ type Entry struct {
 	IsQortexSupport              bool              `json:",omitempty"`
 	QortexSupport                *QortexSupport    `json:",omitempty"`
 	IsQortexSupportKnowledgeBase bool              `json:",omitempty"`
+	LinkTitle                    string            `json:",omitempty"`
 
 	IsRequest                     bool          `json:",omitempty"`
 	ShareRequest                  *ShareRequest `json:",omitempty"`
@@ -745,6 +746,7 @@ type WatchList struct {
 }
 
 type MyTask struct {
+	PrefixURL       string
 	NeedActionTasks []*TaskOutline
 	GroupTasks      []*GroupTasksOutline
 	ClosedTasks     []*TaskOutline

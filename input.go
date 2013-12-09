@@ -43,6 +43,7 @@ type EntryInput struct {
 	Name        string // Blog Comment required
 
 	InlineHelp       bool
+	LinkTitle        string //for qortex support knowledge base
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
@@ -82,6 +83,7 @@ type QortexSupportInput struct {
 	KnowledgeBase    bool
 	InlineHelp       bool
 	PublishedToUsers bool
+	LinkTitle        string //for qortex support knowledge base
 
 	LocaleName string
 }
