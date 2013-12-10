@@ -1102,3 +1102,14 @@ type SupportedLanguage struct {
 	DisplayText string
 	IsCurrent   bool
 }
+
+type KnowledgeOverview struct {
+	PrefixURL          string
+	GroupId            string
+	Title              string
+	Content            template.HTML
+	IsHiding           bool
+	IsAtQortexSupport  bool
+	Editable           bool
+	CanSeeHiddenBanner bool
+}
