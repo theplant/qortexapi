@@ -1113,4 +1113,5 @@ type KnowledgeOverview struct {
 	LocalHistoryUpdatedAt string
 	Versions              []*EntryVersion `json:",omitempty"`
 	CurrentVersion        *EntryVersion
+	LanguageCode          string
 }

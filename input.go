@@ -249,8 +249,9 @@ type TaskPwMap struct {
 }
 
 type KnowledgeOverviewInput struct {
-	GroupId  string
-	Title    string
-	Content  string
-	IsHidden bool
+	GroupId      string
+	Title        string
+	Content      string
+	IsHidden     bool
+	LanguageCode string
 }
