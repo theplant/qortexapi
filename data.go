@@ -309,11 +309,12 @@ type TaskLog struct {
 	IsTimeTrackingAdded   bool
 	IsTimeTrackingUpdated bool
 	IsReopened            bool
+	IsLabelChanged        bool
 
 	CreatedAt           time.Time
 	VersionAt           time.Time
 	LocalHumanCreatedAt string
-	Assigner            EmbedUser
+	Author              EmbedUser
 	Assignee            EmbedUser
 	OldAssignee         EmbedUser
 	EstimatedTimeValue  float64
@@ -321,10 +322,10 @@ type TaskLog struct {
 
 	NewSpentTime float64
 
-	Status                 string
-	Priority               string
-	Label                  string
-	IsLabelChanged         bool
+	Status   string
+	Priority string
+	Label    string
+
 	TimeTrackingUpdateLogs []*TimeTrackingUpdateLog
 }
 
@@ -554,6 +555,7 @@ type Entry struct {
 	CreatedAt     time.Time `json:",omitempty"`
 	UpdatedAt     time.Time `json:",omitempty"`
 	BumpedUpAt    time.Time `json:",omitempty"`
+	VersionAt     time.Time `json:",omitempty"`
 	BaseOnEntryId string    `json:",omitempty"`
 
 	AllAttachmentsURL    string    `json:",omitempty"`
