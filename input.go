@@ -47,7 +47,7 @@ type EntryInput struct {
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
-	LocaleName   string
+	LocaleName       string
 	BingLanguageCode string //Bing translation code
 
 	// For Creating To-Dos From Comment
@@ -246,4 +246,11 @@ type TaskInput struct {
 type TaskPwMap struct {
 	Id             string `bson:"-"`
 	PriorityWeight float64
+}
+
+type KnowledgeOverviewInput struct {
+	GroupId  string
+	Title    string
+	Content  string
+	IsHidden bool
 }
