@@ -73,7 +73,7 @@ type AuthUserService interface {
 	GetKnowledgeOverview(groupId string) (r *KnowledgeOverview, err error)
 	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
 
-	//dType "all": delete all versions of the entry, "version": delete current version of the entry
+	// dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
@@ -85,6 +85,7 @@ type AuthUserService interface {
 	GetDocViewSession(doi string, groupId string, attachmentId string) (sessionId string, err error)
 	DeleteEntryAttachment(doi string, groupId string, attachmentId string, ownerId string) (attachments []*Attachment, err error)
 	GetOtherVersionsComments(entryId string, groupId string, updateAtUnixNanoForVersion string) (comments []*Entry, err error)
+	GetOtherVersionsTaskLogs(entryId string, groupId string, updateAtUnixNanoForVersion string) (taskLogs []*TaskLog, err error)
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
@@ -117,7 +118,7 @@ type AuthUserService interface {
 	ChooseMarkdownEditor() (err error)
 	ChooseStyledEditor() (err error)
 
-	//Group related
+	// Group related
 	GetNewGroup() (group *Group, err error)
 	GetGroup(groupId string) (group *Group, err error)
 	CreateGroup(input *GroupInput) (group *Group, err error)
@@ -133,7 +134,7 @@ type AuthUserService interface {
 	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput) (err error)
 
-	//User related
+	// User related
 	GetAuthUser() (user *User, err error)
 	GetOrgUsers(keyword string, startFullName string, limit int) (users []*User, nextFullName string, err error)
 	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []*User, nextFullName string, err error)
@@ -158,7 +159,7 @@ type AuthUserService interface {
 	GetMyCount() (myCount *MyCount, err error)
 	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
 
-	//Organization Related
+	// Organization Related
 	GetJoinOrgInvitations() (invitations []*Invitation, err error)
 	GetOrganization(orgId string) (org *Organization, err error)
 	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
@@ -174,7 +175,7 @@ type AuthUserService interface {
 
 	StartTrial() (err error)
 
-	//Settings related
+	// Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 	CanCreateGroup() (ok bool, err error)
@@ -199,10 +200,10 @@ type AuthUserService interface {
 
 	StopSharingGroup(requestId string) (err error)
 
-	//preferences
+	// preferences
 	DismissPresentationTip() (err error)
 
-	//chat
+	// chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
 	GetPrivateChat(conversationId string, searchKeyWords string) (chatEntry *Entry, err error)
 
@@ -215,7 +216,7 @@ type AuthUserService interface {
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
 	GetQortexSupportHelpLink(title string) (link string, err error)
 
-	//Advand Task Related
+	// Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
 	EditTask(groupId string, taskId string) (task *Task, err error)
 	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
@@ -227,20 +228,18 @@ type AuthUserService interface {
 	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
 
-	// Group: Advanced To-Dos Related
+	// [Group] Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
-
 	AllOpenAdvancedToDosInGroup(groupId string) (page *OpenAdvancedToDosPage, err error)
 	AllOpenAdvancedToDosGroupingByUserInGroup(groupId string) (atos []*OpenAdvancedToDosPage, err error)
 	AllOpenAdvancedToDosGroupingByStatusInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
 	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
-	AdvancedToDosOfBucketInGroup(groupId, bucket string) (taskOutlines []*TaskOutline, timeUnit string, timeTotal float64, err error)
 	AllOpenBasicToDosInGroup(groupId string) (taskOutlines []*TaskOutline, err error)
 	AllOpenBasicToDosGroupingByUserInGroup(groupId string) (atos []*BasicOpenToDoOutlines, err error)
-
-	ClosedBasicToDosInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
-	ClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
+	AllClosedBasicToDosInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
+	AllClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime time.Time) (taskOutlines []*TaskOutline, apiGroup *Group, endOfTasks bool, err error)
+	CountOfClosedToDosInGroup(ttype int, groupId string) (count int, err error)
 }
 
 type AuthAdminService interface {
