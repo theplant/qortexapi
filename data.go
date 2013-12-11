@@ -1099,19 +1099,19 @@ type SupportedLanguage struct {
 }
 
 type KnowledgeOverview struct {
-	Author                EmbedUser
-	PrefixURL             string
-	GroupId               string
-	Title                 string
-	Content               string
-	HtmlContent           template.HTML
-	IsPreferMarkdown      bool
-	IsHidden              bool
-	IsAtQortexSupport     bool
-	Editable              bool
-	CanSeeHiddenBanner    bool
-	LocalHistoryUpdatedAt string
-	Versions              []*EntryVersion `json:",omitempty"`
-	CurrentVersion        *EntryVersion
-	LanguageCode          string
+	Author             EmbedUser
+	PrefixURL          string
+	GroupId            string
+	Title              string
+	Content            string
+	HtmlContent        template.HTML
+	IsPreferMarkdown   bool
+	IsHidden           bool
+	IsAtQortexSupport  bool
+	Editable           bool
+	CanSeeHiddenBanner bool
+        HasVersions bool
+	Versions           []*EntryVersion `json:",omitempty"`
+	CurrentVersion     *EntryVersion
+	LanguageCode       string
 }

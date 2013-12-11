@@ -71,6 +71,7 @@ type AuthUserService interface {
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
 	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)
 	GetKnowledgeOverview(groupId string) (r *KnowledgeOverview, err error)
+	SwitchKnowledgeOverviewVersion(groupId string, entryId string, languageCode string) (r *KnowledgeOverview, err error)
 	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
 
 	// dType "all": delete all versions of the entry, "version": delete current version of the entry
