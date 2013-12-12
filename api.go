@@ -239,7 +239,8 @@ type AuthUserService interface {
 	ClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime time.Time) (taskOutlines []*TaskOutline, apiGroup *Group, endOfTasks bool, err error)
 
-	//billing
+	//payment
+	GetPaymentSession() (session string, err error)
 	GetBilling() (billing *Billing, err error)
 }
 
