@@ -1,6 +1,8 @@
 package qortexapi
 
-import "time"
+import (
+	"time"
+)
 
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
@@ -241,7 +243,9 @@ type AuthUserService interface {
 
 	//payment
 	GetPaymentSession() (session string, err error)
-	GetBilling() (billing *Billing, err error)
+	GetBillingInfo() (billing *BillingInfo, err error)
+	SyncBilling() (err error)
+	SyncBillingDetails() (err error)
 }
 
 type AuthAdminService interface {

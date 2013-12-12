@@ -1,6 +1,7 @@
 package qortexapi
 
 import (
+	paymentapi "github.com/theplant/theplant_payment/api"
 	"html/template"
 	"time"
 )
@@ -1074,7 +1075,9 @@ type SupportedLanguage struct {
 	IsCurrent   bool
 }
 
-type Billing struct {
+type BillingInfo struct {
 	IsSharedGroupAccount bool
 	FreeTrialLeftDays    int
+	Billing              *paymentapi.Billing
+	BillingDetails       *paymentapi.BillingDetails
 }
