@@ -1105,13 +1105,15 @@ type KnowledgeOverview struct {
 	Title              string
 	Content            string
 	HtmlContent        template.HTML
+	LocaleTitleMap     map[string]string        `json:",omitempty"`
+	LocaleContentMap   map[string]template.HTML `json:",omitempty"`
 	IsPreferMarkdown   bool
 	IsHidden           bool
 	IsAtQortexSupport  bool
 	Editable           bool
 	CanSeeHiddenBanner bool
-        HasVersions bool
+	HasVersions        bool
 	Versions           []*EntryVersion `json:",omitempty"`
-	CurrentVersion     *EntryVersion
 	LanguageCode       string
+	EntryLanguages     []*EntryLanguage
 }
