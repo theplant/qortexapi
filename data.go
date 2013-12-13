@@ -1071,6 +1071,7 @@ type TranslatedThread struct {
 	Content       string
 	Comments      []*TranslatedComment
 	IsCommentOnly bool
+	IsWikiSection bool
 }
 
 type TranslatedComment struct {
@@ -1102,6 +1103,7 @@ type KnowledgeOverview struct {
 	Author             EmbedUser
 	PrefixURL          string
 	GroupId            string
+	EntryId            string
 	Title              string
 	Content            string
 	HtmlContent        template.HTML
