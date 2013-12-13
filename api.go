@@ -79,6 +79,7 @@ type AuthUserService interface {
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
 	MachineTranslate(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
+	MachineTranslateWikiSection(entryId string, groupId string,  targetlang string) (translatedThread *TranslatedThread, err error)
 	OriginalThread(entryId string, groupId string) (translatedThread *TranslatedThread, err error)
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
