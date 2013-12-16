@@ -1079,6 +1079,8 @@ type BillingInfo struct {
 	IsSharedGroupAccount bool
 	FreeTrialLeftDays    int
 	ActiveUserCount      int
+	Country              string
+	Phone                string
 	Billing              *paymentapi.Billing
 	BillingDetails       *paymentapi.BillingDetails
 }
