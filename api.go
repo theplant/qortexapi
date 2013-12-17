@@ -72,6 +72,7 @@ type AuthUserService interface {
 	GetKnowledgeOverview(groupId string) (r *KnowledgeOverview, err error)
 	SwitchKnowledgeOverviewVersion(groupId string, entryId string, languageCode string) (r *KnowledgeOverview, err error)
 	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
+	GetEntryToTranslate(entryId string, groupId string) (entry *Entry, err error)
 
 	// dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
@@ -79,7 +80,7 @@ type AuthUserService interface {
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
 	MachineTranslate(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
-	MachineTranslateWikiSection(entryId string, groupId string,  targetlang string) (translatedThread *TranslatedThread, err error)
+	MachineTranslateWikiSection(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
 	OriginalThread(entryId string, groupId string) (translatedThread *TranslatedThread, err error)
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)

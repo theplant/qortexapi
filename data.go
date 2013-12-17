@@ -700,6 +700,7 @@ type Entry struct {
 	BingLanguageCode  string                   `json:",omitempty"`
 
 	EntryLanguages []*EntryLanguage
+	ToLanguages    []*SupportedLanguage
 
 	// For Advanced To-Dos
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
