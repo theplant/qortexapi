@@ -273,4 +273,6 @@ type AuthAdminService interface {
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 
 	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
+
+	MarkOrgFreeOrPay(orgId string) (free bool, err error)
 }
