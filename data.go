@@ -694,13 +694,15 @@ type Entry struct {
 	VisibleForSuperOrg            bool          `json:",omitempty"`
 
 	//Multi locales related
-	CurrentLocaleName string                   `json:",omitempty"`
-	LocaleTitleMap    map[string]string        `json:",omitempty"`
-	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
-	BingLanguageCode  string                   `json:",omitempty"`
+	CurrentLocaleName    string                   `json:",omitempty"`
+	LocaleTitleMap       map[string]string        `json:",omitempty"`
+	LocaleContentMap     map[string]template.HTML `json:",omitempty"`
+	LocaleHtmlContentMap map[string]template.HTML `json:",omitempty"`
+	BingLanguageCode     string                   `json:",omitempty"`
 
-	EntryLanguages []*EntryLanguage
-	ToLanguages    []*SupportedLanguage
+	HasMoreThanOneLanguages bool
+	EntryLanguages          []*EntryLanguage
+	ToLanguages             []*SupportedLanguage
 
 	// For Advanced To-Dos
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
@@ -1106,22 +1108,23 @@ type SupportedLanguage struct {
 }
 
 type KnowledgeOverview struct {
-	Author             EmbedUser
-	PrefixURL          string
-	GroupId            string
-	EntryId            string
-	Title              string
-	Content            string
-	HtmlContent        template.HTML
-	LocaleTitleMap     map[string]string        `json:",omitempty"`
-	LocaleContentMap   map[string]template.HTML `json:",omitempty"`
-	IsPreferMarkdown   bool
-	IsHidden           bool
-	IsAtQortexSupport  bool
-	Editable           bool
-	CanSeeHiddenBanner bool
-	HasVersions        bool
-	Versions           []*EntryVersion `json:",omitempty"`
-	LanguageCode       string
-	EntryLanguages     []*EntryLanguage
+	Author                  EmbedUser
+	PrefixURL               string
+	GroupId                 string
+	EntryId                 string
+	Title                   string
+	Content                 string
+	HtmlContent             template.HTML
+	LocaleTitleMap          map[string]string        `json:",omitempty"`
+	LocaleHtmlContentMap    map[string]template.HTML `json:",omitempty"`
+	IsPreferMarkdown        bool
+	IsHidden                bool
+	IsAtQortexSupport       bool
+	Editable                bool
+	CanSeeHiddenBanner      bool
+	HasVersions             bool
+	Versions                []*EntryVersion `json:",omitempty"`
+	LanguageCode            string
+	HasMoreThanOneLanguages bool
+	EntryLanguages          []*EntryLanguage
 }
