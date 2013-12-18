@@ -123,6 +123,7 @@ type EmbedUser struct {
 	Avatar              string            `json:",omitempty"`
 	JID                 string            `json:",omitempty"`
 	Timezone            string            `json:",omitempty"`
+	OrgName             string            `json:",omitempty"`
 	IsSuperUser         bool              `json:",omitempty"`
 	IsShare             bool              `json:",omitempty"`
 	OrganizationId      string            `json:",omitempty"`
@@ -280,40 +281,46 @@ type AdvancedTask struct {
 	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool
 	IsTimeTrackingEnabled   bool
-	PriorityCode            int
-	Priority                string
 	IsPendingEstimation     bool
-	TimeUnit                string
-	EstimatedTimeValue      float64
-	SpentTimeTracking       []*TimeTrackingItem
-	TotalSpentTime          string
-	Status                  string
-	StatusCode              int
-	TaskFlowNewStatuses     []*TaskFlowStatus
-	TaskFlowOpenStatuses    []*TaskFlowStatus
-	TaskFlowClosedStatuses  []*TaskFlowStatus
-	AssignableUsers         []*AssignableUser
-	LabelCode               int
-	Label                   string
-	TaskLabels              []*TaskLabel
-	TaskPriorities          []*TaskPriority
-	TaskLogs                []*TaskLog
+
+	PriorityCode int    // The value of priority: 0, 10 or 20.
+	Priority     string // The text of priority: "Please Set", "Soon" or "Someday".
+	LabelCode    int
+	Label        string
+	StatusCode   int    // The value of status: 0, 1 or 2.
+	Status       string // The text of status: new, open or closed.
+
+	TimeUnit           string
+	EstimatedTimeValue float64
+	SpentTimeTracking  []*TimeTrackingItem
+	TotalSpentTime     string
+
+	AssignableUsers []*AssignableUser
+
+	TaskFlowNewStatuses    []*TaskFlowStatus // All available statuses
+	TaskFlowOpenStatuses   []*TaskFlowStatus
+	TaskFlowClosedStatuses []*TaskFlowStatus
+
+	TaskLabels     []*TaskLabel    // All available labels
+	TaskPriorities []*TaskPriority // All available priorities
+	TaskLogs       []*TaskLog      // All the actions have been taken
 }
 
 type TaskLog struct {
-	IsClaimed             bool
-	IsAssigneeChanged     bool
-	IsTimingChanged       bool
-	IsStatusChanged       bool
-	IsEstimationChanged   bool
-	IsTimeTrackingAdded   bool
+	IsClaimed             bool // {Author} will do this
+	IsAssigneeChanged     bool // {Author} reassigned the To-Do from {OldAssignee} to {Assignee}.
+	IsTimingChanged       bool // {Author} set Start Timing to {Priority}.
+	IsStatusChanged       bool // {Author} changed the status to {Status}.
+	IsEstimationChanged   bool // {Author} set an estimate of {EstimatedTimeValue} {TimeUnit}.
+	IsTimeTrackingAdded   bool // {Author} worked {NewSpentTime} {TimeUnit} on this.
 	IsTimeTrackingUpdated bool
-	IsReopened            bool
+	IsReopened            bool // {Author} reopened this To-Do.
+	IsLabelChanged        bool // {Author} set the label to Bug.
 
 	CreatedAt           time.Time
 	VersionAt           time.Time
 	LocalHumanCreatedAt string
-	Assigner            EmbedUser
+	Author              EmbedUser // User who takes the action
 	Assignee            EmbedUser
 	OldAssignee         EmbedUser
 	EstimatedTimeValue  float64
@@ -321,10 +328,10 @@ type TaskLog struct {
 
 	NewSpentTime float64
 
-	Status                 string
-	Priority               string
-	Label                  string
-	IsLabelChanged         bool
+	Status   string
+	Priority string
+	Label    string
+
 	TimeTrackingUpdateLogs []*TimeTrackingUpdateLog
 }
 
@@ -408,7 +415,7 @@ type Task struct {
 
 	TaskFlow       int
 	IsClaimed      bool
-	IsAdvancedTask bool
+	IsAdvancedTask bool // True when the PM feature is enabled and the AdvancedTask will be not nil.
 	AdvancedTask   *AdvancedTask
 
 	NeedShowAppliedText bool
@@ -554,6 +561,7 @@ type Entry struct {
 	CreatedAt     time.Time `json:",omitempty"`
 	UpdatedAt     time.Time `json:",omitempty"`
 	BumpedUpAt    time.Time `json:",omitempty"`
+	VersionAt     time.Time `json:",omitempty"`
 	BaseOnEntryId string    `json:",omitempty"`
 
 	AllAttachmentsURL    string    `json:",omitempty"`
@@ -651,8 +659,7 @@ type Entry struct {
 	Ack          *Task         `json:",omitempty"`
 	Conversation *Conversation `json:",omitempty"`
 
-	LinkedEntries []*LinkedEntry  `json:",omitempty"`
-	Versions      []*EntryVersion `json:",omitempty"`
+	Versions []*EntryVersion `json:",omitempty"`
 
 	ToUsers                []EmbedUser   `json:",omitempty"`
 	MentionedUsers         []EmbedUser   `json:",omitempty"`
@@ -672,6 +679,7 @@ type Entry struct {
 	IsQortexSupport              bool              `json:",omitempty"`
 	QortexSupport                *QortexSupport    `json:",omitempty"`
 	IsQortexSupportKnowledgeBase bool              `json:",omitempty"`
+	LinkTitle                    string            `json:",omitempty"`
 
 	IsRequest                     bool          `json:",omitempty"`
 	ShareRequest                  *ShareRequest `json:",omitempty"`
@@ -684,16 +692,22 @@ type Entry struct {
 	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
 
 	// For Advanced To-Dos
-	DerivedToDoEntries  []*ReleatedEntry // For Comment
-	ReleatedToDoEntries []*ReleatedEntry // For Entry
-	BasedOnPost         *BasedOnPost
+	DerivedToDoEntries []*RelatedEntry // For Comment
+	RelatedToDoEntries []*RelatedEntry // For Entry
+	BasedOnPost        *BasedOnPost
+
+	RelatedEntries []*RelatedEntry
+
+	// TODO: to remove
+	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
 
-type ReleatedEntry struct {
+type RelatedEntry struct {
 	HtmlTitle           template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
 	Author              *EmbedUser
+	IsComment           bool
 }
 
 type BasedOnPost struct {
@@ -731,6 +745,7 @@ type WatchList struct {
 }
 
 type MyTask struct {
+	PrefixURL       string
 	NeedActionTasks []*TaskOutline
 	GroupTasks      []*GroupTasksOutline
 	ClosedTasks     []*TaskOutline
