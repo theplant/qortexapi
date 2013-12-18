@@ -701,6 +701,7 @@ type Entry struct {
 	BingLanguageCode     string                   `json:",omitempty"`
 
 	HasMoreThanOneLanguages bool
+	IsAllTranslated         bool
 	EntryLanguages          []*EntryLanguage
 	ToLanguages             []*SupportedLanguage
 
@@ -1125,11 +1126,11 @@ type KnowledgeOverview struct {
 	HasVersions             bool
 	Versions                []*EntryVersion `json:",omitempty"`
 	LanguageCode            string
-	HasMoreThanOneLanguages bool
 	EntryLanguages          []*EntryLanguage
 	ToLanguages             []*SupportedLanguage
-
-	UploadURL             template.HTMLAttr `json:",omitempty"` //just for reuse the mannual translation form
-	IsHidePresentationTip bool              `json:",omitempty"` //just for reuse the mannual translation form
-	Id                    string            `json:",omitempty"` //just for reuse the mannual translation form
+	HasMoreThanOneLanguages bool
+	IsAllTranslated         bool
+	UploadURL               template.HTMLAttr `json:",omitempty"` //just for reuse the mannual translation form
+	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
+	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
 }
