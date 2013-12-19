@@ -212,7 +212,7 @@ type AuthUserService interface {
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
-	GetQortexSupport(entryId string) (entry *Entry, err error)
+	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error)
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
