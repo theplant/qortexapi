@@ -67,8 +67,8 @@ type AuthUserService interface {
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
-	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)
-	GetKnowledgeOverview(groupId string) (r *KnowledgeOverview, err error)
+	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)//When languageCode is empty, use default
+	GetKnowledgeOverview(groupId string, languageCode string) (r *KnowledgeOverview, err error) //When languageCode is empty, use default
 	SwitchKnowledgeOverviewVersion(groupId string, entryId string, languageCode string) (r *KnowledgeOverview, err error)
 	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
 	GetEntryToTranslate(entryId string, groupId string) (entry *Entry, err error)
@@ -212,7 +212,7 @@ type AuthUserService interface {
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
-	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error)
+	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error)//When languageCode is empty, use default
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
