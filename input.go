@@ -91,7 +91,7 @@ type QortexSupportInput struct {
 	PublishedToUsers bool
 	LinkTitle        string //for qortex support knowledge base
 
-	LocaleName string
+	BingLanguageCode string
 }
 
 type GroupInput struct {
