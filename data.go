@@ -1105,4 +1105,5 @@ type BillingInfo struct {
 	Phone                string
 	Billing              *paymentapi.Billing
 	BillingDetails       *paymentapi.BillingDetails
+	PastPayments         []paymentapi.Payment
 }
