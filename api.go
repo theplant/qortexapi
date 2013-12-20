@@ -273,4 +273,6 @@ type AuthAdminService interface {
 	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
 
 	MarkOrgFreeOrPay(orgId string) (free bool, err error)
+
+	GetOrgPayment() (orgPaymentInfos []*OrgPaymentInfo, err error)
 }

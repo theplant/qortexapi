@@ -901,6 +901,13 @@ type OrgStats struct {
 	Author           EmbedUser
 }
 
+type OrgPaymentInfo struct {
+	OrgId     string
+	OrgName   string
+	OrgType   string
+	ExpiredAt time.Time
+}
+
 type AccessReq struct {
 	Email        string
 	PriorityCode string
