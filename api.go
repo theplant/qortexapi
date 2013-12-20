@@ -243,6 +243,7 @@ type AuthUserService interface {
 	GetBillingInfo() (billing *BillingInfo, err error)
 	SyncBilling() (err error)
 	SyncBillingDetails() (err error)
+	ValidatePayment() (err error)
 }
 
 type AuthAdminService interface {
