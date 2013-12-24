@@ -1009,32 +1009,13 @@ type GroupTasksOutline struct {
 	SimpleToDos         []*TaskOutline
 	// NowToDos             []*TaskOutline
 	// NowEstimateTotal     float64
-	// NowEstimateUnit      string
-	SoonToDos            []*TaskOutline
-	LenOfSoonToDos       int
-	SoonEstimateTotal    float64
-	SoonEstimateUnit     string
-	SomedayToDos         []*TaskOutline
-	LenOfSomedayToDos    int
-	SomedayEstimateTotal float64
-	SomedayEstimateUnit  string
-}
-
-type AssigneeTasksOutline struct {
-	Assignee            *EmbedUser
-	AcksAndPendingToDos []*TaskOutline
-	SimpleToDos         []*TaskOutline
-	// NowToDos             []*TaskOutline
-	// NowEstimateTotal     float64
-	// NowEstimateUnit      string
-	SoonToDos            []*TaskOutline
-	LenOfSoonToDos       int
-	SoonEstimateTotal    float64
-	SoonEstimateUnit     string
-	SomedayToDos         []*TaskOutline
-	LenOfSomedayToDos    int
-	SomedayEstimateTotal float64
-	SomedayEstimateUnit  string
+	InProgressToDos         []*TaskOutline
+	InProgressEstimateTotal float64
+	SoonToDos               []*TaskOutline
+	SoonEstimateTotal       float64
+	SomedayToDos            []*TaskOutline
+	SomedayEstimateTotal    float64
+	EstimateUnit            string
 }
 
 type OpenAdvancedToDosBucket struct {
