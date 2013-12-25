@@ -277,4 +277,6 @@ type AuthAdminService interface {
 	MarkOrgFreeOrPay(orgId string) (free bool, err error)
 
 	GetOrgPayment() (orgPaymentInfos []*OrgPaymentInfo, err error)
+
+	ResetTrial(orgId string) (err error)
 }
