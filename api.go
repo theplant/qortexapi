@@ -278,5 +278,5 @@ type AuthAdminService interface {
 
 	GetOrgPayment() (orgPaymentInfos []*OrgPaymentInfo, err error)
 
-	ResetTrial(orgId string) (err error)
+	SetTrial(orgId string, deadLine string) (err error)
 }

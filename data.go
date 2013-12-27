@@ -902,10 +902,12 @@ type OrgStats struct {
 }
 
 type OrgPaymentInfo struct {
-	OrgId     string
-	OrgName   string
-	OrgType   string
-	ExpiredAt time.Time
+	OrgId         string
+	OrgName       string
+	IsFreeOrg     bool
+	IsSharingOrg  bool
+	TrialDeadline time.Time
+	ExpiredAt     time.Time
 }
 
 type AccessReq struct {
