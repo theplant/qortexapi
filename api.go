@@ -165,6 +165,7 @@ type AuthUserService interface {
 	SearchOrganizations(keyword string) (orgs []*Organization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
+	MarkAsSampleOrg() (err error)
 
 	AcceptShareRequestByAdmin(requestId string) (err error)
 	RejectShareRequestByAdmin(requestId string) (err error)
