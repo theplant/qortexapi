@@ -35,6 +35,10 @@ type PublicService interface {
 
 	// Signup
 	RequestSignup(email string) (err error)
+
+	// Demo related
+	CreateDemoOrg(idOrQortexURL string) (r *Organization, err error)
+	CreateDemoMember(firstName string, lastName string) (r *Member, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.

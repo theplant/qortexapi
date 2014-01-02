@@ -32,6 +32,9 @@ type Organization struct {
 	EnableMultilingual       bool
 	LanguageSelectors        *LanguageSelectors
 	SizeOptions              map[string]string
+
+	IsDemo    bool
+	IsSandBox bool
 }
 
 type Blog struct {
@@ -869,12 +872,14 @@ type ContactInfo struct {
 }
 
 type Member struct {
+	Id                 string
 	Name               string
 	Email              string
 	ComfirmationSentAt string
 	SignupConfirmedAt  string
 	SignupStatus       string
 	JoinedOrgs         []*Organization
+	IsDemo             bool
 }
 
 // Following are for Admin Service
