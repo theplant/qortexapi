@@ -282,12 +282,12 @@ type AdvancedTask struct {
 	IsTimeTrackingEnabled   bool
 	IsPendingEstimation     bool
 
-	PriorityCode int    // The value of priority: 0, 10 or 20.
-	Priority     string // The text of priority: "Please Set", "Soon" or "Someday".
-	LabelCode    int
-	Label        string
-	StatusCode   int    // The value of status: 0, 1 or 2.
-	Status       string // The text of status: new, open or closed.
+	// PriorityCode int    // The value of priority: 0, 10 or 20.
+	// Priority     string // The text of priority: "Please Set", "Soon" or "Someday".
+	LabelCode  int
+	Label      string
+	StatusCode int    // The value of status: 0, 1 or 2.
+	Status     string // The text of status: new, open or closed.
 
 	TimeUnit           string
 	EstimatedTimeValue float64
@@ -300,15 +300,15 @@ type AdvancedTask struct {
 	TaskFlowOpenStatuses   []*TaskFlowStatus
 	TaskFlowClosedStatuses []*TaskFlowStatus
 
-	TaskLabels     []*TaskLabel    // All available labels
-	TaskPriorities []*TaskPriority // All available priorities
-	TaskLogs       []*TaskLog      // All the actions have been taken
+	TaskLabels []*TaskLabel // All available labels
+	// TaskPriorities []*TaskPriority // All available priorities
+	TaskLogs []*TaskLog // All the actions have been taken
 }
 
 type TaskLog struct {
-	IsClaimed             bool // {Author} will do this
-	IsAssigneeChanged     bool // {Author} reassigned the To-Do from {OldAssignee} to {Assignee}.
-	IsTimingChanged       bool // {Author} set Start Timing to {Priority}.
+	IsClaimed         bool // {Author} will do this
+	IsAssigneeChanged bool // {Author} reassigned the To-Do from {OldAssignee} to {Assignee}.
+	// IsTimingChanged   bool // {Author} set Start Timing to {Priority}.
 	IsStatusChanged       bool // {Author} changed the status to {Status}.
 	IsEstimationChanged   bool // {Author} set an estimate of {EstimatedTimeValue} {TimeUnit}.
 	IsTimeTrackingAdded   bool // {Author} worked {NewSpentTime} {TimeUnit} on this.
@@ -327,9 +327,9 @@ type TaskLog struct {
 
 	NewSpentTime float64
 
-	Status   string
-	Priority string
-	Label    string
+	Status string
+	// Priority string
+	Label string
 
 	TimeTrackingUpdateLogs []*TimeTrackingUpdateLog
 }
