@@ -997,13 +997,15 @@ type GroupTasksOutline struct {
 	SimpleToDos         []*TaskOutline
 	// NowToDos             []*TaskOutline
 	// NowEstimateTotal     float64
-	InProgressToDos         []*TaskOutline
-	InProgressEstimateTotal float64
-	SoonToDos               []*TaskOutline
-	SoonEstimateTotal       float64
-	SomedayToDos            []*TaskOutline
-	SomedayEstimateTotal    float64
-	EstimateUnit            string
+	OpenToDos               []*TaskOutline
+	OpenEstimateTotal       float64
+	NotStartedToDos         []*TaskOutline
+	NotStartedEstimateTotal float64
+	// SoonToDos            []*TaskOutline
+	// SoonEstimateTotal    float64
+	// SomedayToDos         []*TaskOutline
+	// SomedayEstimateTotal float64
+	EstimateUnit string
 }
 
 type OpenAdvancedToDosBucket struct {
