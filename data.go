@@ -33,7 +33,7 @@ type Organization struct {
 	LanguageSelectors        *LanguageSelectors
 	SizeOptions              map[string]string
 
-	IsDemo    bool
+	IsSample  bool
 	IsSandBox bool
 }
 
@@ -879,7 +879,7 @@ type Member struct {
 	SignupConfirmedAt  string
 	SignupStatus       string
 	JoinedOrgs         []*Organization
-	IsDemo             bool
+	IsSandbox          bool
 }
 
 // Following are for Admin Service
