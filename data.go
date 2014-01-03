@@ -707,7 +707,7 @@ type RelatedEntry struct {
 	LocalHumanCreatedAt string
 	Author              *EmbedUser
 	IsComment           bool
-	Embeded             bool
+	IsEmbedded          bool
 }
 
 type BasedOnPost struct {
