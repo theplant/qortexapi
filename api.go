@@ -172,6 +172,8 @@ type AuthUserService interface {
 	MarkAsSampleOrg() (err error)
 	MarkAsStandardOrg() (err error)
 	GetSampleOrgs() (orgs []*Organization, err error)
+	GetSandboxOrgs() (orgs []*Organization, err error)
+	DeleteSandboxOrg(orgId string) (err error)
 
 	AcceptShareRequestByAdmin(requestId string) (err error)
 	RejectShareRequestByAdmin(requestId string) (err error)

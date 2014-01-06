@@ -33,9 +33,10 @@ type Organization struct {
 	LanguageSelectors        *LanguageSelectors
 	SizeOptions              map[string]string
 
-	IsSample  bool
-	IsSandBox bool
-        PublicDemoURL string
+	IsSample      bool
+	IsSandBox     bool
+	PublicDemoURL string
+	CreatedAt     string
 }
 
 type Blog struct {
