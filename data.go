@@ -1009,8 +1009,8 @@ type GroupTasksOutline struct {
 }
 
 type OpenAdvancedToDosBucket struct {
-	Title         string
-	Type          string
+	Title string
+	// Type          string
 	ToDoSettings  *AdvancedToDoSettings
 	ToDos         []*TaskOutline
 	LenOfToDos    int
