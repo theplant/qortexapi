@@ -694,7 +694,7 @@ type Entry struct {
 	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
 
 	// For Advanced To-Dos
-	DerivedToDoEntries []*RelatedEntry // For Comment
+	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
 	RelatedToDoEntries []*RelatedEntry // For Entry
 	BasedOnPost        *BasedOnPost
 
@@ -710,6 +710,7 @@ type RelatedEntry struct {
 	LocalHumanCreatedAt string
 	Author              *EmbedUser
 	IsComment           bool
+	IsEmbedded          bool
 }
 
 type BasedOnPost struct {

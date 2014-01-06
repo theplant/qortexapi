@@ -52,6 +52,10 @@ type EntryInput struct {
 	// For Creating To-Dos From Comment
 	BasedPostId        string
 	GroupIdOfBasedPost string
+	SelectionTextInFo  struct {
+		Text    string
+		Occured int
+	}
 }
 
 const (
