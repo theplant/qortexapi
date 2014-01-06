@@ -170,6 +170,8 @@ type AuthUserService interface {
 	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
 	MarkAsSampleOrg() (err error)
+	MarkAsStandardOrg() (err error)
+	GetSampleOrgs() (orgs []*Organization, err error)
 
 	AcceptShareRequestByAdmin(requestId string) (err error)
 	RejectShareRequestByAdmin(requestId string) (err error)

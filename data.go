@@ -35,6 +35,7 @@ type Organization struct {
 
 	IsSample  bool
 	IsSandBox bool
+        PublicDemoURL string
 }
 
 type Blog struct {
