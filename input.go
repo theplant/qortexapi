@@ -238,7 +238,6 @@ type TaskInput struct {
 	AssigneeId                string
 	TodoStatus                int
 	Label                     int
-	Priority                  int
 	EstimateTime              string
 	SpentTime                 string
 	IsClaiming                bool
