@@ -1017,7 +1017,6 @@ type OpenAdvancedToDosBucket struct {
 	EstimateTotal float64
 	EstimateUnit  string
 	Editable      bool
-	Priorities    []*TaskPriority
 	Followers     []*EmbedUser
 }
 
