@@ -52,10 +52,12 @@ type EntryInput struct {
 	// For Creating To-Dos From Comment
 	BasedPostId        string
 	GroupIdOfBasedPost string
-	SelectionTextInFo  struct {
-		Text    string
-		Occured int
-	}
+	SelectionTextInFo  SelectionTextInFo
+}
+
+type SelectionTextInFo struct {
+	Text    string
+	Occured int
 }
 
 const (
@@ -238,7 +240,6 @@ type TaskInput struct {
 	AssigneeId                string
 	TodoStatus                int
 	Label                     int
-	Priority                  int
 	EstimateTime              string
 	SpentTime                 string
 	IsClaiming                bool
