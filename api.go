@@ -236,6 +236,7 @@ type AuthUserService interface {
 	AllClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime string) (taskOutlines []*TaskOutline, apiGroup *Group, hasMore bool, err error)
 	CountOfClosedToDosInGroup(ttype int, groupId string) (count int, err error)
+	ToDoCSV(groupId string) (todos []*ToDoCSVItem, err error)
 }
 
 type AuthAdminService interface {

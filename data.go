@@ -1040,6 +1040,20 @@ type ClosedAdvancedToDoOutline struct {
 	Group            *Group
 }
 
+type ToDoCSVItem struct {
+	Creator string
+	Title   string
+	// Content         string
+	Status          string
+	EstimateTime    string `Title:"Estimate Time"`
+	TotalSpentTime  string `Title:"Total Spent Time"`
+	TimeUnit        string `Title:"Time Unit"`
+	SpentTimeDetail string `Title:"Spent Time Detail"`
+	CreateTime      string `Title:"Create Time"`
+	UpdateTime      string `Title:"Update Time"`
+	Due             string
+}
+
 type TranslatedThread struct {
 	Title         string
 	Content       string
