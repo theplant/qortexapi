@@ -280,4 +280,6 @@ type AuthAdminService interface {
 	GetOrgPayment() (orgPaymentInfos []*OrgPaymentInfo, err error)
 
 	SetTrial(orgId string, deadLine string) (err error)
+
+	SetExpiredAt(orgId string, deadLine string) (err error)
 }
