@@ -36,6 +36,7 @@ type Organization struct {
 	IsSample      bool
 	IsSandBox     bool
 	PublicDemoURL string
+	TutorialsURL string
 	CreatedAt     string
 }
 
