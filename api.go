@@ -208,6 +208,7 @@ type AuthUserService interface {
 
 	// preferences
 	DismissPresentationTip() (err error)
+	DismissTutorialsTip() (err error)
 
 	// chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
