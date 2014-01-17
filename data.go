@@ -698,7 +698,7 @@ type Entry struct {
 	LocaleTitleMap       map[string]string        `json:",omitempty"`
 	LocaleContentMap     map[string]template.HTML `json:",omitempty"`
 	LocaleHtmlContentMap map[string]template.HTML `json:",omitempty"`
-	BingLanguageCode     string                   `json:",omitempty"`
+	LanguageCode         string                   `json:",omitempty"`
 
 	HasMoreThanOneLanguages bool
 	IsAllTranslated         bool
