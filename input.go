@@ -47,8 +47,8 @@ type EntryInput struct {
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
-	LocaleName       string
-	BingLanguageCode string //Bing translation code
+	LocaleName   string
+	LanguageCode string //CLD language code
 
 	// For Creating To-Dos From Comment
 	BasedPostId        string
@@ -85,7 +85,7 @@ type QortexSupportInput struct {
 	PublishedToUsers bool
 	LinkTitle        string //for qortex support knowledge base
 
-	BingLanguageCode string
+	LanguageCode string
 }
 
 type GroupInput struct {
