@@ -71,7 +71,13 @@ type AuthUserService interface {
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
-	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (entry *Entry, err error)
+	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)  //When languageCode is empty, use default
+	EditEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
+	GetKnowledgeOverview(groupId string, languageCode string) (r *KnowledgeOverview, err error)                                                            //When languageCode is empty, use default
+	SwitchKnowledgeOverviewVersion(groupId string, entryId string, languageCode string) (r *KnowledgeOverview, err error)
+	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
+	GetEntryToTranslate(entryId string, groupId string) (entry *Entry, err error)
+	GetWikiSectionToTranslate(entryId string, groupId string) (entry *KnowledgeOverview, err error)
 
 	// dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
@@ -79,6 +85,7 @@ type AuthUserService interface {
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
 	MachineTranslate(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
+	MachineTranslateWikiSection(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
 	OriginalThread(entryId string, groupId string) (translatedThread *TranslatedThread, err error)
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
@@ -217,7 +224,7 @@ type AuthUserService interface {
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
-	GetQortexSupport(entryId string) (entry *Entry, err error)
+	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
