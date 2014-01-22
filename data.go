@@ -1051,9 +1051,9 @@ type ClosedAdvancedToDoOutline struct {
 }
 
 type ToDoCSVItem struct {
-	Creator string
-	Title   string
-	// Content         string
+	Creator         string
+	Title           string
+	Content         string `Title:"Description"`
 	Status          string
 	EstimateTime    string `Title:"Estimate Time"`
 	TotalSpentTime  string `Title:"Total Spent Time"`
