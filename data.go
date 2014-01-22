@@ -1,9 +1,10 @@
 package qortexapi
 
 import (
-	paymentapi "github.com/theplant/theplant_payment/api"
 	"html/template"
 	"time"
+
+	paymentapi "github.com/theplant/theplant_payment/api"
 )
 
 type OrgSettings struct {
@@ -909,6 +910,17 @@ type OrgPaymentInfo struct {
 	IsSharingOrg  bool
 	TrialDeadline time.Time
 	ExpiredAt     time.Time
+}
+
+type OrgPaymentHistory struct {
+	PaymentDescription string
+	PaymentDate        time.Time
+	CurrencyCode       string
+	PaymentAmount      int64
+	Status             string
+	Term               int64
+	UserCount          int64
+	NextPaymentDate    time.Time
 }
 
 type AccessReq struct {
