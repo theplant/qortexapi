@@ -97,8 +97,8 @@ type AuthUserService interface {
 
 	// watchlist related
 	GetWatchList(before string, limit int) (watchlist *WatchList, err error)
-	AddToWatchList(entryId string, groupId string, remindMode string) (added bool, err error)
-	StopWatching(entryId string, groupId string) (stopped bool, err error)
+	AddToWatchList(entryId string, groupId string, remindMode string) (err error)
+	StopWatching(entryId string, groupId string) (err error)
 	ReadWatching(entryId string, groupId string) (err error)
 	RemindMe() (reminded bool, err error)
 	StartSmartReminding(groupId string, watchItemId string) (stopped bool, err error)
