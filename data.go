@@ -660,18 +660,19 @@ type Entry struct {
 
 	Versions []*EntryVersion `json:",omitempty"`
 
-	ToUsers                []EmbedUser   `json:",omitempty"`
-	MentionedUsers         []EmbedUser   `json:",omitempty"`
-	LikedByUsers           []EmbedUser   `json:",omitempty"`
-	Attachments            []*Attachment `json:",omitempty"`
-	CommentsAttachments    []*Attachment `json:",omitempty"`
-	FirstPicture           *Attachment   `json:",omitempty"`
-	ExternalComments       []*Entry      `json:",omitempty"`
-	CurrentVersionComments []*Entry
-	OtherVersionsComments  []*Entry
-	NewComment             *Entry         `json:",omitempty"`
-	NewEntry               *Entry         `json:",omitempty"`
-	GroupSlector           *GroupSelector `json:",omitempty"`
+	ToUsers        []EmbedUser `json:",omitempty"`
+	MentionedUsers []EmbedUser `json:",omitempty"`
+	LikedByUsers                   []EmbedUser   `json:",omitempty"`
+	IsLikedByUsersCountMoreThanOne bool          `json:",omitempty"`
+	Attachments                    []*Attachment `json:",omitempty"`
+	CommentsAttachments            []*Attachment `json:",omitempty"`
+	FirstPicture                   *Attachment   `json:",omitempty"`
+	ExternalComments               []*Entry      `json:",omitempty"`
+	CurrentVersionComments         []*Entry
+	OtherVersionsComments          []*Entry
+	NewComment                     *Entry         `json:",omitempty"`
+	NewEntry                       *Entry         `json:",omitempty"`
+	GroupSlector                   *GroupSelector `json:",omitempty"`
 
 	// Aaron New Added
 	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
