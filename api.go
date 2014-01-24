@@ -156,7 +156,7 @@ type AuthUserService interface {
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
-	SetPreferredLanguages(languageCodes []string) (err error)
+	SetPreferredLanguages(languageCodes []string) (localeName string, err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
