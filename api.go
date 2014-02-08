@@ -92,6 +92,7 @@ type AuthUserService interface {
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
 
+	GetMyNotifications(before string, limit int) (mynotis *MyNotifications, err error)
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
 	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
 
