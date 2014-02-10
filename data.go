@@ -136,9 +136,9 @@ type EmbedUser struct {
 
 type PanelStatus struct {
 	// HasToDo                 bool
-	HasDraft                bool
-	HasWatchList            bool
-	HasChat                 bool
+	// HasDraft                bool
+	// HasWatchList            bool
+	// HasChat                 bool
 	ShowMarkUnreadThreshold int
 }
 
