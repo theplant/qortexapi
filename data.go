@@ -678,7 +678,6 @@ type Entry struct {
 	CurrentVersionComments         []*Entry
 	OtherVersionsComments          []*Entry
 	NewComment                     *Entry         `json:",omitempty"`
-	NewEntry                       *Entry         `json:",omitempty"`
 	GroupSlector                   *GroupSelector `json:",omitempty"`
 
 	// Aaron New Added
