@@ -245,6 +245,7 @@ type TaskInput struct {
 	IsClaiming                bool
 	ToUserIds                 string
 	TimetrackingHistoryUpdate string
+	TaskDue                   string // format:20130507
 }
 
 type TaskPwMap struct {

@@ -317,6 +317,7 @@ type TaskLog struct {
 	IsTimeTrackingUpdated bool
 	IsReopened            bool // {Author} reopened this To-Do.
 	IsLabelChanged        bool // {Author} set the label to Bug.
+	IsDueChanged          bool // {Author} set the due date from 2013/09/23 to 2014/09/23.
 
 	CreatedAt           time.Time
 	VersionAt           time.Time
@@ -332,6 +333,9 @@ type TaskLog struct {
 	Status string
 	// Priority string
 	Label string
+
+	LocalOldDue string
+	LocalNewDue string
 
 	TimeTrackingUpdateLogs []*TimeTrackingUpdateLog
 }
@@ -396,6 +400,7 @@ type Task struct {
 	CompletedAt       time.Time `json:",omitempty"`
 	LocalCreatedDate  string    `json:",omitempty"`
 	LocalDue          string    `json:",omitempty"`
+	LocalDueWithYear  string    `json:",omitempty"`
 	LocalDueShortDate string    `json:",omitempty"`
 	DueInputValue     string    `json:",omitempty"`
 
