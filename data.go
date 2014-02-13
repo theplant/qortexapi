@@ -991,28 +991,22 @@ type TaskOutline struct {
 	CompleteAtUnixNano  int64
 	IsTitleCreatedBy    bool
 	ActionNeeded        bool
+	IsUnprioritized     bool
 }
 
 type GroupTasksOutline struct {
-	Group               *EmbedGroup
-	AcksAndPendingToDos []*TaskOutline // Action Needed
-	SimpleToDos         []*TaskOutline
-	// NowToDos             []*TaskOutline
-	// NowEstimateTotal     float64
+	Group                   *EmbedGroup
+	AcksAndPendingToDos     []*TaskOutline // Action Needed
+	SimpleToDos             []*TaskOutline
 	OpenToDos               []*TaskOutline
 	OpenEstimateTotal       float64
 	NotStartedToDos         []*TaskOutline
 	NotStartedEstimateTotal float64
-	// SoonToDos            []*TaskOutline
-	// SoonEstimateTotal    float64
-	// SomedayToDos         []*TaskOutline
-	// SomedayEstimateTotal float64
-	EstimateUnit string
+	EstimateUnit            string
 }
 
 type OpenAdvancedToDosBucket struct {
-	Title string
-	// Type          string
+	Title         string
 	ToDoSettings  *AdvancedToDoSettings
 	ToDos         []*TaskOutline
 	LenOfToDos    int
@@ -1023,9 +1017,27 @@ type OpenAdvancedToDosBucket struct {
 }
 
 type OpenAdvancedToDosPage struct {
-	Assignee          *EmbedUser
+	Assignee                     *EmbedUser `json:",omitempty"`
+	ToDos                        []*TaskOutline
+	ToDoMarkers                  []*ToDoMarker
+	EstimateTotal, TrackingTotal float64
+	EstimateUnit                 string
+	Followers                    []*EmbedUser
+	ToDoSettings                 *AdvancedToDoSettings
+
+	// TODO: Remove
 	ActionNeededToDos []*TaskOutline
 	ToDosBuckets      []*OpenAdvancedToDosBucket
+}
+
+type ToDoMarker struct {
+	Id                           string
+	Label                        string
+	Date                         string
+	BeforeIndex                  int
+	EstimateTotal, TrackingTotal float64
+	EstimateUnit                 string
+	PriorityWeight               float64
 }
 
 type BasicOpenToDoOutlines struct {
