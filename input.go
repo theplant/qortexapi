@@ -246,6 +246,7 @@ type TaskInput struct {
 	ToUserIds                 string
 	TimetrackingHistoryUpdate string
 	TaskDue                   string // format:20130507
+	EntryId                   string
 }
 
 type TaskPwMap struct {
