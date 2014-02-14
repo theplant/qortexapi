@@ -1005,27 +1005,27 @@ type GroupTasksOutline struct {
 	EstimateUnit            string
 }
 
+// Bucket is a historical name after many runs of feature iteration,
+// basically, it represents a bunch of to-dos and its relevant information.
 type OpenAdvancedToDosBucket struct {
-	Title         string
-	ToDoSettings  *AdvancedToDoSettings
-	ToDos         []*TaskOutline
-	LenOfToDos    int
-	EstimateTotal float64
-	EstimateUnit  string
-	Editable      bool
-	Followers     []*EmbedUser
+	Title        string
+	ToDoSettings *AdvancedToDoSettings
+	ToDos        []*TaskOutline
+
+	NoStat                       bool
+	EstimateTotal, TrackingTotal float64
+	EstimateUnit                 string
+
+	Followers   []*EmbedUser
+	ToDoMarkers []*ToDoMarker
+
+	// TODO: to remove
+	LenOfToDos int
+	Editable   bool
 }
 
 type OpenAdvancedToDosPage struct {
-	Assignee                     *EmbedUser `json:",omitempty"`
-	ToDos                        []*TaskOutline
-	ToDoMarkers                  []*ToDoMarker
-	EstimateTotal, TrackingTotal float64
-	EstimateUnit                 string
-	Followers                    []*EmbedUser
-	ToDoSettings                 *AdvancedToDoSettings
-
-	// TODO: Remove
+	Assignee          *EmbedUser `json:",omitempty"`
 	ActionNeededToDos []*TaskOutline
 	ToDosBuckets      []*OpenAdvancedToDosBucket
 }

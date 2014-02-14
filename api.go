@@ -228,10 +228,10 @@ type AuthUserService interface {
 
 	// [Group] Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
-	AllOpenAdvancedToDosInGroup(groupId string) (page *OpenAdvancedToDosPage, err error)
+	AllOpenAdvancedToDosInGroup(groupId string) (bucket *OpenAdvancedToDosBucket, err error)
 	AllOpenAdvancedToDosGroupingByUserInGroup(groupId string) (atos []*OpenAdvancedToDosPage, err error)
-	AllOpenAdvancedToDosGroupingByStatusInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
-	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
+	AllOpenAdvancedToDosGroupingByStatusInGroup(groupId string) (page []*OpenAdvancedToDosBucket, apiGroup *Group, err error)
+	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page []*OpenAdvancedToDosBucket, apiGroup *Group, err error)
 	AllOpenBasicToDosInGroup(groupId string) (taskOutlines []*TaskOutline, err error)
 	AllOpenBasicToDosGroupingByUserInGroup(groupId string) (atos []*BasicOpenToDoOutlines, err error)
 	AllClosedBasicToDosInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
