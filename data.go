@@ -908,6 +908,7 @@ type OrgPaymentInfo struct {
 	OrgName       string
 	IsFreeOrg     bool
 	IsSharingOrg  bool
+	HasPaid       bool
 	TrialDeadline time.Time
 	ExpiredAt     time.Time
 }
