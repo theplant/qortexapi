@@ -1025,9 +1025,8 @@ type OpenAdvancedToDosBucket struct {
 }
 
 type OpenAdvancedToDosPage struct {
-	Assignee          *EmbedUser `json:",omitempty"`
-	ActionNeededToDos []*TaskOutline
-	ToDosBuckets      []*OpenAdvancedToDosBucket
+	Assignee     *EmbedUser `json:",omitempty"`
+	ToDosBuckets []*OpenAdvancedToDosBucket
 }
 
 type ToDoMarker struct {
