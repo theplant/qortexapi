@@ -748,6 +748,7 @@ type WatchList struct {
 
 type MyTask struct {
 	PrefixURL       string
+	UserName        string
 	NeedActionTasks []*TaskOutline
 	GroupTasks      []*GroupTasksOutline
 	ClosedTasks     []*TaskOutline
