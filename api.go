@@ -92,13 +92,14 @@ type AuthUserService interface {
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
 
+	GetMyNotifications(before string, limit int) (mynotis *MyNotifications, err error)
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
 	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
 
 	// watchlist related
 	GetWatchList(before string, limit int) (watchlist *WatchList, err error)
-	AddToWatchList(entryId string, groupId string, remindMode string) (added bool, err error)
-	StopWatching(entryId string, groupId string) (stopped bool, err error)
+	AddToWatchList(entryId string, groupId string, remindMode string) (err error)
+	StopWatching(entryId string, groupId string) (err error)
 	ReadWatching(entryId string, groupId string) (err error)
 	RemindMe() (reminded bool, err error)
 	StartSmartReminding(groupId string, watchItemId string) (stopped bool, err error)
@@ -223,6 +224,7 @@ type AuthUserService interface {
 	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)
 	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
+	GetUserTasks(userId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 
 	// [Group] Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
