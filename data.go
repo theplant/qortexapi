@@ -458,45 +458,6 @@ type LinkedEntry struct {
 	Link           template.HTMLAttr
 }
 
-// TODO: should be replaced by ShareRequest
-type Request struct {
-	Id               string
-	CurrentPrefixURL string
-	Info             template.HTML
-	ActionButton     template.HTML
-
-	FromOrg         EmbedOrg
-	ToOrg           EmbedOrg
-	SharedGroup     EmbedGroup
-	SharedOrgIdHex  string
-	FromUserIdHex   string
-	SharedInvitee   EmbedUser
-	SharedInviter   EmbedUser
-	SharedResponsor EmbedUser
-	ToEmail         string
-	State           string
-}
-
-// TODO: Deprecated! Remove me later. ShareRequest is the new one
-type SharingInvitation struct {
-	FromOrg         EmbedOrg
-	FromUserId      string
-	SharedGroup     *Group
-	IsNewAccount    bool
-	Email           string
-	Token           string
-	JoinedOrgs      []EmbedOrg
-	IsAccepted      bool
-	IsRejected      bool
-	IsPending       bool
-	IsForwarded     bool
-	IsCanceled      bool
-	IsStopped       bool
-	PendingDuration string
-	ToOrgName       string
-	ToOrgId         string
-}
-
 type ShareRequest struct {
 	Id              string
 	FromUser        EmbedUser
@@ -519,6 +480,16 @@ type ShareRequest struct {
 	Info            template.HTML `json:",omitempty"`
 	ActionButton    template.HTML `json:",omitempty"`
 	RequestBarHtml  template.HTML `json:",omitempty"`
+}
+
+type InnerMessage struct {
+	IsGroupCreated bool
+	IsGroupDeleted bool
+	IsOrgCreated   bool
+	UserName       string
+	GroupName      string
+	GroupLink      string
+	OrgName        string
 }
 
 type GroupSharingInfo struct {
@@ -619,13 +590,10 @@ type Entry struct {
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
 
-	InnerMessage    *InnerMessage `json:",omitempty"`
-	IsSystemMessage bool          `json:",omitempty"`
-	IsInnerMessage  bool          `json:",omitempty"`
-	IsBroadcast     bool          `json:",omitempty"`
+	IsBroadcast     bool          `json:",omitempty"` // Deprecated, should be removed
 	IsFromSuperOrg  bool          `json:",omitempty"`
 	IsFromSuperUser bool          `json:",omitempty"`
-	IsFeedback      bool          `json:",omitempty"`
+	IsFeedback      bool          `json:",omitempty"` // Deprecated, should be removed
 	FromOrg         EmbedOrg      `json:",omitempty"`
 	ToOrgs          []EmbedOrg    `json:",omitempty"`
 	ToOrgsHtml      template.HTML `json:",omitempty"`
@@ -657,6 +625,9 @@ type Entry struct {
 	IsFromEmail     bool   `json:",omitempty"`
 	InlineHelp      bool   `json:",omitempty"`
 
+	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
+	VisibleForSuperOrg            bool `json:",omitempty"`
+
 	AllAttachmentsCount         int
 	CommentsCount               int
 	CurrentVersionCommentsCount int
@@ -687,17 +658,19 @@ type Entry struct {
 	NewComment                     *Entry         `json:",omitempty"`
 	GroupSlector                   *GroupSelector `json:",omitempty"`
 
-	// Aaron New Added
-	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
+	// Qortex Support Type
 	IsQortexSupport              bool              `json:",omitempty"`
 	QortexSupport                *QortexSupport    `json:",omitempty"`
 	IsQortexSupportKnowledgeBase bool              `json:",omitempty"`
 	LinkTitle                    string            `json:",omitempty"`
+	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
 
-	IsRequest                     bool          `json:",omitempty"`
-	ShareRequest                  *ShareRequest `json:",omitempty"`
-	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
-	VisibleForSuperOrg            bool          `json:",omitempty"`
+	// System Message Type
+	IsSystemMessage bool `json:",omitempty"`
+
+	// Is Share Request type of System Message
+	IsRequest    bool          `json:",omitempty"`
+	ShareRequest *ShareRequest `json:",omitempty"`
 
 	//Multi locales related
 	CurrentLocaleName    string                   `json:",omitempty"`
@@ -710,6 +683,10 @@ type Entry struct {
 	IsAllTranslated         bool
 	EntryLanguages          []*EntryLanguage
 	ToLanguages             []*SupportedLanguage
+
+	// Is Inner Message type of System Message
+	IsInnerMessage bool          `json:",omitempty"`
+	InnerMessage   *InnerMessage `json:",omitempty"`
 
 	// For Advanced To-Dos
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
@@ -745,10 +722,10 @@ type BasedOnPost struct {
 
 type QortexSupport struct {
 	Audience          string        `json:",omitempty"`
-	IsToOffical       bool          `json:",omitempty"`
-	IsToAllUsers      bool          `json:",omitempty"`
-	IsToAllAdmins     bool          `json:",omitempty"`
-	IsToOrganizations bool          `json:",omitempty"`
+	IsToOffical       bool          `json:",omitempty"` // Is customer's feedback
+	IsToAllUsers      bool          `json:",omitempty"` // Is Qortex Support Message to all users
+	IsToAllAdmins     bool          `json:",omitempty"` // Is Qortex Support Message to all admins
+	IsToOrganizations bool          `json:",omitempty"` // Is Qortex Support Message to some organizations
 	FromOrg           EmbedOrg      `json:",omitempty"`
 	ToOrgs            []EmbedOrg    `json:",omitempty"`
 	ToOrgsHtml        template.HTML `json:",omitempty"`
@@ -937,16 +914,6 @@ type AccessReq struct {
 	ApprovedBy   string
 	CreatedAt    string
 	UpdatedAt    string
-}
-
-type InnerMessage struct {
-	ByUser                string
-	GroupName             string
-	GroupLink             string
-	OrgName               string
-	IsDeletedGroupMessage bool
-	IsCreatedGroupMessage bool
-	IsSetupOrgMessage     bool
 }
 
 type GroupAside struct {
