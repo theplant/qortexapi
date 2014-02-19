@@ -34,6 +34,13 @@ type Organization struct {
 	SizeOptions              map[string]string
 }
 
+type SearchOrganization struct {
+	Id        string
+	Name      string
+	QortexURL string
+	LogoURL   string
+}
+
 type Blog struct {
 	Title       string
 	Description string
