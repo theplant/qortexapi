@@ -1120,4 +1120,5 @@ type BillingInfo struct {
 	Billing              *paymentapi.Billing
 	BillingDetails       *paymentapi.BillingDetails
 	PastPayments         []paymentapi.Payment
+	Package              *paymentapi.Package
 }
