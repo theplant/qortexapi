@@ -34,6 +34,13 @@ type Organization struct {
 	SizeOptions              map[string]string
 }
 
+type SearchOrganization struct {
+	Id        string
+	Name      string
+	QortexURL string
+	LogoURL   string
+}
+
 type Blog struct {
 	Title       string
 	Description string
@@ -761,6 +768,7 @@ type WatchList struct {
 
 type MyTask struct {
 	PrefixURL       string
+	UserName        string
 	NeedActionTasks []*TaskOutline
 	GroupTasks      []*GroupTasksOutline
 	ClosedTasks     []*TaskOutline

@@ -171,7 +171,7 @@ type AuthUserService interface {
 	GetMyOrgsUnreadInfo() (unreadInfo []*OrgUnreadInfo, err error)
 	GetMyJoinedOrganizations() (orgs []*Organization, err error)
 	GetCurrentOrganization() (org *Organization, err error)
-	SearchOrganizations(keyword string) (orgs []*Organization, err error)
+	SearchOrganizations(keyword string) (orgs []*SearchOrganization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
 
