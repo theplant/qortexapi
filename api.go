@@ -163,7 +163,7 @@ type AuthUserService interface {
 	GetMyOrgsUnreadInfo() (unreadInfo []*OrgUnreadInfo, err error)
 	GetMyJoinedOrganizations() (orgs []*Organization, err error)
 	GetCurrentOrganization() (org *Organization, err error)
-	SearchOrganizations(keyword string) (orgs []*Organization, err error)
+	SearchOrganizations(keyword string) (orgs []*SearchOrganization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
 
@@ -203,6 +203,7 @@ type AuthUserService interface {
 	// chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
 	GetPrivateChat(conversationId string, searchKeyWords string) (chatEntry *Entry, err error)
+	OpenConversation(cid, fromJid, toJid string) (err error)
 
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
