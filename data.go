@@ -1105,3 +1105,8 @@ type KnowledgeOverview struct {
 	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
 	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
 }
+
+type GroupCollection struct {
+	Id   string
+	Name string
+}
