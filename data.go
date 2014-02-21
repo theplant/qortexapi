@@ -595,6 +595,7 @@ type Entry struct {
 	WatchlistHtml       template.HTML `json:",omitempty"`
 	ToUsersHtml         template.HTML `json:",omitempty"`
 	LikedByUsersHtml    template.HTML `json:",omitempty"`
+	HistoryPanelHtml        template.HTML `json:",omitempty"`
 
 	Link             template.HTMLAttr `json:",omitempty"`
 	BaseOnLink       template.HTMLAttr `json:",omitempty"`

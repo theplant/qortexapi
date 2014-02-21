@@ -71,7 +71,8 @@ type AuthUserService interface {
 	GetTitle(groupId string, entryId string) (title string, err error)                                                                                     //When languageCode is empty, use default
 	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)  //When languageCode is empty, use default
 	EditEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
-	GetKnowledgeOverview(groupId string, languageCode string) (r *KnowledgeOverview, err error)                                                            //When languageCode is empty, use default
+	SwitchEntryLanguage(entryId string, groupId string, languageCode string) (entry *Entry, err error)
+	GetKnowledgeOverview(groupId string, languageCode string) (r *KnowledgeOverview, err error) //When languageCode is empty, use default
 	SwitchKnowledgeOverviewVersion(groupId string, entryId string, languageCode string) (r *KnowledgeOverview, err error)
 	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
 	GetEntryToTranslate(entryId string, groupId string) (entry *Entry, err error)
