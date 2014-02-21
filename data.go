@@ -1095,3 +1095,8 @@ type SupportedLanguage struct {
 	DisplayText string
 	IsCurrent   bool
 }
+
+type GroupCollection struct {
+	Id   string
+	Name string
+}
