@@ -155,6 +155,7 @@ type AuthUserService interface {
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
 	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
+	ReadNotificationItem(itemId, groupId string) (myCount *MyCount, err error)
 
 	// Organization Related
 	GetJoinOrgInvitations() (invitations []*Invitation, err error)
