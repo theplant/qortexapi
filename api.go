@@ -63,11 +63,21 @@ type AuthUserService interface {
 	CreateTask(input *EntryInput) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string, taskId string) (entry *Task, err error)
 	CreateComment(input *EntryInput) (entry *Entry, err error)
-	GetComment(entryId string, groupId string) (entry *Entry, err error)
+	GetComment(entryId string, groupId string, languageCode string) (entry *Entry, err error)
+	EditComment(entryId string, groupId string, languageCode string) (entry *Entry, err error)
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
-	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string) (entry *Entry, err error)
+	GetTitle(groupId string, entryId string) (title string, err error)                                                                                              //When languageCode is empty, use default
+	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)           //When languageCode is empty, use default
+	SwitchEntryVersion(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
+	EditEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)          //When languageCode is empty, use default
+	SwitchEntryLanguage(entryId string, groupId string, languageCode string) (entry *Entry, err error)
+	GetKnowledgeOverview(groupId string, languageCode string) (r *KnowledgeOverview, err error) //When languageCode is empty, use default
+	SwitchKnowledgeOverviewVersion(groupId string, entryId string, languageCode string) (r *KnowledgeOverview, err error)
+	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
+	GetEntryToTranslate(entryId string, groupId string) (entry *Entry, err error)
+	GetWikiSectionToTranslate(entryId string, groupId string) (entry *KnowledgeOverview, err error)
 
 	// dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
@@ -75,6 +85,7 @@ type AuthUserService interface {
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
 	MachineTranslate(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
+	MachineTranslateWikiSection(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
 	OriginalThread(entryId string, groupId string) (translatedThread *TranslatedThread, err error)
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
@@ -150,7 +161,7 @@ type AuthUserService interface {
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
-	SetPreferredLanguages(languageCodes []string) (err error)
+	SetPreferredLanguages(languageCodes []string) (localeName string, err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
@@ -209,7 +220,7 @@ type AuthUserService interface {
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
-	GetQortexSupport(entryId string) (entry *Entry, err error)
+	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
