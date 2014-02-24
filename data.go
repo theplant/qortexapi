@@ -1085,6 +1085,7 @@ type KnowledgeOverview struct {
 	EntryId                 string
 	Title                   string
 	Content                 string
+	HtmlTitle               template.HTML
 	HtmlContent             template.HTML
 	LocaleTitleMap          map[string]string        `json:",omitempty"`
 	LocaleHtmlContentMap    map[string]template.HTML `json:",omitempty"`
