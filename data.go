@@ -566,6 +566,7 @@ type Entry struct {
 	WatchlistHtml       template.HTML `json:",omitempty"`
 	ToUsersHtml         template.HTML `json:",omitempty"`
 	LikedByUsersHtml    template.HTML `json:",omitempty"`
+	HistoryPanelHtml    template.HTML `json:",omitempty"`
 
 	Link             template.HTMLAttr `json:",omitempty"`
 	BaseOnLink       template.HTMLAttr `json:",omitempty"`
@@ -667,14 +668,21 @@ type Entry struct {
 	IsRequest    bool          `json:",omitempty"`
 	ShareRequest *ShareRequest `json:",omitempty"`
 
+	//Multi locales related
+	CurrentLocaleName    string                   `json:",omitempty"`
+	LocaleTitleMap       map[string]string        `json:",omitempty"`
+	LocaleContentMap     map[string]template.HTML `json:",omitempty"`
+	LocaleHtmlContentMap map[string]template.HTML `json:",omitempty"`
+	LanguageCode         string                   `json:",omitempty"`
+
+	HasMoreThanOneLanguages bool
+	IsAllTranslated         bool
+	EntryLanguages          []*EntryLanguage
+	ToLanguages             []*SupportedLanguage
+
 	// Is Inner Message type of System Message
 	IsInnerMessage bool          `json:",omitempty"`
 	InnerMessage   *InnerMessage `json:",omitempty"`
-
-	// Multi locales related
-	CurrentLocaleName string                   `json:",omitempty"`
-	LocaleTitleMap    map[string]string        `json:",omitempty"`
-	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
 
 	// For Advanced To-Dos
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
@@ -685,6 +693,12 @@ type Entry struct {
 
 	// TODO: to remove
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
+}
+
+type EntryLanguage struct {
+	Code         string
+	LanguageName string
+	IsCurrent    bool
 }
 
 type RelatedEntry struct {
@@ -1036,6 +1050,7 @@ type TranslatedThread struct {
 	Content       string
 	Comments      []*TranslatedComment
 	IsCommentOnly bool
+	IsWikiSection bool
 }
 
 type TranslatedComment struct {
@@ -1061,4 +1076,31 @@ type SupportedLanguage struct {
 	StoreKey    string
 	DisplayText string
 	IsCurrent   bool
+}
+
+type KnowledgeOverview struct {
+	Author                  EmbedUser
+	PrefixURL               string
+	GroupId                 string
+	EntryId                 string
+	Title                   string
+	Content                 string
+	HtmlContent             template.HTML
+	LocaleTitleMap          map[string]string        `json:",omitempty"`
+	LocaleHtmlContentMap    map[string]template.HTML `json:",omitempty"`
+	IsPreferMarkdown        bool
+	IsHidden                bool
+	IsAtQortexSupport       bool
+	Editable                bool
+	CanSeeHiddenBanner      bool
+	HasVersions             bool
+	Versions                []*EntryVersion `json:",omitempty"`
+	LanguageCode            string
+	EntryLanguages          []*EntryLanguage
+	ToLanguages             []*SupportedLanguage
+	HasMoreThanOneLanguages bool
+	IsAllTranslated         bool
+	UploadURL               template.HTMLAttr `json:",omitempty"` //just for reuse the mannual translation form
+	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
+	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
 }

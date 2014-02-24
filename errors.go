@@ -47,4 +47,5 @@ var (
 	HighFrequencyError             = errors.New("High frequency requests")
 	SaveTranscriptionError         = errors.New("Can not save transcription")
 	ClaimTaskError                 = errors.New("Task was already cliamed by others")
+	InvalidLanguageCodeError       = errors.New("Language code is not supported")
 )
