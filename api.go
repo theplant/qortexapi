@@ -67,13 +67,17 @@ type AuthUserService interface {
 	CreateTask(input *EntryInput) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string, taskId string) (entry *Task, err error)
 	CreateComment(input *EntryInput) (entry *Entry, err error)
-	GetComment(entryId string, groupId string) (entry *Entry, err error)
+	GetComment(entryId string, groupId string, languageCode string) (entry *Entry, err error)
+	EditComment(entryId string, groupId string, languageCode string) (entry *Entry, err error)
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
-	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)  //When languageCode is empty, use default
-	EditEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
-	GetKnowledgeOverview(groupId string, languageCode string) (r *KnowledgeOverview, err error)                                                            //When languageCode is empty, use default
+	GetTitle(groupId string, entryId string) (title string, err error)                                                                                              //When languageCode is empty, use default
+	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)           //When languageCode is empty, use default
+	SwitchEntryVersion(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
+	EditEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)          //When languageCode is empty, use default
+	SwitchEntryLanguage(entryId string, groupId string, languageCode string) (entry *Entry, err error)
+	GetKnowledgeOverview(groupId string, languageCode string) (r *KnowledgeOverview, err error) //When languageCode is empty, use default
 	SwitchKnowledgeOverviewVersion(groupId string, entryId string, languageCode string) (r *KnowledgeOverview, err error)
 	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
 	GetEntryToTranslate(entryId string, groupId string) (entry *Entry, err error)
@@ -84,7 +88,7 @@ type AuthUserService interface {
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
-	MachineTranslate(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
+	MachineTranslate(entryId string, groupId string, currentLang string, targetlang string) (translatedThread *TranslatedThread, err error)
 	MachineTranslateWikiSection(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
 	OriginalThread(entryId string, groupId string) (translatedThread *TranslatedThread, err error)
 
@@ -103,6 +107,7 @@ type AuthUserService interface {
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
 
+	GetMyNotifications(before string, limit int) (mynotis *MyNotifications, err error)
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
 	MarkAllAsRead(groupId string) (mycount *MyCount, err error)
 
@@ -160,11 +165,12 @@ type AuthUserService interface {
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
-	SetPreferredLanguages(languageCodes []string) (err error)
+	SetPreferredLanguages(languageCodes []string) (localeName string, err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
 	ReadEntry(entryId, groupId string) (myCount *MyCount, err error)
+	ReadNotificationItem(itemId, groupId string) (myCount *MyCount, err error)
 
 	// Organization Related
 	GetJoinOrgInvitations() (invitations []*Invitation, err error)
@@ -173,7 +179,7 @@ type AuthUserService interface {
 	GetMyOrgsUnreadInfo() (unreadInfo []*OrgUnreadInfo, err error)
 	GetMyJoinedOrganizations() (orgs []*Organization, err error)
 	GetCurrentOrganization() (org *Organization, err error)
-	SearchOrganizations(keyword string) (orgs []*Organization, err error)
+	SearchOrganizations(keyword string) (orgs []*SearchOrganization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
 	MarkAsSampleOrg() (err error)
@@ -220,6 +226,7 @@ type AuthUserService interface {
 	// chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
 	GetPrivateChat(conversationId string, searchKeyWords string) (chatEntry *Entry, err error)
+	OpenConversation(cid, fromJid, toJid string) (err error)
 
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
@@ -241,6 +248,7 @@ type AuthUserService interface {
 	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)
 	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
+	GetUserTasks(userId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 
 	// [Group] Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
