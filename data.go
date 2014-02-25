@@ -224,6 +224,7 @@ type GroupAdvancedSettingPage struct {
 	ThrowawayNotYetOpenTagIndexes map[string][]string
 	ThrowawayOpenTagIndexes       map[string][]string
 	ThrowawayClosedTagIndexes     map[string][]string
+	HideSharingExternally         bool
 }
 
 type EmbedGroup struct {
