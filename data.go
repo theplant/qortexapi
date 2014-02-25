@@ -1122,4 +1122,7 @@ type BillingInfo struct {
 	PastPayments         []paymentapi.Payment
 	Package              *paymentapi.Package
 	CurrencySymbol       string
+	HasWaitingBilling    bool
+	HasSubscribedBilling bool
+	HasPaidBilling       bool
 }
