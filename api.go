@@ -86,6 +86,7 @@ type AuthUserService interface {
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetGroupAside() (ga *GroupAside, err error)
+	GetNewGroupAside() (nga *NewGroupAside, err error)
 
 	// Get Unread entries for type entryType since the fromTimeUnixNano unix nanoseconds, and return max limit entries.
 	// entryType could be:	"post", "knowledge", "task"

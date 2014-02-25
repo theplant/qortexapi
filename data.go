@@ -1101,3 +1101,25 @@ type GroupCollection struct {
 	Id   string
 	Name string
 }
+
+type NewGroupAside struct {
+	ShowNewGroupButton bool
+	Lists              []*GroupCollectionList
+}
+
+type GroupCollectionList struct {
+	IsEmpty       bool
+	IsCollapsed   bool
+	Announcement  *Group
+	QortexSupport *Group
+	Collections   []*GroupsInCollection
+	Groups        []*Group
+	SharedGroups  []*Group
+}
+
+type GroupsInCollection struct {
+	ColId        string
+	ColName      string
+	Groups       []*Group
+	SharedGroups []*Group
+}
