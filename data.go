@@ -1121,4 +1121,5 @@ type BillingInfo struct {
 	BillingDetails       *paymentapi.BillingDetails
 	PastPayments         []paymentapi.Payment
 	Package              *paymentapi.Package
+	CurrencySymbol       string
 }
