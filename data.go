@@ -160,6 +160,7 @@ type Group struct {
 	TaskLink            string `json:",omitempty"`
 	Slug                string `json:",omitempty"`
 	Author              EmbedUser
+	IsArchived          bool
 	IsAdmin             bool              `json:",omitempty"`
 	IsPrivate           bool              `json:",omitempty"`
 	Editable            bool              `json:",omitempty"`
