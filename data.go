@@ -211,21 +211,43 @@ type TagIndex struct {
 	Index int
 }
 
+type GroupGeneralSettingPage struct {
+	Group      *Group
+	CurrentOrg *Organization
+
+	IsNewGroup bool   `json:"-"`
+	ActionURL  string `json:"-"`
+}
+
+type GroupUsersPage struct {
+	Group      *Group
+	CurrentOrg *Organization
+
+	IsNewGroup bool `json:"-"`
+}
+
+type GroupSharingExternallyPage struct {
+	Group         *Group
+	CurrentOrg    *Organization
+	ShareRequests []*ShareRequest
+
+	IsNewGroup bool `json:"-"`
+}
+
 type GroupAdvancedSettingPage struct {
 	Group       *Group
 	Followers   []*EmbedUser
 	CurrentOrg  *Organization
 	SharingInfo *GroupSharingInfo
 
-	CreatingGroup bool
-	Editable      bool
+	IsNewGroup bool `json:"-"`
+	Editable   bool // diff from Group.Editable
 
 	// Shit...
 	ThrowawayStatusSuggestions    map[string]string
 	ThrowawayNotYetOpenTagIndexes map[string][]string
 	ThrowawayOpenTagIndexes       map[string][]string
 	ThrowawayClosedTagIndexes     map[string][]string
-	HideSharingExternally         bool
 }
 
 type EmbedGroup struct {

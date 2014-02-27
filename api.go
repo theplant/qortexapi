@@ -241,6 +241,10 @@ type AuthUserService interface {
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
 	GetUserTasks(userId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 
+	GetGroupGeneralSettingPage(gId string) (page *GroupGeneralSettingPage, err error)
+	GetGroupUsersPage(gId string) (page *GroupUsersPage, err error)
+	GetGroupSharingExternallyPage(gId string) (page *GroupSharingExternallyPage, err error)
+
 	// [Group] Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
 	AllOpenAdvancedToDosInGroup(groupId string) (page *OpenAdvancedToDosPage, err error)
