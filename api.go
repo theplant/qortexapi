@@ -142,6 +142,7 @@ type AuthUserService interface {
 	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput) (err error)
 	GetAllGroupCollections() (gcs []*GroupCollection, err error)
+	ToggleGroupArchiving(gids string, signal bool) (err error)
 
 	// User related
 	GetAuthUser() (user *User, err error)
