@@ -690,9 +690,6 @@ type Entry struct {
 	RelatedToDoEntries []*RelatedEntry // For Entry
 	BasedOnPost        *BasedOnPost
 
-	RelatedEntries []*RelatedEntry
-
-	// TODO: to remove
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
 
