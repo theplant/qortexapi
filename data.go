@@ -382,17 +382,17 @@ type TimeTrackingItem struct {
 type Task struct {
 	Id                string
 	GroupId           string
-	IsTaskOwner       bool `json:",omitempty"`
-	IsTaskAssignee    bool `json:",omitempty"`
-	IsOthers          bool `json:",omitempty"`
-	IsCurrentUserDone bool `json:",omitempty"`
+	IsTaskOwner       bool `json:",omitempty"` // Is this task created by current user
+	IsTaskAssignee    bool `json:",omitempty"` // Is this task assigned to current user
+	IsOthers          bool `json:",omitempty"` //
+	IsCurrentUserDone bool `json:",omitempty"` // use in ack to multi-user, if current user click ack
 
-	IsAcknowledgement bool `json:",omitempty"`
-	IsTodoForOne      bool `json:",omitempty"`
-	IsTodoForAll      bool `json:",omitempty"`
+	IsAcknowledgement bool `json:",omitempty"` // is task a ack
+	IsTodoForOne      bool `json:",omitempty"` // is task a todo
+	IsTodoForAll      bool `json:",omitempty"` // not use in current system
 
-	IsCompleted bool `json:",omitempty"`
-	IsClosed    bool `json:",omitempty"`
+	IsCompleted bool `json:",omitempty"` // task assignee finish or task creator close the task , IsCompleted =true
+	IsClosed    bool `json:",omitempty"` // task creator close the task , IsCompleted =true
 	IsToGroup   bool `json:",omitempty"`
 
 	IsDueToday bool `json:",omitempty"`
@@ -410,19 +410,20 @@ type Task struct {
 	CompletedUsersCount int `json:",omitempty"`
 	PendingUsersCount   int `json:",omitempty"`
 
-	Owner          EmbedUser   `json:",omitempty"`
-	ToUsers        []EmbedUser `json:",omitempty"`
-	ToUsersText    string      `json:",omitempty"`
-	PendingUsers   []EmbedUser `json:",omitempty"`
-	CompletedUsers []EmbedUser `json:",omitempty"`
-	Assignee       EmbedUser   `json:",omitempty"`
+	Owner          EmbedUser   `json:",omitempty"` // task creator
+	ToUsers        []EmbedUser `json:",omitempty"` // used in ack and todo, to track all assignees
+	ToUsersText    string      `json:",omitempty"` // format   user1Id:user1Name,user2Id:user2Name
+	PendingUsers   []EmbedUser `json:",omitempty"` // used in muti-usr ack, to track incompleted users
+	CompletedUsers []EmbedUser `json:",omitempty"` // used in muti-usr ack,to track completed users
+	Assignee       EmbedUser   `json:",omitempty"` // used in todo, current assignee
 
 	ColorCssClass       string        `json:",omitempty"`
 	ReopenColorCssClass string        `json:",omitempty"`
 	TaskBarHtml         template.HTML `json:",omitempty"`
 
-	TaskFlow       int
-	IsClaimed      bool
+	TaskFlow int //For Advanced todo ,NEW:0 ,OPEN:1,CLOSED:2 ,For BasicToDo, NEW:0, CLOSED:2
+
+	IsClaimed      bool // used in muti-user todo, if someone has clicked "i will do it",IsClaimed = true
 	IsAdvancedTask bool // True when the PM feature is enabled and the AdvancedTask will be not nil.
 	AdvancedTask   *AdvancedTask
 
@@ -599,18 +600,18 @@ type Entry struct {
 	IsKnowledgeBase bool   `json:",omitempty"`
 	IsPost          bool   `json:",omitempty"`
 	IsComment       bool   `json:",omitempty"`
-	IsTask          bool   `json:",omitempty"`
+	IsTask          bool   `json:",omitempty"` // when entry is ack or todo , IsTask = true
 	IsChat          bool   `json:",omitempty"`
-	IsTaskToDo      bool   `json:",omitempty"`
-	IsTaskAck       bool   `json:",omitempty"`
-	IsTaskLog       bool   `json:",omitempty"`
+	IsTaskToDo      bool   `json:",omitempty"` // when entry is todo , IsTaskToDo = true
+	IsTaskAck       bool   `json:",omitempty"` // when entry is ack , IsTaskAck = true
+	IsTaskLog       bool   `json:",omitempty"` // use IsTaskLog to distinguish between task log and normal comment
 	IsInWatchList   bool   `json:",omitempty"`
 	IsToGroup       string `json:",omitempty"`
 	CanEdit         bool   `json:",omitempty"`
 	CanReply        bool   `json:",omitempty"`
 	LikedByMe       bool   `json:",omitempty"`
-	HasInlineTask   bool   `json:",omitempty"`
-	TaskIsCompleted bool   `json:",omitempty"`
+	HasInlineTask   bool   `json:",omitempty"` // when comment has a ack , HasInlineTask = true
+	TaskIsCompleted bool   `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
 	IsRoot          bool   `json:",omitempty"`
 	IsUnread        bool   `json:",omitempty"`
 	IsUpdated       bool   `json:",omitempty"`
@@ -635,8 +636,8 @@ type Entry struct {
 	CurrentVersionEditor EmbedUser
 	Group                *Group `json:",omitempty"`
 	// Task                 *Task         `json:",omitempty"`
-	Todo         *Task         `json:",omitempty"`
-	Ack          *Task         `json:",omitempty"`
+	Todo         *Task         `json:",omitempty"` // when entry is a todo(IsTaskToDo=true), this exsits
+	Ack          *Task         `json:",omitempty"` // when entry is a ack(IsTaskAck=true), this exsits
 	Conversation *Conversation `json:",omitempty"`
 
 	Versions []*EntryVersion `json:",omitempty"`
