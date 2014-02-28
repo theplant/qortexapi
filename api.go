@@ -140,7 +140,6 @@ type AuthUserService interface {
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput) (err error)
-	GetAllGroupCollections() (gcs []*GroupCollection, err error)
 
 	// User related
 	GetAuthUser() (user *User, err error)
