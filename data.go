@@ -676,7 +676,8 @@ type Entry struct {
 	CurrentVersionComments         []*Entry
 	OtherVersionsComments          []*Entry
 	NewComment                     *Entry         `json:",omitempty"`
-	GroupSlector                   *GroupSelector `json:",omitempty"`
+	GroupSlector                   *GroupSelector `json:",omitempty"` // TODO: to remove
+	GroupCollectionLists           []*GroupCollectionList
 
 	// Qortex Support Type
 	IsQortexSupport              bool              `json:",omitempty"`
@@ -1137,14 +1138,17 @@ type GroupCollection struct {
 
 type NewGroupAside struct {
 	ShowNewGroupButton bool
-	Lists              []*GroupCollectionList
+
+	// Lists contains at least one element, and up to three elements.
+	// The first one is My Groups, then Other Groups, the last one Archived Groups.
+	Lists []*GroupCollectionList
 }
 
 type GroupCollectionList struct {
 	IsEmpty       bool
 	IsCollapsed   bool
-	Announcement  *Group
-	QortexSupport *Group
+	Announcement  *Group // only exists in My Groups
+	QortexSupport *Group // only exists in My Groups
 	Collections   []*GroupsInCollection
 	Groups        []*Group
 	SharedGroups  []*Group
