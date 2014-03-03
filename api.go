@@ -133,7 +133,6 @@ type AuthUserService interface {
 	CreateGroup(input *GroupInput) (group *Group, err error)
 	UpdateGroup(input *GroupInput) (err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
-	// UpdateGroupSlug(id string, slug string) (validated *govalidations.Validated, err error)
 	DeleteGroup(groupId string) (err error)
 	GetGroupBySlug(slug string) (group *Group, err error)
 	GetGroups(keyword string) (groups []*Group, err error)
