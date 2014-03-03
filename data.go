@@ -182,6 +182,7 @@ type Group struct {
 	GroupEmailAddress   string
 	ToDoSettings        *AdvancedToDoSettings
 	TodoGroupingRoute   string `json:",omitempty"`
+	Collection          *GroupCollection
 }
 
 type AdvancedToDoSettings struct {
@@ -212,8 +213,9 @@ type TagIndex struct {
 }
 
 type GroupGeneralSettingPage struct {
-	Group      *Group
-	CurrentOrg *Organization
+	Group       *Group
+	CurrentOrg  *Organization
+	Collections []*GroupCollection `json:",omitempty"`
 
 	IsNewGroup bool   `json:"-"`
 	ActionURL  string `json:"-"`
@@ -267,12 +269,15 @@ type GroupSelectorItem struct {
 
 type GroupSelector struct {
 	Header                  template.HTML
-	SelectedGroupId         string
-	SysMessage              *GroupSelectorItem
 	FollowingNormalGroups   []*GroupSelectorItem
 	FollowingSharedGroups   []*GroupSelectorItem
 	UnFollowingNormalGroups []*GroupSelectorItem
 	UnFollowingSharedGroups []*GroupSelectorItem
+}
+
+type NewGroupSelector struct {
+	SelectedGroupId      string
+	GroupCollectionLists []*GroupCollectionList
 }
 
 type Attachment struct {
@@ -675,9 +680,9 @@ type Entry struct {
 	ExternalComments               []*Entry      `json:",omitempty"`
 	CurrentVersionComments         []*Entry
 	OtherVersionsComments          []*Entry
-	NewComment                     *Entry         `json:",omitempty"`
-	GroupSlector                   *GroupSelector `json:",omitempty"` // TODO: to remove
-	GroupCollectionLists           []*GroupCollectionList
+	NewComment                     *Entry            `json:",omitempty"`
+	GroupSlector                   *GroupSelector    `json:",omitempty"` // TODO: to remove
+	NewGroupSelector               *NewGroupSelector `json:",omitempty"`
 
 	// Qortex Support Type
 	IsQortexSupport              bool              `json:",omitempty"`
