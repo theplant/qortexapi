@@ -160,7 +160,7 @@ type AuthUserService interface {
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
-	SetPreferredLanguages(languageCodes []string) (localeName string, err error)
+	SetPreferredLanguages(languageCodes []string) (err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
@@ -191,7 +191,6 @@ type AuthUserService interface {
 	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string) (sendedEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
-	ChangeLocale(localeName string) (err error)
 	UpdateGroupAdvancedToDoSettings(gId, settings string) (err error)
 
 	// TODO: mail-updates: remove it
