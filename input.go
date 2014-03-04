@@ -1,5 +1,7 @@
 package qortexapi
 
+import "time"
+
 type EntryInput struct {
 	Id string
 
@@ -249,5 +251,12 @@ type TaskInput struct {
 
 type TaskPwMap struct {
 	Id             string `bson:"-"`
+	PriorityWeight float64
+}
+
+type ToDoMarkerInput struct {
+	Id             string
+	Label          string
+	Date           time.Time `bson:",omitempty"`
 	PriorityWeight float64
 }
