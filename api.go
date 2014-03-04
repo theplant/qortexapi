@@ -260,6 +260,7 @@ type AuthUserService interface {
 	SyncBillingDetails() (err error)
 	SyncPastPayments() (err error)
 	ValidatePayment() (err error)
+	CancelSubscription() (err error)
 }
 
 type AuthAdminService interface {
