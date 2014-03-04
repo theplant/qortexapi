@@ -48,4 +48,5 @@ var (
 	SaveTranscriptionError         = errors.New("Can not save transcription")
 	ClaimTaskError                 = errors.New("Task was already cliamed by others")
 	NeedPayError                   = errors.New("Qortex need to pay")
+	InvalidLanguageCodeError       = errors.New("Language code is not supported")
 )
