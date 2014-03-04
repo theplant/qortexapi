@@ -438,6 +438,7 @@ type Task struct {
 	NeedToBeEditMode    bool
 	IsEditing           bool
 	CanEditDueDate      bool
+	FarAwayCorner       bool
 }
 
 type EntryVersion struct {
