@@ -1124,6 +1124,7 @@ type BillingInfo struct {
 	HasWaitingBilling    bool
 	HasSubscribedBilling bool
 	HasPaidBilling       bool
+	IsOverdue            bool
 }
 
 type KnowledgeOverview struct {
