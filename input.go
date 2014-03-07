@@ -53,6 +53,7 @@ type EntryInput struct {
 
 	// For Creating To-Dos From Comment
 	BasedPostId        string
+	BasedPostLangCode  string
 	GroupIdOfBasedPost string
 	SelectionTextInFo  SelectionTextInFo
 }
