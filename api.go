@@ -299,4 +299,6 @@ type AuthAdminService interface {
 	SetTrial(orgId string, deadLine string) (err error)
 
 	SetExpiredAt(orgId string, deadLine string) (err error)
+	//for test
+	SendPaymentWarnEmail(orgId string) (err error)
 }
