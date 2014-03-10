@@ -78,7 +78,7 @@ type User struct {
 	OrgId                string
 	OriginalOrgId        string
 	PrefixURL            string
-	ProfileURL           string
+	ProfileURL           template.HTMLAttr
 	IsLoggedInUser       bool
 	IsAvailable          bool
 	IsDisabled           bool
