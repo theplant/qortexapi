@@ -5,7 +5,6 @@ import (
 	"time"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
-	"labix.org/v2/mgo/bson"
 )
 
 type OrgSettings struct {
@@ -987,8 +986,8 @@ type MarketableMemberInfo struct {
 // for My Tasks  and Group tasks
 type TaskOutline struct {
 	Id                  string
-	EntryId             bson.ObjectId
-	RootId              bson.ObjectId // only for ack in comment
+	RootId              string
+	CommentId           string // only for ack in comment
 	EntryTitle          template.HTML
 	EntryLink           template.HTMLAttr
 	IsComment           bool
