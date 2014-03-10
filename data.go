@@ -1153,3 +1153,14 @@ type KnowledgeOverview struct {
 	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
 	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
 }
+
+type ContactUsInfo struct {
+	FirstName   string
+	LastName    string
+	Email       string
+	Address     string
+	Phone       string
+	Country     string
+	CompanyName string
+	CompanySize string
+}

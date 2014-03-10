@@ -262,6 +262,8 @@ type AuthUserService interface {
 	SyncPastPayments() (err error)
 	ValidatePayment() (err error)
 	CancelSubscription() (err error)
+
+	GetContactUsInfo() (info *ContactUsInfo, err error)
 }
 
 type AuthAdminService interface {
