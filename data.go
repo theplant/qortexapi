@@ -94,6 +94,7 @@ type User struct {
 	FollowingGroups      []*Group
 	Preferences          *Preferences
 	NoDetail             bool `json:",omitempty"`
+	HasMobileDevices     bool `json:"-"`
 }
 
 type GroupUsers struct {
