@@ -3,8 +3,6 @@ package qortexapi
 import (
 	"html/template"
 	"time"
-
-	"labix.org/v2/mgo/bson"
 )
 
 type OrgSettings struct {
@@ -86,7 +84,7 @@ type User struct {
 	OrgId                string
 	OriginalOrgId        string
 	PrefixURL            string
-	ProfileURL           string
+	ProfileURL           template.HTMLAttr
 	IsLoggedInUser       bool
 	IsAvailable          bool
 	IsDisabled           bool
@@ -102,6 +100,7 @@ type User struct {
 	FollowingGroups      []*Group
 	Preferences          *Preferences
 	NoDetail             bool `json:",omitempty"`
+	HasMobileDevices     bool `json:"-"`
 }
 
 type GroupUsers struct {
@@ -973,8 +972,8 @@ type MarketableMemberInfo struct {
 // for My Tasks  and Group tasks
 type TaskOutline struct {
 	Id                  string
-	EntryId             bson.ObjectId
-	RootId              bson.ObjectId // only for ack in comment
+	RootId              string
+	CommentId           string // only for ack in comment
 	EntryTitle          template.HTML
 	EntryLink           template.HTMLAttr
 	IsComment           bool
