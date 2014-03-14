@@ -562,9 +562,9 @@ type Entry struct {
 	LastUpdateAtAgo      string    `json:",omitempty"`
 	WatchedAtAgo         string    `json:",omitempty"`
 	NextRemindAtLater    string    `json:",omitempty"`
-	MentionedUserIds     string    `json:",omitempty"`
-	DomainURL            string    `json:",omitempty"`
-	UpdatedAtUnixNano    string    `json:",omitempty"`
+	// MentionedUserIds     string    `json:",omitempty"`
+	DomainURL         string `json:",omitempty"`
+	UpdatedAtUnixNano string `json:",omitempty"`
 	// last version's update time
 	LastUpdateAt string `json:",omitempty"`
 
