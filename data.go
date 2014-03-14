@@ -75,9 +75,10 @@ type User struct {
 	Timezone             string
 	IsSuperUser          bool
 	IsSharedUser         bool
-	OrgId                string
-	OriginalOrgId        string
-	PrefixURL            string
+	OrgId                string `json:",omitempty"`
+	OriginalOrgId        string `json:",omitempty"`
+	OrgName              string `json:",omitempty"`
+	PrefixURL            string `json:",omitempty"`
 	ProfileURL           template.HTMLAttr
 	IsLoggedInUser       bool
 	IsAvailable          bool
@@ -86,11 +87,9 @@ type User struct {
 	FromSharedGroup      bool
 	FromOrganizationName string
 	Editable             bool
-	Followable           bool
-	FollowedByMe         bool
 	FollowingTheGroup    bool
-	Department           string
-	Location             string
+	Department           string `json:",omitempty"`
+	Location             string `json:",omitempty"`
 	FollowingGroups      []*Group
 	Preferences          *Preferences
 	NoDetail             bool `json:",omitempty"`
