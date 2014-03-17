@@ -84,6 +84,7 @@ type User struct {
 	IsAvailable          bool
 	IsDisabled           bool
 	IsDeleted            bool
+	Followable           bool
 	FromSharedGroup      bool
 	FromOrganizationName string
 	Editable             bool
