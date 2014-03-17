@@ -1111,6 +1111,7 @@ type SupportedLanguage struct {
 type BillingInfo struct {
 	IsSharedGroupAccount bool
 	FreeTrialLeftDays    int
+	ExpiredLeftDays      int
 	ActiveUserCount      int
 	Country              string
 	Phone                string
