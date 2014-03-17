@@ -3,6 +3,8 @@ package qortexapi
 import (
 	"html/template"
 	"time"
+
+	paymentapi "github.com/theplant/theplant_payment/api"
 )
 
 type OrgSettings struct {
@@ -915,6 +917,27 @@ type OrgStats struct {
 	Author           EmbedUser
 }
 
+type OrgPaymentInfo struct {
+	OrgId         string
+	OrgName       string
+	IsFreeOrg     bool
+	IsSharingOrg  bool
+	HasPaid       bool
+	TrialDeadline time.Time
+	ExpiredAt     time.Time
+}
+
+type OrgPaymentHistory struct {
+	PaymentDescription string
+	PaymentDate        time.Time
+	CurrencyCode       string
+	PaymentAmount      int64
+	Status             string
+	Term               int64
+	UserCount          int64
+	NextPaymentDate    time.Time
+}
+
 type AccessReq struct {
 	Email        string
 	PriorityCode string
@@ -1093,6 +1116,27 @@ type SupportedLanguage struct {
 	IsCurrent   bool
 }
 
+type BillingInfo struct {
+	IsSharedGroupAccount bool
+	FreeTrialLeftDays    int
+	ExpiredLeftDays      int
+	ActiveUserCount      int
+	Country              string
+	Phone                string
+	Billing              *paymentapi.Billing
+	BillingDetails       *paymentapi.BillingDetails
+	PastPayments         []paymentapi.Payment
+	Package              *paymentapi.Package
+	CurrencySymbol       string
+	MonthlyPrice         int
+	HasWaitingBilling    bool
+	HasSubscribedBilling bool
+	HasPaidBilling       bool
+	IsOverdue            bool
+	DismissPaymentTips   bool
+	IsDowngrade          bool
+}
+
 type KnowledgeOverview struct {
 	Author                  EmbedUser
 	PrefixURL               string
@@ -1119,4 +1163,15 @@ type KnowledgeOverview struct {
 	UploadURL               template.HTMLAttr `json:",omitempty"` //just for reuse the mannual translation form
 	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
 	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
+}
+
+type ContactUsInfo struct {
+	FirstName   string
+	LastName    string
+	Email       string
+	Address     string
+	Phone       string
+	Country     string
+	CompanyName string
+	CompanySize string
 }

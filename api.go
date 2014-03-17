@@ -257,6 +257,7 @@ type AuthUserService interface {
 	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
 	AllOpenBasicToDosInGroup(groupId string) (taskOutlines []*TaskOutline, err error)
 	AllOpenBasicToDosGroupingByUserInGroup(groupId string) (atos []*BasicOpenToDoOutlines, err error)
+
 	AllClosedBasicToDosInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
 	AllClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime string) (taskOutlines []*TaskOutline, apiGroup *Group, hasMore bool, err error)
@@ -266,6 +267,19 @@ type AuthUserService interface {
 	// Apple device service
 	RegisterAppleDeviceForUser(userId string, token string) (err error)
 	UnregisterAppleDeviceForUser(userId string, token string) (err error)
+
+	//payment
+	GetPaymentSession() (session string, err error)
+	CanSeeBilling() (yes bool, err error)
+	GetBillingInfo() (billing *BillingInfo, err error)
+	SyncBilling() (err error)
+	SyncBillingDetails() (err error)
+	SyncPastPayments() (err error)
+	ValidatePayment() (err error)
+	CancelSubscription() (err error)
+	DismissPaymentTips() (err error)
+
+	GetContactUsInfo() (info *ContactUsInfo, err error)
 }
 
 type AuthAdminService interface {
@@ -293,4 +307,16 @@ type AuthAdminService interface {
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 
 	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
+
+	MarkOrgFreeOrPay(orgId string) (free bool, err error)
+
+	GetOrgPayment() (orgPaymentInfos []*OrgPaymentInfo, err error)
+
+	GetPaymentHistory(orgId string) (history []OrgPaymentHistory, err error)
+
+	SetTrial(orgId string, deadLine string) (err error)
+
+	SetExpiredAt(orgId string, deadLine string) (err error)
+	//for test
+	SendPaymentWarnEmail(orgId string) (err error)
 }
