@@ -12,11 +12,11 @@ type EntryInput struct {
 	Content string
 	GroupId string
 
-	IsToGroup        string // “0”:Notify People ,“1”:Notify Group
-	ToUserIds        string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
-	TodoUserIds      string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
-	MentionedUserIds string // @users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
-	UploadGroupId    string // upload file's groupid, when in my feed UploadGroupId =""
+	IsToGroup   string // “0”:Notify People ,“1”:Notify Group
+	ToUserIds   string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	TodoUserIds string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	// MentionedUserIds string // @users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	UploadGroupId string // upload file's groupid, when in my feed UploadGroupId =""
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
 	IsToDo            bool   // IsToDo == true, will create todo for entry.
