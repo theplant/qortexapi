@@ -274,7 +274,7 @@ type AuthUserService interface {
 	GetBillingInfo() (billing *BillingInfo, err error)
 	SyncBilling() (err error)
 	SyncBillingDetails() (err error)
-	SyncPastPayments() (err error)
+	// SyncPastPayments() (err error)
 	ValidatePayment() (err error)
 	CancelSubscription() (err error)
 	DismissPaymentTips() (err error)
