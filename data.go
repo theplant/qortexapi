@@ -1126,7 +1126,7 @@ type BillingInfo struct {
 	HasPaidBilling       bool
 	IsOverdue            bool
 	DismissPaymentTips   bool
-	IsDowngrade          bool
+	// IsDowngrade          bool
 }
 
 type KnowledgeOverview struct {
