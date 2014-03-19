@@ -2,7 +2,7 @@ package qortexapi
 
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
-	GetAuthUserService(session string) (authUserService AuthUserService, err error)
+	GetAuthUserService(session string, orgId string) (authUserService AuthUserService, err error)
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
@@ -255,6 +255,9 @@ type AuthUserService interface {
 	// Apple device service
 	RegisterAppleDeviceForUser(userId string, token string) (err error)
 	UnregisterAppleDeviceForUser(userId string, token string) (err error)
+
+	// For Mobile Specifically
+	GetInitInfo() (info *InitInfo, err error)
 }
 
 type AuthAdminService interface {

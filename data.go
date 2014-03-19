@@ -32,6 +32,12 @@ type Organization struct {
 	EnableMultilingual       bool
 	LanguageSelectors        *LanguageSelectors
 	SizeOptions              map[string]string
+
+	// for current loggind user, added for AuthUserService.GetInitInfo
+	UnreadCount             int `json:",omitempty"`
+	NotificationUnreadCount int `json:",omitempty"`
+	ActiveTasksCount        int `json:",omitempty"`
+	OfflineMessageCount     int `json:",omitempty"`
 }
 
 type SearchOrganization struct {
@@ -182,6 +188,8 @@ type Group struct {
 	GroupEmailAddress   string
 	ToDoSettings        *AdvancedToDoSettings
 	TodoGroupingRoute   string `json:",omitempty"`
+
+	UnreadCount int `json:",omitempty"` // for current loggind user
 }
 
 type AdvancedToDoSettings struct {
@@ -932,8 +940,9 @@ type GroupAside struct {
 }
 
 type OrgUnreadInfo struct {
-	OrgId           string
-	FeedUnreadCount int
+	OrgId                   string
+	FeedUnreadCount         int
+	NotificationUnreadCount int
 }
 
 const (
@@ -1112,4 +1121,18 @@ type KnowledgeOverview struct {
 	UploadURL               template.HTMLAttr `json:",omitempty"` //just for reuse the mannual translation form
 	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
 	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
+}
+
+type InitInfo struct {
+	CurrentUser *User
+
+	CurrentOrg *Organization
+	JoinedOrgs []*Organization
+
+	AnnouncementGroup      *Group
+	SmGroup                *Group
+	FollowedNormalGroups   []*Group
+	FollowedSharedGroups   []*Group
+	UnFollowedNormalGroups []*Group
+	UnFollowedSharedGroups []*Group
 }
