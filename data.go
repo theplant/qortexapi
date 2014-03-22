@@ -1129,6 +1129,24 @@ type BillingInfo struct {
 	// IsDowngrade          bool
 }
 
+type ReceiptInfo struct {
+	Id          string
+	OrgName     string
+	OrgAdress   string
+	OrgCountry  string
+	PaymentTerm string
+	UserCount   int
+	PaymentDate string
+	PriceUnit   string
+	Cost        string
+	Tax         string
+
+	// for jp
+	CostWithoutTax string
+	// for countries ,not jp ,de
+	CurrencySymbol string
+}
+
 type KnowledgeOverview struct {
 	Author                  EmbedUser
 	PrefixURL               string

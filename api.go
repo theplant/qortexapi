@@ -257,6 +257,7 @@ type AuthUserService interface {
 	GetPaymentSession() (session string, err error)
 	CanSeeBilling() (yes bool, err error)
 	GetBillingInfo() (billing *BillingInfo, err error)
+	GetReceiptInfo(id string) (receipt *ReceiptInfo, err error)
 	SyncBilling() (err error)
 	SyncBillingDetails() (err error)
 	// SyncPastPayments() (err error)
