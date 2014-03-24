@@ -49,4 +49,5 @@ var (
 	ClaimTaskError                 = errors.New("Task was already cliamed by others")
 	NeedPayError                   = errors.New("Qortex need to pay")
 	InvalidLanguageCodeError       = errors.New("Language code is not supported")
+	NotFoundError                  = errors.New("not found")
 )

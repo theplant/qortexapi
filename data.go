@@ -1145,7 +1145,27 @@ type BillingInfo struct {
 	HasPaidBilling       bool
 	IsOverdue            bool
 	DismissPaymentTips   bool
-	IsDowngrade          bool
+	PrefixURL            string
+	// IsDowngrade          bool
+}
+
+type ReceiptInfo struct {
+	Id          string
+	OrgName     string
+	OrgAdress   string
+	OrgCountry  string
+	PaymentTerm string
+	UserCount   int
+	PaymentDate string
+	PriceUnit   string
+	Cost        string
+	Tax         string
+
+	// for jp
+	CostWithoutTax string
+	YearOrMonth    string
+	// for countries ,not jp ,de
+	CurrencySymbol string
 }
 
 type KnowledgeOverview struct {
