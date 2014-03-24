@@ -1144,6 +1144,7 @@ type ReceiptInfo struct {
 
 	// for jp
 	CostWithoutTax string
+	YearOrMonth    string
 	// for countries ,not jp ,de
 	CurrencySymbol string
 }
