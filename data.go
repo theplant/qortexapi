@@ -1126,6 +1126,7 @@ type BillingInfo struct {
 	HasPaidBilling       bool
 	IsOverdue            bool
 	DismissPaymentTips   bool
+	PrefixURL            string
 	// IsDowngrade          bool
 }
 
