@@ -38,7 +38,7 @@ type Organization struct {
 	IsSample      bool
 	IsSandBox     bool
 	PublicDemoURL string
-	TutorialsURL string
+	TutorialsURL  string
 	CreatedAt     string
 
 	// for current loggind user, added for AuthUserService.GetInitInfo
@@ -198,6 +198,7 @@ type Group struct {
 	TodoGroupingRoute   string `json:",omitempty"`
 
 	UnreadCount int `json:",omitempty"` // for current loggind user
+	IsSandboxGroup bool
 }
 
 type AdvancedToDoSettings struct {
