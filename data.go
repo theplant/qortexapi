@@ -1110,6 +1110,8 @@ type SupportedLanguage struct {
 
 type BillingInfo struct {
 	IsSharedGroupAccount bool
+	IsFreeAccount        bool
+	IsProAccount         bool
 	FreeTrialLeftDays    int
 	ExpiredLeftDays      int
 	ActiveUserCount      int
