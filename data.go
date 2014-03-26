@@ -197,7 +197,7 @@ type Group struct {
 	ToDoSettings        *AdvancedToDoSettings
 	TodoGroupingRoute   string `json:",omitempty"`
 
-	UnreadCount int `json:",omitempty"` // for current loggind user
+	UnreadCount    int `json:",omitempty"` // for current loggind user
 	IsSandboxGroup bool
 }
 
@@ -1151,7 +1151,7 @@ type BillingInfo struct {
 	IsOverdue            bool
 	DismissPaymentTips   bool
 	PrefixURL            string
-	// IsDowngrade          bool
+	FreeTrialDays        int
 }
 
 type ReceiptInfo struct {
