@@ -218,8 +218,9 @@ type GroupAdvancedSettingPage struct {
 	CurrentOrg  *Organization
 	SharingInfo *GroupSharingInfo
 
-	CreatingGroup bool
-	Editable      bool
+	CreatingGroup     bool
+	Editable          bool
+	DisableProFeatrue bool
 
 	// Shit...
 	ThrowawayStatusSuggestions    map[string]string
@@ -698,6 +699,8 @@ type Entry struct {
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
 	RelatedToDoEntries []*RelatedEntry // For Entry
 	BasedOnPost        *BasedOnPost
+
+	DisableProFeatrue bool
 
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
