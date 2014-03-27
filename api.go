@@ -35,6 +35,10 @@ type PublicService interface {
 
 	// Signup
 	RequestSignup(email string) (err error)
+
+	// Demo related
+	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
+	CreateSandboxMember(firstName string, lastName string, avatarURL string) (r *Member, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -178,6 +182,12 @@ type AuthUserService interface {
 	SearchOrganizations(keyword string) (orgs []*SearchOrganization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
+	MarkAsSampleOrg() (err error)
+	MarkAsStandardOrg() (err error)
+	GetSampleOrgs() (orgs []*Organization, err error)
+	GetSandboxOrgs() (orgs []*Organization, err error)
+	DeleteSandboxOrg(orgId string) (err error)
+	DeleteAllSandboxOrg() (err error)
 
 	AcceptShareRequestByAdmin(requestId string) (err error)
 	RejectShareRequestByAdmin(requestId string) (err error)
@@ -210,6 +220,7 @@ type AuthUserService interface {
 
 	// preferences
 	DismissPresentationTip() (err error)
+	DismissTutorialsTip() (err error)
 
 	// chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
@@ -246,6 +257,7 @@ type AuthUserService interface {
 	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
 	AllOpenBasicToDosInGroup(groupId string) (taskOutlines []*TaskOutline, err error)
 	AllOpenBasicToDosGroupingByUserInGroup(groupId string) (atos []*BasicOpenToDoOutlines, err error)
+
 	AllClosedBasicToDosInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
 	AllClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime string) (taskOutlines []*TaskOutline, apiGroup *Group, hasMore bool, err error)
@@ -256,6 +268,19 @@ type AuthUserService interface {
 	RegisterAppleDeviceForUser(userId string, token string) (err error)
 	UnregisterAppleDeviceForUser(userId string, token string) (err error)
 
+	//payment
+	GetPaymentSession() (session string, err error)
+	CanSeeBilling() (yes bool, err error)
+	GetBillingInfo() (billing *BillingInfo, err error)
+	GetReceiptInfo(id string) (receipt *ReceiptInfo, err error)
+	SyncBilling() (err error)
+	SyncBillingDetails() (err error)
+	// SyncPastPayments() (err error)
+	ValidatePayment() (err error)
+	CancelSubscription() (err error)
+	DismissPaymentTips() (err error)
+
+	GetContactUsInfo() (info *ContactUsInfo, err error)
 	// For Mobile Specifically
 	GetInitInfo() (info *InitInfo, err error)
 }
@@ -285,4 +310,16 @@ type AuthAdminService interface {
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 
 	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
+
+	MarkOrgFreeOrPay(orgId string) (free bool, err error)
+
+	GetOrgPayment() (orgPaymentInfos []*OrgPaymentInfo, err error)
+
+	GetPaymentHistory(orgId string) (history []OrgPaymentHistory, err error)
+
+	SetTrial(orgId string, deadLine string) (err error)
+
+	SetExpiredAt(orgId string, deadLine string) (err error)
+	//for test
+	SendPaymentWarnEmail(orgId string) (err error)
 }

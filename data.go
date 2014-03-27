@@ -3,6 +3,8 @@ package qortexapi
 import (
 	"html/template"
 	"time"
+
+	paymentapi "github.com/theplant/theplant_payment/api"
 )
 
 type OrgSettings struct {
@@ -32,6 +34,12 @@ type Organization struct {
 	EnableMultilingual       bool
 	LanguageSelectors        *LanguageSelectors
 	SizeOptions              map[string]string
+
+	IsSample      bool
+	IsSandBox     bool
+	PublicDemoURL string
+	TutorialsURL  string
+	CreatedAt     string
 
 	// for current loggind user, added for AuthUserService.GetInitInfo
 	UnreadCount             int `json:",omitempty"`
@@ -189,7 +197,8 @@ type Group struct {
 	ToDoSettings        *AdvancedToDoSettings
 	TodoGroupingRoute   string `json:",omitempty"`
 
-	UnreadCount int `json:",omitempty"` // for current loggind user
+	UnreadCount    int `json:",omitempty"` // for current loggind user
+	IsSandboxGroup bool
 }
 
 type AdvancedToDoSettings struct {
@@ -225,8 +234,9 @@ type GroupAdvancedSettingPage struct {
 	CurrentOrg  *Organization
 	SharingInfo *GroupSharingInfo
 
-	CreatingGroup bool
-	Editable      bool
+	CreatingGroup     bool
+	Editable          bool
+	DisableProFeatrue bool
 
 	// Shit...
 	ThrowawayStatusSuggestions    map[string]string
@@ -706,6 +716,8 @@ type Entry struct {
 	RelatedToDoEntries []*RelatedEntry // For Entry
 	BasedOnPost        *BasedOnPost
 
+	DisableProFeatrue bool
+
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
 
@@ -885,12 +897,14 @@ type ContactInfo struct {
 }
 
 type Member struct {
+	Id                 string
 	Name               string
 	Email              string
 	ComfirmationSentAt string
 	SignupConfirmedAt  string
 	SignupStatus       string
 	JoinedOrgs         []*Organization
+	IsSandbox          bool
 }
 
 // Following are for Admin Service
@@ -914,6 +928,27 @@ type OrgStats struct {
 	CreatedAt        string
 	LastUpdate       string
 	Author           EmbedUser
+}
+
+type OrgPaymentInfo struct {
+	OrgId         string
+	OrgName       string
+	IsFreeOrg     bool
+	IsSharingOrg  bool
+	HasPaid       bool
+	TrialDeadline time.Time
+	ExpiredAt     time.Time
+}
+
+type OrgPaymentHistory struct {
+	PaymentDescription string
+	PaymentDate        time.Time
+	CurrencyCode       string
+	PaymentAmount      int64
+	Status             string
+	Term               int64
+	UserCount          int64
+	NextPaymentDate    time.Time
 }
 
 type AccessReq struct {
@@ -1095,6 +1130,49 @@ type SupportedLanguage struct {
 	IsCurrent   bool
 }
 
+type BillingInfo struct {
+	IsSharedGroupAccount bool
+	IsFreeAccount        bool
+	IsProAccount         bool
+	FreeTrialLeftDays    int
+	ExpiredLeftDays      int
+	ActiveUserCount      int
+	Country              string
+	Phone                string
+	Billing              *paymentapi.Billing
+	BillingDetails       *paymentapi.BillingDetails
+	PastPayments         []paymentapi.Payment
+	Package              *paymentapi.Package
+	CurrencySymbol       string
+	MonthlyPrice         int
+	HasWaitingBilling    bool
+	HasSubscribedBilling bool
+	HasPaidBilling       bool
+	IsOverdue            bool
+	DismissPaymentTips   bool
+	PrefixURL            string
+	FreeTrialDays        int
+}
+
+type ReceiptInfo struct {
+	Id          string
+	OrgName     string
+	OrgAdress   string
+	OrgCountry  string
+	PaymentTerm string
+	UserCount   int
+	PaymentDate string
+	PriceUnit   string
+	Cost        string
+	Tax         string
+
+	// for jp
+	CostWithoutTax string
+	YearOrMonth    string
+	// for countries ,not jp ,de
+	CurrencySymbol string
+}
+
 type KnowledgeOverview struct {
 	Author                  EmbedUser
 	PrefixURL               string
@@ -1121,6 +1199,17 @@ type KnowledgeOverview struct {
 	UploadURL               template.HTMLAttr `json:",omitempty"` //just for reuse the mannual translation form
 	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
 	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
+}
+
+type ContactUsInfo struct {
+	FirstName   string
+	LastName    string
+	Email       string
+	Address     string
+	Phone       string
+	Country     string
+	CompanyName string
+	CompanySize string
 }
 
 type InitInfo struct {
