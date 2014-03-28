@@ -3,6 +3,8 @@ package qortexapi
 import (
 	"html/template"
 	"time"
+
+	paymentapi "github.com/theplant/theplant_payment/api"
 )
 
 type OrgSettings struct {
@@ -32,6 +34,25 @@ type Organization struct {
 	EnableMultilingual       bool
 	LanguageSelectors        *LanguageSelectors
 	SizeOptions              map[string]string
+
+	IsSample      bool
+	IsSandBox     bool
+	PublicDemoURL string
+	TutorialsURL  string
+	CreatedAt     string
+
+	// for current loggind user, added for AuthUserService.GetInitInfo
+	UnreadCount             int `json:",omitempty"`
+	NotificationUnreadCount int `json:",omitempty"`
+	ActiveTasksCount        int `json:",omitempty"`
+	OfflineMessageCount     int `json:",omitempty"`
+}
+
+type SearchOrganization struct {
+	Id        string
+	Name      string
+	QortexURL string
+	LogoURL   string
 }
 
 type Blog struct {
@@ -68,25 +89,26 @@ type User struct {
 	Timezone             string
 	IsSuperUser          bool
 	IsSharedUser         bool
-	OrgId                string
-	OriginalOrgId        string
-	PrefixURL            string
-	ProfileURL           string
+	OrgId                string `json:",omitempty"`
+	OriginalOrgId        string `json:",omitempty"`
+	OrgName              string `json:",omitempty"`
+	PrefixURL            string `json:",omitempty"`
+	ProfileURL           template.HTMLAttr
 	IsLoggedInUser       bool
 	IsAvailable          bool
 	IsDisabled           bool
 	IsDeleted            bool
+	Followable           bool
 	FromSharedGroup      bool
 	FromOrganizationName string
 	Editable             bool
-	Followable           bool
-	FollowedByMe         bool
 	FollowingTheGroup    bool
-	Department           string
-	Location             string
+	Department           string `json:",omitempty"`
+	Location             string `json:",omitempty"`
 	FollowingGroups      []*Group
 	Preferences          *Preferences
 	NoDetail             bool `json:",omitempty"`
+	HasMobileDevices     bool `json:"-"`
 }
 
 type GroupUsers struct {
@@ -174,6 +196,9 @@ type Group struct {
 	GroupEmailAddress   string
 	ToDoSettings        *AdvancedToDoSettings
 	TodoGroupingRoute   string `json:",omitempty"`
+
+	UnreadCount    int `json:",omitempty"` // for current loggind user
+	IsSandboxGroup bool
 }
 
 type AdvancedToDoSettings struct {
@@ -209,8 +234,9 @@ type GroupAdvancedSettingPage struct {
 	CurrentOrg  *Organization
 	SharingInfo *GroupSharingInfo
 
-	CreatingGroup bool
-	Editable      bool
+	CreatingGroup     bool
+	Editable          bool
+	DisableProFeatrue bool
 
 	// Shit...
 	ThrowawayStatusSuggestions    map[string]string
@@ -317,6 +343,7 @@ type TaskLog struct {
 	IsTimeTrackingUpdated bool
 	IsReopened            bool // {Author} reopened this To-Do.
 	IsLabelChanged        bool // {Author} set the label to Bug.
+	IsDueChanged          bool // {Author} set the due date from 2013/09/23 to 2014/09/23.
 
 	CreatedAt           time.Time
 	VersionAt           time.Time
@@ -332,6 +359,9 @@ type TaskLog struct {
 	Status string
 	// Priority string
 	Label string
+
+	LocalOldDue string
+	LocalNewDue string
 
 	TimeTrackingUpdateLogs []*TimeTrackingUpdateLog
 }
@@ -375,17 +405,17 @@ type TimeTrackingItem struct {
 type Task struct {
 	Id                string
 	GroupId           string
-	IsTaskOwner       bool `json:",omitempty"`
-	IsTaskAssignee    bool `json:",omitempty"`
-	IsOthers          bool `json:",omitempty"`
-	IsCurrentUserDone bool `json:",omitempty"`
+	IsTaskOwner       bool `json:",omitempty"` // Is this task created by current user
+	IsTaskAssignee    bool `json:",omitempty"` // Is this task assigned to current user
+	IsOthers          bool `json:",omitempty"` //
+	IsCurrentUserDone bool `json:",omitempty"` // use in ack to multi-user, if current user click ack
 
-	IsAcknowledgement bool `json:",omitempty"`
-	IsTodoForOne      bool `json:",omitempty"`
-	IsTodoForAll      bool `json:",omitempty"`
+	IsAcknowledgement bool `json:",omitempty"` // is task a ack
+	IsTodoForOne      bool `json:",omitempty"` // is task a todo
+	IsTodoForAll      bool `json:",omitempty"` // not use in current system
 
-	IsCompleted bool `json:",omitempty"`
-	IsClosed    bool `json:",omitempty"`
+	IsCompleted bool `json:",omitempty"` // task assignee finish or task creator close the task , IsCompleted =true
+	IsClosed    bool `json:",omitempty"` // task creator close the task , IsCompleted =true
 	IsToGroup   bool `json:",omitempty"`
 
 	IsDueToday bool `json:",omitempty"`
@@ -396,6 +426,7 @@ type Task struct {
 	CompletedAt       time.Time `json:",omitempty"`
 	LocalCreatedDate  string    `json:",omitempty"`
 	LocalDue          string    `json:",omitempty"`
+	LocalDueWithYear  string    `json:",omitempty"`
 	LocalDueShortDate string    `json:",omitempty"`
 	DueInputValue     string    `json:",omitempty"`
 
@@ -403,25 +434,28 @@ type Task struct {
 	CompletedUsersCount int `json:",omitempty"`
 	PendingUsersCount   int `json:",omitempty"`
 
-	Owner          EmbedUser   `json:",omitempty"`
-	ToUsers        []EmbedUser `json:",omitempty"`
-	ToUsersText    string      `json:",omitempty"`
-	PendingUsers   []EmbedUser `json:",omitempty"`
-	CompletedUsers []EmbedUser `json:",omitempty"`
-	Assignee       EmbedUser   `json:",omitempty"`
+	Owner          EmbedUser   `json:",omitempty"` // task creator
+	ToUsers        []EmbedUser `json:",omitempty"` // used in ack and todo, to track all assignees
+	ToUsersText    string      `json:",omitempty"` // format   user1Id:user1Name,user2Id:user2Name
+	PendingUsers   []EmbedUser `json:",omitempty"` // used in muti-usr ack, to track incompleted users
+	CompletedUsers []EmbedUser `json:",omitempty"` // used in muti-usr ack,to track completed users
+	Assignee       EmbedUser   `json:",omitempty"` // used in todo, current assignee
 
 	ColorCssClass       string        `json:",omitempty"`
 	ReopenColorCssClass string        `json:",omitempty"`
 	TaskBarHtml         template.HTML `json:",omitempty"`
 
-	TaskFlow       int
-	IsClaimed      bool
+	TaskFlow int //For Advanced todo ,NEW:0 ,OPEN:1,CLOSED:2 ,For BasicToDo, NEW:0, CLOSED:2
+
+	IsClaimed      bool // used in muti-user todo, if someone has clicked "i will do it",IsClaimed = true
 	IsAdvancedTask bool // True when the PM feature is enabled and the AdvancedTask will be not nil.
 	AdvancedTask   *AdvancedTask
 
 	NeedShowAppliedText bool
 	NeedToBeEditMode    bool
 	IsEditing           bool
+	CanEditDueDate      bool
+	FarAwayCorner       bool
 }
 
 type EntryVersion struct {
@@ -446,45 +480,6 @@ type LinkedEntry struct {
 	Link           template.HTMLAttr
 }
 
-// TODO: should be replaced by ShareRequest
-type Request struct {
-	Id               string
-	CurrentPrefixURL string
-	Info             template.HTML
-	ActionButton     template.HTML
-
-	FromOrg         EmbedOrg
-	ToOrg           EmbedOrg
-	SharedGroup     EmbedGroup
-	SharedOrgIdHex  string
-	FromUserIdHex   string
-	SharedInvitee   EmbedUser
-	SharedInviter   EmbedUser
-	SharedResponsor EmbedUser
-	ToEmail         string
-	State           string
-}
-
-// TODO: Deprecated! Remove me later. ShareRequest is the new one
-type SharingInvitation struct {
-	FromOrg         EmbedOrg
-	FromUserId      string
-	SharedGroup     *Group
-	IsNewAccount    bool
-	Email           string
-	Token           string
-	JoinedOrgs      []EmbedOrg
-	IsAccepted      bool
-	IsRejected      bool
-	IsPending       bool
-	IsForwarded     bool
-	IsCanceled      bool
-	IsStopped       bool
-	PendingDuration string
-	ToOrgName       string
-	ToOrgId         string
-}
-
 type ShareRequest struct {
 	Id              string
 	FromUser        EmbedUser
@@ -507,6 +502,16 @@ type ShareRequest struct {
 	Info            template.HTML `json:",omitempty"`
 	ActionButton    template.HTML `json:",omitempty"`
 	RequestBarHtml  template.HTML `json:",omitempty"`
+}
+
+type InnerMessage struct {
+	IsGroupCreated bool
+	IsGroupDeleted bool
+	IsOrgCreated   bool
+	UserName       string
+	GroupName      string
+	GroupLink      string
+	OrgName        string
 }
 
 type GroupSharingInfo struct {
@@ -575,9 +580,9 @@ type Entry struct {
 	LastUpdateAtAgo      string    `json:",omitempty"`
 	WatchedAtAgo         string    `json:",omitempty"`
 	NextRemindAtLater    string    `json:",omitempty"`
-	MentionedUserIds     string    `json:",omitempty"`
-	DomainURL            string    `json:",omitempty"`
-	UpdatedAtUnixNano    string    `json:",omitempty"`
+	// MentionedUserIds     string    `json:",omitempty"`
+	DomainURL         string `json:",omitempty"`
+	UpdatedAtUnixNano string `json:",omitempty"`
 	// last version's update time
 	LastUpdateAt string `json:",omitempty"`
 
@@ -588,6 +593,7 @@ type Entry struct {
 	WatchlistHtml       template.HTML `json:",omitempty"`
 	ToUsersHtml         template.HTML `json:",omitempty"`
 	LikedByUsersHtml    template.HTML `json:",omitempty"`
+	HistoryPanelHtml    template.HTML `json:",omitempty"`
 
 	Link             template.HTMLAttr `json:",omitempty"`
 	BaseOnLink       template.HTMLAttr `json:",omitempty"`
@@ -607,13 +613,10 @@ type Entry struct {
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
 
-	InnerMessage    *InnerMessage `json:",omitempty"`
-	IsSystemMessage bool          `json:",omitempty"`
-	IsInnerMessage  bool          `json:",omitempty"`
-	IsBroadcast     bool          `json:",omitempty"`
+	IsBroadcast     bool          `json:",omitempty"` // Deprecated, should be removed
 	IsFromSuperOrg  bool          `json:",omitempty"`
 	IsFromSuperUser bool          `json:",omitempty"`
-	IsFeedback      bool          `json:",omitempty"`
+	IsFeedback      bool          `json:",omitempty"` // Deprecated, should be removed
 	FromOrg         EmbedOrg      `json:",omitempty"`
 	ToOrgs          []EmbedOrg    `json:",omitempty"`
 	ToOrgsHtml      template.HTML `json:",omitempty"`
@@ -623,18 +626,18 @@ type Entry struct {
 	IsKnowledgeBase bool   `json:",omitempty"`
 	IsPost          bool   `json:",omitempty"`
 	IsComment       bool   `json:",omitempty"`
-	IsTask          bool   `json:",omitempty"`
+	IsTask          bool   `json:",omitempty"` // when entry is ack or todo , IsTask = true
 	IsChat          bool   `json:",omitempty"`
-	IsTaskToDo      bool   `json:",omitempty"`
-	IsTaskAck       bool   `json:",omitempty"`
-	IsTaskLog       bool   `json:",omitempty"`
+	IsTaskToDo      bool   `json:",omitempty"` // when entry is todo , IsTaskToDo = true
+	IsTaskAck       bool   `json:",omitempty"` // when entry is ack , IsTaskAck = true
+	IsTaskLog       bool   `json:",omitempty"` // use IsTaskLog to distinguish between task log and normal comment
 	IsInWatchList   bool   `json:",omitempty"`
 	IsToGroup       string `json:",omitempty"`
 	CanEdit         bool   `json:",omitempty"`
 	CanReply        bool   `json:",omitempty"`
 	LikedByMe       bool   `json:",omitempty"`
-	HasInlineTask   bool   `json:",omitempty"`
-	TaskIsCompleted bool   `json:",omitempty"`
+	HasInlineTask   bool   `json:",omitempty"` // when comment has a ack , HasInlineTask = true
+	TaskIsCompleted bool   `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
 	IsRoot          bool   `json:",omitempty"`
 	IsUnread        bool   `json:",omitempty"`
 	IsUpdated       bool   `json:",omitempty"`
@@ -644,6 +647,9 @@ type Entry struct {
 	IsInGroup       bool   `json:",omitempty"`
 	IsFromEmail     bool   `json:",omitempty"`
 	InlineHelp      bool   `json:",omitempty"`
+
+	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
+	VisibleForSuperOrg            bool `json:",omitempty"`
 
 	AllAttachmentsCount         int
 	CommentsCount               int
@@ -656,8 +662,8 @@ type Entry struct {
 	CurrentVersionEditor EmbedUser
 	Group                *Group `json:",omitempty"`
 	// Task                 *Task         `json:",omitempty"`
-	Todo         *Task         `json:",omitempty"`
-	Ack          *Task         `json:",omitempty"`
+	Todo         *Task         `json:",omitempty"` // when entry is a todo(IsTaskToDo=true), this exsits
+	Ack          *Task         `json:",omitempty"` // when entry is a ack(IsTaskAck=true), this exsits
 	Conversation *Conversation `json:",omitempty"`
 
 	Versions []*EntryVersion `json:",omitempty"`
@@ -675,32 +681,50 @@ type Entry struct {
 	NewComment                     *Entry         `json:",omitempty"`
 	GroupSlector                   *GroupSelector `json:",omitempty"`
 
-	// Aaron New Added
-	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
+	// Qortex Support Type
 	IsQortexSupport              bool              `json:",omitempty"`
 	QortexSupport                *QortexSupport    `json:",omitempty"`
 	IsQortexSupportKnowledgeBase bool              `json:",omitempty"`
 	LinkTitle                    string            `json:",omitempty"`
+	QortexSupportNotifyOptions   map[string]string `json:",omitempty"`
 
-	IsRequest                     bool          `json:",omitempty"`
-	ShareRequest                  *ShareRequest `json:",omitempty"`
-	VisibleForSuperUserInSuperOrg bool          `json:",omitempty"`
-	VisibleForSuperOrg            bool          `json:",omitempty"`
+	// System Message Type
+	IsSystemMessage bool `json:",omitempty"`
+
+	// Is Share Request type of System Message
+	IsRequest    bool          `json:",omitempty"`
+	ShareRequest *ShareRequest `json:",omitempty"`
 
 	//Multi locales related
-	CurrentLocaleName string                   `json:",omitempty"`
-	LocaleTitleMap    map[string]string        `json:",omitempty"`
-	LocaleContentMap  map[string]template.HTML `json:",omitempty"`
+	CurrentLocaleName    string                   `json:",omitempty"`
+	LocaleTitleMap       map[string]string        `json:",omitempty"`
+	LocaleContentMap     map[string]template.HTML `json:",omitempty"`
+	LocaleHtmlContentMap map[string]template.HTML `json:",omitempty"`
+	LanguageCode         string                   `json:",omitempty"`
+
+	HasMoreThanOneLanguages bool
+	IsAllTranslated         bool
+	EntryLanguages          []*EntryLanguage
+	ToLanguages             []*SupportedLanguage
+
+	// Is Inner Message type of System Message
+	IsInnerMessage bool          `json:",omitempty"`
+	InnerMessage   *InnerMessage `json:",omitempty"`
 
 	// For Advanced To-Dos
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
 	RelatedToDoEntries []*RelatedEntry // For Entry
 	BasedOnPost        *BasedOnPost
 
-	RelatedEntries []*RelatedEntry
+	DisableProFeatrue bool
 
-	// TODO: to remove
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
+}
+
+type EntryLanguage struct {
+	Code         string
+	LanguageName string
+	IsCurrent    bool
 }
 
 type RelatedEntry struct {
@@ -720,10 +744,10 @@ type BasedOnPost struct {
 
 type QortexSupport struct {
 	Audience          string        `json:",omitempty"`
-	IsToOffical       bool          `json:",omitempty"`
-	IsToAllUsers      bool          `json:",omitempty"`
-	IsToAllAdmins     bool          `json:",omitempty"`
-	IsToOrganizations bool          `json:",omitempty"`
+	IsToOffical       bool          `json:",omitempty"` // Is customer's feedback
+	IsToAllUsers      bool          `json:",omitempty"` // Is Qortex Support Message to all users
+	IsToAllAdmins     bool          `json:",omitempty"` // Is Qortex Support Message to all admins
+	IsToOrganizations bool          `json:",omitempty"` // Is Qortex Support Message to some organizations
 	FromOrg           EmbedOrg      `json:",omitempty"`
 	ToOrgs            []EmbedOrg    `json:",omitempty"`
 	ToOrgsHtml        template.HTML `json:",omitempty"`
@@ -748,6 +772,7 @@ type WatchList struct {
 
 type MyTask struct {
 	PrefixURL       string
+	UserName        string
 	NeedActionTasks []*TaskOutline
 	GroupTasks      []*GroupTasksOutline
 	ClosedTasks     []*TaskOutline
@@ -872,12 +897,14 @@ type ContactInfo struct {
 }
 
 type Member struct {
+	Id                 string
 	Name               string
 	Email              string
 	ComfirmationSentAt string
 	SignupConfirmedAt  string
 	SignupStatus       string
 	JoinedOrgs         []*Organization
+	IsSandbox          bool
 }
 
 // Following are for Admin Service
@@ -903,6 +930,27 @@ type OrgStats struct {
 	Author           EmbedUser
 }
 
+type OrgPaymentInfo struct {
+	OrgId         string
+	OrgName       string
+	IsFreeOrg     bool
+	IsSharingOrg  bool
+	HasPaid       bool
+	TrialDeadline time.Time
+	ExpiredAt     time.Time
+}
+
+type OrgPaymentHistory struct {
+	PaymentDescription string
+	PaymentDate        time.Time
+	CurrencyCode       string
+	PaymentAmount      int64
+	Status             string
+	Term               int64
+	UserCount          int64
+	NextPaymentDate    time.Time
+}
+
 type AccessReq struct {
 	Email        string
 	PriorityCode string
@@ -911,16 +959,6 @@ type AccessReq struct {
 	ApprovedBy   string
 	CreatedAt    string
 	UpdatedAt    string
-}
-
-type InnerMessage struct {
-	ByUser                string
-	GroupName             string
-	GroupLink             string
-	OrgName               string
-	IsDeletedGroupMessage bool
-	IsCreatedGroupMessage bool
-	IsSetupOrgMessage     bool
 }
 
 type GroupAside struct {
@@ -937,8 +975,9 @@ type GroupAside struct {
 }
 
 type OrgUnreadInfo struct {
-	OrgId           string
-	FeedUnreadCount int
+	OrgId                   string
+	FeedUnreadCount         int
+	NotificationUnreadCount int
 }
 
 const (
@@ -969,6 +1008,8 @@ type MarketableMemberInfo struct {
 // for My Tasks  and Group tasks
 type TaskOutline struct {
 	Id                  string
+	RootId              string
+	CommentId           string // only for ack in comment
 	EntryTitle          template.HTML
 	EntryLink           template.HTMLAttr
 	IsComment           bool
@@ -1072,6 +1113,7 @@ type TranslatedThread struct {
 	Content       string
 	Comments      []*TranslatedComment
 	IsCommentOnly bool
+	IsWikiSection bool
 }
 
 type TranslatedComment struct {
@@ -1097,4 +1139,100 @@ type SupportedLanguage struct {
 	StoreKey    string
 	DisplayText string
 	IsCurrent   bool
+}
+
+type BillingInfo struct {
+	IsSharedGroupAccount bool
+	IsFreeAccount        bool
+	IsProAccount         bool
+	FreeTrialLeftDays    int
+	ExpiredLeftDays      int
+	ActiveUserCount      int
+	Country              string
+	Phone                string
+	Billing              *paymentapi.Billing
+	BillingDetails       *paymentapi.BillingDetails
+	PastPayments         []paymentapi.Payment
+	Package              *paymentapi.Package
+	CurrencySymbol       string
+	MonthlyPrice         int
+	HasWaitingBilling    bool
+	HasSubscribedBilling bool
+	HasPaidBilling       bool
+	IsOverdue            bool
+	DismissPaymentTips   bool
+	PrefixURL            string
+	FreeTrialDays        int
+}
+
+type ReceiptInfo struct {
+	Id          string
+	OrgName     string
+	OrgAdress   string
+	OrgCountry  string
+	PaymentTerm string
+	UserCount   int
+	PaymentDate string
+	PriceUnit   string
+	Cost        string
+	Tax         string
+
+	// for jp
+	CostWithoutTax string
+	YearOrMonth    string
+	// for countries ,not jp ,de
+	CurrencySymbol string
+}
+
+type KnowledgeOverview struct {
+	Author                  EmbedUser
+	PrefixURL               string
+	GroupId                 string
+	EntryId                 string
+	Title                   string
+	Content                 string
+	HtmlTitle               template.HTML
+	HtmlContent             template.HTML
+	LocaleTitleMap          map[string]string        `json:",omitempty"`
+	LocaleHtmlContentMap    map[string]template.HTML `json:",omitempty"`
+	IsPreferMarkdown        bool
+	IsHidden                bool
+	IsAtQortexSupport       bool
+	Editable                bool
+	CanSeeHiddenBanner      bool
+	HasVersions             bool
+	Versions                []*EntryVersion `json:",omitempty"`
+	LanguageCode            string
+	EntryLanguages          []*EntryLanguage
+	ToLanguages             []*SupportedLanguage
+	HasMoreThanOneLanguages bool
+	IsAllTranslated         bool
+	UploadURL               template.HTMLAttr `json:",omitempty"` //just for reuse the mannual translation form
+	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
+	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
+}
+
+type ContactUsInfo struct {
+	FirstName   string
+	LastName    string
+	Email       string
+	Address     string
+	Phone       string
+	Country     string
+	CompanyName string
+	CompanySize string
+}
+
+type InitInfo struct {
+	CurrentUser *User
+
+	CurrentOrg *Organization
+	JoinedOrgs []*Organization
+
+	AnnouncementGroup      *Group
+	SmGroup                *Group
+	FollowedNormalGroups   []*Group
+	FollowedSharedGroups   []*Group
+	UnFollowedNormalGroups []*Group
+	UnFollowedSharedGroups []*Group
 }

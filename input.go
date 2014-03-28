@@ -14,10 +14,11 @@ type EntryInput struct {
 	Content string
 	GroupId string
 
-	IsToGroup        string // “0”:Notify People ,“1”:Notify Group
-	ToUserIds        string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
-	TodoUserIds      string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
-	MentionedUserIds string // @users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	IsToGroup   string // “0”:Notify People ,“1”:Notify Group
+	ToUserIds   string // notify users  seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	TodoUserIds string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	// MentionedUserIds string // @users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	UploadGroupId string // upload file's groupid, when in my feed UploadGroupId =""
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
 	IsToDo            bool   // IsToDo == true, will create todo for entry.
@@ -49,10 +50,12 @@ type EntryInput struct {
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
-	LocaleName string
+	LocaleName   string
+	LanguageCode string //CLD language code
 
 	// For Creating To-Dos From Comment
 	BasedPostId        string
+	BasedPostLangCode  string
 	GroupIdOfBasedPost string
 	SelectionTextInFo  SelectionTextInFo
 }
@@ -92,7 +95,7 @@ type QortexSupportInput struct {
 	PublishedToUsers bool
 	LinkTitle        string //for qortex support knowledge base
 
-	LocaleName string
+	LanguageCode string
 }
 
 type GroupInput struct {
@@ -132,6 +135,7 @@ type OrganizationInput struct {
 	RestrictSubscriptionMail bool
 	AnyoneCanJoin            bool
 	LanguageCodes            []string
+	FreeOrPro                string
 }
 
 // Like or Unlike an entry action input
@@ -247,6 +251,8 @@ type TaskInput struct {
 	IsClaiming                bool
 	ToUserIds                 string
 	TimetrackingHistoryUpdate string
+	TaskDue                   string // format:20130507
+	EntryId                   string
 }
 
 type TaskPwMap struct {
@@ -259,4 +265,12 @@ type ToDoMarkerInput struct {
 	Label          string
 	Date           time.Time `bson:",omitempty"`
 	PriorityWeight float64
+}
+
+type KnowledgeOverviewInput struct {
+	GroupId      string
+	Title        string
+	Content      string
+	IsHidden     bool
+	LanguageCode string
 }
