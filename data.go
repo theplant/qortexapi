@@ -633,20 +633,20 @@ type Entry struct {
 	IsTaskLog       bool   `json:",omitempty"` // use IsTaskLog to distinguish between task log and normal comment
 	IsInWatchList   bool   `json:",omitempty"`
 	IsToGroup       string `json:",omitempty"`
-	CanEdit         bool   `json:",omitempty"`
-	CanReply        bool   `json:",omitempty"`
-	LikedByMe       bool   `json:",omitempty"`
-	HasInlineTask   bool   `json:",omitempty"` // when comment has a ack , HasInlineTask = true
-	TaskIsCompleted bool   `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
-	IsRoot          bool   `json:",omitempty"`
-	IsUnread        bool   `json:",omitempty"`
-	IsUpdated       bool   `json:",omitempty"`
-	IsLastVersion   bool   `json:",omitempty"`
-	Presentation    bool   `json:",omitempty"`
-	AnyoneCanEdit   bool   `json:",omitempty"`
-	IsInGroup       bool   `json:",omitempty"`
-	IsFromEmail     bool   `json:",omitempty"`
-	InlineHelp      bool   `json:",omitempty"`
+	CanEdit         bool
+	CanReply        bool `json:",omitempty"`
+	LikedByMe       bool `json:",omitempty"`
+	HasInlineTask   bool `json:",omitempty"` // when comment has a ack , HasInlineTask = true
+	TaskIsCompleted bool `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
+	IsRoot          bool `json:",omitempty"`
+	IsUnread        bool `json:",omitempty"`
+	IsUpdated       bool `json:",omitempty"`
+	IsLastVersion   bool `json:",omitempty"`
+	Presentation    bool `json:",omitempty"`
+	AnyoneCanEdit   bool `json:",omitempty"`
+	IsInGroup       bool `json:",omitempty"`
+	IsFromEmail     bool `json:",omitempty"`
+	InlineHelp      bool `json:",omitempty"`
 
 	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
 	VisibleForSuperOrg            bool `json:",omitempty"`
