@@ -1060,6 +1060,8 @@ type OpenAdvancedToDosBucket struct {
 	Followers   []*EmbedUser
 	ToDoMarkers []*ToDoMarker
 
+	HasUnprioritizedToDos bool `json:"-"`
+
 	// TODO: to remove
 	LenOfToDos int
 	Editable   bool
