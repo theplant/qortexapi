@@ -131,7 +131,7 @@ type AuthUserService interface {
 	GetNewGroup() (group *Group, err error)
 	GetGroup(groupId string) (group *Group, err error)
 	CreateGroup(input *GroupInput) (group *Group, err error)
-	UpdateGroup(input *GroupInput) (err error)
+	UpdateGroup(input *GroupInput) (group *Group, err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
 	DeleteGroup(groupId string) (err error)
 	GetGroupBySlug(slug string) (group *Group, err error)
