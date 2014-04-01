@@ -834,6 +834,7 @@ type MyCount struct {
 	FollowedUnreadCount     int
 	NotificationUnreadCount int
 	ActiveTasksCount        int
+	ActionNeededTasksCount  int
 	OfflineMessageCount     int
 	GroupCounts             []*GroupCount
 }
