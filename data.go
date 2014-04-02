@@ -808,16 +808,7 @@ type NotificationItem struct {
 }
 
 type WatchItem struct {
-	AttachCnt  int
-	CommentCnt int
-	LikeCnt    int
-
-	AttachCntStr  template.HTML
-	CommentCntStr template.HTML
-	LikeCntStr    template.HTML
-
-	WatchTime time.Time
-
+	WatchTime        time.Time
 	IsSmartReminding bool
 	IsNoReminding    bool
 
