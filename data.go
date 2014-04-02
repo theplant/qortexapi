@@ -379,6 +379,7 @@ type TimeTrackingUpdateLog struct {
 type AssignableUser struct {
 	UserId     string
 	Name       string
+	Avatar     string
 	IsAssigned bool
 }
 
