@@ -571,8 +571,6 @@ type Entry struct {
 	VersionAt     time.Time `json:",omitempty"`
 	BaseOnEntryId string    `json:",omitempty"`
 
-	AllAttachmentsURL    string    `json:",omitempty"`
-	Permalink            string    `json:",omitempty"`
 	IconName             string    `json:",omitempty"`
 	LocalHumanCreatedAt  string    `json:",omitempty"`
 	LocalHumanUpdatedAt  string    `json:",omitempty"`
