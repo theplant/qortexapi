@@ -203,6 +203,11 @@ type Group struct {
 	IsSandboxGroup bool
 }
 
+type GroupCollection struct {
+	Id   string
+	Name string
+}
+
 type AdvancedToDoSettings struct {
 	Enabled                 bool
 	EnableTimeEstimate      bool
