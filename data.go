@@ -3,6 +3,8 @@ package qortexapi
 import (
 	"html/template"
 	"time"
+
+	paymentapi "github.com/theplant/theplant_payment/api"
 )
 
 type OrgSettings struct {
@@ -32,6 +34,18 @@ type Organization struct {
 	EnableMultilingual       bool
 	LanguageSelectors        *LanguageSelectors
 	SizeOptions              map[string]string
+
+	IsSample      bool
+	IsSandBox     bool
+	PublicDemoURL string
+	TutorialsURL  string
+	CreatedAt     string
+
+	// for current loggind user, added for AuthUserService.GetInitInfo
+	UnreadCount             int `json:",omitempty"`
+	NotificationUnreadCount int `json:",omitempty"`
+	ActiveTasksCount        int `json:",omitempty"`
+	OfflineMessageCount     int `json:",omitempty"`
 }
 
 type SearchOrganization struct {
@@ -75,25 +89,26 @@ type User struct {
 	Timezone             string
 	IsSuperUser          bool
 	IsSharedUser         bool
-	OrgId                string
-	OriginalOrgId        string
-	PrefixURL            string
-	ProfileURL           string
+	OrgId                string `json:",omitempty"`
+	OriginalOrgId        string `json:",omitempty"`
+	OrgName              string `json:",omitempty"`
+	PrefixURL            string `json:",omitempty"`
+	ProfileURL           template.HTMLAttr
 	IsLoggedInUser       bool
 	IsAvailable          bool
 	IsDisabled           bool
 	IsDeleted            bool
+	Followable           bool
 	FromSharedGroup      bool
 	FromOrganizationName string
 	Editable             bool
-	Followable           bool
-	FollowedByMe         bool
 	FollowingTheGroup    bool
-	Department           string
-	Location             string
+	Department           string `json:",omitempty"`
+	Location             string `json:",omitempty"`
 	FollowingGroups      []*Group
 	Preferences          *Preferences
 	NoDetail             bool `json:",omitempty"`
+	HasMobileDevices     bool `json:"-"`
 }
 
 type GroupUsers struct {
@@ -183,6 +198,9 @@ type Group struct {
 	ToDoSettings        *AdvancedToDoSettings
 	TodoGroupingRoute   string `json:",omitempty"`
 	Collection          *GroupCollection
+
+	UnreadCount    int `json:",omitempty"` // for current loggind user
+	IsSandboxGroup bool
 }
 
 type AdvancedToDoSettings struct {
@@ -242,8 +260,9 @@ type GroupAdvancedSettingPage struct {
 	CurrentOrg  *Organization
 	SharingInfo *GroupSharingInfo
 
-	IsNewGroup bool `json:"-"`
-	Editable   bool // diff from Group.Editable
+	IsNewGroup        bool `json:"-"`
+	Editable          bool // diff from Group.Editable
+	DisableProFeatrue bool
 
 	// Shit...
 	ThrowawayStatusSuggestions    map[string]string
@@ -353,6 +372,7 @@ type TaskLog struct {
 	IsTimeTrackingUpdated bool
 	IsReopened            bool // {Author} reopened this To-Do.
 	IsLabelChanged        bool // {Author} set the label to Bug.
+	IsDueChanged          bool // {Author} set the due date from 2013/09/23 to 2014/09/23.
 
 	CreatedAt           time.Time
 	VersionAt           time.Time
@@ -368,6 +388,9 @@ type TaskLog struct {
 	Status string
 	// Priority string
 	Label string
+
+	LocalOldDue string
+	LocalNewDue string
 
 	TimeTrackingUpdateLogs []*TimeTrackingUpdateLog
 }
@@ -385,6 +408,7 @@ type TimeTrackingUpdateLog struct {
 type AssignableUser struct {
 	UserId     string
 	Name       string
+	Avatar     string
 	IsAssigned bool
 }
 
@@ -411,17 +435,17 @@ type TimeTrackingItem struct {
 type Task struct {
 	Id                string
 	GroupId           string
-	IsTaskOwner       bool `json:",omitempty"`
-	IsTaskAssignee    bool `json:",omitempty"`
-	IsOthers          bool `json:",omitempty"`
-	IsCurrentUserDone bool `json:",omitempty"`
+	IsTaskOwner       bool `json:",omitempty"` // Is this task created by current user
+	IsTaskAssignee    bool `json:",omitempty"` // Is this task assigned to current user
+	IsOthers          bool `json:",omitempty"` //
+	IsCurrentUserDone bool `json:",omitempty"` // use in ack to multi-user, if current user click ack
 
-	IsAcknowledgement bool `json:",omitempty"`
-	IsTodoForOne      bool `json:",omitempty"`
-	IsTodoForAll      bool `json:",omitempty"`
+	IsAcknowledgement bool `json:",omitempty"` // is task a ack
+	IsTodoForOne      bool `json:",omitempty"` // is task a todo
+	IsTodoForAll      bool `json:",omitempty"` // not use in current system
 
-	IsCompleted bool `json:",omitempty"`
-	IsClosed    bool `json:",omitempty"`
+	IsCompleted bool `json:",omitempty"` // task assignee finish or task creator close the task , IsCompleted =true
+	IsClosed    bool `json:",omitempty"` // task creator close the task , IsCompleted =true
 	IsToGroup   bool `json:",omitempty"`
 
 	IsDueToday bool `json:",omitempty"`
@@ -432,6 +456,7 @@ type Task struct {
 	CompletedAt       time.Time `json:",omitempty"`
 	LocalCreatedDate  string    `json:",omitempty"`
 	LocalDue          string    `json:",omitempty"`
+	LocalDueWithYear  string    `json:",omitempty"`
 	LocalDueShortDate string    `json:",omitempty"`
 	DueInputValue     string    `json:",omitempty"`
 
@@ -439,25 +464,28 @@ type Task struct {
 	CompletedUsersCount int `json:",omitempty"`
 	PendingUsersCount   int `json:",omitempty"`
 
-	Owner          EmbedUser   `json:",omitempty"`
-	ToUsers        []EmbedUser `json:",omitempty"`
-	ToUsersText    string      `json:",omitempty"`
-	PendingUsers   []EmbedUser `json:",omitempty"`
-	CompletedUsers []EmbedUser `json:",omitempty"`
-	Assignee       EmbedUser   `json:",omitempty"`
+	Owner          EmbedUser   `json:",omitempty"` // task creator
+	ToUsers        []EmbedUser `json:",omitempty"` // used in ack and todo, to track all assignees
+	ToUsersText    string      `json:",omitempty"` // format   user1Id:user1Name,user2Id:user2Name
+	PendingUsers   []EmbedUser `json:",omitempty"` // used in muti-usr ack, to track incompleted users
+	CompletedUsers []EmbedUser `json:",omitempty"` // used in muti-usr ack,to track completed users
+	Assignee       EmbedUser   `json:",omitempty"` // used in todo, current assignee
 
 	ColorCssClass       string        `json:",omitempty"`
 	ReopenColorCssClass string        `json:",omitempty"`
 	TaskBarHtml         template.HTML `json:",omitempty"`
 
-	TaskFlow       int
-	IsClaimed      bool
+	TaskFlow int //For Advanced todo ,NEW:0 ,OPEN:1,CLOSED:2 ,For BasicToDo, NEW:0, CLOSED:2
+
+	IsClaimed      bool // used in muti-user todo, if someone has clicked "i will do it",IsClaimed = true
 	IsAdvancedTask bool // True when the PM feature is enabled and the AdvancedTask will be not nil.
 	AdvancedTask   *AdvancedTask
 
 	NeedShowAppliedText bool
 	NeedToBeEditMode    bool
 	IsEditing           bool
+	CanEditDueDate      bool
+	FarAwayCorner       bool
 }
 
 type EntryVersion struct {
@@ -572,8 +600,6 @@ type Entry struct {
 	VersionAt     time.Time `json:",omitempty"`
 	BaseOnEntryId string    `json:",omitempty"`
 
-	AllAttachmentsURL    string    `json:",omitempty"`
-	Permalink            string    `json:",omitempty"`
 	IconName             string    `json:",omitempty"`
 	LocalHumanCreatedAt  string    `json:",omitempty"`
 	LocalHumanUpdatedAt  string    `json:",omitempty"`
@@ -582,9 +608,9 @@ type Entry struct {
 	LastUpdateAtAgo      string    `json:",omitempty"`
 	WatchedAtAgo         string    `json:",omitempty"`
 	NextRemindAtLater    string    `json:",omitempty"`
-	MentionedUserIds     string    `json:",omitempty"`
-	DomainURL            string    `json:",omitempty"`
-	UpdatedAtUnixNano    string    `json:",omitempty"`
+	// MentionedUserIds     string    `json:",omitempty"`
+	DomainURL         string `json:",omitempty"`
+	UpdatedAtUnixNano string `json:",omitempty"`
 	// last version's update time
 	LastUpdateAt string `json:",omitempty"`
 
@@ -628,27 +654,27 @@ type Entry struct {
 	IsKnowledgeBase bool   `json:",omitempty"`
 	IsPost          bool   `json:",omitempty"`
 	IsComment       bool   `json:",omitempty"`
-	IsTask          bool   `json:",omitempty"`
+	IsTask          bool   `json:",omitempty"` // when entry is ack or todo , IsTask = true
 	IsChat          bool   `json:",omitempty"`
-	IsTaskToDo      bool   `json:",omitempty"`
-	IsTaskAck       bool   `json:",omitempty"`
-	IsTaskLog       bool   `json:",omitempty"`
+	IsTaskToDo      bool   `json:",omitempty"` // when entry is todo , IsTaskToDo = true
+	IsTaskAck       bool   `json:",omitempty"` // when entry is ack , IsTaskAck = true
+	IsTaskLog       bool   `json:",omitempty"` // use IsTaskLog to distinguish between task log and normal comment
 	IsInWatchList   bool   `json:",omitempty"`
 	IsToGroup       string `json:",omitempty"`
-	CanEdit         bool   `json:",omitempty"`
-	CanReply        bool   `json:",omitempty"`
-	LikedByMe       bool   `json:",omitempty"`
-	HasInlineTask   bool   `json:",omitempty"`
-	TaskIsCompleted bool   `json:",omitempty"`
-	IsRoot          bool   `json:",omitempty"`
-	IsUnread        bool   `json:",omitempty"`
-	IsUpdated       bool   `json:",omitempty"`
-	IsLastVersion   bool   `json:",omitempty"`
-	Presentation    bool   `json:",omitempty"`
-	AnyoneCanEdit   bool   `json:",omitempty"`
-	IsInGroup       bool   `json:",omitempty"`
-	IsFromEmail     bool   `json:",omitempty"`
-	InlineHelp      bool   `json:",omitempty"`
+	CanEdit         bool
+	CanReply        bool `json:",omitempty"`
+	LikedByMe       bool `json:",omitempty"`
+	HasInlineTask   bool `json:",omitempty"` // when comment has a ack , HasInlineTask = true
+	TaskIsCompleted bool `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
+	IsRoot          bool `json:",omitempty"`
+	IsUnread        bool `json:",omitempty"`
+	IsUpdated       bool `json:",omitempty"`
+	IsLastVersion   bool `json:",omitempty"`
+	Presentation    bool `json:",omitempty"`
+	AnyoneCanEdit   bool `json:",omitempty"`
+	IsInGroup       bool `json:",omitempty"`
+	IsFromEmail     bool `json:",omitempty"`
+	InlineHelp      bool `json:",omitempty"`
 
 	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
 	VisibleForSuperOrg            bool `json:",omitempty"`
@@ -664,8 +690,8 @@ type Entry struct {
 	CurrentVersionEditor EmbedUser
 	Group                *Group `json:",omitempty"`
 	// Task                 *Task         `json:",omitempty"`
-	Todo         *Task         `json:",omitempty"`
-	Ack          *Task         `json:",omitempty"`
+	Todo         *Task         `json:",omitempty"` // when entry is a todo(IsTaskToDo=true), this exsits
+	Ack          *Task         `json:",omitempty"` // when entry is a ack(IsTaskAck=true), this exsits
 	Conversation *Conversation `json:",omitempty"`
 
 	Versions []*EntryVersion `json:",omitempty"`
@@ -719,9 +745,8 @@ type Entry struct {
 	RelatedToDoEntries []*RelatedEntry // For Entry
 	BasedOnPost        *BasedOnPost
 
-	RelatedEntries []*RelatedEntry
+	DisableProFeatrue bool
 
-	// TODO: to remove
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
 }
 
@@ -813,16 +838,7 @@ type NotificationItem struct {
 }
 
 type WatchItem struct {
-	AttachCnt  int
-	CommentCnt int
-	LikeCnt    int
-
-	AttachCntStr  template.HTML
-	CommentCntStr template.HTML
-	LikeCntStr    template.HTML
-
-	WatchTime time.Time
-
+	WatchTime        time.Time
 	IsSmartReminding bool
 	IsNoReminding    bool
 
@@ -838,6 +854,7 @@ type MyCount struct {
 	FollowedUnreadCount     int
 	NotificationUnreadCount int
 	ActiveTasksCount        int
+	ActionNeededTasksCount  int
 	OfflineMessageCount     int
 	GroupCounts             []*GroupCount
 }
@@ -901,12 +918,14 @@ type ContactInfo struct {
 }
 
 type Member struct {
+	Id                 string
 	Name               string
 	Email              string
 	ComfirmationSentAt string
 	SignupConfirmedAt  string
 	SignupStatus       string
 	JoinedOrgs         []*Organization
+	IsSandbox          bool
 }
 
 // Following are for Admin Service
@@ -930,6 +949,27 @@ type OrgStats struct {
 	CreatedAt        string
 	LastUpdate       string
 	Author           EmbedUser
+}
+
+type OrgPaymentInfo struct {
+	OrgId         string
+	OrgName       string
+	IsFreeOrg     bool
+	IsSharingOrg  bool
+	HasPaid       bool
+	TrialDeadline time.Time
+	ExpiredAt     time.Time
+}
+
+type OrgPaymentHistory struct {
+	PaymentDescription string
+	PaymentDate        time.Time
+	CurrencyCode       string
+	PaymentAmount      int64
+	Status             string
+	Term               int64
+	UserCount          int64
+	NextPaymentDate    time.Time
 }
 
 type AccessReq struct {
@@ -956,8 +996,9 @@ type GroupAside struct {
 }
 
 type OrgUnreadInfo struct {
-	OrgId           string
-	FeedUnreadCount int
+	OrgId                   string
+	FeedUnreadCount         int
+	NotificationUnreadCount int
 }
 
 const (
@@ -988,6 +1029,8 @@ type MarketableMemberInfo struct {
 // for My Tasks  and Group tasks
 type TaskOutline struct {
 	Id                  string
+	RootId              string
+	CommentId           string // only for ack in comment
 	EntryTitle          template.HTML
 	EntryLink           template.HTMLAttr
 	IsComment           bool
@@ -1010,41 +1053,54 @@ type TaskOutline struct {
 	CompleteAtUnixNano  int64
 	IsTitleCreatedBy    bool
 	ActionNeeded        bool
+	IsUnprioritized     bool
 }
 
 type GroupTasksOutline struct {
-	Group               *EmbedGroup
-	AcksAndPendingToDos []*TaskOutline // Action Needed
-	SimpleToDos         []*TaskOutline
-	// NowToDos             []*TaskOutline
-	// NowEstimateTotal     float64
+	Group                   *EmbedGroup
+	AcksAndPendingToDos     []*TaskOutline // Action Needed
+	SimpleToDos             []*TaskOutline
 	OpenToDos               []*TaskOutline
 	OpenEstimateTotal       float64
 	NotStartedToDos         []*TaskOutline
 	NotStartedEstimateTotal float64
-	// SoonToDos            []*TaskOutline
-	// SoonEstimateTotal    float64
-	// SomedayToDos         []*TaskOutline
-	// SomedayEstimateTotal float64
-	EstimateUnit string
+	EstimateUnit            string
 }
 
+// Bucket is a historical name after many runs of feature iteration,
+// basically, it represents a bunch of to-dos and its relevant information.
 type OpenAdvancedToDosBucket struct {
-	Title string
-	// Type          string
-	ToDoSettings  *AdvancedToDoSettings
-	ToDos         []*TaskOutline
-	LenOfToDos    int
-	EstimateTotal float64
-	EstimateUnit  string
-	Editable      bool
-	Followers     []*EmbedUser
+	Title        string
+	ToDoSettings *AdvancedToDoSettings
+	ToDos        []*TaskOutline
+
+	NoStat                       bool
+	EstimateTotal, TrackingTotal float64
+	EstimateUnit                 string
+
+	Followers   []*EmbedUser
+	ToDoMarkers []*ToDoMarker
+
+	HasUnprioritizedToDos bool `json:"-"`
+
+	// TODO: to remove
+	LenOfToDos int
+	Editable   bool
 }
 
 type OpenAdvancedToDosPage struct {
-	Assignee          *EmbedUser
-	ActionNeededToDos []*TaskOutline
-	ToDosBuckets      []*OpenAdvancedToDosBucket
+	Assignee     *EmbedUser `json:",omitempty"`
+	ToDosBuckets []*OpenAdvancedToDosBucket
+}
+
+type ToDoMarker struct {
+	Id                           string
+	Label                        string
+	Date                         string
+	BeforeIndex                  int
+	EstimateTotal, TrackingTotal float64
+	EstimateUnit                 string
+	PriorityWeight               float64
 }
 
 type BasicOpenToDoOutlines struct {
@@ -1108,6 +1164,49 @@ type SupportedLanguage struct {
 	IsCurrent   bool
 }
 
+type BillingInfo struct {
+	IsSharedGroupAccount bool
+	IsFreeAccount        bool
+	IsProAccount         bool
+	FreeTrialLeftDays    int
+	ExpiredLeftDays      int
+	ActiveUserCount      int
+	Country              string
+	Phone                string
+	Billing              *paymentapi.Billing
+	BillingDetails       *paymentapi.BillingDetails
+	PastPayments         []paymentapi.Payment
+	Package              *paymentapi.Package
+	CurrencySymbol       string
+	MonthlyPrice         int
+	HasWaitingBilling    bool
+	HasSubscribedBilling bool
+	HasPaidBilling       bool
+	IsOverdue            bool
+	DismissPaymentTips   bool
+	PrefixURL            string
+	FreeTrialDays        int
+}
+
+type ReceiptInfo struct {
+	Id          string
+	OrgName     string
+	OrgAdress   string
+	OrgCountry  string
+	PaymentTerm string
+	UserCount   int
+	PaymentDate string
+	PriceUnit   string
+	Cost        string
+	Tax         string
+
+	// for jp
+	CostWithoutTax string
+	YearOrMonth    string
+	// for countries ,not jp ,de
+	CurrencySymbol string
+}
+
 type KnowledgeOverview struct {
 	Author                  EmbedUser
 	PrefixURL               string
@@ -1136,9 +1235,29 @@ type KnowledgeOverview struct {
 	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
 }
 
-type GroupCollection struct {
-	Id   string
-	Name string
+type ContactUsInfo struct {
+	FirstName   string
+	LastName    string
+	Email       string
+	Address     string
+	Phone       string
+	Country     string
+	CompanyName string
+	CompanySize string
+}
+
+type InitInfo struct {
+	CurrentUser *User
+
+	CurrentOrg *Organization
+	JoinedOrgs []*Organization
+
+	AnnouncementGroup      *Group
+	SmGroup                *Group
+	FollowedNormalGroups   []*Group
+	FollowedSharedGroups   []*Group
+	UnFollowedNormalGroups []*Group
+	UnFollowedSharedGroups []*Group
 }
 
 type NewGroupAside struct {

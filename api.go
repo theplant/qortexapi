@@ -2,7 +2,7 @@ package qortexapi
 
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
-	GetAuthUserService(session string) (authUserService AuthUserService, err error)
+	GetAuthUserService(session string, orgId string) (authUserService AuthUserService, err error)
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
@@ -35,6 +35,10 @@ type PublicService interface {
 
 	// Signup
 	RequestSignup(email string) (err error)
+
+	// Demo related
+	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
+	CreateSandboxMember(firstName string, lastName string, avatarURL string) (r *Member, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -62,6 +66,7 @@ type AuthUserService interface {
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
 	CloseTask(entryId string, groupId string, taskId string) (entry *Task, err error)
+	UpdateTask(taskInput *TaskInput) (task *Task, err error)
 	CreateComment(input *EntryInput) (entry *Entry, err error)
 	GetComment(entryId string, groupId string, languageCode string) (entry *Entry, err error)
 	EditComment(entryId string, groupId string, languageCode string) (entry *Entry, err error)
@@ -112,7 +117,6 @@ type AuthUserService interface {
 	GetWatchList(before string, limit int) (watchlist *WatchList, err error)
 	AddToWatchList(entryId string, groupId string, remindMode string) (err error)
 	StopWatching(entryId string, groupId string) (err error)
-	ReadWatching(entryId string, groupId string) (err error)
 	RemindMe() (reminded bool, err error)
 	StartSmartReminding(groupId string, watchItemId string) (stopped bool, err error)
 	StopReminding(groupId string, watchItemId string) (stopped bool, err error)
@@ -140,9 +144,9 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
-	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput) (err error)
 	GetAllGroupCollections() (gcs []*GroupCollection, err error)
 	ToggleGroupArchiving(gids string, signal bool) (err error)
+	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
 
 	// User related
 	GetAuthUser() (user *User, err error)
@@ -163,7 +167,7 @@ type AuthUserService interface {
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
-	SetPreferredLanguages(languageCodes []string) (localeName string, err error)
+	SetPreferredLanguages(languageCodes []string) (err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
@@ -180,6 +184,12 @@ type AuthUserService interface {
 	SearchOrganizations(keyword string) (orgs []*SearchOrganization, err error)
 	UpdateOrganization(input *OrganizationInput) (org *Organization, err error)
 	SwitchOrganization(orgId string) (err error)
+	MarkAsSampleOrg() (err error)
+	MarkAsStandardOrg() (err error)
+	GetSampleOrgs() (orgs []*Organization, err error)
+	GetSandboxOrgs() (orgs []*Organization, err error)
+	DeleteSandboxOrg(orgId string) (err error)
+	DeleteAllSandboxOrg() (err error)
 
 	AcceptShareRequestByAdmin(requestId string) (err error)
 	RejectShareRequestByAdmin(requestId string) (err error)
@@ -194,7 +204,6 @@ type AuthUserService interface {
 	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string) (sendedEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
-	ChangeLocale(localeName string) (err error)
 	UpdateGroupAdvancedToDoSettings(gId, settings string) (err error)
 
 	// TODO: mail-updates: remove it
@@ -213,6 +222,7 @@ type AuthUserService interface {
 
 	// preferences
 	DismissPresentationTip() (err error)
+	DismissTutorialsTip() (err error)
 
 	// chat
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
@@ -233,7 +243,7 @@ type AuthUserService interface {
 	EditTask(groupId string, taskId string) (task *Task, err error)
 	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
 	ClaimTask(taskId string, groupId string) (task *Task, err error)
-	UpdateTask(input *TaskInput) (task *Task, err error)
+	UpdateSimpleTask(input *TaskInput) (task *Task, err error)
 	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetOpenTasksIMade() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)
@@ -247,17 +257,39 @@ type AuthUserService interface {
 
 	// [Group] Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
-	AllOpenAdvancedToDosInGroup(groupId string) (page *OpenAdvancedToDosPage, err error)
+	AllOpenAdvancedToDosInGroup(groupId string) (bucket *OpenAdvancedToDosBucket, err error)
 	AllOpenAdvancedToDosGroupingByUserInGroup(groupId string) (atos []*OpenAdvancedToDosPage, err error)
-	AllOpenAdvancedToDosGroupingByStatusInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
-	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
+	AllOpenAdvancedToDosGroupingByStatusInGroup(groupId string) (page []*OpenAdvancedToDosBucket, apiGroup *Group, err error)
+	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page []*OpenAdvancedToDosBucket, apiGroup *Group, err error)
 	AllOpenBasicToDosInGroup(groupId string) (taskOutlines []*TaskOutline, err error)
 	AllOpenBasicToDosGroupingByUserInGroup(groupId string) (atos []*BasicOpenToDoOutlines, err error)
+
 	AllClosedBasicToDosInGroup(groupId string, afterTimeS string) (taskOutlines []*TaskOutline, err error)
 	AllClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime string) (taskOutlines []*TaskOutline, apiGroup *Group, hasMore bool, err error)
 	CountOfClosedToDosInGroup(ttype int, groupId string) (count int, err error)
+	CountOfActionNeededToDosInGroup(gid string) (count int, err error)
 	ToDoCSV(groupId string) (todos []*ToDoCSVItem, err error)
+
+	// Apple device service
+	RegisterAppleDeviceForUser(userId string, token string) (err error)
+	UnregisterAppleDeviceForUser(userId string, token string) (err error)
+
+	//payment
+	GetPaymentSession() (session string, err error)
+	CanSeeBilling() (yes bool, err error)
+	GetBillingInfo() (billing *BillingInfo, err error)
+	GetReceiptInfo(id string) (receipt *ReceiptInfo, err error)
+	SyncBilling() (err error)
+	SyncBillingDetails() (err error)
+	// SyncPastPayments() (err error)
+	ValidatePayment() (err error)
+	CancelSubscription() (err error)
+	DismissPaymentTips() (err error)
+
+	GetContactUsInfo() (info *ContactUsInfo, err error)
+	// For Mobile Specifically
+	GetInitInfo() (info *InitInfo, err error)
 }
 
 type AuthAdminService interface {
@@ -285,4 +317,16 @@ type AuthAdminService interface {
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 
 	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
+
+	MarkOrgFreeOrPay(orgId string) (free bool, err error)
+
+	GetOrgPayment() (orgPaymentInfos []*OrgPaymentInfo, err error)
+
+	GetPaymentHistory(orgId string) (history []OrgPaymentHistory, err error)
+
+	SetTrial(orgId string, deadLine string) (err error)
+
+	SetExpiredAt(orgId string, deadLine string) (err error)
+	//for test
+	SendPaymentWarnEmail(orgId string) (err error)
 }
