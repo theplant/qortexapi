@@ -42,12 +42,11 @@ type Organization struct {
 	CreatedAt     string
 
 	// for current loggind user, added for AuthUserService.GetInitInfo
-	UnreadCount              int `json:",omitempty"`
-	NotificationUnreadCount  int `json:",omitempty"`
-	ActiveTasksCount         int `json:",omitempty"`
-	OfflineMessageCount      int `json:",omitempty"`
-	MyActiveTasksCount       int `json:",omitempty"`
-	MyActionNeededTasksCount int `json:",omitempty"`
+	UnreadCount             int `json:",omitempty"`
+	NotificationUnreadCount int `json:",omitempty"`
+	OfflineMessageCount     int `json:",omitempty"`
+	ActiveTasksCount        int `json:",omitempty"`
+	ActionNeededTasksCount  int `json:",omitempty"`
 }
 
 type SearchOrganization struct {
