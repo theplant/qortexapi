@@ -44,8 +44,9 @@ type Organization struct {
 	// for current loggind user, added for AuthUserService.GetInitInfo
 	UnreadCount             int `json:",omitempty"`
 	NotificationUnreadCount int `json:",omitempty"`
-	ActiveTasksCount        int `json:",omitempty"`
 	OfflineMessageCount     int `json:",omitempty"`
+	ActiveTasksCount        int `json:",omitempty"`
+	ActionNeededTasksCount  int `json:",omitempty"`
 }
 
 type SearchOrganization struct {
