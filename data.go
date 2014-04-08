@@ -78,37 +78,39 @@ type BlogEntry struct {
 }
 
 type User struct {
-	Id                   string
-	Email                string
-	Firstame             string
-	LastName             string
-	Name                 string
-	Title                string
-	Avatar               string
-	JID                  string
-	Timezone             string
-	IsSuperUser          bool
-	IsSharedUser         bool
-	OrgId                string `json:",omitempty"`
-	OriginalOrgId        string `json:",omitempty"`
-	OrgName              string `json:",omitempty"`
-	PrefixURL            string `json:",omitempty"`
-	ProfileURL           template.HTMLAttr
-	IsLoggedInUser       bool
-	IsAvailable          bool
-	IsDisabled           bool
-	IsDeleted            bool
-	Followable           bool
-	FromSharedGroup      bool
-	FromOrganizationName string
-	Editable             bool
-	FollowingTheGroup    bool
-	Department           string `json:",omitempty"`
-	Location             string `json:",omitempty"`
-	FollowingGroups      []*Group
-	Preferences          *Preferences
-	NoDetail             bool `json:",omitempty"`
-	HasMobileDevices     bool `json:"-"`
+	Id                    string
+	Email                 string
+	Firstame              string
+	LastName              string
+	Name                  string
+	Title                 string
+	Avatar                string
+	JID                   string
+	Timezone              string
+	IsSuperUser           bool
+	IsSuperUserInSuperOrg bool
+	IsSharedUser          bool
+	IsOfficial            bool
+	OrgId                 string `json:",omitempty"`
+	OriginalOrgId         string `json:",omitempty"`
+	OrgName               string `json:",omitempty"`
+	PrefixURL             string `json:",omitempty"`
+	ProfileURL            template.HTMLAttr
+	IsLoggedInUser        bool
+	IsAvailable           bool
+	IsDisabled            bool
+	IsDeleted             bool
+	Followable            bool
+	FromSharedGroup       bool
+	FromOrganizationName  string
+	Editable              bool
+	FollowingTheGroup     bool
+	Department            string `json:",omitempty"`
+	Location              string `json:",omitempty"`
+	FollowingGroups       []*Group
+	Preferences           *Preferences
+	NoDetail              bool `json:",omitempty"`
+	HasMobileDevices      bool `json:"-"`
 }
 
 type GroupUsers struct {
