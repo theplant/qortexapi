@@ -75,6 +75,7 @@ type BlogEntry struct {
 	Author           EmbedUser
 	PrevBlogUrl      string
 	NextBlogUrl      string
+	TweetUrl         string
 }
 
 type User struct {
