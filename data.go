@@ -64,8 +64,7 @@ type Blog struct {
 
 type BlogEntry struct {
 	Id               string
-	Title            string
-	HtmlTitle        template.HTML
+	Title            template.HTML
 	Slug             string
 	CreatedAt        time.Time
 	LocalCreatedAt   string
@@ -592,19 +591,19 @@ type Message struct {
 
 type Entry struct {
 	Id            string
-	EType         string    `json:",omitempty"`
-	Title         string    `json:",omitempty"`
-	Slug          string    `json:",omitempty"`
-	Content       string    `json:",omitempty"`
-	TypeTitle     string    `json:",omitempty"`
-	RootId        string    `json:",omitempty"`
-	GroupId       string    `json:",omitempty"`
-	AuthorId      string    `json:",omitempty"`
-	CreatedAt     time.Time `json:",omitempty"`
-	UpdatedAt     time.Time `json:",omitempty"`
-	BumpedUpAt    time.Time `json:",omitempty"`
-	VersionAt     time.Time `json:",omitempty"`
-	BaseOnEntryId string    `json:",omitempty"`
+	EType         string        `json:",omitempty"`
+	Title         template.HTML `json:",omitempty"`
+	Slug          string        `json:",omitempty"`
+	Content       string        `json:",omitempty"`
+	TypeTitle     string        `json:",omitempty"`
+	RootId        string        `json:",omitempty"`
+	GroupId       string        `json:",omitempty"`
+	AuthorId      string        `json:",omitempty"`
+	CreatedAt     time.Time     `json:",omitempty"`
+	UpdatedAt     time.Time     `json:",omitempty"`
+	BumpedUpAt    time.Time     `json:",omitempty"`
+	VersionAt     time.Time     `json:",omitempty"`
+	BaseOnEntryId string        `json:",omitempty"`
 
 	IconName             string    `json:",omitempty"`
 	LocalHumanCreatedAt  string    `json:",omitempty"`
@@ -620,7 +619,6 @@ type Entry struct {
 	// last version's update time
 	LastUpdateAt string `json:",omitempty"`
 
-	HtmlTitle           template.HTML `json:",omitempty"`
 	HtmlContent         template.HTML `json:",omitempty"`
 	HtmlContentPart     template.HTML `json:",omitempty"`
 	TaskHtmlContentPart template.HTML `json:",omitempty"`
@@ -763,7 +761,7 @@ type EntryLanguage struct {
 }
 
 type RelatedEntry struct {
-	HtmlTitle           template.HTML
+	Title               template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
 	Author              *EmbedUser
@@ -772,9 +770,9 @@ type RelatedEntry struct {
 }
 
 type BasedOnPost struct {
-	RootHtmlTitle template.HTML
-	Link          template.HTMLAttr
-	IsComment     bool
+	RootTitle template.HTML
+	Link      template.HTMLAttr
+	IsComment bool
 }
 
 type QortexSupport struct {
@@ -792,8 +790,7 @@ type EmbedEntry struct {
 	Id        string
 	GroupId   string
 	GroupName string
-	Title     string
-	HtmlTitle template.HTML
+	Title     template.HTML
 	EType     string
 	Author    EmbedUser
 	ToUsers   []EmbedUser
@@ -1218,9 +1215,8 @@ type KnowledgeOverview struct {
 	PrefixURL               string
 	GroupId                 string
 	EntryId                 string
-	Title                   string
 	Content                 string
-	HtmlTitle               template.HTML
+	Title                   template.HTML
 	HtmlContent             template.HTML
 	LocaleTitleMap          map[string]string        `json:",omitempty"`
 	LocaleHtmlContentMap    map[string]template.HTML `json:",omitempty"`
