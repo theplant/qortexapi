@@ -1285,4 +1285,10 @@ type GroupsInCollection struct {
 	ColName      string
 	Groups       []*Group
 	SharedGroups []*Group
+	IsCollapsed  bool
+}
+
+type GroupColCollapseState struct {
+	ColId       string
+	IsCollapsed bool
 }

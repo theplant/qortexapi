@@ -170,6 +170,7 @@ type AuthUserService interface {
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
 	SetPreferredLanguages(languageCodes []string) (err error)
+	ToggleGroupCol(gtype int, colIdStr string) (err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
