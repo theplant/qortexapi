@@ -84,6 +84,7 @@ type User struct {
 	Firstame              string
 	LastName              string
 	Name                  string
+	LocaleName            map[string]string `json:"-"` // Keeping names for different locale, which has different name order for first and last name
 	Title                 string
 	Avatar                string
 	JID                   string
@@ -145,6 +146,7 @@ type EmbedUser struct {
 	Id                  string
 	Email               string
 	Name                string
+	LocaleName          map[string]string `json:"-"`
 	Title               string            `json:",omitempty"`
 	Avatar              string            `json:",omitempty"`
 	JID                 string            `json:",omitempty"`
