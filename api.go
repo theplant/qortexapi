@@ -252,7 +252,7 @@ type AuthUserService interface {
 	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)
 	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
-	GetUserTasks(userId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
+	GetUserTasks(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 
 	GetGroupGeneralSettingPage(gId string) (page *GroupGeneralSettingPage, err error)
 	GetGroupUsersPage(gId string) (page *GroupUsersPage, err error)
