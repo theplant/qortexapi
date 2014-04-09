@@ -183,6 +183,7 @@ type Group struct {
 	IsPrivate           bool              `json:",omitempty"`
 	Editable            bool              `json:",omitempty"`
 	Managable           bool              `json:",omitempty"`
+	CanShareGroup       bool              `json:",omitempty"`
 	Accessible          bool              `json:",omitempty"`
 	FollowedByMe        bool              `json:",omitempty"`
 	AdministratedByMe   bool              `json:",omitempty"`
@@ -272,7 +273,6 @@ type GroupAdvancedSettingPage struct {
 	SharingInfo *GroupSharingInfo
 
 	IsNewGroup        bool `json:"-"`
-	Editable          bool // diff from Group.Editable
 	DisableProFeatrue bool
 
 	// Shit...
