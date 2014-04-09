@@ -161,8 +161,15 @@ type PreferencesInput struct {
 }
 
 type MemberAccountInput struct {
-	FirstName string
-	LastName  string
+	FirstName     string // English name
+	LastName      string
+	FirstNameCn   string // Chinese name
+	LastNameCn    string
+	FirstNameJp   string // Japanese name for display
+	LastNameJp    string
+	FirstNameJpKa string // Japanese Katakana name for ordering
+	LastNameJpKa  string
+
 	AvatarURL string
 }
 
