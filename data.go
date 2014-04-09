@@ -44,8 +44,9 @@ type Organization struct {
 	// for current loggind user, added for AuthUserService.GetInitInfo
 	UnreadCount             int `json:",omitempty"`
 	NotificationUnreadCount int `json:",omitempty"`
-	ActiveTasksCount        int `json:",omitempty"`
 	OfflineMessageCount     int `json:",omitempty"`
+	ActiveTasksCount        int `json:",omitempty"`
+	ActionNeededTasksCount  int `json:",omitempty"`
 }
 
 type SearchOrganization struct {
@@ -64,7 +65,6 @@ type Blog struct {
 type BlogEntry struct {
 	Id               string
 	Title            string
-	HtmlTitle        template.HTML
 	Slug             string
 	CreatedAt        time.Time
 	LocalCreatedAt   string
@@ -75,40 +75,43 @@ type BlogEntry struct {
 	Author           EmbedUser
 	PrevBlogUrl      string
 	NextBlogUrl      string
+	TweetUrl         string
 }
 
 type User struct {
-	Id                   string
-	Email                string
-	Firstame             string
-	LastName             string
-	Name                 string
-	Title                string
-	Avatar               string
-	JID                  string
-	Timezone             string
-	IsSuperUser          bool
-	IsSharedUser         bool
-	OrgId                string `json:",omitempty"`
-	OriginalOrgId        string `json:",omitempty"`
-	OrgName              string `json:",omitempty"`
-	PrefixURL            string `json:",omitempty"`
-	ProfileURL           template.HTMLAttr
-	IsLoggedInUser       bool
-	IsAvailable          bool
-	IsDisabled           bool
-	IsDeleted            bool
-	Followable           bool
-	FromSharedGroup      bool
-	FromOrganizationName string
-	Editable             bool
-	FollowingTheGroup    bool
-	Department           string `json:",omitempty"`
-	Location             string `json:",omitempty"`
-	FollowingGroups      []*Group
-	Preferences          *Preferences
-	NoDetail             bool `json:",omitempty"`
-	HasMobileDevices     bool `json:"-"`
+	Id                    string
+	Email                 string
+	Firstame              string
+	LastName              string
+	Name                  string
+	Title                 string
+	Avatar                string
+	JID                   string
+	Timezone              string
+	IsSuperUser           bool
+	IsSuperUserInSuperOrg bool
+	IsSharedUser          bool
+	IsOfficial            bool
+	OrgId                 string `json:",omitempty"`
+	OriginalOrgId         string `json:",omitempty"`
+	OrgName               string `json:",omitempty"`
+	PrefixURL             string `json:",omitempty"`
+	ProfileURL            template.HTMLAttr
+	IsLoggedInUser        bool
+	IsAvailable           bool
+	IsDisabled            bool
+	IsDeleted             bool
+	Followable            bool
+	FromSharedGroup       bool
+	FromOrganizationName  string
+	Editable              bool
+	FollowingTheGroup     bool
+	Department            string `json:",omitempty"`
+	Location              string `json:",omitempty"`
+	FollowingGroups       []*Group
+	Preferences           *Preferences
+	NoDetail              bool `json:",omitempty"`
+	HasMobileDevices      bool `json:"-"`
 }
 
 type GroupUsers struct {
@@ -199,6 +202,9 @@ type Group struct {
 
 	UnreadCount    int `json:",omitempty"` // for current loggind user
 	IsSandboxGroup bool
+
+	// is the current logged-in user the project manager of this group
+	AmIPM bool `json:",omitempty"`
 }
 
 type AdvancedToDoSettings struct {
@@ -379,6 +385,7 @@ type TimeTrackingUpdateLog struct {
 type AssignableUser struct {
 	UserId     string
 	Name       string
+	Avatar     string
 	IsAssigned bool
 }
 
@@ -570,8 +577,6 @@ type Entry struct {
 	VersionAt     time.Time `json:",omitempty"`
 	BaseOnEntryId string    `json:",omitempty"`
 
-	AllAttachmentsURL    string    `json:",omitempty"`
-	Permalink            string    `json:",omitempty"`
 	IconName             string    `json:",omitempty"`
 	LocalHumanCreatedAt  string    `json:",omitempty"`
 	LocalHumanUpdatedAt  string    `json:",omitempty"`
@@ -586,7 +591,6 @@ type Entry struct {
 	// last version's update time
 	LastUpdateAt string `json:",omitempty"`
 
-	HtmlTitle           template.HTML `json:",omitempty"`
 	HtmlContent         template.HTML `json:",omitempty"`
 	HtmlContentPart     template.HTML `json:",omitempty"`
 	TaskHtmlContentPart template.HTML `json:",omitempty"`
@@ -633,20 +637,20 @@ type Entry struct {
 	IsTaskLog       bool   `json:",omitempty"` // use IsTaskLog to distinguish between task log and normal comment
 	IsInWatchList   bool   `json:",omitempty"`
 	IsToGroup       string `json:",omitempty"`
-	CanEdit         bool   `json:",omitempty"`
-	CanReply        bool   `json:",omitempty"`
-	LikedByMe       bool   `json:",omitempty"`
-	HasInlineTask   bool   `json:",omitempty"` // when comment has a ack , HasInlineTask = true
-	TaskIsCompleted bool   `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
-	IsRoot          bool   `json:",omitempty"`
-	IsUnread        bool   `json:",omitempty"`
-	IsUpdated       bool   `json:",omitempty"`
-	IsLastVersion   bool   `json:",omitempty"`
-	Presentation    bool   `json:",omitempty"`
-	AnyoneCanEdit   bool   `json:",omitempty"`
-	IsInGroup       bool   `json:",omitempty"`
-	IsFromEmail     bool   `json:",omitempty"`
-	InlineHelp      bool   `json:",omitempty"`
+	CanEdit         bool
+	CanReply        bool `json:",omitempty"`
+	LikedByMe       bool `json:",omitempty"`
+	HasInlineTask   bool `json:",omitempty"` // when comment has a ack , HasInlineTask = true
+	TaskIsCompleted bool `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
+	IsRoot          bool `json:",omitempty"`
+	IsUnread        bool `json:",omitempty"`
+	IsUpdated       bool `json:",omitempty"`
+	IsLastVersion   bool `json:",omitempty"`
+	Presentation    bool `json:",omitempty"`
+	AnyoneCanEdit   bool `json:",omitempty"`
+	IsInGroup       bool `json:",omitempty"`
+	IsFromEmail     bool `json:",omitempty"`
+	InlineHelp      bool `json:",omitempty"`
 
 	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
 	VisibleForSuperOrg            bool `json:",omitempty"`
@@ -728,7 +732,7 @@ type EntryLanguage struct {
 }
 
 type RelatedEntry struct {
-	HtmlTitle           template.HTML
+	Title               template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
 	Author              *EmbedUser
@@ -737,9 +741,9 @@ type RelatedEntry struct {
 }
 
 type BasedOnPost struct {
-	RootHtmlTitle template.HTML
-	Link          template.HTMLAttr
-	IsComment     bool
+	RootTitle template.HTML
+	Link      template.HTMLAttr
+	IsComment bool
 }
 
 type QortexSupport struct {
@@ -758,7 +762,6 @@ type EmbedEntry struct {
 	GroupId   string
 	GroupName string
 	Title     string
-	HtmlTitle template.HTML
 	EType     string
 	Author    EmbedUser
 	ToUsers   []EmbedUser
@@ -809,16 +812,7 @@ type NotificationItem struct {
 }
 
 type WatchItem struct {
-	AttachCnt  int
-	CommentCnt int
-	LikeCnt    int
-
-	AttachCntStr  template.HTML
-	CommentCntStr template.HTML
-	LikeCntStr    template.HTML
-
-	WatchTime time.Time
-
+	WatchTime        time.Time
 	IsSmartReminding bool
 	IsNoReminding    bool
 
@@ -834,6 +828,7 @@ type MyCount struct {
 	FollowedUnreadCount     int
 	NotificationUnreadCount int
 	ActiveTasksCount        int
+	ActionNeededTasksCount  int
 	OfflineMessageCount     int
 	GroupCounts             []*GroupCount
 }
@@ -1032,41 +1027,54 @@ type TaskOutline struct {
 	CompleteAtUnixNano  int64
 	IsTitleCreatedBy    bool
 	ActionNeeded        bool
+	IsUnprioritized     bool
 }
 
 type GroupTasksOutline struct {
-	Group               *EmbedGroup
-	AcksAndPendingToDos []*TaskOutline // Action Needed
-	SimpleToDos         []*TaskOutline
-	// NowToDos             []*TaskOutline
-	// NowEstimateTotal     float64
+	Group                   *EmbedGroup
+	AcksAndPendingToDos     []*TaskOutline // Action Needed
+	SimpleToDos             []*TaskOutline
 	OpenToDos               []*TaskOutline
 	OpenEstimateTotal       float64
 	NotStartedToDos         []*TaskOutline
 	NotStartedEstimateTotal float64
-	// SoonToDos            []*TaskOutline
-	// SoonEstimateTotal    float64
-	// SomedayToDos         []*TaskOutline
-	// SomedayEstimateTotal float64
-	EstimateUnit string
+	EstimateUnit            string
 }
 
+// Bucket is a historical name after many runs of feature iteration,
+// basically, it represents a bunch of to-dos and its relevant information.
 type OpenAdvancedToDosBucket struct {
-	Title string
-	// Type          string
-	ToDoSettings  *AdvancedToDoSettings
-	ToDos         []*TaskOutline
-	LenOfToDos    int
-	EstimateTotal float64
-	EstimateUnit  string
-	Editable      bool
-	Followers     []*EmbedUser
+	Title        string
+	ToDoSettings *AdvancedToDoSettings
+	ToDos        []*TaskOutline
+
+	NoStat                       bool
+	EstimateTotal, TrackingTotal float64
+	EstimateUnit                 string
+
+	Followers   []*EmbedUser
+	ToDoMarkers []*ToDoMarker
+
+	HasUnprioritizedToDos bool `json:"-"`
+
+	// TODO: to remove
+	LenOfToDos int
+	Editable   bool
 }
 
 type OpenAdvancedToDosPage struct {
-	Assignee          *EmbedUser
-	ActionNeededToDos []*TaskOutline
-	ToDosBuckets      []*OpenAdvancedToDosBucket
+	Assignee     *EmbedUser `json:",omitempty"`
+	ToDosBuckets []*OpenAdvancedToDosBucket
+}
+
+type ToDoMarker struct {
+	Id                           string
+	Label                        string
+	Date                         string
+	BeforeIndex                  int
+	EstimateTotal, TrackingTotal float64
+	EstimateUnit                 string
+	PriorityWeight               float64
 }
 
 type BasicOpenToDoOutlines struct {
@@ -1178,9 +1186,8 @@ type KnowledgeOverview struct {
 	PrefixURL               string
 	GroupId                 string
 	EntryId                 string
-	Title                   string
 	Content                 string
-	HtmlTitle               template.HTML
+	Title                   string
 	HtmlContent             template.HTML
 	LocaleTitleMap          map[string]string        `json:",omitempty"`
 	LocaleHtmlContentMap    map[string]template.HTML `json:",omitempty"`

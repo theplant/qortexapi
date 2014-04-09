@@ -103,6 +103,8 @@ type AuthUserService interface {
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetGroupAside() (ga *GroupAside, err error)
 
+	GetMyFeedEntriesLite(before string, limit int) (entries []*Entry, err error)
+
 	// Get Unread entries for type entryType since the fromTimeUnixNano unix nanoseconds, and return max limit entries.
 	// entryType could be:	"post", "knowledge", "task"
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
@@ -116,7 +118,6 @@ type AuthUserService interface {
 	GetWatchList(before string, limit int) (watchlist *WatchList, err error)
 	AddToWatchList(entryId string, groupId string, remindMode string) (err error)
 	StopWatching(entryId string, groupId string) (err error)
-	ReadWatching(entryId string, groupId string) (err error)
 	RemindMe() (reminded bool, err error)
 	StartSmartReminding(groupId string, watchItemId string) (stopped bool, err error)
 	StopReminding(groupId string, watchItemId string) (stopped bool, err error)
@@ -144,7 +145,7 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
-	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput) (err error)
+	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
 
 	// User related
 	GetAuthUser() (user *User, err error)
@@ -247,14 +248,14 @@ type AuthUserService interface {
 	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)
 	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
-	GetUserTasks(userId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
+	GetUserTasks(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 
 	// [Group] Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
-	AllOpenAdvancedToDosInGroup(groupId string) (page *OpenAdvancedToDosPage, err error)
+	AllOpenAdvancedToDosInGroup(groupId string) (bucket *OpenAdvancedToDosBucket, err error)
 	AllOpenAdvancedToDosGroupingByUserInGroup(groupId string) (atos []*OpenAdvancedToDosPage, err error)
-	AllOpenAdvancedToDosGroupingByStatusInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
-	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page *OpenAdvancedToDosPage, apiGroup *Group, err error)
+	AllOpenAdvancedToDosGroupingByStatusInGroup(groupId string) (page []*OpenAdvancedToDosBucket, apiGroup *Group, err error)
+	AllOpenAdvancedToDosGroupingByLabelInGroup(groupId string) (page []*OpenAdvancedToDosBucket, apiGroup *Group, err error)
 	AllOpenBasicToDosInGroup(groupId string) (taskOutlines []*TaskOutline, err error)
 	AllOpenBasicToDosGroupingByUserInGroup(groupId string) (atos []*BasicOpenToDoOutlines, err error)
 
@@ -262,6 +263,7 @@ type AuthUserService interface {
 	AllClosedAdvancedToDosInGroup(groupId string) (closedOutlines []*ClosedAdvancedToDoOutline, err error)
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime string) (taskOutlines []*TaskOutline, apiGroup *Group, hasMore bool, err error)
 	CountOfClosedToDosInGroup(ttype int, groupId string) (count int, err error)
+	CountOfActionNeededToDosInGroup(gid string) (count int, err error)
 	ToDoCSV(groupId string) (todos []*ToDoCSVItem, err error)
 
 	// Apple device service
