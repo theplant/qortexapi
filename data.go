@@ -64,7 +64,7 @@ type Blog struct {
 
 type BlogEntry struct {
 	Id               string
-	Title            template.HTML
+	Title            string
 	Slug             string
 	CreatedAt        time.Time
 	LocalCreatedAt   string
@@ -75,6 +75,7 @@ type BlogEntry struct {
 	Author           EmbedUser
 	PrevBlogUrl      string
 	NextBlogUrl      string
+	TweetUrl         string
 }
 
 type User struct {
@@ -562,19 +563,19 @@ type Message struct {
 
 type Entry struct {
 	Id            string
-	EType         string        `json:",omitempty"`
-	Title         template.HTML `json:",omitempty"`
-	Slug          string        `json:",omitempty"`
-	Content       string        `json:",omitempty"`
-	TypeTitle     string        `json:",omitempty"`
-	RootId        string        `json:",omitempty"`
-	GroupId       string        `json:",omitempty"`
-	AuthorId      string        `json:",omitempty"`
-	CreatedAt     time.Time     `json:",omitempty"`
-	UpdatedAt     time.Time     `json:",omitempty"`
-	BumpedUpAt    time.Time     `json:",omitempty"`
-	VersionAt     time.Time     `json:",omitempty"`
-	BaseOnEntryId string        `json:",omitempty"`
+	EType         string    `json:",omitempty"`
+	Title         string    `json:",omitempty"`
+	Slug          string    `json:",omitempty"`
+	Content       string    `json:",omitempty"`
+	TypeTitle     string    `json:",omitempty"`
+	RootId        string    `json:",omitempty"`
+	GroupId       string    `json:",omitempty"`
+	AuthorId      string    `json:",omitempty"`
+	CreatedAt     time.Time `json:",omitempty"`
+	UpdatedAt     time.Time `json:",omitempty"`
+	BumpedUpAt    time.Time `json:",omitempty"`
+	VersionAt     time.Time `json:",omitempty"`
+	BaseOnEntryId string    `json:",omitempty"`
 
 	IconName             string    `json:",omitempty"`
 	LocalHumanCreatedAt  string    `json:",omitempty"`
@@ -760,7 +761,7 @@ type EmbedEntry struct {
 	Id        string
 	GroupId   string
 	GroupName string
-	Title     template.HTML
+	Title     string
 	EType     string
 	Author    EmbedUser
 	ToUsers   []EmbedUser
@@ -1186,7 +1187,7 @@ type KnowledgeOverview struct {
 	GroupId                 string
 	EntryId                 string
 	Content                 string
-	Title                   template.HTML
+	Title                   string
 	HtmlContent             template.HTML
 	LocaleTitleMap          map[string]string        `json:",omitempty"`
 	LocaleHtmlContentMap    map[string]template.HTML `json:",omitempty"`
