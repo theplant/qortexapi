@@ -85,7 +85,6 @@ type User struct {
 	LastName              string
 	Name                  string
 	LocaleName            map[string]string `json:"-"` // Keeping names for different locale, which has different name order for first and last name
-	Title                 string
 	Avatar                string
 	JID                   string
 	Timezone              string
@@ -107,12 +106,11 @@ type User struct {
 	FromOrganizationName  string
 	Editable              bool
 	FollowingTheGroup     bool
-	Department            string `json:",omitempty"`
-	Location              string `json:",omitempty"`
-	FollowingGroups       []*Group
-	Preferences           *Preferences
-	NoDetail              bool `json:",omitempty"`
-	HasMobileDevices      bool `json:"-"`
+	FollowingGroups       []*Group     `json:",omitempty"`
+	Preferences           *Preferences `json:",omitempty"`
+	Profile               Profile      `json:",omitempty"`
+	NoDetail              bool         `json:",omitempty"`
+	HasMobileDevices      bool         `json:"-"`
 }
 
 type GroupUsers struct {
@@ -121,18 +119,35 @@ type GroupUsers struct {
 }
 
 type Preferences struct {
-	Timezone                   string
-	TimezoneOffset             string
-	PreferFullName             bool
-	EnterForNewLine            bool
-	AsideGroupsCollapse        bool
-	AsideOtherGroupsCollapse   bool
-	ShowMarkUnreadThreshold    int
-	AdminModeOn                bool
-	PreferMarkdown             bool
-	AutoFollowPublicGroup      bool
-	EnableHTML5Notification    bool
-	PreferredLanguageSelectors *LanguageSelectors
+	Timezone                   string             `json:",omitempty"`
+	TimezoneOffset             string             `json:",omitempty"`
+	PreferFullName             bool               `json:",omitempty"`
+	EnterForNewLine            bool               `json:",omitempty"`
+	AsideGroupsCollapse        bool               `json:",omitempty"`
+	AsideOtherGroupsCollapse   bool               `json:",omitempty"`
+	ShowMarkUnreadThreshold    int                `json:",omitempty"`
+	AdminModeOn                bool               `json:",omitempty"`
+	PreferMarkdown             bool               `json:",omitempty"`
+	AutoFollowPublicGroup      bool               `json:",omitempty"`
+	EnableHTML5Notification    bool               `json:",omitempty"`
+	PreferredLanguageSelectors *LanguageSelectors `json:",omitempty"`
+}
+
+type Profile struct {
+	Summary    string   `json:",omitempty"`
+	Title      string   `json:",omitempty"`
+	Department string   `json:",omitempty"`
+	Location   string   `json:",omitempty"`
+	Expertise  string   `json:",omitempty"`
+	Interests  string   `json:",omitempty"`
+	BirthMonth string   `json:",omitempty"`
+	BirthDay   string   `json:",omitempty"`
+	WorkPhone  string   `json:",omitempty"`
+	Mobile     string   `json:",omitempty"`
+	Twitter    string   `json:",omitempty"`
+	Skype      string   `json:",omitempty"`
+	Facebook   string   `json:",omitempty"`
+	Others     []string `json:",omitempty"`
 }
 
 type EmbedOrg struct {
@@ -214,7 +229,7 @@ type AdvancedToDoSettings struct {
 	EnableTimeEstimate      bool
 	EnableTimeTracking      bool
 	TimeUnit                int
-	ProjectManager          *EmbedUser
+	ProjectManager          EmbedUser
 	Labels                  []*TagIndex
 	NotYetOpenStatuses      []*TagIndex
 	OpenStatuses            []*TagIndex
@@ -238,7 +253,7 @@ type TagIndex struct {
 
 type GroupAdvancedSettingPage struct {
 	Group       *Group
-	Followers   []*EmbedUser
+	Followers   []EmbedUser
 	CurrentOrg  *Organization
 	SharingInfo *GroupSharingInfo
 
@@ -737,7 +752,7 @@ type RelatedEntry struct {
 	Title               template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
-	Author              *EmbedUser
+	Author              EmbedUser
 	IsComment           bool
 	IsEmbedded          bool
 }
@@ -1010,7 +1025,7 @@ type TaskOutline struct {
 	EntryTitle          template.HTML
 	EntryLink           template.HTMLAttr
 	IsComment           bool
-	Assignee            *EmbedUser
+	Assignee            EmbedUser
 	AuthorName          string
 	Group               *EmbedGroup
 	Age                 string
@@ -1054,7 +1069,7 @@ type OpenAdvancedToDosBucket struct {
 	EstimateTotal, TrackingTotal float64
 	EstimateUnit                 string
 
-	Followers   []*EmbedUser
+	Followers   []EmbedUser
 	ToDoMarkers []*ToDoMarker
 
 	HasUnprioritizedToDos bool `json:"-"`
@@ -1065,7 +1080,7 @@ type OpenAdvancedToDosBucket struct {
 }
 
 type OpenAdvancedToDosPage struct {
-	Assignee     *EmbedUser `json:",omitempty"`
+	Assignee     EmbedUser `json:",omitempty"`
 	ToDosBuckets []*OpenAdvancedToDosBucket
 }
 
@@ -1080,7 +1095,7 @@ type ToDoMarker struct {
 }
 
 type BasicOpenToDoOutlines struct {
-	Assignee     *EmbedUser
+	Assignee     EmbedUser
 	TaskOutlines []*TaskOutline
 	Editable     bool
 }
@@ -1222,7 +1237,7 @@ type ContactUsInfo struct {
 }
 
 type InitInfo struct {
-	CurrentUser *User
+	CurrentUser User
 
 	CurrentOrg *Organization
 	JoinedOrgs []*Organization
