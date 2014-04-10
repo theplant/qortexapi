@@ -99,17 +99,19 @@ type QortexSupportInput struct {
 }
 
 type GroupInput struct {
-	Id            string
-	Name          string
-	Description   string
-	LogoURL       string
-	IconName      string
-	Slug          string
-	IsPrivate     bool
-	IsShared      bool
-	GroupOwners   []string
-	InvitedOrgIds []string
-	AutoGenSlug   bool
+	Id             string
+	Name           string
+	Description    string
+	LogoURL        string
+	IconName       string
+	Slug           string
+	IsPrivate      bool
+	IsShared       bool
+	GroupOwners    []string
+	InvitedOrgIds  []string
+	AutoGenSlug    bool
+	CollectionName string
+	CollectionId   string
 }
 
 type OrgSettingsInput struct {

@@ -102,6 +102,7 @@ type AuthUserService interface {
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetGroupAside() (ga *GroupAside, err error)
+	GetNewGroupAside() (nga *NewGroupAside, err error)
 
 	GetMyFeedEntriesLite(before string, limit int) (entries []*Entry, err error)
 
@@ -136,7 +137,7 @@ type AuthUserService interface {
 	GetNewGroup() (group *Group, err error)
 	GetGroup(groupId string) (group *Group, err error)
 	CreateGroup(input *GroupInput) (group *Group, err error)
-	UpdateGroup(input *GroupInput) (err error)
+	UpdateGroup(input *GroupInput) (group *Group, err error)
 	UpdateGroupLogo(groupId string, logoURL string) (err error)
 	DeleteGroup(groupId string) (err error)
 	GetGroupBySlug(slug string) (group *Group, err error)
@@ -145,6 +146,8 @@ type AuthUserService interface {
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
 	GetClassifiedGroups() (anouncementGroup *Group, smGroup *Group, followedNormalGroups []*Group, followedSharedGroups []*Group, unFollowedNormalGroups []*Group, unFollowedSharedGroups []*Group, err error)
+	GetAllGroupCollections() (gcs []*GroupCollection, err error)
+	ToggleGroupArchiving(gids string, signal bool) (err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
 
 	// User related
@@ -167,6 +170,7 @@ type AuthUserService interface {
 	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
 	SetPreferredLanguages(languageCodes []string) (err error)
+	ToggleGroupCol(gtype int, colIdStr string) (err error)
 
 	// Count related
 	GetMyCount() (myCount *MyCount, err error)
@@ -249,6 +253,10 @@ type AuthUserService interface {
 	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
 	GetUserTasks(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
+
+	GetGroupGeneralSettingPage(gId string) (page *GroupGeneralSettingPage, err error)
+	GetGroupUsersPage(gId string) (page *GroupUsersPage, err error)
+	GetGroupSharingExternallyPage(gId string) (page *GroupSharingExternallyPage, err error)
 
 	// [Group] Advanced To-Dos Related
 	GetGroupAdvancedToDoSetting(gId string) (page *GroupAdvancedSettingPage, err error)
