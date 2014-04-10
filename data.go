@@ -162,18 +162,18 @@ type EmbedUser struct {
 	Email               string
 	Name                string
 	LocaleName          map[string]string `json:"-"`
-	Title               string            `json:",omitempty"`
-	Avatar              string            `json:",omitempty"`
-	JID                 string            `json:",omitempty"`
-	Timezone            string            `json:",omitempty"`
-	OrgName             string            `json:",omitempty"`
-	IsSuperUser         bool              `json:",omitempty"`
-	IsShare             bool              `json:",omitempty"`
-	OrganizationId      string            `json:",omitempty"`
-	OriginalOrgId       string            `json:",omitempty"`
-	ProfileURL          template.HTMLAttr `json:",omitempty"`
-	NoDetail            bool              `json:",omitempty"`
-	UnfollowSharedGroup bool              `json:",omitempty"`
+	Title               string
+	Avatar              string
+	JID                 string
+	Timezone            string
+	OrgName             string
+	IsSuperUser         bool
+	IsShare             bool
+	OrganizationId      string
+	OriginalOrgId       string
+	ProfileURL          template.HTMLAttr
+	NoDetail            bool
+	UnfollowSharedGroup bool
 }
 
 type PanelStatus struct {
