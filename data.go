@@ -195,10 +195,12 @@ type Group struct {
 	TaskLink            string `json:",omitempty"`
 	Slug                string `json:",omitempty"`
 	Author              EmbedUser
+	IsArchived          bool
 	IsAdmin             bool              `json:",omitempty"`
 	IsPrivate           bool              `json:",omitempty"`
 	Editable            bool              `json:",omitempty"`
 	Managable           bool              `json:",omitempty"`
+	CanShareGroup       bool              `json:",omitempty"`
 	Accessible          bool              `json:",omitempty"`
 	FollowedByMe        bool              `json:",omitempty"`
 	AdministratedByMe   bool              `json:",omitempty"`
@@ -216,12 +218,18 @@ type Group struct {
 	GroupEmailAddress   string
 	ToDoSettings        *AdvancedToDoSettings
 	TodoGroupingRoute   string `json:",omitempty"`
+	Collection          *GroupCollection
 
 	UnreadCount    int `json:",omitempty"` // for current loggind user
 	IsSandboxGroup bool
 
 	// is the current logged-in user the project manager of this group
 	AmIPM bool `json:",omitempty"`
+}
+
+type GroupCollection struct {
+	Id   string
+	Name string
 }
 
 type AdvancedToDoSettings struct {
@@ -251,14 +259,37 @@ type TagIndex struct {
 	Index int
 }
 
+type GroupGeneralSettingPage struct {
+	Group       *Group
+	CurrentOrg  *Organization
+	Collections []*GroupCollection `json:",omitempty"`
+
+	IsNewGroup bool   `json:"-"`
+	ActionURL  string `json:"-"`
+}
+
+type GroupUsersPage struct {
+	Group      *Group
+	CurrentOrg *Organization
+
+	IsNewGroup bool `json:"-"`
+}
+
+type GroupSharingExternallyPage struct {
+	Group         *Group
+	CurrentOrg    *Organization
+	ShareRequests []*ShareRequest
+
+	IsNewGroup bool `json:"-"`
+}
+
 type GroupAdvancedSettingPage struct {
 	Group       *Group
 	Followers   []EmbedUser
 	CurrentOrg  *Organization
 	SharingInfo *GroupSharingInfo
 
-	CreatingGroup     bool
-	Editable          bool
+	IsNewGroup        bool `json:"-"`
 	DisableProFeatrue bool
 
 	// Shit...
@@ -285,12 +316,15 @@ type GroupSelectorItem struct {
 
 type GroupSelector struct {
 	Header                  template.HTML
-	SelectedGroupId         string
-	SysMessage              *GroupSelectorItem
 	FollowingNormalGroups   []*GroupSelectorItem
 	FollowingSharedGroups   []*GroupSelectorItem
 	UnFollowingNormalGroups []*GroupSelectorItem
 	UnFollowingSharedGroups []*GroupSelectorItem
+}
+
+type NewGroupSelector struct {
+	SelectedGroupId      string
+	GroupCollectionLists []*GroupCollectionList
 }
 
 type Attachment struct {
@@ -699,8 +733,9 @@ type Entry struct {
 	ExternalComments               []*Entry      `json:",omitempty"`
 	CurrentVersionComments         []*Entry
 	OtherVersionsComments          []*Entry
-	NewComment                     *Entry         `json:",omitempty"`
-	GroupSlector                   *GroupSelector `json:",omitempty"`
+	NewComment                     *Entry            `json:",omitempty"`
+	GroupSlector                   *GroupSelector    `json:",omitempty"` // TODO: to remove
+	NewGroupSelector               *NewGroupSelector `json:",omitempty"`
 
 	// Qortex Support Type
 	IsQortexSupport              bool              `json:",omitempty"`
@@ -1248,4 +1283,35 @@ type InitInfo struct {
 	FollowedSharedGroups   []*Group
 	UnFollowedNormalGroups []*Group
 	UnFollowedSharedGroups []*Group
+}
+
+type NewGroupAside struct {
+	ShowNewGroupButton bool
+
+	// Lists contains at least one element, and up to three elements.
+	// The first one is My Groups, then Other Groups, the last one Archived Groups.
+	Lists []*GroupCollectionList
+}
+
+type GroupCollectionList struct {
+	IsEmpty       bool
+	IsCollapsed   bool
+	Announcement  *Group // only exists in My Groups
+	QortexSupport *Group // only exists in My Groups
+	Collections   []*GroupsInCollection
+	Groups        []*Group
+	SharedGroups  []*Group
+}
+
+type GroupsInCollection struct {
+	ColId        string
+	ColName      string
+	Groups       []*Group
+	SharedGroups []*Group
+	IsCollapsed  bool
+}
+
+type GroupColCollapseState struct {
+	ColId       string
+	IsCollapsed bool
 }
