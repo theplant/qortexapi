@@ -150,10 +150,12 @@ type AuthUserService interface {
 	ToggleGroupArchiving(gids string, signal bool) (err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
 
+	GetAllGroupUsers(groupId string) (uers []User, err error)
+
 	// User related
 	GetAuthUser() (user *User, err error)
-	GetOrgUsers(keyword string, startFullName string, limit int) (users []*User, nextFullName string, err error)
-	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []*User, nextFullName string, err error)
+	GetOrgUsers(keyword string, startFullName string, limit int) (users []User, nextFullName string, err error)
+	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []User, nextFullName string, err error)
 	GetUser(userId string) (user *User, err error)
 	EnableUser(userId string) (err error)
 	DisableUser(userId string) (err error)
@@ -162,7 +164,7 @@ type AuthUserService interface {
 	DemoteFromSuperUser(userId string) (err error)
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
-	GetMyFollowingUsers() (followingUsers []*User, err error)
+	GetMyFollowingUsers() (followingUsers []User, err error)
 	GetPanelStatus() (panelStatus *PanelStatus, err error)
 	GetUserPreferences() (preferences *Preferences, err error)
 	UpdateUserPreferences(input *PreferencesInput) (preferences *Preferences, err error)

@@ -102,8 +102,6 @@ type User struct {
 	IsDisabled            bool
 	IsDeleted             bool
 	Followable            bool
-	FromSharedGroup       bool
-	FromOrganizationName  string
 	Editable              bool
 	FollowingTheGroup     bool
 	FollowingGroups       []*Group     `json:",omitempty"`
