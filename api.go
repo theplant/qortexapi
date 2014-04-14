@@ -143,6 +143,7 @@ type AuthUserService interface {
 	GetAllGroupCollections() (gcs []*GroupCollection, err error)
 	ToggleGroupArchiving(gids string, signal bool) (err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
+	UpdateCollection(gId, colId, colName string) (group *Group, err error)
 
 	GetAllGroupUsers(groupId string) (uers []User, err error)
 
