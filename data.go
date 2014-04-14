@@ -205,6 +205,7 @@ type Group struct {
 
 	UnreadCount    int `json:",omitempty"` // for current loggind user
 	IsSandboxGroup bool
+	IsInSandboxOrg bool
 
 	// is the current logged-in user the project manager of this group
 	AmIPM bool `json:",omitempty"`
