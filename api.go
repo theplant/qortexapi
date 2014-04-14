@@ -27,9 +27,6 @@ type PublicService interface {
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, err error)
-	RequestNewSignupToken(email string) (err error)
-	RequestNewInvitationToken(orgId string, email string) (err error)
-	RequestNewSharingToken(email string) (err error)
 
 	InviteMe(organizationId string, email string) (err error)
 
