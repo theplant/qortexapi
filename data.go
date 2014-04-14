@@ -999,13 +999,12 @@ type OrgPaymentHistory struct {
 }
 
 type AccessReq struct {
-	Email        string
-	PriorityCode string
-	AccessCode   string
-	Status       string
-	ApprovedBy   string
-	CreatedAt    string
-	UpdatedAt    string
+	Email      string
+	AccessCode string
+	Status     string
+	ApprovedBy string
+	CreatedAt  string
+	UpdatedAt  string
 }
 
 type GroupAside struct {

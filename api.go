@@ -30,9 +30,6 @@ type PublicService interface {
 
 	InviteMe(organizationId string, email string) (err error)
 
-	// Signup
-	RequestSignup(email string) (err error)
-
 	// Demo related
 	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
 	CreateSandboxMember(firstName string, lastName string, avatarURL string) (r *Member, err error)
@@ -303,18 +300,8 @@ type AuthAdminService interface {
 	GetOrgStats() (orgStats []*OrgStats, err error)
 	// Get all closed beta access requests
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
-	// Approve user access request for closed beta
-	ApproveAccess(email string) (err error)
-	// Resend the approved mail
-	ResendApprovedMail(email string) (err error)
 	// Get all members
 	GetAllMembers() (members []*Member, err error)
-	// Ignore the access
-	IgnoreAccess(email string) (err error)
-
-	GetAutoApproveAccess() (enabled bool, err error)
-
-	SetAutoApproveAccess(enable bool) (err error)
 
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 
