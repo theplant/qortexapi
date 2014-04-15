@@ -1041,7 +1041,7 @@ type TaskOutline struct {
 	Id                  string
 	RootId              string
 	CommentId           string // only for ack in comment
-	EntryTitle          template.HTML
+	EntryTitle          string
 	EntryLink           template.HTMLAttr
 	IsComment           bool
 	Assignee            *EmbedUser
