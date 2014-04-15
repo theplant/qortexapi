@@ -32,7 +32,7 @@ type PublicService interface {
 
 	// Demo related
 	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
-	CreateSandboxMember(firstName string, lastName string, avatarURL string) (r *Member, err error)
+	CreateSandboxMember(mi *MemberAccountInput) (r *Member, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
