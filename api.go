@@ -165,6 +165,7 @@ type AuthUserService interface {
 	UpdateUserPreferences(input *PreferencesInput) (preferences *Preferences, err error)
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
 	GetSharedAndPrivateGroupUsers() (groupUsers []*GroupUsers, err error)
+	GetAllUsers() (currentOrgUsers []*EmbedUser, groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
 	SetPreferredLanguages(languageCodes []string) (err error)
 	ToggleGroupCol(gtype int, colIdStr string) (err error)
