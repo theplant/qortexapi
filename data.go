@@ -114,6 +114,9 @@ type User struct {
 
 type GroupUsers struct {
 	GroupId    string
+	IsShared   bool
+	IsPrivate  bool
+	IsFollowed bool
 	EmbedUsers []EmbedUser
 }
 
