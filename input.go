@@ -61,6 +61,22 @@ type EntryInput struct {
 	SelectionTextInFo  SelectionTextInFo
 }
 
+type DraftInput struct {
+	Id             string
+	GroupId        string
+	Title          string
+	Content        string
+	ToUserIds      string
+	UserId         string
+	Etype          string
+	IsToGroup      string
+	OrganizationId string
+	ContentType    string // "" ,"html","markdown", when "" will use user's setting
+	IsTaskTodo     bool
+	IsTaskAck      bool
+	TodoUserIds    string
+}
+
 type SelectionTextInFo struct {
 	Text    string
 	Occured int

@@ -121,6 +121,7 @@ type AuthUserService interface {
 	UpdateLike(input *LikeInput) (entry *Entry, err error)
 
 	// draft related
+	CreateDraft(input *DraftInput) (draft *Entry, err error)
 	GetDraftList(before string, limit int) (draftlist *DraftList, err error)
 	GetDraft(entryId string, groupId string) (entry *Entry, err error)
 	DeleteDraft(entryId string, groupId string) (err error)
