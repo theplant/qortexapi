@@ -19,6 +19,7 @@ type EntryInput struct {
 	TodoUserIds string // Todo users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	// MentionedUserIds string // @users seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	UploadGroupId string // upload file's groupid, when in my feed UploadGroupId =""
+	ContentType   string // "" ,"html","markdown", when "" will use user's setting
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
 	IsToDo            bool   // IsToDo == true, will create todo for entry.
@@ -163,8 +164,15 @@ type PreferencesInput struct {
 }
 
 type MemberAccountInput struct {
-	FirstName string
-	LastName  string
+	FirstName     string // English name
+	LastName      string
+	FirstNameCn   string // Chinese name
+	LastNameCn    string
+	FirstNameJp   string // Japanese name for display
+	LastNameJp    string
+	FirstNameJpKa string // Japanese Katakana name for ordering
+	LastNameJpKa  string
+
 	AvatarURL string
 }
 

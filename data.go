@@ -84,7 +84,8 @@ type User struct {
 	Firstame              string
 	LastName              string
 	Name                  string
-	Title                 string
+	LocaleName            map[string]string `json:"-"` // Keeping names for different locale, which has different name order for first and last name
+	KatakanaName          string
 	Avatar                string
 	JID                   string
 	Timezone              string
@@ -102,36 +103,54 @@ type User struct {
 	IsDisabled            bool
 	IsDeleted             bool
 	Followable            bool
-	FromSharedGroup       bool
-	FromOrganizationName  string
 	Editable              bool
 	FollowingTheGroup     bool
-	Department            string `json:",omitempty"`
-	Location              string `json:",omitempty"`
-	FollowingGroups       []*Group
-	Preferences           *Preferences
-	NoDetail              bool `json:",omitempty"`
-	HasMobileDevices      bool `json:"-"`
+	FollowingGroups       []*Group     `json:",omitempty"`
+	Preferences           *Preferences `json:",omitempty"`
+	Profile               Profile      `json:",omitempty"`
+	NoDetail              bool         `json:",omitempty"`
+	HasMobileDevices      bool         `json:"-"`
+	PreferredLanguageCode string
 }
 
 type GroupUsers struct {
 	GroupId    string
+	IsShared   bool
+	IsPrivate  bool
+	IsFollowed bool
 	EmbedUsers []EmbedUser
 }
 
 type Preferences struct {
-	Timezone                   string
-	TimezoneOffset             string
-	PreferFullName             bool
-	EnterForNewLine            bool
-	AsideGroupsCollapse        bool
-	AsideOtherGroupsCollapse   bool
-	ShowMarkUnreadThreshold    int
-	AdminModeOn                bool
-	PreferMarkdown             bool
-	AutoFollowPublicGroup      bool
-	EnableHTML5Notification    bool
-	PreferredLanguageSelectors *LanguageSelectors
+	Timezone                   string             `json:",omitempty"`
+	TimezoneOffset             string             `json:",omitempty"`
+	PreferFullName             bool               `json:",omitempty"`
+	EnterForNewLine            bool               `json:",omitempty"`
+	AsideGroupsCollapse        bool               `json:",omitempty"`
+	AsideOtherGroupsCollapse   bool               `json:",omitempty"`
+	ShowMarkUnreadThreshold    int                `json:",omitempty"`
+	AdminModeOn                bool               `json:",omitempty"`
+	PreferMarkdown             bool               `json:",omitempty"`
+	AutoFollowPublicGroup      bool               `json:",omitempty"`
+	EnableHTML5Notification    bool               `json:",omitempty"`
+	PreferredLanguageSelectors *LanguageSelectors `json:",omitempty"`
+}
+
+type Profile struct {
+	Summary    string   `json:",omitempty"`
+	Title      string   `json:",omitempty"`
+	Department string   `json:",omitempty"`
+	Location   string   `json:",omitempty"`
+	Expertise  string   `json:",omitempty"`
+	Interests  string   `json:",omitempty"`
+	BirthMonth string   `json:",omitempty"`
+	BirthDay   string   `json:",omitempty"`
+	WorkPhone  string   `json:",omitempty"`
+	Mobile     string   `json:",omitempty"`
+	Twitter    string   `json:",omitempty"`
+	Skype      string   `json:",omitempty"`
+	Facebook   string   `json:",omitempty"`
+	Others     []string `json:",omitempty"`
 }
 
 type EmbedOrg struct {
@@ -142,21 +161,24 @@ type EmbedOrg struct {
 }
 
 type EmbedUser struct {
-	Id                  string
-	Email               string
-	Name                string
-	Title               string            `json:",omitempty"`
-	Avatar              string            `json:",omitempty"`
-	JID                 string            `json:",omitempty"`
-	Timezone            string            `json:",omitempty"`
-	OrgName             string            `json:",omitempty"`
-	IsSuperUser         bool              `json:",omitempty"`
-	IsShare             bool              `json:",omitempty"`
-	OrganizationId      string            `json:",omitempty"`
-	OriginalOrgId       string            `json:",omitempty"`
-	ProfileURL          template.HTMLAttr `json:",omitempty"`
-	NoDetail            bool              `json:",omitempty"`
-	UnfollowSharedGroup bool              `json:",omitempty"`
+	Id                    string
+	Email                 string
+	Name                  string
+	LocaleName            map[string]string `json:"-"`
+	KatakanaName          string
+	Title                 string
+	Avatar                string
+	JID                   string
+	Timezone              string
+	OrgName               string
+	IsSuperUser           bool
+	IsShare               bool
+	OrganizationId        string
+	OriginalOrgId         string
+	ProfileURL            template.HTMLAttr
+	NoDetail              bool
+	UnfollowSharedGroup   bool
+	PreferredLanguageCode string
 }
 
 type PanelStatus struct {
@@ -205,6 +227,7 @@ type Group struct {
 
 	UnreadCount    int `json:",omitempty"` // for current loggind user
 	IsSandboxGroup bool
+	IsInSandboxOrg bool
 
 	// is the current logged-in user the project manager of this group
 	AmIPM bool `json:",omitempty"`
@@ -220,7 +243,7 @@ type AdvancedToDoSettings struct {
 	EnableTimeEstimate      bool
 	EnableTimeTracking      bool
 	TimeUnit                int
-	ProjectManager          *EmbedUser
+	ProjectManager          EmbedUser
 	Labels                  []*TagIndex
 	NotYetOpenStatuses      []*TagIndex
 	OpenStatuses            []*TagIndex
@@ -268,7 +291,7 @@ type GroupSharingExternallyPage struct {
 
 type GroupAdvancedSettingPage struct {
 	Group       *Group
-	Followers   []*EmbedUser
+	Followers   []EmbedUser
 	CurrentOrg  *Organization
 	SharingInfo *GroupSharingInfo
 
@@ -770,7 +793,7 @@ type RelatedEntry struct {
 	Title               template.HTML
 	Link                template.HTMLAttr
 	LocalHumanCreatedAt string
-	Author              *EmbedUser
+	Author              EmbedUser
 	IsComment           bool
 	IsEmbedded          bool
 }
@@ -982,13 +1005,12 @@ type OrgPaymentHistory struct {
 }
 
 type AccessReq struct {
-	Email        string
-	PriorityCode string
-	AccessCode   string
-	Status       string
-	ApprovedBy   string
-	CreatedAt    string
-	UpdatedAt    string
+	Email      string
+	AccessCode string
+	Status     string
+	ApprovedBy string
+	CreatedAt  string
+	UpdatedAt  string
 }
 
 type GroupAside struct {
@@ -1040,10 +1062,10 @@ type TaskOutline struct {
 	Id                  string
 	RootId              string
 	CommentId           string // only for ack in comment
-	EntryTitle          template.HTML
+	EntryTitle          string
 	EntryLink           template.HTMLAttr
 	IsComment           bool
-	Assignee            *EmbedUser
+	Assignee            EmbedUser
 	AuthorName          string
 	Group               *EmbedGroup
 	Age                 string
@@ -1087,7 +1109,7 @@ type OpenAdvancedToDosBucket struct {
 	EstimateTotal, TrackingTotal float64
 	EstimateUnit                 string
 
-	Followers   []*EmbedUser
+	Followers   []EmbedUser
 	ToDoMarkers []*ToDoMarker
 
 	HasUnprioritizedToDos bool `json:"-"`
@@ -1098,7 +1120,7 @@ type OpenAdvancedToDosBucket struct {
 }
 
 type OpenAdvancedToDosPage struct {
-	Assignee     *EmbedUser `json:",omitempty"`
+	Assignee     EmbedUser `json:",omitempty"`
 	ToDosBuckets []*OpenAdvancedToDosBucket
 }
 
@@ -1113,7 +1135,7 @@ type ToDoMarker struct {
 }
 
 type BasicOpenToDoOutlines struct {
-	Assignee     *EmbedUser
+	Assignee     EmbedUser
 	TaskOutlines []*TaskOutline
 	Editable     bool
 }
@@ -1255,7 +1277,7 @@ type ContactUsInfo struct {
 }
 
 type InitInfo struct {
-	CurrentUser *User
+	CurrentUser User
 
 	CurrentOrg *Organization
 	JoinedOrgs []*Organization

@@ -27,18 +27,12 @@ type PublicService interface {
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, err error)
-	RequestNewSignupToken(email string) (err error)
-	RequestNewInvitationToken(orgId string, email string) (err error)
-	RequestNewSharingToken(email string) (err error)
 
 	InviteMe(organizationId string, email string) (err error)
 
-	// Signup
-	RequestSignup(email string) (err error)
-
 	// Demo related
 	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
-	CreateSandboxMember(firstName string, lastName string, avatarURL string) (r *Member, err error)
+	CreateSandboxMember(mi *MemberAccountInput) (r *Member, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -149,11 +143,14 @@ type AuthUserService interface {
 	GetAllGroupCollections() (gcs []*GroupCollection, err error)
 	ToggleGroupArchiving(gids string, signal bool) (err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
+	UpdateCollection(gId, colId, colName string) (group *Group, err error)
+
+	GetAllGroupUsers(groupId string) (uers []User, err error)
 
 	// User related
 	GetAuthUser() (user *User, err error)
-	GetOrgUsers(keyword string, startFullName string, limit int) (users []*User, nextFullName string, err error)
-	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []*User, nextFullName string, err error)
+	GetOrgUsers(keyword string, startFullName string, limit int) (users []User, nextFullName string, err error)
+	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []User, nextFullName string, err error)
 	GetUser(userId string) (user *User, err error)
 	EnableUser(userId string) (err error)
 	DisableUser(userId string) (err error)
@@ -162,12 +159,13 @@ type AuthUserService interface {
 	DemoteFromSuperUser(userId string) (err error)
 	FollowUser(userId string) (err error)
 	UnfollowUser(userId string) (err error)
-	GetMyFollowingUsers() (followingUsers []*User, err error)
+	GetMyFollowingUsers() (followingUsers []User, err error)
 	GetPanelStatus() (panelStatus *PanelStatus, err error)
 	GetUserPreferences() (preferences *Preferences, err error)
 	UpdateUserPreferences(input *PreferencesInput) (preferences *Preferences, err error)
 	GetOrgEmbedUsers() (users []*EmbedUser, err error)
-	GetNonStandardGroupEmbedUsers() (groupUsers []*GroupUsers, err error)
+	GetSharedAndPrivateGroupUsers() (groupUsers []*GroupUsers, err error)
+	GetAllUsers() (currentOrgUsers []*EmbedUser, groupUsers []*GroupUsers, err error)
 	UpdateUserProfile(input *UserProfileInput) (err error)
 	SetPreferredLanguages(languageCodes []string) (err error)
 	ToggleGroupCol(gtype int, colIdStr string) (err error)
@@ -304,18 +302,8 @@ type AuthAdminService interface {
 	GetOrgStats() (orgStats []*OrgStats, err error)
 	// Get all closed beta access requests
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
-	// Approve user access request for closed beta
-	ApproveAccess(email string) (err error)
-	// Resend the approved mail
-	ResendApprovedMail(email string) (err error)
 	// Get all members
 	GetAllMembers() (members []*Member, err error)
-	// Ignore the access
-	IgnoreAccess(email string) (err error)
-
-	GetAutoApproveAccess() (enabled bool, err error)
-
-	SetAutoApproveAccess(enable bool) (err error)
 
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 
