@@ -110,6 +110,7 @@ type User struct {
 	Profile               Profile      `json:",omitempty"`
 	NoDetail              bool         `json:",omitempty"`
 	HasMobileDevices      bool         `json:"-"`
+	PreferredLanguageCode string
 }
 
 type GroupUsers struct {
@@ -160,23 +161,24 @@ type EmbedOrg struct {
 }
 
 type EmbedUser struct {
-	Id                  string
-	Email               string
-	Name                string
-	LocaleName          map[string]string `json:"-"`
-	KatakanaName        string
-	Title               string
-	Avatar              string
-	JID                 string
-	Timezone            string
-	OrgName             string
-	IsSuperUser         bool
-	IsShare             bool
-	OrganizationId      string
-	OriginalOrgId       string
-	ProfileURL          template.HTMLAttr
-	NoDetail            bool
-	UnfollowSharedGroup bool
+	Id                    string
+	Email                 string
+	Name                  string
+	LocaleName            map[string]string `json:"-"`
+	KatakanaName          string
+	Title                 string
+	Avatar                string
+	JID                   string
+	Timezone              string
+	OrgName               string
+	IsSuperUser           bool
+	IsShare               bool
+	OrganizationId        string
+	OriginalOrgId         string
+	ProfileURL            template.HTMLAttr
+	NoDetail              bool
+	UnfollowSharedGroup   bool
+	PreferredLanguageCode string
 }
 
 type PanelStatus struct {
