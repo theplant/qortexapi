@@ -329,8 +329,8 @@ type GroupSelector struct {
 }
 
 type NewGroupSelector struct {
-	SelectedGroupId      string
-	GroupCollectionLists []*GroupCollectionList
+	SelectedGroupId string
+	GroupsLists     []*GroupsList
 }
 
 type Attachment struct {
@@ -1295,20 +1295,27 @@ type NewGroupAside struct {
 
 	// Lists contains at least one element, and up to three elements.
 	// The first one is My Groups, then Other Groups, the last one Archived Groups.
-	Lists []*GroupCollectionList
+	Lists []*GroupsList
 }
 
-type GroupCollectionList struct {
-	IsEmpty       bool
+type GroupsList struct {
+	// IsEmpty       bool
 	IsCollapsed   bool
 	Announcement  *Group // only exists in My Groups
 	QortexSupport *Group // only exists in My Groups
-	Collections   []*GroupsInCollection
-	Groups        []*Group
-	SharedGroups  []*Group
+	// Collections   []*GroupedGroups
+	// Groups        []*Group
+	// SharedGroups  []*Group
+	Metas       []*MetaGroup
+	SharedMetas []*MetaGroup
 }
 
-type GroupsInCollection struct {
+type MetaGroup struct {
+	Collection *GroupedGroups
+	Group      *Group
+}
+
+type GroupedGroups struct {
 	ColId        string
 	ColName      string
 	Groups       []*Group
