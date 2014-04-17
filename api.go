@@ -277,6 +277,9 @@ type AuthUserService interface {
 	// Apple device service
 	RegisterAppleDeviceForUser(userId string, token string) (err error)
 	UnregisterAppleDeviceForUser(userId string, token string) (err error)
+	// Android device service
+	RegisterAndroidDeviceForUser(userId string, regid string) (err error)
+	UnregisterAndroidDeviceForUser(userId string, regid string) (err error)
 
 	//payment
 	GetPaymentSession() (session string, err error)
