@@ -467,8 +467,12 @@ type TimeTrackingItem struct {
 }
 
 type Task struct {
-	Id                string
-	GroupId           string
+	Id         string
+	GroupId    string
+	EntryId    string `bson:",omitempty"`
+	EntryTitle string `bson:",omitempty"`
+	CommentId  string `bson:",omitempty"` // only for ack in comment
+
 	IsTaskOwner       bool `json:",omitempty"` // Is this task created by current user
 	IsTaskAssignee    bool `json:",omitempty"` // Is this task assigned to current user
 	IsOthers          bool `json:",omitempty"` //
@@ -1094,6 +1098,17 @@ type GroupTasksOutline struct {
 	OpenToDos               []*TaskOutline
 	OpenEstimateTotal       float64
 	NotStartedToDos         []*TaskOutline
+	NotStartedEstimateTotal float64
+	EstimateUnit            string
+}
+
+type GroupTasks struct {
+	Group                   *EmbedGroup
+	AcksAndPendingToDos     []*Task // Action Needed
+	SimpleToDos             []*Task
+	OpenToDos               []*Task
+	NotStartedToDos         []*Task
+	OpenEstimateTotal       float64
 	NotStartedEstimateTotal float64
 	EstimateUnit            string
 }
