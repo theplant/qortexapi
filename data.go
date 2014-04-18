@@ -172,13 +172,15 @@ type EmbedUser struct {
 	Timezone              string
 	OrgName               string
 	IsSuperUser           bool
+	IsDisabled            bool `json:"-"`
+	IsDeleted             bool `json:"-"`
 	IsShare               bool
 	OrganizationId        string
 	OriginalOrgId         string
-	ProfileURL            template.HTMLAttr
+	ProfileURL            template.HTMLAttr `json:"-"`
 	NoDetail              bool
 	UnfollowSharedGroup   bool
-	PreferredLanguageCode string
+	PreferredLanguageCode string `json:"-"`
 }
 
 type PanelStatus struct {
