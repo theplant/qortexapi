@@ -275,11 +275,18 @@ type AuthUserService interface {
 	ToDoCSV(groupId string) (todos []*ToDoCSVItem, err error)
 
 	// Apple device service
-	RegisterAppleDeviceForUser(userId string, token string) (err error)
-	UnregisterAppleDeviceForUser(userId string, token string) (err error)
+	RegisterAppleDevice(token string) (err error)
+	UnregisterAppleDevice(token string) (err error)
+
+	RegisterAppleDeviceForUser(userId string, token string) (err error)   // Deprecated, should be removed
+	UnregisterAppleDeviceForUser(userId string, token string) (err error) // Deprecated, should be removed
+
 	// Android device service
-	RegisterAndroidDeviceForUser(userId string, regid string) (err error)
-	UnregisterAndroidDeviceForUser(userId string, regid string) (err error)
+	RegisterAndroidDevice(regid string) (err error)
+	UnregisterAndroidDevice(regid string) (err error)
+
+	RegisterAndroidDeviceForUser(userId string, regid string) (err error)   // Deprecated, should be removed
+	UnregisterAndroidDeviceForUser(userId string, regid string) (err error) // Deprecated, should be removed
 
 	//payment
 	GetPaymentSession() (session string, err error)
