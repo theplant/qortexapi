@@ -180,7 +180,7 @@ type EmbedUser struct {
 	ProfileURL            template.HTMLAttr `json:"-"`
 	NoDetail              bool
 	UnfollowSharedGroup   bool
-	PreferredLanguageCode string `json:"-"`
+	PreferredLanguageCode string
 }
 
 type PanelStatus struct {
