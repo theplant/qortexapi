@@ -1,5 +1,7 @@
 package qortexapi
 
+import "io"
+
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
 	GetAuthUserService(session string, orgId string) (authUserService AuthUserService, err error)
@@ -303,6 +305,10 @@ type AuthUserService interface {
 	GetContactUsInfo() (info *ContactUsInfo, err error)
 	// For Mobile Specifically
 	GetInitInfo() (info *InitInfo, err error)
+
+	// Files
+	UploadFile(gId string, file io.Reader) (apiAtt *Attachment, err error)
+	DeleteFile(fileId string) (err error)
 }
 
 type AuthAdminService interface {
