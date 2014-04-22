@@ -526,6 +526,8 @@ type Task struct {
 	IsEditing           bool
 	CanEditDueDate      bool
 	FarAwayCorner       bool
+
+	PriorityWeight float64
 }
 
 type EntryVersion struct {
