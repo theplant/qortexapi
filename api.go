@@ -307,7 +307,7 @@ type AuthUserService interface {
 	GetInitInfo() (info *InitInfo, err error)
 
 	// Files
-	UploadFile(gId string, file io.Reader) (apiAtt *Attachment, err error)
+	UploadFile(gId string, fileName string, contentType string, file io.Reader) (apiAtt *Attachment, err error)
 	DeleteFile(fileId string) (err error)
 }
 
