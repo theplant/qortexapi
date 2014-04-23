@@ -236,7 +236,8 @@ type AuthUserService interface {
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
-	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
+	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error)  //When languageCode is empty, use default
+	EditQortexSupport(entryId string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
@@ -307,7 +308,7 @@ type AuthUserService interface {
 	GetInitInfo() (info *InitInfo, err error)
 
 	// Files
-	UploadFile(gId string, file io.Reader) (apiAtt *Attachment, err error)
+	UploadFile(gId string, fileName string, contentType string, file io.Reader) (apiAtt *Attachment, err error)
 	DeleteFile(fileId string) (err error)
 }
 
