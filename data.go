@@ -821,6 +821,7 @@ type QortexSupport struct {
 	FromOrg           EmbedOrg      `json:",omitempty"`
 	ToOrgs            []EmbedOrg    `json:",omitempty"`
 	ToOrgsHtml        template.HTML `json:",omitempty"`
+	IsPublished       bool          `json:",omitempty"`
 }
 
 type EmbedEntry struct {

@@ -242,6 +242,7 @@ type AuthUserService interface {
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
 	GetQortexSupportHelpLink(title string) (link string, err error)
+	SendQortexSupportTestingEmail(entryId string, userId string) (err error)
 
 	// Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
