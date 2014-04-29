@@ -101,16 +101,17 @@ type BroadcastInput struct {
 
 // TODO: Explaination needed.
 type QortexSupportInput struct {
-	Id               string
-	Title            string
-	Content          string
-	ToOrgIds         []string
-	RootId           string
-	Audiance         string
-	KnowledgeBase    bool
-	InlineHelp       bool
-	PublishedToUsers bool
-	LinkTitle        string //for qortex support knowledge base
+	Id                   string
+	Title                string
+	Content              string
+	ToOrgIds             []string
+	RootId               string
+	Audiance             string
+	PublishQortexSupport bool
+	KnowledgeBase        bool   //for qortex support knowledge base
+	InlineHelp           bool   //for qortex support knowledge base
+	PublishedToUsers     bool   //for qortex support knowledge base
+	LinkTitle            string //for qortex support knowledge base
 
 	LanguageCode string
 }

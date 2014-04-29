@@ -288,7 +288,8 @@ type GroupSharingExternallyPage struct {
 	CurrentOrg    *Organization
 	ShareRequests []*ShareRequest
 
-	IsNewGroup bool `json:"-"`
+	IsNewGroup        bool `json:"-"`
+	DisableProFeatrue bool
 }
 
 type GroupAdvancedSettingPage struct {
@@ -827,6 +828,7 @@ type QortexSupport struct {
 	FromOrg           EmbedOrg      `json:",omitempty"`
 	ToOrgs            []EmbedOrg    `json:",omitempty"`
 	ToOrgsHtml        template.HTML `json:",omitempty"`
+	IsPublished       bool          `json:",omitempty"`
 }
 
 type EmbedEntry struct {

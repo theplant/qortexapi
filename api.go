@@ -236,11 +236,13 @@ type AuthUserService interface {
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
-	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
+	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error)  //When languageCode is empty, use default
+	EditQortexSupport(entryId string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
 	GetQortexSupportHelpLink(title string) (link string, err error)
+	SendQortexSupportTestingEmail(entryId string, userId string) (err error)
 
 	// Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
