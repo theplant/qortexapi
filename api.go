@@ -218,7 +218,7 @@ type AuthUserService interface {
 	ConfirmChangingEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (err error)
 
-	SendShareRequest(groupId string, email string) (shareRequest *ShareRequest, err error)
+	SendShareRequest(groupId string, email string, message string) (shareRequest *ShareRequest, err error)
 	GetShareRequests(groupId string) (sis []*ShareRequest, err error)
 	CancelShareRequest(requestId string) (err error)
 
