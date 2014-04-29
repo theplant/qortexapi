@@ -630,8 +630,6 @@ type Message struct {
 	EmbedUser      EmbedUser
 	ShowUser       bool
 	IsOffline      bool
-
-	HighlightedContent template.HTML // for search
 }
 
 type Entry struct {
