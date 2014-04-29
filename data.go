@@ -368,6 +368,11 @@ type Attachment struct {
 	CrocodocStatus int `json:",omitempty"`
 	// Crocodoc session Id for iframe viewer
 	SessionId string `json:",omitempty"`
+
+	// For Search
+	GroupName        string `json:",omitempty"`
+	GroupLink        string `json:",omitempty"`
+	LinkWithKeywords template.HTMLAttr
 }
 
 type AdvancedTask struct {
@@ -612,19 +617,20 @@ type Conversation struct {
 	SharedMessageIds    []string
 	MessagesCount       int
 	Messages            []*Message
+
+	LinkWithKeywords template.HTMLAttr `json:",omitempty"` // for Search
 }
 
 type Message struct {
-	Id                 string
-	ConversationId     string
-	UserId             string
-	Content            string
-	HtmlContent        template.HTML
-	CreatedAt          time.Time
-	EmbedUser          EmbedUser
-	ShowUser           bool
-	IsOffline          bool
-	HighlightedContent template.HTML
+	Id             string
+	ConversationId string
+	UserId         string
+	Content        string
+	HtmlContent    template.HTML
+	CreatedAt      time.Time
+	EmbedUser      EmbedUser
+	ShowUser       bool
+	IsOffline      bool
 }
 
 type Entry struct {
@@ -1348,3 +1354,79 @@ type GroupColCollapseState struct {
 	ColId       string
 	IsCollapsed bool
 }
+
+type (
+	SearchParams struct {
+		// FilterString string
+		Scope    string
+		GroupIds []string
+		UserIds  []string
+		SortBy   string
+		Page     int // Start from: 1
+		Keywords string
+	}
+
+	SearchResult struct {
+		Entities    []SearchEntity
+		Attachments []*Attachment
+		Links       []*SearchLink
+
+		HighlightedTerms []string
+
+		SearchAllGroupsURL string
+		Keywords           string
+
+		Page      int
+		TotalPage int
+		PrePage   int
+		PrePages  []int
+		NextPage  int
+		NextPages []int
+
+		TotalItemsCount   int
+		EntriesCount      int
+		LinksCount        int
+		LinkIndexableIds  []string
+		FilesCount        int
+		FileIndexableIds  []string
+		PrivateChatsCount int
+	}
+
+	// A SearchEntity could be only be a conversation or a Entry
+	SearchEntity struct {
+		Conversation *Conversation
+		Entry        *SearchEntry
+	}
+
+	SearchEntry struct {
+		Id     string
+		Title  template.HTML
+		Author EmbedUser
+
+		GroupId       string
+		GroupName     string
+		GroupIconName string
+
+		LocalHumanCreatedAt string
+		LinkWithKeywords    template.HTMLAttr
+		HighlightedChunks   []template.HTML // array is overdesign, or just unnecessary?
+
+		IsChat          bool
+		IsKnowledgeBase bool
+		AnyoneCanEdit   bool
+		IsPublished     bool
+		IsShared        bool
+		IsTask          bool
+		IsFromEmail     bool
+	}
+
+	SearchLink struct {
+		IndexableId string
+
+		Title                   string
+		Link                    string
+		LinkToEntryWithKeywords template.HTMLAttr
+		GroupName               string
+		GroupLink               string
+	}
+)

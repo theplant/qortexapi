@@ -311,6 +311,11 @@ type AuthUserService interface {
 	// Files
 	UploadFile(gId string, fileName string, contentType string, file io.Reader) (apiAtt *Attachment, err error)
 	DeleteFile(fileId string) (err error)
+
+	// Search
+	Search(sp SearchParams) (sr SearchResult, err error)
+	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
+	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 }
 
 type AuthAdminService interface {
