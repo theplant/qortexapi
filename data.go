@@ -1176,17 +1176,17 @@ type ClosedAdvancedToDoOutline struct {
 }
 
 type ToDoCSVItem struct {
-	Creator         string
-	Title           string
-	Content         string `Title:"Description"`
-	Status          string
-	EstimateTime    string `Title:"Estimate Time"`
-	TotalSpentTime  string `Title:"Total Spent Time"`
-	TimeUnit        string `Title:"Time Unit"`
-	SpentTimeDetail string `Title:"Spent Time Detail"`
-	CreateTime      string `Title:"Create Time"`
-	UpdateTime      string `Title:"Update Time"`
-	Due             string
+	Creator         string `Title:"i18n.csv.Creator"`
+	Title           string `Title:"i18n.csv.Title"`
+	Content         string `Title:"i18n.csv.Description"`
+	Status          string `Title:"i18n.csv.Status"`
+	EstimateTime    string `Title:"i18n.csv.Estimate Time"`
+	TotalSpentTime  string `Title:"i18n.csv.Total Spent Time"`
+	TimeUnit        string `Title:"i18n.csv.Time Unit"`
+	SpentTimeDetail string `Title:"i18n.csv.Spent Time Detail"`
+	CreateTime      string `Title:"i18n.csv.Create Time"`
+	UpdateTime      string `Title:"i18n.csv.Update Time"`
+	Due             string `Title:"i18n.csv.Due"`
 }
 
 type TranslatedThread struct {
