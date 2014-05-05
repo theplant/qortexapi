@@ -287,6 +287,7 @@ type GroupSharingExternallyPage struct {
 	Group         *Group
 	CurrentOrg    *Organization
 	ShareRequests []*ShareRequest
+	SharingOrgs   []*EmbedOrg
 
 	IsNewGroup        bool `json:"-"`
 	DisableProFeatrue bool

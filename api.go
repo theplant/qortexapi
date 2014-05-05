@@ -219,6 +219,7 @@ type AuthUserService interface {
 	UpdateAccount(input *MemberAccountInput) (err error)
 
 	SendShareRequest(groupId string, email string, message string) (shareRequest *ShareRequest, err error)
+	SendShareRequestToOrg(groupId string, toOrgId string) (shareRequest *ShareRequest, err error)
 	GetShareRequests(groupId string) (sis []*ShareRequest, err error)
 	CancelShareRequest(requestId string) (err error)
 
