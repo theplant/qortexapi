@@ -51,8 +51,9 @@ type EntryInput struct {
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
-	LocaleName   string
-	LanguageCode string //CLD language code
+	LocaleName          string
+	LanguageCode        string //CLD language code
+	IsAddingTranslation bool
 
 	// For Creating To-Dos From Comment
 	BasedPostId        string
@@ -62,19 +63,19 @@ type EntryInput struct {
 }
 
 type DraftInput struct {
-	Id             string
-	GroupId        string
-	Title          string
-	Content        string
-	ToUserIds      string
-	UserId         string
-	Etype          string
-	IsToGroup      string
-	OrganizationId string
-	ContentType    string // "" ,"html","markdown", when "" will use user's setting
-	IsTaskTodo     bool
-	IsTaskAck      bool
-	TodoUserIds    string
+	Id        string
+	GroupId   string
+	Title     string
+	Content   string
+	ToUserIds string
+	// UserId         string
+	Etype     string
+	IsToGroup string
+	// OrganizationId string
+	ContentType string // "" ,"html","markdown", when "" will use user's setting
+	IsTaskTodo  bool
+	IsTaskAck   bool
+	TodoUserIds string
 }
 
 type SelectionTextInFo struct {
@@ -113,7 +114,8 @@ type QortexSupportInput struct {
 	PublishedToUsers     bool   //for qortex support knowledge base
 	LinkTitle            string //for qortex support knowledge base
 
-	LanguageCode string
+	LanguageCode        string
+	IsAddingTranslation bool
 }
 
 type GroupInput struct {
