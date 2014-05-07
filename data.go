@@ -1443,3 +1443,11 @@ type (
 		GroupLink               string
 	}
 )
+
+type PushInfo struct {
+	OrgId     string
+	UserId    string
+	GroupId   string
+	EntryId   string
+	CommentId string
+}
