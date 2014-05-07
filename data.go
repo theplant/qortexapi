@@ -1244,6 +1244,10 @@ type BillingInfo struct {
 	DismissPaymentTips   bool
 	PrefixURL            string
 	FreeTrialDays        int
+
+	//Date display related
+	PackageExpiredAt                 string
+	PackageSubscribedNextPaymentDate string
 }
 
 type ReceiptInfo struct {
