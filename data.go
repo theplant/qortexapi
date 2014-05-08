@@ -729,6 +729,7 @@ type Entry struct {
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
+	LastNewVersionEditor EmbedUser
 	Group                *Group `json:",omitempty"`
 	// Task                 *Task         `json:",omitempty"`
 	Todo         *Task         `json:",omitempty"` // when entry is a todo(IsTaskToDo=true), this exsits
