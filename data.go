@@ -817,6 +817,7 @@ type BasedOnPost struct {
 	RootTitle template.HTML
 	Link      template.HTMLAttr
 	IsComment bool
+	Content   template.HTML
 }
 
 type QortexSupport struct {
