@@ -35,6 +35,9 @@ type PublicService interface {
 	// Demo related
 	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
 	CreateSandboxMember(mi *MemberAccountInput) (r *Member, err error)
+
+	// Get the push notification detail
+	GetPushInfo(itemId string) (info *PushInfo, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -236,11 +239,13 @@ type AuthUserService interface {
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	CreateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
-	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
+	GetQortexSupport(entryId string, languageCode string) (entry *Entry, err error)  //When languageCode is empty, use default
+	EditQortexSupport(entryId string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
 	GetQortexSupportComment(entryId string) (entry *Entry, err error)
 	UpdateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
 	UpdateQortexSupportComment(input *QortexSupportInput) (entry *Entry, err error)
 	GetQortexSupportHelpLink(title string) (link string, err error)
+	SendQortexSupportTestingEmail(entryId string, userId string) (err error)
 
 	// Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
@@ -309,6 +314,11 @@ type AuthUserService interface {
 	// Files
 	UploadFile(gId string, fileName string, contentType string, file io.Reader) (apiAtt *Attachment, err error)
 	DeleteFile(fileId string) (err error)
+
+	// Search
+	Search(sp SearchParams) (sr SearchResult, err error)
+	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
+	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 }
 
 type AuthAdminService interface {
