@@ -222,10 +222,11 @@ type AuthUserService interface {
 	UpdateAccount(input *MemberAccountInput) (err error)
 
 	SendShareRequest(groupId string, email string) (shareRequest *ShareRequest, err error)
+	SendShareRequestToOrg(groupId string, toOrgId string) (shareRequest *ShareRequest, err error)
 	GetShareRequests(groupId string) (sis []*ShareRequest, err error)
 	CancelShareRequest(requestId string) (err error)
-
 	StopSharingGroup(requestId string) (err error)
+	GetGroupSharingOrgs(groupId string) (orgs []*EmbedOrg, err error)
 
 	// preferences
 	DismissPresentationTip() (err error)
