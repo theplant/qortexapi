@@ -736,6 +736,7 @@ type Entry struct {
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
+	LastNewVersionEditor EmbedUser
 	Group                *Group `json:",omitempty"`
 	// Task                 *Task         `json:",omitempty"`
 	Todo         *Task         `json:",omitempty"` // when entry is a todo(IsTaskToDo=true), this exsits
@@ -1244,6 +1245,10 @@ type BillingInfo struct {
 	DismissPaymentTips   bool
 	PrefixURL            string
 	FreeTrialDays        int
+
+	//Date display related
+	PackageExpiredAt                 string
+	PackageSubscribedNextPaymentDate string
 }
 
 type ReceiptInfo struct {
@@ -1439,3 +1444,11 @@ type (
 		GroupLink               string
 	}
 )
+
+type PushInfo struct {
+	OrgId     string
+	UserId    string
+	GroupId   string
+	EntryId   string
+	CommentId string
+}

@@ -35,6 +35,9 @@ type PublicService interface {
 	// Demo related
 	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
 	CreateSandboxMember(mi *MemberAccountInput) (r *Member, err error)
+
+	// Get the push notification detail
+	GetPushInfo(itemId string) (info *PushInfo, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
