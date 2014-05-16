@@ -375,6 +375,21 @@ type Attachment struct {
 	LinkWithKeywords template.HTMLAttr
 }
 
+type File struct {
+	Attachment *Attachment
+	Entry      *FileEntry
+}
+
+type FileEntry struct {
+	Id        string
+	GroupId   string
+	GroupName string
+	Title     string
+	EType     string
+	Author    EmbedUser
+	Link      template.HTML
+}
+
 type AdvancedTask struct {
 	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool

@@ -150,8 +150,8 @@ type AuthUserService interface {
 	ToggleGroupArchiving(gids string, signal bool) (err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
 	UpdateCollection(gId, colId, colName string) (group *Group, err error)
-
 	GetAllGroupUsers(groupId string) (uers []User, err error)
+	GetGroupFiles(groupId string, before string, limit int) (files []*File, err error)
 
 	// User related
 	GetAuthUser() (user *User, err error)
