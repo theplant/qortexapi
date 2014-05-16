@@ -376,6 +376,21 @@ type Attachment struct {
 	LinkWithKeywords template.HTMLAttr
 }
 
+type File struct {
+	Attachment *Attachment
+	Entry      *FileEntry
+}
+
+type FileEntry struct {
+	Id        string
+	GroupId   string
+	GroupName string
+	Title     string
+	EType     string
+	Author    EmbedUser
+	Link      template.HTML
+}
+
 type AdvancedTask struct {
 	CurrentAssignee         EmbedUser
 	IsTimeEstimationEnabled bool
@@ -737,6 +752,7 @@ type Entry struct {
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
+	LastNewVersionEditor EmbedUser
 	Group                *Group `json:",omitempty"`
 	// Task                 *Task         `json:",omitempty"`
 	Todo         *Task         `json:",omitempty"` // when entry is a todo(IsTaskToDo=true), this exsits
@@ -818,6 +834,7 @@ type BasedOnPost struct {
 	RootTitle template.HTML
 	Link      template.HTMLAttr
 	IsComment bool
+	Content   template.HTML
 }
 
 type QortexSupport struct {
@@ -1245,6 +1262,10 @@ type BillingInfo struct {
 	DismissPaymentTips   bool
 	PrefixURL            string
 	FreeTrialDays        int
+
+	//Date display related
+	PackageExpiredAt                 string
+	PackageSubscribedNextPaymentDate string
 }
 
 type ReceiptInfo struct {
@@ -1440,3 +1461,11 @@ type (
 		GroupLink               string
 	}
 )
+
+type PushInfo struct {
+	OrgId     string
+	UserId    string
+	GroupId   string
+	EntryId   string
+	CommentId string
+}

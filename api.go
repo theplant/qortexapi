@@ -35,6 +35,9 @@ type PublicService interface {
 	// Demo related
 	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
 	CreateSandboxMember(mi *MemberAccountInput) (r *Member, err error)
+
+	// Get the push notification detail
+	GetPushInfo(itemId string) (info *PushInfo, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -147,8 +150,8 @@ type AuthUserService interface {
 	ToggleGroupArchiving(gids string, signal bool) (err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
 	UpdateCollection(gId, colId, colName string) (group *Group, err error)
-
 	GetAllGroupUsers(groupId string) (uers []User, err error)
+	GetGroupFiles(groupId string, before string, limit int) (files []*File, err error)
 
 	// User related
 	GetAuthUser() (user *User, err error)
