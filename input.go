@@ -59,7 +59,7 @@ type EntryInput struct {
 	BasedPostId        string
 	BasedPostLangCode  string
 	GroupIdOfBasedPost string
-	SelectionTextInFo  SelectionTextInFo
+	SelectionTextInfo  SelectionTextInfo
 }
 
 type DraftInput struct {
@@ -78,9 +78,11 @@ type DraftInput struct {
 	TodoUserIds string
 }
 
-type SelectionTextInFo struct {
-	Text    string
-	Occured int
+type SelectionTextInfo struct {
+	StartText        string
+	StartOccurrences int
+	EndText          string
+	EndOccurrences   int
 }
 
 const (

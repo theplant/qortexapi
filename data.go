@@ -287,6 +287,7 @@ type GroupSharingExternallyPage struct {
 	Group         *Group
 	CurrentOrg    *Organization
 	ShareRequests []*ShareRequest
+	SharingOrgs   []*EmbedOrg
 
 	IsNewGroup        bool `json:"-"`
 	DisableProFeatrue bool
@@ -373,6 +374,21 @@ type Attachment struct {
 	GroupName        string `json:",omitempty"`
 	GroupLink        string `json:",omitempty"`
 	LinkWithKeywords template.HTMLAttr
+}
+
+type File struct {
+	Attachment *Attachment
+	Entry      *FileEntry
+}
+
+type FileEntry struct {
+	Id        string
+	GroupId   string
+	GroupName string
+	Title     string
+	EType     string
+	Author    EmbedUser
+	Link      template.HTML
 }
 
 type AdvancedTask struct {
@@ -733,6 +749,7 @@ type Entry struct {
 	AllLikesCount               int
 	VersionCount                int
 	UnreadCommentCount          int
+	TranslationsCount           int
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
@@ -818,6 +835,7 @@ type BasedOnPost struct {
 	RootTitle template.HTML
 	Link      template.HTMLAttr
 	IsComment bool
+	Content   template.HTML
 }
 
 type QortexSupport struct {

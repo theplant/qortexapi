@@ -85,6 +85,7 @@ type AuthUserService interface {
 
 	// dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
+	DeleteEntryTranslation(entryId string, groupId string, languageCode string) (delType string, err error)
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
@@ -150,8 +151,8 @@ type AuthUserService interface {
 	ToggleGroupArchiving(gids string, signal bool) (err error)
 	BulkUpdateTasksInGroup(groupId string, taskPwMap []*TaskPwMap, taskInputs []*TaskInput, markerInputs []*ToDoMarkerInput) (err error)
 	UpdateCollection(gId, colId, colName string) (group *Group, err error)
-
 	GetAllGroupUsers(groupId string) (uers []User, err error)
+	GetGroupFiles(groupId string, before string, limit int) (files []*File, err error)
 
 	// User related
 	GetAuthUser() (user *User, err error)
@@ -208,7 +209,7 @@ type AuthUserService interface {
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
-	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string) (sendedEmails []string, err error)
+	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string, toFollowGroups []string) (sendedEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	UpdateGroupAdvancedToDoSettings(gId, settings string) (err error)
@@ -221,7 +222,8 @@ type AuthUserService interface {
 	ConfirmChangingEmail(token string) (err error)
 	UpdateAccount(input *MemberAccountInput) (err error)
 
-	SendShareRequest(groupId string, email string) (shareRequest *ShareRequest, err error)
+	SendShareRequest(groupId string, email string, message string) (shareRequest *ShareRequest, err error)
+	SendShareRequestToOrg(groupId string, toOrgId string) (shareRequest *ShareRequest, err error)
 	GetShareRequests(groupId string) (sis []*ShareRequest, err error)
 	CancelShareRequest(requestId string) (err error)
 
