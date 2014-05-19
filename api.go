@@ -85,6 +85,7 @@ type AuthUserService interface {
 
 	// dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
+	DeleteEntryTranslation(entryId string, groupId string, languageCode string) (delType string, err error)
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)

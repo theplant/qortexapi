@@ -749,6 +749,7 @@ type Entry struct {
 	AllLikesCount               int
 	VersionCount                int
 	UnreadCommentCount          int
+	TranslationsCount           int
 
 	Author               EmbedUser
 	CurrentVersionEditor EmbedUser
