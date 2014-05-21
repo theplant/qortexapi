@@ -3,6 +3,7 @@ package qortexapi
 import (
 	"html/template"
 	"time"
+	"labix.org/v2/mgo/bson"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
 )
@@ -1026,6 +1027,18 @@ type OrgPaymentInfo struct {
 	HasPaid       bool
 	TrialDeadline time.Time
 	ExpiredAt     time.Time
+}
+
+type MinOrgInfo struct {
+	OrgId   string
+	OrgName string
+}
+
+type OrgUserCache struct {
+	UserMap               map[string]*User
+	CurrentOrgUserNameMap map[string]bson.ObjectId
+	SharedOrgsUsersMap    map[string]map[string]bson.ObjectId
+	SharedOrgsNameMap     map[string]string
 }
 
 type OrgPaymentHistory struct {

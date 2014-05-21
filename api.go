@@ -350,4 +350,10 @@ type AuthAdminService interface {
 	SetExpiredAt(orgId string, deadLine string) (err error)
 	//for test
 	SendPaymentWarnEmail(orgId string) (err error)
+
+	GetMinOrgs() (orgInfos []*MinOrgInfo, err error)
+
+	GetOrgUserCache(orgId string) (orgUserCache *OrgUserCache, err error)
+
+	ResetOrgUserCache(orgId string) (err error)
 }
