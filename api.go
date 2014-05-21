@@ -216,7 +216,7 @@ type AuthUserService interface {
 
 	// TODO: mail-updates: remove it
 	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
-	UpdateMailPreference(input *MailPreferenceInput) (err error)
+	UpdateNotificationsPreference(input *NotificationPreferenceInput) (err error)
 
 	PrepareChangingEmail(newEmail string) (changer *EmailChanger, err error)
 	ConfirmChangingEmail(token string) (err error)
