@@ -95,7 +95,6 @@ type AuthUserService interface {
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 	GetDocViewSession(doi string, groupId string, attachmentId string) (sessionId string, err error)
-	DeleteEntryAttachment(doi string, groupId string, attachmentId string, ownerId string) (attachments []*Attachment, err error)
 	GetOtherVersionsComments(entryId string, groupId string, updateAtUnixNanoForVersion string) (comments []*Entry, err error)
 	GetOtherVersionsTaskLogs(entryId string, groupId string, updateAtUnixNanoForVersion string) (taskLogs []*TaskLog, err error)
 
@@ -315,7 +314,8 @@ type AuthUserService interface {
 
 	// Files
 	UploadFile(entryId string, gId string, fileName string, contentType string, file io.Reader) (apiAtt *Attachment, err error)
-	DeleteFile(fileId string) (err error)
+	// DeleteFile(fileId string) (err error)
+	DeleteFile(groupId string, attachmentId string, ownerId string) (attachments []*Attachment, err error)
 
 	// Search
 	Search(sp SearchParams) (sr SearchResult, err error)
