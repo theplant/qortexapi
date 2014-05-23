@@ -175,6 +175,7 @@ type EmbedUser struct {
 	IsSuperUser           bool
 	IsDisabled            bool `json:"-"`
 	IsDeleted             bool `json:"-"`
+	IsAvailable           bool `json:"-"`
 	IsShare               bool
 	OrganizationId        string
 	OriginalOrgId         string
@@ -1036,9 +1037,9 @@ type MinOrgInfo struct {
 
 type OrgUserCache struct {
 	UserMap               map[string]*User
-	CurrentOrgUserNameMap map[string]bson.ObjectId
-	SharedOrgsUsersMap    map[string]map[string]bson.ObjectId
-	SharedOrgsNameMap     map[string]string
+	EmbedUsersMap         map[string]*EmbedUser
+	UserNameMap           map[string]bson.ObjectId
+	GroupToSharingOrgsMap map[string][]string
 }
 
 type OrgPaymentHistory struct {
