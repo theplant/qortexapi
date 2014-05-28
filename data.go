@@ -2,8 +2,8 @@ package qortexapi
 
 import (
 	"html/template"
-	"time"
 	"labix.org/v2/mgo/bson"
+	"time"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
 )
@@ -1483,4 +1483,14 @@ type PushInfo struct {
 	GroupId   string
 	EntryId   string
 	CommentId string
+}
+
+type Token struct {
+	Id          string
+	MemberId    string
+	OrgId       string
+	GroupId     string
+	Key         string
+	Label       string
+	AccessLevel int
 }

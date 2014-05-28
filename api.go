@@ -251,7 +251,6 @@ type AuthUserService interface {
 	// Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
 	EditTask(groupId string, taskId string) (task *Task, err error)
-	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
 	ClaimTask(taskId string, groupId string) (task *Task, err error)
 	UpdateSimpleTask(input *TaskInput) (task *Task, err error)
 	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
@@ -321,6 +320,9 @@ type AuthUserService interface {
 	Search(sp SearchParams) (sr SearchResult, err error)
 	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
+
+	SaveToken(tokenId string, label string, accessLevel int, groupId string) (token string, err error)
+	GetOrgTokens() (tokens []*Token, err error)
 }
 
 type AuthAdminService interface {
