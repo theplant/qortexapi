@@ -115,12 +115,11 @@ type User struct {
 }
 
 type GroupUsers struct {
-	GroupId         string
-	IsShared        bool
-	IsSharedFromOrg bool
-	IsPrivate       bool
-	IsFollowed      bool
-	EmbedUsers      []EmbedUser
+	GroupId    string
+	IsShared   bool
+	IsPrivate  bool
+	IsFollowed bool
+	EmbedUsers []EmbedUser
 }
 
 type Preferences struct {
