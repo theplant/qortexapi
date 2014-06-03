@@ -307,6 +307,7 @@ type AuthUserService interface {
 	ValidatePayment() (err error)
 	CancelSubscription() (err error)
 	DismissPaymentTips() (err error)
+	DisableProFeatrue(groupId string) (r bool, err error)
 
 	GetContactUsInfo() (info *ContactUsInfo, err error)
 	// For Mobile Specifically
