@@ -196,6 +196,7 @@ type PanelStatus struct {
 type Group struct {
 	Id                  string `json:",omitempty"`
 	Name                string `json:",omitempty"`
+	SuffixedName        string `json:",omitempty"`
 	Description         string `json:",omitempty"`
 	GType               string `json:",omitempty"`
 	LogoURL             string `json:",omitempty"`
