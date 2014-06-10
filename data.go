@@ -1487,11 +1487,12 @@ type PushInfo struct {
 }
 
 type Token struct {
-	Id          string
-	MemberId    string
-	OrgId       string
-	GroupId     string
-	Key         string
-	Label       string
-	AccessLevel int
+	Id            string
+	MemberId      string
+	OrgId         string
+	IsForAllGroup bool
+	GroupIds      []string
+	Key           string
+	Label         string
+	AccessLevel   int
 }

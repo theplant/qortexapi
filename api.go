@@ -322,7 +322,9 @@ type AuthUserService interface {
 	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 
-	SaveToken(tokenId string, label string, accessLevel int, groupId string) (token string, err error)
+	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool) (token string, err error)
+	RemoveGroupFromToken(tokenId string, groupId string) (err error)
+	AddGroupToToken(tokenId string, groupId string) (err error)
 	GetOrgTokens() (tokens []*Token, err error)
 }
 
