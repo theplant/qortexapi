@@ -5,6 +5,8 @@ import "time"
 type EntryInput struct {
 	Id string
 
+	AutoGenerateId bool
+
 	// "post": normal entry
 	// "task": acknowledgement or To-Do (IsAcknowledgement == true ,IsToGroup == "2")
 	// "comment": entry's comment
