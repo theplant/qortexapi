@@ -319,7 +319,7 @@ type AuthUserService interface {
 	DeleteFile(groupId string, attachmentId string, ownerId string) (attachments []*Attachment, err error)
 
 	// Search
-	Search(sp SearchParams) (sr SearchResult, err error)
+	Search(sp SearchInput) (sr SearchResult, err error)
 	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 }

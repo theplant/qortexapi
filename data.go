@@ -3,6 +3,7 @@ package qortexapi
 import (
 	"html/template"
 	"time"
+
 	"labix.org/v2/mgo/bson"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
@@ -236,6 +237,8 @@ type Group struct {
 
 	// is the current logged-in user the project manager of this group
 	AmIPM bool `json:",omitempty"`
+
+	SharedWithOrgs []EmbedOrg `json:",omitempty"`
 }
 
 type GroupCollection struct {
@@ -1394,25 +1397,6 @@ type GroupColCollapseState struct {
 }
 
 type (
-	SearchParams struct {
-		// Value: myfeed, group, chats, user, tasks
-		// In myfeed, entries, conversations, links, and attachemnts will appear in your search result
-		// In chats, only conversations
-		// In tasks, only tasks
-		// About group and user, actually, they are mainly for pc stuff, app could ignore them
-		Scope string
-
-		GroupIds []string
-		UserIds  []string
-
-		// Sorting stuff by relevance: 	rel
-		// Sorting stuff by date: 		rec
-		SortBy string
-
-		Page     int // Start from: 1
-		Keywords string
-	}
-
 	SearchResult struct {
 		Entities    []SearchEntity
 		Attachments []*Attachment
