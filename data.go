@@ -1356,6 +1356,8 @@ type InitInfo struct {
 	FollowedSharedGroups   []*Group
 	UnFollowedNormalGroups []*Group
 	UnFollowedSharedGroups []*Group
+
+	Lists []*GroupsList
 }
 
 type NewGroupAside struct {
