@@ -311,6 +311,7 @@ type AuthUserService interface {
 	GetContactUsInfo() (info *ContactUsInfo, err error)
 	// For Mobile Specifically
 	GetInitInfo() (info *InitInfo, err error)
+	GetNewInitInfo() (info *InitInfo, err error)
 
 	// Files
 	UploadFile(entryId string, gId string, fileName string, contentType string, file io.Reader) (apiAtt *Attachment, err error)

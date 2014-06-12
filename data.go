@@ -236,6 +236,8 @@ type Group struct {
 
 	// is the current logged-in user the project manager of this group
 	AmIPM bool `json:",omitempty"`
+
+	SharedWithOrgs []EmbedOrg `json:",omitempty"`
 }
 
 type GroupCollection struct {
@@ -1353,6 +1355,8 @@ type InitInfo struct {
 	FollowedSharedGroups   []*Group
 	UnFollowedNormalGroups []*Group
 	UnFollowedSharedGroups []*Group
+
+	Lists []*GroupsList
 }
 
 type NewGroupAside struct {
