@@ -89,6 +89,7 @@ type AuthUserService interface {
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
+	SingleEntryMachineTranslate(entryId string, groupId string, currentLang string, targetlang string, isMarkdown bool) (translatedThread *TranslatedThread, err error)
 	MachineTranslate(entryId string, groupId string, currentLang string, targetlang string) (translatedThread *TranslatedThread, err error)
 	MachineTranslateWikiSection(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
 	OriginalThread(entryId string, groupId string) (translatedThread *TranslatedThread, err error)

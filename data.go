@@ -1229,8 +1229,6 @@ type ToDoCSVItem struct {
 type TranslatedThread struct {
 	Title         string
 	Content       string
-	RawTitle      string
-	RawContent    string
 	Comments      []*TranslatedComment
 	IsCommentOnly bool
 	IsWikiSection bool
