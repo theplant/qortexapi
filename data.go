@@ -1351,6 +1351,7 @@ type InitInfo struct {
 	CurrentOrg *Organization
 	JoinedOrgs []*Organization
 
+	// Return by GetInitInfo
 	AnnouncementGroup      *Group
 	SmGroup                *Group
 	FollowedNormalGroups   []*Group
@@ -1358,6 +1359,7 @@ type InitInfo struct {
 	UnFollowedNormalGroups []*Group
 	UnFollowedSharedGroups []*Group
 
+	// Return by GetNewInitInfo
 	Lists []*GroupsList
 }
 
