@@ -111,6 +111,7 @@ type User struct {
 	Profile               Profile      `json:",omitempty"`
 	NoDetail              bool         `json:",omitempty"`
 	HasMobileDevices      bool         `json:"-"`
+	HasDevMobileDevices   bool         `json:"-"` //For Apple TestFlight
 	PreferredLanguageCode string
 }
 
@@ -1349,6 +1350,7 @@ type InitInfo struct {
 	CurrentOrg *Organization
 	JoinedOrgs []*Organization
 
+	// Return by GetInitInfo
 	AnnouncementGroup      *Group
 	SmGroup                *Group
 	FollowedNormalGroups   []*Group
@@ -1356,6 +1358,7 @@ type InitInfo struct {
 	UnFollowedNormalGroups []*Group
 	UnFollowedSharedGroups []*Group
 
+	// Return by GetNewInitInfo
 	Lists []*GroupsList
 }
 

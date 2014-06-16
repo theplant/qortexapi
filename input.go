@@ -117,6 +117,7 @@ type QortexSupportInput struct {
 	InlineHelp           bool   //for qortex support knowledge base
 	PublishedToUsers     bool   //for qortex support knowledge base
 	LinkTitle            string //for qortex support knowledge base
+	ContentType          string // "" ,"html","markdown", when "" will use user's setting
 
 	LanguageCode        string
 	IsAddingTranslation bool
