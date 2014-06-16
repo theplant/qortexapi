@@ -326,3 +326,9 @@ type SearchInput struct {
 	Page     int // Start from: 1
 	Keywords string
 }
+
+type ZapierSubscribeInput struct {
+	SubscriptionUrl string
+	Event           string
+	TargetUrl       string
+}

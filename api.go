@@ -327,6 +327,9 @@ type AuthUserService interface {
 	RemoveGroupFromToken(tokenId string, groupId string) (err error)
 	AddGroupToToken(tokenId string, groupId string) (err error)
 	GetOrgTokens() (tokens []*Token, err error)
+
+	ZapierSubscribe(input ZapierSubscribeInput) (err error)
+	// ZapierUnsubscribe() (err error)
 }
 
 type AuthAdminService interface {
