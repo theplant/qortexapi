@@ -328,7 +328,7 @@ type AuthUserService interface {
 	AddGroupToToken(tokenId string, groupId string) (err error)
 	GetOrgTokens() (tokens []*Token, err error)
 
-	ZapierSubscribe(input ZapierSubscribeInput) (err error)
+	ZapierSubscribe(input ZapierSubscribeInput) (webhookId string, err error)
 	// ZapierUnsubscribe() (err error)
 }
 
