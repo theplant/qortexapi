@@ -329,7 +329,7 @@ type AuthUserService interface {
 	GetOrgTokens() (tokens []*Token, err error)
 
 	ZapierSubscribe(input ZapierSubscribeInput) (webhookId string, err error)
-	// ZapierUnsubscribe() (err error)
+	ZapierUnsubscribe(webhookId string) (err error)
 }
 
 type AuthAdminService interface {
