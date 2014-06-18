@@ -215,7 +215,7 @@ type AuthUserService interface {
 
 	// TODO: mail-updates: remove it
 	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
-	UpdateMailPreference(input *MailPreferenceInput) (err error)
+	UpdateNotificationsPreference(input *NotificationPreferenceInput) (err error)
 
 	PrepareChangingEmail(newEmail string) (changer *EmailChanger, err error)
 	ConfirmChangingEmail(token string) (err error)
@@ -251,7 +251,6 @@ type AuthUserService interface {
 	// Advand Task Related
 	NewTask(groupId string) (task *Task, err error)
 	EditTask(groupId string, taskId string) (task *Task, err error)
-	GetAdvancedTask(taskId string) (at *AdvancedTask, err error)
 	ClaimTask(taskId string, groupId string) (task *Task, err error)
 	UpdateSimpleTask(input *TaskInput) (task *Task, err error)
 	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
@@ -285,9 +284,6 @@ type AuthUserService interface {
 	// Apple device service
 	RegisterAppleDevice(token string) (err error)
 	UnregisterAppleDevice(token string) (err error)
-
-	RegisterAppleDeviceForDev(token string) (err error)
-	UnregisterAppleDeviceForDev(token string) (err error)
 
 	// Android device service
 	RegisterAndroidDevice(regid string) (err error)
@@ -323,6 +319,14 @@ type AuthUserService interface {
 	Search(sp SearchInput) (sr SearchResult, err error)
 	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
+
+	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool) (token string, err error)
+	RemoveGroupFromToken(tokenId string, groupId string) (err error)
+	AddGroupToToken(tokenId string, groupId string) (err error)
+	GetOrgTokens() (tokens []*Token, err error)
+
+	ZapierSubscribe(input ZapierSubscribeInput) (webhookId string, err error)
+	ZapierUnsubscribe(webhookId string) (err error)
 }
 
 type AuthAdminService interface {
