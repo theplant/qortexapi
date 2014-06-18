@@ -286,9 +286,6 @@ type AuthUserService interface {
 	RegisterAppleDevice(token string) (err error)
 	UnregisterAppleDevice(token string) (err error)
 
-	RegisterAppleDeviceForDev(token string) (err error)
-	UnregisterAppleDeviceForDev(token string) (err error)
-
 	// Android device service
 	RegisterAndroidDevice(regid string) (err error)
 	UnregisterAndroidDevice(regid string) (err error)

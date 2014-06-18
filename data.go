@@ -112,7 +112,6 @@ type User struct {
 	Profile               Profile      `json:",omitempty"`
 	NoDetail              bool         `json:",omitempty"`
 	HasMobileDevices      bool         `json:"-"`
-	HasDevMobileDevices   bool         `json:"-"` //For Apple TestFlight
 	PreferredLanguageCode string
 }
 
