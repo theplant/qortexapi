@@ -110,8 +110,7 @@ type User struct {
 	Preferences           *Preferences `json:",omitempty"`
 	Profile               Profile      `json:",omitempty"`
 	NoDetail              bool         `json:",omitempty"`
-	HasMobileDevices      bool         `json:"-"`
-	HasDevMobileDevices   bool         `json:"-"` //For Apple TestFlight
+	EnabledMobilePush     bool         `json:"-"`
 	PreferredLanguageCode string
 }
 

@@ -268,10 +268,11 @@ type MailUpdatesInput struct {
 	DailyIsOn         bool
 }
 
-type MailPreferenceInput struct {
-	Expecting    bool
-	SendInterval int
-	SendLag      int
+type NotificationPreferenceInput struct {
+	Expecting       bool
+	SendInterval    int
+	SendLag         int
+	IsMobileEnabled bool
 }
 
 type TaskInput struct {
