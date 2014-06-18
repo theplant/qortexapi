@@ -95,7 +95,6 @@ type AuthUserService interface {
 
 	GetEntryAttachments(entryId string, groupId string) (attachments []*Attachment, err error)
 	GetDocViewSession(doi string, groupId string, attachmentId string) (sessionId string, err error)
-	DeleteEntryAttachment(doi string, groupId string, attachmentId string, ownerId string) (attachments []*Attachment, err error)
 	GetOtherVersionsComments(entryId string, groupId string, updateAtUnixNanoForVersion string) (comments []*Entry, err error)
 	GetOtherVersionsTaskLogs(entryId string, groupId string, updateAtUnixNanoForVersion string) (taskLogs []*TaskLog, err error)
 
@@ -287,9 +286,6 @@ type AuthUserService interface {
 	RegisterAppleDevice(token string) (err error)
 	UnregisterAppleDevice(token string) (err error)
 
-	RegisterAppleDeviceForUser(userId string, token string) (err error)   // Deprecated, should be removed
-	UnregisterAppleDeviceForUser(userId string, token string) (err error) // Deprecated, should be removed
-
 	// Android device service
 	RegisterAndroidDevice(regid string) (err error)
 	UnregisterAndroidDevice(regid string) (err error)
@@ -308,17 +304,20 @@ type AuthUserService interface {
 	ValidatePayment() (err error)
 	CancelSubscription() (err error)
 	DismissPaymentTips() (err error)
+	DisableProFeatrue(groupId string) (r bool, err error)
 
 	GetContactUsInfo() (info *ContactUsInfo, err error)
 	// For Mobile Specifically
 	GetInitInfo() (info *InitInfo, err error)
+	GetNewInitInfo() (info *InitInfo, err error)
 
 	// Files
-	UploadFile(gId string, fileName string, contentType string, file io.Reader) (apiAtt *Attachment, err error)
-	DeleteFile(fileId string) (err error)
+	UploadFile(entryId string, gId string, fileName string, contentType string, file io.Reader) (apiAtt *Attachment, err error)
+	// DeleteFile(fileId string) (err error)
+	DeleteFile(groupId string, attachmentId string, ownerId string) (attachments []*Attachment, err error)
 
 	// Search
-	Search(sp SearchParams) (sr SearchResult, err error)
+	Search(sp SearchInput) (sr SearchResult, err error)
 	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 }

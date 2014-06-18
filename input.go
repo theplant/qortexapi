@@ -115,6 +115,7 @@ type QortexSupportInput struct {
 	InlineHelp           bool   //for qortex support knowledge base
 	PublishedToUsers     bool   //for qortex support knowledge base
 	LinkTitle            string //for qortex support knowledge base
+	ContentType          string // "" ,"html","markdown", when "" will use user's setting
 
 	LanguageCode        string
 	IsAddingTranslation bool
@@ -305,4 +306,23 @@ type KnowledgeOverviewInput struct {
 	Content      string
 	IsHidden     bool
 	LanguageCode string
+}
+
+type SearchInput struct {
+	// Value: myfeed, group, chats, user, tasks
+	// In myfeed, entries, conversations, links, and attachemnts will appear in your search result
+	// In chats, only conversations
+	// In tasks, only tasks
+	// About group and user, actually, they are mainly for pc stuff, app could ignore them
+	Scope string
+
+	GroupIds []string
+	UserIds  []string
+
+	// Sorting stuff by relevance: 	rel
+	// Sorting stuff by date: 		rec
+	SortBy string
+
+	Page     int // Start from: 1
+	Keywords string
 }

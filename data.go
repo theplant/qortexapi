@@ -3,6 +3,7 @@ package qortexapi
 import (
 	"html/template"
 	"time"
+
 	"labix.org/v2/mgo/bson"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
@@ -175,6 +176,7 @@ type EmbedUser struct {
 	IsSuperUser           bool
 	IsDisabled            bool `json:"-"`
 	IsDeleted             bool `json:"-"`
+	IsAvailable           bool `json:"-"`
 	IsShare               bool
 	OrganizationId        string
 	OriginalOrgId         string
@@ -195,6 +197,7 @@ type PanelStatus struct {
 type Group struct {
 	Id                  string `json:",omitempty"`
 	Name                string `json:",omitempty"`
+	SuffixedName        string `json:",omitempty"`
 	Description         string `json:",omitempty"`
 	GType               string `json:",omitempty"`
 	LogoURL             string `json:",omitempty"`
@@ -234,6 +237,8 @@ type Group struct {
 
 	// is the current logged-in user the project manager of this group
 	AmIPM bool `json:",omitempty"`
+
+	SharedWithOrgs []EmbedOrg `json:",omitempty"`
 }
 
 type GroupCollection struct {
@@ -1036,9 +1041,9 @@ type MinOrgInfo struct {
 
 type OrgUserCache struct {
 	UserMap               map[string]*User
-	CurrentOrgUserNameMap map[string]bson.ObjectId
-	SharedOrgsUsersMap    map[string]map[string]bson.ObjectId
-	SharedOrgsNameMap     map[string]string
+	EmbedUsersMap         map[string]*EmbedUser
+	UserNameMap           map[string]bson.ObjectId
+	GroupToSharingOrgsMap map[string][]string
 }
 
 type OrgPaymentHistory struct {
@@ -1345,12 +1350,16 @@ type InitInfo struct {
 	CurrentOrg *Organization
 	JoinedOrgs []*Organization
 
+	// Return by GetInitInfo
 	AnnouncementGroup      *Group
 	SmGroup                *Group
 	FollowedNormalGroups   []*Group
 	FollowedSharedGroups   []*Group
 	UnFollowedNormalGroups []*Group
 	UnFollowedSharedGroups []*Group
+
+	// Return by GetNewInitInfo
+	Lists []*GroupsList
 }
 
 type NewGroupAside struct {
@@ -1392,25 +1401,6 @@ type GroupColCollapseState struct {
 }
 
 type (
-	SearchParams struct {
-		// Value: myfeed, group, chats, user, tasks
-		// In myfeed, entries, conversations, links, and attachemnts will appear in your search result
-		// In chats, only conversations
-		// In tasks, only tasks
-		// About group and user, actually, they are mainly for pc stuff, app could ignore them
-		Scope string
-
-		GroupIds []string
-		UserIds  []string
-
-		// Sorting stuff by relevance: 	rel
-		// Sorting stuff by date: 		rec
-		SortBy string
-
-		Page     int // Start from: 1
-		Keywords string
-	}
-
 	SearchResult struct {
 		Entities    []SearchEntity
 		Attachments []*Attachment
