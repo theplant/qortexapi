@@ -321,8 +321,8 @@ type AuthUserService interface {
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 
 	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool) (token string, err error)
-	RemoveGroupFromToken(tokenId string, groupId string) (err error)
-	AddGroupToToken(tokenId string, groupId string) (err error)
+	RemoveGroupsFromToken(tokenId string, groupIds []string) (err error)
+	AddGroupsToToken(tokenId string, groupIds []string) (err error)
 	GetOrgTokens() (tokens []*Token, err error)
 
 	ZapierSubscribe(input ZapierSubscribeInput) (webhookId string, err error)
