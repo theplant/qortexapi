@@ -5,6 +5,8 @@ import "time"
 type EntryInput struct {
 	Id string
 
+	AutoGenerateId bool
+
 	// "post": normal entry
 	// "task": acknowledgement or To-Do (IsAcknowledgement == true ,IsToGroup == "2")
 	// "comment": entry's comment
@@ -266,10 +268,11 @@ type MailUpdatesInput struct {
 	DailyIsOn         bool
 }
 
-type MailPreferenceInput struct {
-	Expecting    bool
-	SendInterval int
-	SendLag      int
+type NotificationPreferenceInput struct {
+	Expecting       bool
+	SendInterval    int
+	SendLag         int
+	IsMobileEnabled bool
 }
 
 type TaskInput struct {
@@ -324,4 +327,10 @@ type SearchInput struct {
 
 	Page     int // Start from: 1
 	Keywords string
+}
+
+type ZapierSubscribeInput struct {
+	SubscriptionUrl string
+	Event           string
+	TargetUrl       string
 }
