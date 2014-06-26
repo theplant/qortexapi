@@ -142,6 +142,7 @@ type AuthUserService interface {
 	DeleteGroup(groupId string) (err error)
 	GetGroupBySlug(slug string) (group *Group, err error)
 	GetGroups(keyword string) (groups []*Group, err error)
+	GetEmbedGroups(keyword string) (groups []*EmbedGroup, err error)
 	GetPublicGroups(keyword string) (groups []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
