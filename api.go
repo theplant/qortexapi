@@ -102,8 +102,10 @@ type AuthUserService interface {
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
 	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
-	GetGroupAside() (ga *GroupAside, err error)
-	GetNewGroupAside() (nga *NewGroupAside, err error)
+
+	GetGroupAside() (ga *GroupAside, err error)        // Dreprecated. Now is GetGroupAsideV2
+	GetNewGroupAside() (nga *NewGroupAside, err error) // Dreprecated. Now is GetGroupAsideV2
+	GetGroupAsideV2() (ga *NewGroupAside, err error)
 
 	GetMyFeedEntriesLite(before string, limit int) (entries []*Entry, err error)
 

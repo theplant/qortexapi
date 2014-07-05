@@ -1065,6 +1065,7 @@ type AccessReq struct {
 	UpdatedAt  string
 }
 
+// Deprecated. Now is NewGroupAside
 type GroupAside struct {
 	IsMyGroupsCollapse     bool
 	IsOtherGroupsCollapse  bool
@@ -1371,14 +1372,13 @@ type NewGroupAside struct {
 }
 
 type GroupsList struct {
-	// IsEmpty       bool
 	IsCollapsed   bool
 	Announcement  *Group // only exists in My Groups
 	QortexSupport *Group // only exists in My Groups
-	// Collections   []*GroupedGroups
-	// Groups        []*Group
-	// SharedGroups  []*Group
-	Metas       []*MetaGroup
+	Metas         []*MetaGroup
+
+	// Deprecated in V2
+	// Now standard and shared groups are mixed together.
 	SharedMetas []*MetaGroup
 }
 
@@ -1388,11 +1388,14 @@ type MetaGroup struct {
 }
 
 type GroupedGroups struct {
-	ColId        string
-	ColName      string
-	Groups       []*Group
+	ColId       string
+	ColName     string
+	Groups      []*Group
+	IsCollapsed bool
+
+	// Deprecated in V2
+	// Now standard and shared groups are mixed together.
 	SharedGroups []*Group
-	IsCollapsed  bool
 }
 
 type GroupColCollapseState struct {
