@@ -146,6 +146,7 @@ type AuthUserService interface {
 	DeleteGroup(groupId string) (err error)
 	GetGroupBySlug(slug string) (group *Group, err error)
 	GetGroups(keyword string) (groups []*Group, err error)
+	GetEmbedGroups(keyword string) (groups []*EmbedGroup, err error)
 	GetPublicGroups(keyword string) (groups []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
@@ -324,9 +325,10 @@ type AuthUserService interface {
 	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 
-	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool) (token string, err error)
-	RemoveGroupsFromToken(tokenId string, groupIds []string) (err error)
-	AddGroupsToToken(tokenId string, groupIds []string) (err error)
+	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool, groupIds []string) (token string, err error)
+	DeleteToken(tokenId string) (err error)
+	// RemoveGroupsFromToken(tokenId string, groupIds []string) (err error)
+	// AddGroupsToToken(tokenId string, groupIds []string) (err error)
 	GetOrgTokens() (tokens []*Token, err error)
 
 	ZapierSubscribe(input ZapierSubscribeInput) (webhookId string, err error)
