@@ -320,8 +320,8 @@ type AuthUserService interface {
 
 	// Search
 	Search(sp SearchInput) (sr SearchResult, err error)
-	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
-	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
+	// RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
+	// RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 
 	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool, groupIds []string) (token string, err error)
 	DeleteToken(tokenId string) (err error)
