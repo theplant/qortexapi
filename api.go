@@ -325,6 +325,7 @@ type AuthUserService interface {
 	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 
+	ValidateToken() (err error)
 	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool, groupIds []string) (token string, err error)
 	DeleteToken(tokenId string) (err error)
 	// RemoveGroupsFromToken(tokenId string, groupIds []string) (err error)
