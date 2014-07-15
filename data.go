@@ -845,14 +845,6 @@ type MyTask struct {
 	ClosedTasks     []*TaskOutline
 }
 
-type MyChats struct {
-	ChatEntries      []*Entry
-	HasMore          bool
-	LatestCreateTime int64
-	WhatChats        bool
-	PrefixURL        string
-}
-
 type MyNotifications struct {
 	NotificationItems []*NotificationItem
 	HasMore           bool
@@ -1461,6 +1453,7 @@ type (
 		UpdatedAt   string
 		CurrentUser EmbedUser
 		WithUser    EmbedUser
+		Convs       []*Conversation // Used for development, should be removed later
 	}
 
 	Conversation struct {
