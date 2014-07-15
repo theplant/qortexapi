@@ -620,39 +620,6 @@ type GroupSharingInfo struct {
 	PendingToEmails []string
 }
 
-type Conversation struct {
-	Id                  string
-	Title               string
-	UserIds             []string
-	Participants        []EmbedUser
-	CreatedAt           time.Time
-	EndedAt             time.Time
-	LocalHumanCreatedAt string
-	Topic               string
-	Private             bool
-	IsClose             bool
-	IsShared            bool
-	HasOfflineMessage   bool
-	OfflineLocalTime    string
-	SharedMessageIds    []string
-	MessagesCount       int
-	Messages            []*Message
-
-	LinkWithKeywords template.HTMLAttr `json:",omitempty"` // for Search
-}
-
-type Message struct {
-	Id             string
-	ConversationId string
-	UserId         string
-	Content        string
-	HtmlContent    template.HTML
-	CreatedAt      time.Time
-	EmbedUser      EmbedUser
-	ShowUser       bool
-	IsOffline      bool
-}
-
 type Entry struct {
 	Id            string
 	EType         string    `json:",omitempty"`
@@ -1486,3 +1453,46 @@ type Token struct {
 	Label         string
 	AccessLevel   int
 }
+
+// ----- Chat Related -----
+type (
+	Chat struct {
+		Id          string
+		UpdatedAt   string
+		CurrentUser EmbedUser
+		WithUser    EmbedUser
+	}
+
+	Conversation struct {
+		Id                  string
+		Title               string
+		UserIds             []string
+		Participants        []EmbedUser
+		CreatedAt           time.Time
+		EndedAt             time.Time
+		LocalHumanCreatedAt string
+		Topic               string
+		Private             bool
+		IsClose             bool
+		IsShared            bool
+		HasOfflineMessage   bool
+		OfflineLocalTime    string
+		SharedMessageIds    []string
+		MessagesCount       int
+		Messages            []*Message
+
+		LinkWithKeywords template.HTMLAttr `json:",omitempty"` // for Search
+	}
+
+	Message struct {
+		Id             string
+		ConversationId string
+		UserId         string
+		Content        string
+		HtmlContent    template.HTML
+		CreatedAt      time.Time
+		EmbedUser      EmbedUser
+		ShowUser       bool
+		IsOffline      bool
+	}
+)

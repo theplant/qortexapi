@@ -238,7 +238,8 @@ type AuthUserService interface {
 	DismissTutorialsTip() (err error)
 
 	// chat
-	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
+	GetMyChats() (chats []*Chat, err error)
+	GetMyChatEntries(before string, limit int) (entries []*Entry, err error) // Deprecated
 	GetPrivateChat(conversationId string, searchKeyWords string) (chatEntry *Entry, err error)
 	OpenConversation(cid, fromJid, toJid string) (err error)
 
