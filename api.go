@@ -8,7 +8,7 @@ type PublicService interface {
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
-	ViaHTTPS() bool
+	ViaHTTPS() (bool, error)
 
 	// Find Password
 	FindPassword(email string) (err error)
