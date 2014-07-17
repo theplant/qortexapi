@@ -1330,6 +1330,7 @@ type KnowledgeOverview struct {
 	UploadURL               template.HTMLAttr `json:",omitempty"` //just for reuse the mannual translation form
 	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
 	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
+	DisableProFeatrue       bool
 }
 
 type ContactUsInfo struct {

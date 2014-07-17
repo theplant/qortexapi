@@ -8,6 +8,8 @@ type PublicService interface {
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)
 
+	ViaHTTPS() (ok bool, err error)
+
 	// Find Password
 	FindPassword(email string) (err error)
 	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, err error)
@@ -89,7 +91,9 @@ type AuthUserService interface {
 	MuteEntry(entryId string, groupId string) (err error)
 	UndoMuteEntry(entryId string, groupId string) (err error)
 	GetMachineTranslatableLangauges() (options *LanguageSelector, err error)
+	SingleEntryMachineTranslate(entryId string, groupId string, currentLang string, targetlang string, isMarkdown bool) (translatedThread *TranslatedThread, err error)
 	MachineTranslate(entryId string, groupId string, currentLang string, targetlang string) (translatedThread *TranslatedThread, err error)
+	SingleWikiSectionMachineTranslate(entryId string, groupId string, currentLang string, targetlang string, isMarkdown bool) (translatedThread *TranslatedThread, err error)
 	MachineTranslateWikiSection(entryId string, groupId string, targetlang string) (translatedThread *TranslatedThread, err error)
 	OriginalThread(entryId string, groupId string) (translatedThread *TranslatedThread, err error)
 
@@ -142,6 +146,7 @@ type AuthUserService interface {
 	DeleteGroup(groupId string) (err error)
 	GetGroupBySlug(slug string) (group *Group, err error)
 	GetGroups(keyword string) (groups []*Group, err error)
+	GetEmbedGroups(keyword string) (groups []*EmbedGroup, err error)
 	GetPublicGroups(keyword string) (groups []*Group, err error)
 	AddUserToGroup(groupId string, userId string) (err error)
 	RemoveUserFromGroup(groupId string, userId string) (err error)
@@ -320,9 +325,11 @@ type AuthUserService interface {
 	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
 	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 
-	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool) (token string, err error)
-	RemoveGroupFromToken(tokenId string, groupId string) (err error)
-	AddGroupToToken(tokenId string, groupId string) (err error)
+	ValidateToken() (err error)
+	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool, groupIds []string) (token string, err error)
+	DeleteToken(tokenId string) (err error)
+	// RemoveGroupsFromToken(tokenId string, groupIds []string) (err error)
+	// AddGroupsToToken(tokenId string, groupIds []string) (err error)
 	GetOrgTokens() (tokens []*Token, err error)
 
 	ZapierSubscribe(input ZapierSubscribeInput) (webhookId string, err error)
