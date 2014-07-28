@@ -1484,3 +1484,20 @@ type Token struct {
 	Label         string
 	AccessLevel   int
 }
+
+// The data shared between qortex and qortexpush
+type (
+	UniqushPushData struct {
+		UserId      string `form:"UserId" binding:"required"`
+		Message     string `form:"Message" binding:"required"`
+		AlertNumber string `form:"AlertNumber" binding:"required"`
+		ItemId      string `form:"ItemId" binding:"required"`
+	}
+
+	UniqushSubData struct {
+		UserId       string `form:"UserId" binding:"required"`
+		ServiceType  string `form:"ServiceType" binding:"required"`
+		IsSubscribe  bool   `form:"IsSubscribe" binding:"required"`
+		TokenOrRegId string `form:"TokenOrRegId" binding:"required"`
+	}
+)
