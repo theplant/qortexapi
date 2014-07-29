@@ -103,7 +103,8 @@ type AuthUserService interface {
 	GetOtherVersionsTaskLogs(entryId string, groupId string, updateAtUnixNanoForVersion string) (taskLogs []*TaskLog, err error)
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
-	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
+	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error) // Dreprecated. Now is GetMyFeedEntriesV2
+	GetMyFeedEntriesV2(before string, limit int, withComments bool, directAtMe bool) (entries []*Entry, err error)
 
 	GetGroupAside() (ga *GroupAside, err error)        // Dreprecated. Now is GetGroupAsideV2
 	GetNewGroupAside() (nga *NewGroupAside, err error) // Dreprecated. Now is GetGroupAsideV2
