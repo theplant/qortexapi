@@ -2,8 +2,8 @@ package qortexapi
 
 import (
 	"html/template"
-	"labix.org/v2/mgo/bson"
 	"time"
+	"labix.org/v2/mgo/bson"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
 )
@@ -690,6 +690,7 @@ type Entry struct {
 	IsPost          bool   `json:",omitempty"`
 	IsComment       bool   `json:",omitempty"`
 	IsTask          bool   `json:",omitempty"` // when entry is ack or todo , IsTask = true
+	IsNotification  bool   `json:",omitempty"`
 	IsChat          bool   `json:",omitempty"`
 	IsTaskToDo      bool   `json:",omitempty"` // when entry is todo , IsTaskToDo = true
 	IsTaskAck       bool   `json:",omitempty"` // when entry is ack , IsTaskAck = true
