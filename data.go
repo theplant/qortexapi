@@ -881,13 +881,14 @@ type DraftList struct {
 }
 
 type MyCount struct {
-	UserId                  string
-	FollowedUnreadCount     int
-	NotificationUnreadCount int
-	ActiveTasksCount        int
-	ActionNeededTasksCount  int
-	OfflineMessageCount     int
-	GroupCounts             []*GroupCount
+	UserId                    string
+	FollowedUnreadCount       int
+	NotificationUnreadCount   int // Deprecated
+	NotificationUnreadCountV2 int
+	ActiveTasksCount          int
+	ActionNeededTasksCount    int // Deprecated
+	OfflineMessageCount       int
+	GroupCounts               []*GroupCount
 }
 
 type GroupCount struct {
