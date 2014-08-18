@@ -2,8 +2,8 @@ package qortexapi
 
 import (
 	"html/template"
-	"time"
 	"labix.org/v2/mgo/bson"
+	"time"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
 )
@@ -1456,6 +1456,7 @@ type (
 		CurrentUser EmbedUser
 		WithUser    EmbedUser
 		Convs       []*Conversation // Used for development, should be removed later
+		HasMore     bool
 	}
 
 	Conversation struct {
@@ -1463,8 +1464,7 @@ type (
 		Title               string
 		UserIds             []string
 		Participants        []EmbedUser
-		CreatedAt           time.Time
-		EndedAt             time.Time
+		CreatedAtUnixNano   int64
 		LocalHumanCreatedAt string
 		Topic               string
 		Private             bool
