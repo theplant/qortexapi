@@ -1,8 +1,8 @@
 package qortexapi
 
 import (
+	"gopkg.in/mgo.v2/bson"
 	"html/template"
-	"labix.org/v2/mgo/bson"
 	"time"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
