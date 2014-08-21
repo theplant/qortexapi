@@ -284,7 +284,7 @@ type AuthUserService interface {
 	MoreClosedAdvancedToDosWithStatusInGroup(groupId string, status int, afterTime string) (taskOutlines []*TaskOutline, apiGroup *Group, hasMore bool, err error)
 	CountOfClosedToDosInGroup(ttype int, groupId string) (count int, err error)
 	CountOfActionNeededToDosInGroup(gid string) (count int, err error)
-	ToDoCSV(groupId string) (todos []*ToDoCSVItem, err error)
+	ToDoCSV(groupId string, userId string, month string) (todos []*ToDoCSVItem, err error)
 
 	// Apple device service
 	RegisterAppleDevice(token string) (err error)
