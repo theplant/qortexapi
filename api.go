@@ -263,13 +263,15 @@ type AuthUserService interface {
 	EditTask(groupId string, taskId string) (task *Task, err error)
 	ClaimTask(taskId string, groupId string) (task *Task, err error)
 	UpdateSimpleTask(input *TaskInput) (task *Task, err error)
-	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
-	GetOpenTasksIMade() (groupTasks []*GroupTasksOutline, err error)
-	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)
+	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error) //Deprecated
+	GetOpenTasksIMade() (groupTasks []*GroupTasksOutline, err error)                             //Deprecated
+	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)              //Deprecated
 	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
 	GetTasksOutline(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasks(userId string, groupId string) (groupTasks []*GroupTasks, err error)
+
+	GetOpenTodos(createByUid string, assignToUid string, sortBy string) (groupTasks []*GroupTasksOutline, err error)
 
 	GetGroupGeneralSettingPage(gId string) (page *GroupGeneralSettingPage, err error)
 	GetGroupUsersPage(gId string) (page *GroupUsersPage, err error)
