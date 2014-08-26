@@ -164,6 +164,7 @@ type AuthUserService interface {
 	// User related
 	GetAuthUser() (user *User, err error)
 	GetOrgUsers(keyword string, startFullName string, limit int) (users []User, nextFullName string, err error)
+	GetOrgAllUsers() (users []User, err error)
 	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []User, nextFullName string, err error)
 	GetUser(userId string) (user *User, err error)
 	EnableUser(userId string) (err error)
