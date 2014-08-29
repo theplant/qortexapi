@@ -194,40 +194,41 @@ type PanelStatus struct {
 }
 
 type Group struct {
-	Id                string `json:",omitempty"`
-	Name              string `json:",omitempty"`
-	SuffixedName      string `json:",omitempty"`
-	Description       string `json:",omitempty"`
-	GType             string `json:",omitempty"`
-	LogoURL           string `json:",omitempty"`
-	IconName          string `json:",omitempty"`
-	Link              string `json:",omitempty"`
-	TaskLink          string `json:",omitempty"`
-	Slug              string `json:",omitempty"`
-	Author            EmbedUser
-	IsArchived        bool
-	IsAdmin           bool              `json:",omitempty"`
-	IsPrivate         bool              `json:",omitempty"`
-	Editable          bool              `json:",omitempty"`
-	Managable         bool              `json:",omitempty"`
-	CanShareGroup     bool              `json:",omitempty"`
-	Accessible        bool              `json:",omitempty"`
-	FollowedByMe      bool              `json:",omitempty"`
-	AdministratedByMe bool              `json:",omitempty"`
-	IsPreShared       bool              `json:",omitempty"`
-	IsShared          bool              `json:",omitempty"`
-	IsDefaultLogoURL  bool              `json:",omitempty"`
-	HostOrgName       string            `json:",omitempty"`
-	EntriesCount      int               `json:",omitempty"`
-	FollowersCount    int               `json:",omitempty"`
-	IsAnnouncement    bool              `json:",omitempty"`
-	IsQortexSupport   bool              `json:",omitempty"`
-	GroupOwners       []EmbedUser       `json:",omitempty"`
-	SharingInfo       *GroupSharingInfo `json:",omitempty"`
-	GroupEmailAddress string
-	ToDoSettings      *AdvancedToDoSettings
-	TodoGroupingRoute string `json:",omitempty"`
-	Collection        *GroupCollection
+	Id                     string `json:",omitempty"`
+	Name                   string `json:",omitempty"`
+	SuffixedName           string `json:",omitempty"`
+	Description            string `json:",omitempty"`
+	GType                  string `json:",omitempty"`
+	LogoURL                string `json:",omitempty"`
+	IconName               string `json:",omitempty"`
+	Link                   string `json:",omitempty"`
+	TaskLink               string `json:",omitempty"`
+	Slug                   string `json:",omitempty"`
+	Author                 EmbedUser
+	IsArchived             bool
+	IsAdmin                bool              `json:",omitempty"`
+	IsPrivate              bool              `json:",omitempty"`
+	Editable               bool              `json:",omitempty"`
+	Managable              bool              `json:",omitempty"`
+	CanShareGroup          bool              `json:",omitempty"`
+	Accessible             bool              `json:",omitempty"`
+	FollowedByMe           bool              `json:",omitempty"`
+	AdministratedByMe      bool              `json:",omitempty"`
+	IsPreShared            bool              `json:",omitempty"`
+	IsShared               bool              `json:",omitempty"`
+	IsDefaultLogoURL       bool              `json:",omitempty"`
+	HostOrgName            string            `json:",omitempty"`
+	EntriesCount           int               `json:",omitempty"`
+	FollowersCount         int               `json:",omitempty"`
+	IsAnnouncement         bool              `json:",omitempty"`
+	IsQortexSupport        bool              `json:",omitempty"`
+	GroupOwners            []EmbedUser       `json:",omitempty"`
+	SharingInfo            *GroupSharingInfo `json:",omitempty"`
+	GroupEmailAddress      string
+	ToDoSettings           *AdvancedToDoSettings
+	TodoGroupingRoute      string `json:",omitempty"`
+	Collection             *GroupCollection
+	IsCollectionFirstGroup bool
 
 	UnreadCount    int `json:",omitempty"` // for current loggind user
 	IsSandboxGroup bool
