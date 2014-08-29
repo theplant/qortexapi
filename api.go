@@ -245,8 +245,6 @@ type AuthUserService interface {
 	GetMyChats() (chats []*Chat, err error)
 	GetChatHistory(chatIdHex string, before string, limit int) (convs []*Conversation, hasMore bool, err error)
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error) // Deprecated
-	GetPrivateChat(conversationId string, searchKeyWords string) (chatEntry *Entry, err error)
-	OpenConversation(cid, fromJid, toJid string) (err error)
 
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
