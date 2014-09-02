@@ -2,8 +2,8 @@ package qortexapi
 
 import (
 	"html/template"
-	"time"
 	"labix.org/v2/mgo/bson"
+	"time"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
 )
@@ -230,9 +230,10 @@ type Group struct {
 	Collection             *GroupCollection
 	IsCollectionFirstGroup bool
 
-	UnreadCount    int `json:",omitempty"` // for current loggind user
-	IsSandboxGroup bool
-	IsInSandboxOrg bool
+	UnreadCount          int `json:",omitempty"` // for current loggind user
+	IsSandboxGroup       bool
+	IsInSandboxOrg       bool
+	IsSharedInSandboxOrg bool
 
 	// is the current logged-in user the project manager of this group
 	AmIPM bool `json:",omitempty"`
