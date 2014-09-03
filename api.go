@@ -73,6 +73,7 @@ type AuthUserService interface {
 	EditComment(entryId string, groupId string, languageCode string) (entry *Entry, err error)
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, err error)
+	UpdateKnowledgebase(groupId string, entryId string, knowledgebase bool) (err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
 	GetTitle(groupId string, entryId string) (title string, err error)                                                                                              //When languageCode is empty, use default
 	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)           //When languageCode is empty, use default
