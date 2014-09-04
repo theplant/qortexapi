@@ -2,8 +2,8 @@ package qortexapi
 
 import (
 	"html/template"
-	"labix.org/v2/mgo/bson"
 	"time"
+	"labix.org/v2/mgo/bson"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
 )
@@ -706,6 +706,7 @@ type Entry struct {
 	TaskIsCompleted bool `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
 	IsRoot          bool `json:",omitempty"`
 	IsUnread        bool `json:",omitempty"`
+	HasUnread       bool `json:",omitempty"` // if entry or entry's comments have unread, HasUnread = true
 	IsUpdated       bool `json:",omitempty"`
 	IsLastVersion   bool `json:",omitempty"`
 	Presentation    bool `json:",omitempty"`
