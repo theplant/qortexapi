@@ -1101,6 +1101,8 @@ type TaskOutline struct {
 	IsTitleCreatedBy    bool
 	ActionNeeded        bool
 	IsUnprioritized     bool
+	EnableTimeEstimate  bool
+	EnableTimeTracking  bool
 }
 
 type GroupTasksOutline struct {
@@ -1109,9 +1111,13 @@ type GroupTasksOutline struct {
 	SimpleToDos             []*TaskOutline
 	OpenToDos               []*TaskOutline
 	OpenEstimateTotal       float64
+	OpenSpentTotal          float64
 	NotStartedToDos         []*TaskOutline
 	NotStartedEstimateTotal float64
+	NotStartedSpentTotal    float64
 	EstimateUnit            string
+	EnableTimeEstimate      bool
+	EnableTimeTracking      bool
 }
 
 type GroupTasks struct {
