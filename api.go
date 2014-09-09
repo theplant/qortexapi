@@ -16,7 +16,7 @@ type PublicService interface {
 
 	// Change Email
 	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, err error)
-	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, err error)
+	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, invitationToken string, err error)
 	CancelChangingEmail(token string) (err error)
 
 	// Sharing Flow
