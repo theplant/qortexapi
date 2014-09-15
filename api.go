@@ -217,6 +217,7 @@ type AuthUserService interface {
 	// Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
+	UpdateOrgResctriction(orgSettingInput *OrganizationInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
 	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string, toFollowGroups []string) (sendedEmails []string, err error)
