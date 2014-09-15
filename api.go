@@ -4,6 +4,7 @@ import "io"
 
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
+	GetSessionByToken(token string, locale string) (session string, err error)
 	GetAuthUserService(session string, orgId string) (authUserService AuthUserService, err error)
 	GetAuthorizedAdmin(session string) (apiEmbedUser EmbedUser, err error)
 	GetAuthAdminService(session string) (authAdminService AuthAdminService, err error)

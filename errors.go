@@ -38,7 +38,7 @@ var (
 	DatabaseNotExistError          = errors.New("no such database")
 	UnknownEntryType               = errors.New("unknown entry type")
 	UpdateLikeError                = errors.New("update like error")
-	TokenInvalid                   = errors.New("token is not available")
+	TokenInvalid                   = errors.New("Token is not available")
 	InvitationAlreadyCanceled      = errors.New("invitation was canceled")
 	AccountNotActicated            = errors.New("account was not activated yet")
 	EntryBlankError                = errors.New("Entry can not be blank")
