@@ -1085,6 +1085,7 @@ type TaskOutline struct {
 	AuthorName          string
 	Group               *EmbedGroup
 	Age                 string
+	LastUpdate          string
 	CreatedAt           time.Time
 	Status              string
 	StatusCode          int
