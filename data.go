@@ -437,6 +437,7 @@ type TaskLog struct {
 	IsReopened            bool // {Author} reopened this To-Do.
 	IsLabelChanged        bool // {Author} set the label to Bug.
 	IsDueChanged          bool // {Author} set the due date from 2013/09/23 to 2014/09/23.
+	HtmlContent           template.HTML
 
 	CreatedAt           time.Time
 	VersionAt           time.Time
