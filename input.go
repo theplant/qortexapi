@@ -335,3 +335,17 @@ type ZapierSubscribeInput struct {
 	Event           string
 	TargetUrl       string
 }
+
+type AdvancedToDoSettingsInput struct {
+	Enabled            bool
+	EnableTimeEstimate bool
+	EnableTimeTracking bool
+	TimeUnit           int
+	ProjectManagerId   string
+
+	// NOTE: for new TagIndex, its Index value must be -1
+	Labels             []*TagIndex
+	NotYetOpenStatuses []*TagIndex
+	OpenStatuses       []*TagIndex
+	ClosedStatuses     []*TagIndex
+}
