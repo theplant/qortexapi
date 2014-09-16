@@ -677,6 +677,7 @@ type Entry struct {
 	IsReminding      bool `json:",omitempty"`
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
+	IsNotified       bool `json:",omitempty"`
 
 	IsBroadcast     bool          `json:",omitempty"` // Deprecated, should be removed
 	IsFromSuperOrg  bool          `json:",omitempty"`
