@@ -213,7 +213,7 @@ type ShareChatInput struct {
 }
 
 type ContactInput struct {
-	Name   string
+	Name        string
 	FirstName   string
 	LastName    string
 	CompanyName string
@@ -348,4 +348,8 @@ type AdvancedToDoSettingsInput struct {
 	NotYetOpenStatuses []*TagIndex
 	OpenStatuses       []*TagIndex
 	ClosedStatuses     []*TagIndex
+}
+
+type NewChatInput struct {
+	MessageIds []string
 }
