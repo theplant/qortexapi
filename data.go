@@ -3,6 +3,7 @@ package qortexapi
 import (
 	"html/template"
 	"time"
+
 	"labix.org/v2/mgo/bson"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
@@ -654,6 +655,7 @@ type Entry struct {
 	LastUpdateAt string `json:",omitempty"`
 
 	HtmlContent         template.HTML `json:",omitempty"`
+	EditingHtmlContent  template.HTML `json:",omitempty"`
 	HtmlContentPart     template.HTML `json:",omitempty"`
 	TaskHtmlContentPart template.HTML `json:",omitempty"`
 	WatchlistHtml       template.HTML `json:",omitempty"`
@@ -778,6 +780,7 @@ type Entry struct {
 	IsAllTranslated         bool
 	EntryLanguages          []*EntryLanguage
 	ToLanguages             []*SupportedLanguage
+	IsEditingTranslation    bool
 
 	// Is Inner Message type of System Message
 	IsInnerMessage bool          `json:",omitempty"`

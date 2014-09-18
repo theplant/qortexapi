@@ -53,9 +53,8 @@ type EntryInput struct {
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
-	LocaleName          string
-	LanguageCode        string //CLD language code
-	IsAddingTranslation bool
+	LocaleName   string
+	LanguageCode string //CLD language code
 
 	// For Creating To-Dos From Comment
 	BasedPostId        string
