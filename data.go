@@ -1382,7 +1382,6 @@ type (
 	SearchResult struct {
 		Entities    []SearchEntity
 		Attachments []*Attachment
-		Links       []*SearchLink
 
 		HighlightedTerms []string
 
@@ -1398,8 +1397,6 @@ type (
 
 		TotalItemsCount   int
 		EntriesCount      int
-		LinksCount        int
-		LinkIndexableIds  []string
 		FilesCount        int
 		FileIndexableIds  []string
 		PrivateChatsCount int
