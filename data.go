@@ -1380,8 +1380,9 @@ type GroupColCollapseState struct {
 
 type (
 	SearchResult struct {
-		Entities    []SearchEntity
-		Attachments []*Attachment
+		Entities      []SearchEntity
+		Attachments   []*Attachment
+		GroupSelector *NewGroupSelector
 
 		HighlightedTerms []string
 
