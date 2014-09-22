@@ -428,6 +428,7 @@ type AdvancedTask struct {
 }
 
 type TaskLog struct {
+	Id                string
 	IsClaimed         bool // {Author} will do this
 	IsAssigneeChanged bool // {Author} reassigned the To-Do from {OldAssignee} to {Assignee}.
 	// IsTimingChanged   bool // {Author} set Start Timing to {Priority}.
