@@ -1404,10 +1404,10 @@ type (
 		PrivateChatsCount int
 	}
 
-	// A SearchEntity could be only be a conversation or a Entry
+	// A SearchEntity could be only be a Chat or a Entry
 	SearchEntity struct {
-		Conversation *Conversation
-		Entry        *SearchEntry
+		Chat  *Chat
+		Entry *SearchEntry
 	}
 
 	SearchEntry struct {
@@ -1469,7 +1469,7 @@ type (
 		UpdatedAt   string
 		CurrentUser EmbedUser
 		WithUser    EmbedUser
-		Convs       []*Conversation // Used for development, should be removed later
+		Convs       []*Conversation
 		HasMore     bool
 	}
 
