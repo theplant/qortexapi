@@ -771,11 +771,13 @@ type Entry struct {
 	ShareRequest *ShareRequest `json:",omitempty"`
 
 	//Multi locales related
-	CurrentLocaleName    string                   `json:",omitempty"`
-	LocaleTitleMap       map[string]string        `json:",omitempty"`
-	LocaleContentMap     map[string]template.HTML `json:",omitempty"`
-	LocaleHtmlContentMap map[string]template.HTML `json:",omitempty"`
-	LanguageCode         string                   `json:",omitempty"`
+	CurrentLocaleName      string                   `json:",omitempty"`
+	LocaleTitleMap         map[string]string        `json:",omitempty"`
+	LocaleContentMap       map[string]template.HTML `json:",omitempty"`
+	LocaleHtmlContentMap   map[string]template.HTML `json:",omitempty"`
+	LanguageCode           string                   `json:",omitempty"`
+	ComparedDefaultTitle   string                   `json:",omitempty"`
+	ComparedDefaultContent template.HTML            `json:",omitempty"`
 
 	HasMoreThanOneLanguages bool
 	IsAllTranslated         bool
