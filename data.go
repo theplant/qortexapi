@@ -426,6 +426,7 @@ type AdvancedTask struct {
 }
 
 type TaskLog struct {
+	Id                string
 	IsClaimed         bool // {Author} will do this
 	IsAssigneeChanged bool // {Author} reassigned the To-Do from {OldAssignee} to {Assignee}.
 	// IsTimingChanged   bool // {Author} set Start Timing to {Priority}.
@@ -436,6 +437,7 @@ type TaskLog struct {
 	IsReopened            bool // {Author} reopened this To-Do.
 	IsLabelChanged        bool // {Author} set the label to Bug.
 	IsDueChanged          bool // {Author} set the due date from 2013/09/23 to 2014/09/23.
+	HtmlContent           template.HTML
 
 	CreatedAt           time.Time
 	VersionAt           time.Time
