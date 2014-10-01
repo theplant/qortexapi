@@ -304,9 +304,6 @@ type AuthUserService interface {
 	RegisterAndroidDevice(regid string) (err error)
 	UnregisterAndroidDevice(regid string) (err error)
 
-	RegisterAndroidDeviceForUser(userId string, regid string) (err error)   // Deprecated, should be removed
-	UnregisterAndroidDeviceForUser(userId string, regid string) (err error) // Deprecated, should be removed
-
 	//payment
 	GetPaymentSession() (session string, err error)
 	CanSeeBilling() (yes bool, err error)
