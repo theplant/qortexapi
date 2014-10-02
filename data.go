@@ -997,6 +997,7 @@ type OrgStats struct {
 type OrgPaymentInfo struct {
 	OrgId         string
 	OrgName       string
+	FreeUserLimit int
 	IsFreeOrg     bool
 	IsSharingOrg  bool
 	HasPaid       bool
