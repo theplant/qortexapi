@@ -1245,6 +1245,7 @@ type BillingInfo struct {
 	FreeTrialLeftDays    int
 	ExpiredLeftDays      int
 	ActiveUserCount      int
+	FreeUserLimit        int
 	Country              string
 	Phone                string
 	Billing              *paymentapi.Billing
