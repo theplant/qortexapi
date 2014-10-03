@@ -352,3 +352,12 @@ type AdvancedToDoSettingsInput struct {
 type NewChatInput struct {
 	MessageIds []string
 }
+
+// userId string, entryType string, before string, limit int
+type UserEntriesInput struct {
+	OrgId         string
+	UserId        string
+	BeforeTime    string
+	Limit         int
+	IsShowPrivate bool
+}

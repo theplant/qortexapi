@@ -119,6 +119,7 @@ type AuthUserService interface {
 	// entryType could be:	"post", "knowledge", "task"
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
+	GetUserEntriesV2(input *UserEntriesInput) (entries []*Entry, err error)
 
 	GetMyNotifications(before string, limit int) (mynotis *MyNotifications, err error)
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
