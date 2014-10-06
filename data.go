@@ -1128,6 +1128,9 @@ type GroupTasksOutline struct {
 	EstimateUnit            string
 	EnableTimeEstimate      bool
 	EnableTimeTracking      bool
+	AllToDos                []*TaskOutline
+	AllEstimateTotal        float64
+	AllSpentTotal           float64
 }
 
 type GroupTasks struct {
