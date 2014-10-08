@@ -1073,6 +1073,12 @@ const (
 	MS_ACTIVE_NEAR_TRIAL                  = "ActiveNearTrialEndNudgeToAdmin"
 )
 
+type MailChimpUserListItem struct {
+	Email     string
+	FirstName string
+	LastName  string
+}
+
 type MarketableMemberInfo struct {
 	Email     string
 	FirstName string
