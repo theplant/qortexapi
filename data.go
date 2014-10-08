@@ -345,20 +345,22 @@ type NewGroupSelector struct {
 }
 
 type Attachment struct {
-	Id            string
-	OwnerId       []string  `json:",omitempty"`
-	Category      string    `json:",omitempty"`
-	Filename      string    `json:",omitempty"`
-	ShortFilename string    `json:",omitempty"`
-	ContentType   string    `json:",omitempty"`
-	ContentId     string    `json:",omitempty"`
-	MD5           string    `json:",omitempty"`
-	ContentLength int64     `json:",omitempty"`
-	Error         string    `json:",omitempty"`
-	GroupId       []string  `json:",omitempty"`
-	UploadTime    time.Time `json:",omitempty"`
-	Width         int
-	Height        int
+	Id                  string
+	OwnerId             []string  `json:",omitempty"`
+	Category            string    `json:",omitempty"`
+	Filename            string    `json:",omitempty"`
+	ShortFilename       string    `json:",omitempty"`
+	ContentType         string    `json:",omitempty"`
+	ContentId           string    `json:",omitempty"`
+	MD5                 string    `json:",omitempty"`
+	ContentLength       int64     `json:",omitempty"`
+	Error               string    `json:",omitempty"`
+	GroupId             []string  `json:",omitempty"`
+	UploadTime          time.Time `json:",omitempty"`
+	LocalHumanCreatedAt string    `json:",omitempty"`
+	Width               int
+	Height              int
+	Resolution          string `json:",omitempty"`
 
 	URL          template.HTMLAttr `json:",omitempty"` // origin
 	S1ThumbURL   template.HTMLAttr `json:",omitempty"` // width 240
@@ -366,6 +368,7 @@ type Attachment struct {
 	LThumbURL    template.HTMLAttr `json:",omitempty"` // width 720
 	ImageIconURL template.HTMLAttr `json:",omitempty"`
 	FileIconURL  template.HTMLAttr `json:",omitempty"`
+	DownloadUrl  template.HTMLAttr `json:",omitempty"`
 	HumanSize    string            `json:",omitempty"`
 	IsImage      bool
 	FileKind     string
@@ -381,6 +384,8 @@ type Attachment struct {
 	GroupName        string `json:",omitempty"`
 	GroupLink        string `json:",omitempty"`
 	LinkWithKeywords template.HTMLAttr
+	RootId           string `json:",omitempty"`
+	EntryTitle       string `json:",omitempty"`
 }
 
 type File struct {
@@ -1396,7 +1401,7 @@ type GroupColCollapseState struct {
 type (
 	SearchResult struct {
 		Entities      []SearchEntity
-		Attachments   []*Attachment
+		Attachments   []*Attachment // TODO: should be removed
 		GroupSelector *NewGroupSelector
 
 		HighlightedTerms []string
@@ -1422,6 +1427,7 @@ type (
 	SearchEntity struct {
 		Chat  *Chat
 		Entry *SearchEntry
+		File  *Attachment
 	}
 
 	SearchEntry struct {
