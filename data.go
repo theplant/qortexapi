@@ -1489,8 +1489,9 @@ type (
 		UpdatedAt   string
 		CurrentUser EmbedUser
 		WithUser    EmbedUser
-		Convs       []*Conversation
+		Convs       []*Conversation `json:",omitempty"`
 		HasMore     bool
+		Messages    []*Message `json:",omitempty"` // For holding the chat search results
 	}
 
 	Conversation struct {
@@ -1514,15 +1515,16 @@ type (
 	}
 
 	Message struct {
-		Id             string
-		ConversationId string
-		UserId         string
-		Content        string
-		HtmlContent    template.HTML
-		CreatedAt      time.Time
-		EmbedUser      EmbedUser
-		ShowUser       bool
-		IsOffline      bool
+		Id                  string
+		ConversationId      string
+		UserId              string
+		Content             string
+		HtmlContent         template.HTML
+		CreatedAt           time.Time
+		LocalHumanCreatedAt string
+		EmbedUser           EmbedUser
+		ShowUser            bool
+		IsOffline           bool
 	}
 )
 
