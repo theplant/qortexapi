@@ -111,7 +111,7 @@ type User struct {
 	Preferences           *Preferences `json:",omitempty"`
 	Profile               Profile      `json:",omitempty"`
 	NoDetail              bool         `json:",omitempty"`
-	EnabledMobilePush     bool         `json:"-"`
+	EnabledMobilePush     bool         `json:",omitempty"`
 	PreferredLanguageCode string
 }
 
