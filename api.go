@@ -383,4 +383,6 @@ type AuthAdminService interface {
 	ResetOrgUserCache(orgId string) (err error)
 
 	SetFreeUserLimit(orgId string, num int) (err error)
+
+	ResetCount(orgId string, groupId string) (err error)
 }
