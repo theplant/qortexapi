@@ -358,6 +358,7 @@ type AuthAdminService interface {
 	GetAllMembers() (members []*Member, err error)
 
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
+	ExportAllUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportChineseUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportEnglishUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportJapaneseUsers() (memberInfos []*MailChimpUserListItem, err error)

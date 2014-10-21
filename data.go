@@ -1082,6 +1082,8 @@ type MailChimpUserListItem struct {
 	Email     string
 	FirstName string
 	LastName  string
+	
+	PreferredLanguageCode string
 }
 
 type MarketableMemberInfo struct {
