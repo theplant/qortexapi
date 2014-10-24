@@ -197,7 +197,6 @@ type PanelStatus struct {
 type Group struct {
 	Id                     string `json:",omitempty"`
 	Name                   string `json:",omitempty"`
-	SuffixedName           string `json:",omitempty"`
 	Description            string `json:",omitempty"`
 	GType                  string `json:",omitempty"`
 	LogoURL                string `json:",omitempty"`
@@ -230,6 +229,10 @@ type Group struct {
 	TodoGroupingRoute      string `json:",omitempty"`
 	Collection             *GroupCollection
 	IsCollectionFirstGroup bool
+
+	// For Group Selector
+	FormattedName string `json:",omitempty"`
+	IsSelected    bool
 
 	UnreadCount          int `json:",omitempty"` // for current loggind user
 	IsSandboxGroup       bool
@@ -322,26 +325,6 @@ type EmbedGroup struct {
 	IconName string `json:",omitempty"`
 	Link     string `json:",omitempty"`
 	TaskLink string `json:",omitempty"`
-}
-
-type GroupSelectorItem struct {
-	Id         string
-	Name       string
-	IsSelected bool
-	Accessible bool
-}
-
-type GroupSelector struct {
-	Header                  template.HTML
-	FollowingNormalGroups   []*GroupSelectorItem
-	FollowingSharedGroups   []*GroupSelectorItem
-	UnFollowingNormalGroups []*GroupSelectorItem
-	UnFollowingSharedGroups []*GroupSelectorItem
-}
-
-type NewGroupSelector struct {
-	SelectedGroupId string
-	GroupsLists     []*GroupsList
 }
 
 type Attachment struct {
@@ -757,9 +740,9 @@ type Entry struct {
 	ExternalComments               []*Entry      `json:",omitempty"`
 	CurrentVersionComments         []*Entry
 	OtherVersionsComments          []*Entry
-	NewComment                     *Entry            `json:",omitempty"`
-	GroupSlector                   *GroupSelector    `json:",omitempty"` // TODO: to remove
-	NewGroupSelector               *NewGroupSelector `json:",omitempty"`
+	NewComment                     *Entry `json:",omitempty"`
+
+	GroupsLists []*GroupsList `json:",omitempty"`
 
 	// Qortex Support Type
 	IsQortexSupport              bool              `json:",omitempty"`
@@ -1082,7 +1065,7 @@ type MailChimpUserListItem struct {
 	Email     string
 	FirstName string
 	LastName  string
-	
+
 	PreferredLanguageCode string
 }
 
@@ -1385,10 +1368,11 @@ type MetaGroup struct {
 }
 
 type GroupedGroups struct {
-	ColId       string
-	ColName     string
-	Groups      []*Group
-	IsCollapsed bool
+	ColId            string
+	ColName          string
+	FormattedColName string
+	IsCollapsed      bool
+	Groups           []*Group
 
 	// Deprecated in V2
 	// Now standard and shared groups are mixed together.
@@ -1402,9 +1386,9 @@ type GroupColCollapseState struct {
 
 type (
 	SearchResult struct {
-		Entities      []SearchEntity
-		Attachments   []*Attachment // TODO: should be removed
-		GroupSelector *NewGroupSelector
+		Entities    []SearchEntity
+		Attachments []*Attachment // TODO: should be removed
+		GroupsLists []*GroupsList
 
 		HighlightedTerms []string
 
