@@ -546,7 +546,8 @@ type Task struct {
 	CanEditDueDate      bool
 	FarAwayCorner       bool
 
-	PriorityWeight float64
+	PriorityWeight     float64             `json:",omitempty"`
+	SimpleTaskOutlines []SimpleTaskOutline `json:",omitempty"`
 }
 
 type EntryVersion struct {
@@ -1076,6 +1077,11 @@ type MarketableMemberInfo struct {
 	Status    string
 	InvitOrg  string
 	GotoURL   string
+}
+
+type SimpleTaskOutline struct {
+	EntryTitle          string
+	AbovePriorityWeight float64
 }
 
 // for My Tasks  and Group tasks

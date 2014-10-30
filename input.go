@@ -61,6 +61,8 @@ type EntryInput struct {
 	BasedPostLangCode  string
 	GroupIdOfBasedPost string
 	SelectionTextInfo  SelectionTextInfo
+
+	PriorityWeight float64
 }
 
 type DraftInput struct {
@@ -288,6 +290,7 @@ type TaskInput struct {
 	TimetrackingHistoryUpdate string
 	TaskDue                   string // format:20130507
 	EntryId                   string
+	PriorityWeight            float64
 }
 
 type TaskPwMap struct {
