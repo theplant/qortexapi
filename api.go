@@ -248,6 +248,7 @@ type AuthUserService interface {
 
 	// chat
 	GetMyChats() (chats []*Chat, err error)
+	GetMyChatWithUser(userIdHex string) (chat *Chat, err error)
 	GetChatHistory(chatIdHex string, before string, limit int) (convs []*Conversation, hasMore bool, err error)
 	GetMyChatEntries(before string, limit int) (entries []*Entry, err error) // Deprecated
 
