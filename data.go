@@ -2,8 +2,9 @@ package qortexapi
 
 import (
 	"html/template"
-	"labix.org/v2/mgo/bson"
 	"time"
+
+	"labix.org/v2/mgo/bson"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
 )
@@ -110,7 +111,7 @@ type User struct {
 	Preferences           *Preferences `json:",omitempty"`
 	Profile               Profile      `json:",omitempty"`
 	NoDetail              bool         `json:",omitempty"`
-	EnabledMobilePush     bool         `json:"-"`
+	EnabledMobilePush     bool         `json:",omitempty"`
 	PreferredLanguageCode string
 }
 
@@ -194,45 +195,49 @@ type PanelStatus struct {
 }
 
 type Group struct {
-	Id                  string `json:",omitempty"`
-	Name                string `json:",omitempty"`
-	SuffixedName        string `json:",omitempty"`
-	Description         string `json:",omitempty"`
-	GType               string `json:",omitempty"`
-	LogoURL             string `json:",omitempty"`
-	IconName            string `json:",omitempty"`
-	Link                string `json:",omitempty"`
-	TaskLink            string `json:",omitempty"`
-	Slug                string `json:",omitempty"`
-	Author              EmbedUser
-	IsArchived          bool
-	IsAdmin             bool              `json:",omitempty"`
-	IsPrivate           bool              `json:",omitempty"`
-	Editable            bool              `json:",omitempty"`
-	Managable           bool              `json:",omitempty"`
-	CanShareGroup       bool              `json:",omitempty"`
-	Accessible          bool              `json:",omitempty"`
-	FollowedByMe        bool              `json:",omitempty"`
-	AdministratedByMe   bool              `json:",omitempty"`
-	IsPreShared         bool              `json:",omitempty"`
-	IsShared            bool              `json:",omitempty"`
-	IsDefaultLogoURL    bool              `json:",omitempty"`
-	HostOrgName         string            `json:",omitempty"`
-	IsDispayHostOrgName bool              `json:",omitempty"`
-	EntriesCount        int               `json:",omitempty"`
-	FollowersCount      int               `json:",omitempty"`
-	IsAnnouncement      bool              `json:",omitempty"`
-	IsQortexSupport     bool              `json:",omitempty"`
-	GroupOwners         []EmbedUser       `json:",omitempty"`
-	SharingInfo         *GroupSharingInfo `json:",omitempty"`
-	GroupEmailAddress   string
-	ToDoSettings        *AdvancedToDoSettings
-	TodoGroupingRoute   string `json:",omitempty"`
-	Collection          *GroupCollection
+	Id                     string `json:",omitempty"`
+	Name                   string `json:",omitempty"`
+	Description            string `json:",omitempty"`
+	GType                  string `json:",omitempty"`
+	LogoURL                string `json:",omitempty"`
+	IconName               string `json:",omitempty"`
+	Link                   string `json:",omitempty"`
+	TaskLink               string `json:",omitempty"`
+	Slug                   string `json:",omitempty"`
+	Author                 EmbedUser
+	IsArchived             bool
+	IsAdmin                bool              `json:",omitempty"`
+	IsPrivate              bool              `json:",omitempty"`
+	Editable               bool              `json:",omitempty"`
+	Managable              bool              `json:",omitempty"`
+	CanShareGroup          bool              `json:",omitempty"`
+	Accessible             bool              `json:",omitempty"`
+	FollowedByMe           bool              `json:",omitempty"`
+	AdministratedByMe      bool              `json:",omitempty"`
+	IsPreShared            bool              `json:",omitempty"`
+	IsShared               bool              `json:",omitempty"`
+	IsDefaultLogoURL       bool              `json:",omitempty"`
+	HostOrgName            string            `json:",omitempty"`
+	EntriesCount           int               `json:",omitempty"`
+	FollowersCount         int               `json:",omitempty"`
+	IsAnnouncement         bool              `json:",omitempty"`
+	IsQortexSupport        bool              `json:",omitempty"`
+	GroupOwners            []EmbedUser       `json:",omitempty"`
+	SharingInfo            *GroupSharingInfo `json:",omitempty"`
+	GroupEmailAddress      string
+	ToDoSettings           *AdvancedToDoSettings
+	TodoGroupingRoute      string `json:",omitempty"`
+	Collection             *GroupCollection
+	IsCollectionFirstGroup bool
 
-	UnreadCount    int `json:",omitempty"` // for current loggind user
-	IsSandboxGroup bool
-	IsInSandboxOrg bool
+	// For Group Selector
+	FormattedName string `json:",omitempty"`
+	IsSelected    bool
+
+	UnreadCount          int `json:",omitempty"` // for current loggind user
+	IsSandboxGroup       bool
+	IsInSandboxOrg       bool
+	IsSharedInSandboxOrg bool
 
 	// is the current logged-in user the project manager of this group
 	AmIPM bool `json:",omitempty"`
@@ -322,41 +327,23 @@ type EmbedGroup struct {
 	TaskLink string `json:",omitempty"`
 }
 
-type GroupSelectorItem struct {
-	Id         string
-	Name       string
-	IsSelected bool
-	Accessible bool
-}
-
-type GroupSelector struct {
-	Header                  template.HTML
-	FollowingNormalGroups   []*GroupSelectorItem
-	FollowingSharedGroups   []*GroupSelectorItem
-	UnFollowingNormalGroups []*GroupSelectorItem
-	UnFollowingSharedGroups []*GroupSelectorItem
-}
-
-type NewGroupSelector struct {
-	SelectedGroupId string
-	GroupsLists     []*GroupsList
-}
-
 type Attachment struct {
-	Id            string
-	OwnerId       []string  `json:",omitempty"`
-	Category      string    `json:",omitempty"`
-	Filename      string    `json:",omitempty"`
-	ShortFilename string    `json:",omitempty"`
-	ContentType   string    `json:",omitempty"`
-	ContentId     string    `json:",omitempty"`
-	MD5           string    `json:",omitempty"`
-	ContentLength int64     `json:",omitempty"`
-	Error         string    `json:",omitempty"`
-	GroupId       []string  `json:",omitempty"`
-	UploadTime    time.Time `json:",omitempty"`
-	Width         int
-	Height        int
+	Id                  string
+	OwnerId             []string  `json:",omitempty"`
+	Category            string    `json:",omitempty"`
+	Filename            string    `json:",omitempty"`
+	ShortFilename       string    `json:",omitempty"`
+	ContentType         string    `json:",omitempty"`
+	ContentId           string    `json:",omitempty"`
+	MD5                 string    `json:",omitempty"`
+	ContentLength       int64     `json:",omitempty"`
+	Error               string    `json:",omitempty"`
+	GroupId             []string  `json:",omitempty"`
+	UploadTime          time.Time `json:",omitempty"`
+	LocalHumanCreatedAt string    `json:",omitempty"`
+	Width               int
+	Height              int
+	Resolution          string `json:",omitempty"`
 
 	URL          template.HTMLAttr `json:",omitempty"` // origin
 	S1ThumbURL   template.HTMLAttr `json:",omitempty"` // width 240
@@ -364,6 +351,7 @@ type Attachment struct {
 	LThumbURL    template.HTMLAttr `json:",omitempty"` // width 720
 	ImageIconURL template.HTMLAttr `json:",omitempty"`
 	FileIconURL  template.HTMLAttr `json:",omitempty"`
+	DownloadUrl  template.HTMLAttr `json:",omitempty"`
 	HumanSize    string            `json:",omitempty"`
 	IsImage      bool
 	FileKind     string
@@ -379,6 +367,8 @@ type Attachment struct {
 	GroupName        string `json:",omitempty"`
 	GroupLink        string `json:",omitempty"`
 	LinkWithKeywords template.HTMLAttr
+	RootId           string `json:",omitempty"`
+	EntryTitle       string `json:",omitempty"`
 }
 
 type File struct {
@@ -623,39 +613,6 @@ type GroupSharingInfo struct {
 	PendingToEmails []string
 }
 
-type Conversation struct {
-	Id                  string
-	Title               string
-	UserIds             []string
-	Participants        []EmbedUser
-	CreatedAt           time.Time
-	EndedAt             time.Time
-	LocalHumanCreatedAt string
-	Topic               string
-	Private             bool
-	IsClose             bool
-	IsShared            bool
-	HasOfflineMessage   bool
-	OfflineLocalTime    string
-	SharedMessageIds    []string
-	MessagesCount       int
-	Messages            []*Message
-
-	LinkWithKeywords template.HTMLAttr `json:",omitempty"` // for Search
-}
-
-type Message struct {
-	Id             string
-	ConversationId string
-	UserId         string
-	Content        string
-	HtmlContent    template.HTML
-	CreatedAt      time.Time
-	EmbedUser      EmbedUser
-	ShowUser       bool
-	IsOffline      bool
-}
-
 type Entry struct {
 	Id            string
 	EType         string    `json:",omitempty"`
@@ -687,6 +644,7 @@ type Entry struct {
 	LastUpdateAt string `json:",omitempty"`
 
 	HtmlContent         template.HTML `json:",omitempty"`
+	EditingHtmlContent  template.HTML `json:",omitempty"`
 	HtmlContentPart     template.HTML `json:",omitempty"`
 	TaskHtmlContentPart template.HTML `json:",omitempty"`
 	WatchlistHtml       template.HTML `json:",omitempty"`
@@ -711,6 +669,7 @@ type Entry struct {
 	IsReminding      bool `json:",omitempty"`
 	IsSmartReminding bool `json:",omitempty"`
 	IsNoReminding    bool `json:",omitempty"`
+	IsNotified       bool `json:",omitempty"`
 
 	IsBroadcast     bool          `json:",omitempty"` // Deprecated, should be removed
 	IsFromSuperOrg  bool          `json:",omitempty"`
@@ -726,6 +685,7 @@ type Entry struct {
 	IsPost          bool   `json:",omitempty"`
 	IsComment       bool   `json:",omitempty"`
 	IsTask          bool   `json:",omitempty"` // when entry is ack or todo , IsTask = true
+	IsNotification  bool   `json:",omitempty"`
 	IsChat          bool   `json:",omitempty"`
 	IsTaskToDo      bool   `json:",omitempty"` // when entry is todo , IsTaskToDo = true
 	IsTaskAck       bool   `json:",omitempty"` // when entry is ack , IsTaskAck = true
@@ -739,6 +699,7 @@ type Entry struct {
 	TaskIsCompleted bool `json:",omitempty"` // obsolete ?  use Todo.IsCompleted or Ack.IsCompleted
 	IsRoot          bool `json:",omitempty"`
 	IsUnread        bool `json:",omitempty"`
+	HasUnread       bool `json:",omitempty"` // if entry or entry's comments have unread, HasUnread = true
 	IsUpdated       bool `json:",omitempty"`
 	IsLastVersion   bool `json:",omitempty"`
 	Presentation    bool `json:",omitempty"`
@@ -779,9 +740,9 @@ type Entry struct {
 	ExternalComments               []*Entry      `json:",omitempty"`
 	CurrentVersionComments         []*Entry
 	OtherVersionsComments          []*Entry
-	NewComment                     *Entry            `json:",omitempty"`
-	GroupSlector                   *GroupSelector    `json:",omitempty"` // TODO: to remove
-	NewGroupSelector               *NewGroupSelector `json:",omitempty"`
+	NewComment                     *Entry `json:",omitempty"`
+
+	GroupsLists []*GroupsList `json:",omitempty"`
 
 	// Qortex Support Type
 	IsQortexSupport              bool              `json:",omitempty"`
@@ -798,16 +759,19 @@ type Entry struct {
 	ShareRequest *ShareRequest `json:",omitempty"`
 
 	//Multi locales related
-	CurrentLocaleName    string                   `json:",omitempty"`
-	LocaleTitleMap       map[string]string        `json:",omitempty"`
-	LocaleContentMap     map[string]template.HTML `json:",omitempty"`
-	LocaleHtmlContentMap map[string]template.HTML `json:",omitempty"`
-	LanguageCode         string                   `json:",omitempty"`
+	CurrentLocaleName      string                   `json:",omitempty"`
+	LocaleTitleMap         map[string]string        `json:",omitempty"`
+	LocaleContentMap       map[string]template.HTML `json:",omitempty"`
+	LocaleHtmlContentMap   map[string]template.HTML `json:",omitempty"`
+	LanguageCode           string                   `json:",omitempty"`
+	ComparedDefaultTitle   string                   `json:",omitempty"`
+	ComparedDefaultContent template.HTML            `json:",omitempty"`
 
 	HasMoreThanOneLanguages bool
 	IsAllTranslated         bool
 	EntryLanguages          []*EntryLanguage
 	ToLanguages             []*SupportedLanguage
+	IsEditingTranslation    bool
 
 	// Is Inner Message type of System Message
 	IsInnerMessage bool          `json:",omitempty"`
@@ -881,14 +845,6 @@ type MyTask struct {
 	ClosedTasks     []*TaskOutline
 }
 
-type MyChats struct {
-	ChatEntries      []*Entry
-	HasMore          bool
-	LatestCreateTime int64
-	WhatChats        bool
-	PrefixURL        string
-}
-
 type MyNotifications struct {
 	NotificationItems []*NotificationItem
 	HasMore           bool
@@ -924,13 +880,14 @@ type DraftList struct {
 }
 
 type MyCount struct {
-	UserId                  string
-	FollowedUnreadCount     int
-	NotificationUnreadCount int
-	ActiveTasksCount        int
-	ActionNeededTasksCount  int
-	OfflineMessageCount     int
-	GroupCounts             []*GroupCount
+	UserId                    string
+	FollowedUnreadCount       int
+	NotificationUnreadCount   int // Deprecated
+	NotificationUnreadCountV2 int
+	ActiveTasksCount          int
+	ActionNeededTasksCount    int // Deprecated
+	OfflineMessageCount       int
+	GroupCounts               []*GroupCount
 }
 
 type GroupCount struct {
@@ -1028,6 +985,7 @@ type OrgStats struct {
 type OrgPaymentInfo struct {
 	OrgId         string
 	OrgName       string
+	FreeUserLimit int
 	IsFreeOrg     bool
 	IsSharingOrg  bool
 	HasPaid       bool
@@ -1067,6 +1025,7 @@ type AccessReq struct {
 	UpdatedAt  string
 }
 
+// Deprecated. Now is NewGroupAside
 type GroupAside struct {
 	IsMyGroupsCollapse     bool
 	IsOtherGroupsCollapse  bool
@@ -1102,6 +1061,14 @@ const (
 	MS_ACTIVE_NEAR_TRIAL                  = "ActiveNearTrialEndNudgeToAdmin"
 )
 
+type MailChimpUserListItem struct {
+	Email     string
+	FirstName string
+	LastName  string
+
+	PreferredLanguageCode string
+}
+
 type MarketableMemberInfo struct {
 	Email     string
 	FirstName string
@@ -1123,6 +1090,7 @@ type TaskOutline struct {
 	AuthorName          string
 	Group               *EmbedGroup
 	Age                 string
+	LastUpdate          string
 	CreatedAt           time.Time
 	Status              string
 	StatusCode          int
@@ -1139,6 +1107,8 @@ type TaskOutline struct {
 	IsTitleCreatedBy    bool
 	ActionNeeded        bool
 	IsUnprioritized     bool
+	EnableTimeEstimate  bool
+	EnableTimeTracking  bool
 }
 
 type GroupTasksOutline struct {
@@ -1147,9 +1117,16 @@ type GroupTasksOutline struct {
 	SimpleToDos             []*TaskOutline
 	OpenToDos               []*TaskOutline
 	OpenEstimateTotal       float64
+	OpenSpentTotal          float64
 	NotStartedToDos         []*TaskOutline
 	NotStartedEstimateTotal float64
+	NotStartedSpentTotal    float64
 	EstimateUnit            string
+	EnableTimeEstimate      bool
+	EnableTimeTracking      bool
+	AllToDos                []*TaskOutline
+	AllEstimateTotal        float64
+	AllSpentTotal           float64
 }
 
 type GroupTasks struct {
@@ -1267,6 +1244,7 @@ type BillingInfo struct {
 	FreeTrialLeftDays    int
 	ExpiredLeftDays      int
 	ActiveUserCount      int
+	FreeUserLimit        int
 	Country              string
 	Phone                string
 	Billing              *paymentapi.Billing
@@ -1333,6 +1311,7 @@ type KnowledgeOverview struct {
 	IsHidePresentationTip   bool              `json:",omitempty"` //just for reuse the mannual translation form
 	Id                      string            `json:",omitempty"` //just for reuse the mannual translation form
 	DisableProFeatrue       bool
+	IsEditingTranslation    bool
 }
 
 type ContactUsInfo struct {
@@ -1373,14 +1352,13 @@ type NewGroupAside struct {
 }
 
 type GroupsList struct {
-	// IsEmpty       bool
 	IsCollapsed   bool
 	Announcement  *Group // only exists in My Groups
 	QortexSupport *Group // only exists in My Groups
-	// Collections   []*GroupedGroups
-	// Groups        []*Group
-	// SharedGroups  []*Group
-	Metas       []*MetaGroup
+	Metas         []*MetaGroup
+
+	// Deprecated in V2
+	// Now standard and shared groups are mixed together.
 	SharedMetas []*MetaGroup
 }
 
@@ -1390,11 +1368,15 @@ type MetaGroup struct {
 }
 
 type GroupedGroups struct {
-	ColId        string
-	ColName      string
-	Groups       []*Group
+	ColId            string
+	ColName          string
+	FormattedColName string
+	IsCollapsed      bool
+	Groups           []*Group
+
+	// Deprecated in V2
+	// Now standard and shared groups are mixed together.
 	SharedGroups []*Group
-	IsCollapsed  bool
 }
 
 type GroupColCollapseState struct {
@@ -1405,8 +1387,8 @@ type GroupColCollapseState struct {
 type (
 	SearchResult struct {
 		Entities    []SearchEntity
-		Attachments []*Attachment
-		Links       []*SearchLink
+		Attachments []*Attachment // TODO: should be removed
+		GroupsLists []*GroupsList
 
 		HighlightedTerms []string
 
@@ -1422,17 +1404,16 @@ type (
 
 		TotalItemsCount   int
 		EntriesCount      int
-		LinksCount        int
-		LinkIndexableIds  []string
 		FilesCount        int
 		FileIndexableIds  []string
 		PrivateChatsCount int
 	}
 
-	// A SearchEntity could be only be a conversation or a Entry
+	// A SearchEntity could be only be a Chat or a Entry
 	SearchEntity struct {
-		Conversation *Conversation
-		Entry        *SearchEntry
+		Chat  *Chat
+		Entry *SearchEntry
+		File  *Attachment
 	}
 
 	SearchEntry struct {
@@ -1486,6 +1467,52 @@ type Token struct {
 	Label         string
 	AccessLevel   int
 }
+
+// ----- Chat Related -----
+type (
+	Chat struct {
+		Id          string
+		UpdatedAt   string
+		CurrentUser EmbedUser
+		WithUser    EmbedUser
+		Convs       []*Conversation `json:",omitempty"`
+		HasMore     bool
+		Messages    []*Message `json:",omitempty"` // For holding the chat search results
+	}
+
+	Conversation struct {
+		Id                  string
+		Title               string
+		UserIds             []string
+		Participants        []EmbedUser
+		CreatedAtUnixNano   int64
+		LocalHumanCreatedAt string
+		Topic               string
+		Private             bool
+		IsClose             bool
+		IsShared            bool
+		HasOfflineMessage   bool
+		OfflineLocalTime    string
+		SharedMessageIds    []string
+		MessagesCount       int
+		Messages            []*Message
+
+		LinkWithKeywords template.HTMLAttr `json:",omitempty"` // for Search
+	}
+
+	Message struct {
+		Id                  string
+		ConversationId      string
+		UserId              string
+		Content             string
+		HtmlContent         template.HTML
+		CreatedAt           time.Time
+		LocalHumanCreatedAt string
+		EmbedUser           EmbedUser
+		ShowUser            bool
+		IsOffline           bool
+	}
+)
 
 // The data shared between qortex and qortexpush
 type (

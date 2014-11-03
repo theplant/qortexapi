@@ -17,7 +17,7 @@ type PublicService interface {
 
 	// Change Email
 	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, err error)
-	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, err error)
+	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, invitationToken string, err error)
 	CancelChangingEmail(token string) (err error)
 
 	// Sharing Flow
@@ -63,7 +63,7 @@ type AuthMemberService interface {
 // Normal user and joined organization.
 type AuthUserService interface {
 	GetNewEntry(groupId string) (entry *Entry, err error)
-	GetNewChatEntry(chatId string) (entry *Entry, err error)
+	GetNewChatEntry(input *NewChatInput) (entry *Entry, err error)
 	GetQortexSupportEntries(before string, limit int, withComments bool) (entries []*Entry, err error)
 	CreateEntry(input *EntryInput) (entry *Entry, err error)
 	CreateTask(input *EntryInput) (entry *Entry, err error)
@@ -74,11 +74,13 @@ type AuthUserService interface {
 	EditComment(entryId string, groupId string, languageCode string) (entry *Entry, err error)
 	UpdateComment(input *EntryInput) (entry *Entry, err error)
 	UpdateEntry(input *EntryInput) (entry *Entry, err error)
+	UpdateKnowledgebase(groupId string, entryId string, knowledgebase bool) (err error)
 	GetLatestUpdatedEntryIdByTitle(title string, groupId string) (entryId string, err error)
-	GetTitle(groupId string, entryId string) (title string, err error)                                                                                              //When languageCode is empty, use default
-	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)           //When languageCode is empty, use default
-	SwitchEntryVersion(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error) //When languageCode is empty, use default
-	EditEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)          //When languageCode is empty, use default
+	GetTitle(groupId string, entryId string) (title string, err error)                                                                                                                                //When languageCode is empty, use default
+	GetEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)                                             //When languageCode is empty, use default
+	SwitchEntryVersion(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)                                   //When languageCode is empty, use default
+	EditEntry(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, languageCode string) (entry *Entry, err error)                                            //When languageCode is empty, use default
+	EditTranslation(entryId string, groupId string, updateAtUnixNanoForVersion string, hightlightKeywords string, editingLanguageCode string, comparingLanguageCode string) (entry *Entry, err error) //When languageCode is empty, use default
 	SwitchEntryLanguage(entryId string, groupId string, languageCode string) (entry *Entry, err error)
 	GetKnowledgeOverview(groupId string, languageCode string) (r *KnowledgeOverview, err error) //When languageCode is empty, use default
 	SwitchKnowledgeOverviewVersion(groupId string, entryId string, languageCode string) (r *KnowledgeOverview, err error)
@@ -104,9 +106,12 @@ type AuthUserService interface {
 	GetOtherVersionsTaskLogs(entryId string, groupId string, updateAtUnixNanoForVersion string) (taskLogs []*TaskLog, err error)
 
 	GetGroupEntries(groupId string, entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
-	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error)
-	GetGroupAside() (ga *GroupAside, err error)
-	GetNewGroupAside() (nga *NewGroupAside, err error)
+	GetMyFeedEntries(entryType string, before string, limit int, withComments bool) (entries []*Entry, err error) // Dreprecated. Now is GetMyFeedEntriesV2
+	GetMyFeedEntriesV2(before string, limit int, withComments bool, directAtMe bool) (entries []*Entry, err error)
+
+	GetGroupAside() (ga *GroupAside, err error)        // Dreprecated. Now is GetGroupAsideV2
+	GetNewGroupAside() (nga *NewGroupAside, err error) // Dreprecated. Now is GetGroupAsideV2
+	GetGroupAsideV2() (ga *NewGroupAside, err error)
 
 	GetMyFeedEntriesLite(before string, limit int) (entries []*Entry, err error)
 
@@ -114,6 +119,7 @@ type AuthUserService interface {
 	// entryType could be:	"post", "knowledge", "task"
 	GetNewFeedEntries(entryType string, fromTimeUnixNano string, limit int) (entries []*Entry, err error)
 	GetUserEntries(userId string, entryType string, before string, limit int) (entries []*Entry, err error)
+	GetUserEntriesV2(input *UserEntriesInput) (entries []*Entry, err error)
 
 	GetMyNotifications(before string, limit int) (mynotis *MyNotifications, err error)
 	GetMyNotificationItems(before string, limit int) (notificationItems []*NotificationItem, err error)
@@ -162,6 +168,7 @@ type AuthUserService interface {
 	// User related
 	GetAuthUser() (user *User, err error)
 	GetOrgUsers(keyword string, startFullName string, limit int) (users []User, nextFullName string, err error)
+	GetOrgAllUsers() (users []User, err error)
 	GetGroupUsers(groupId string, keyword string, onlyFollowers bool, startFullName string, limit int) (users []User, nextFullName string, err error)
 	GetUser(userId string) (user *User, err error)
 	EnableUser(userId string) (err error)
@@ -212,12 +219,13 @@ type AuthUserService interface {
 	// Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
 	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
+	UpdateOrgResctriction(orgSettingInput *OrganizationInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
 	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string, toFollowGroups []string) (sendedEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
-	UpdateGroupAdvancedToDoSettings(gId, settings string) (err error)
+	UpdateGroupAdvancedToDoSettings(groupId string, input *AdvancedToDoSettingsInput) (err error)
 
 	// TODO: mail-updates: remove it
 	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
@@ -239,9 +247,10 @@ type AuthUserService interface {
 	DismissTutorialsTip() (err error)
 
 	// chat
-	GetMyChatEntries(before string, limit int) (entries []*Entry, err error)
-	GetPrivateChat(conversationId string, searchKeyWords string) (chatEntry *Entry, err error)
-	OpenConversation(cid, fromJid, toJid string) (err error)
+	GetMyChats() (chats []*Chat, err error)
+	GetMyChatWithUser(userIdHex string) (chat *Chat, err error)
+	GetChatHistory(chatIdHex string, before string, limit int) (convs []*Conversation, hasMore bool, err error)
+	GetMyChatEntries(before string, limit int) (entries []*Entry, err error) // Deprecated
 
 	// Qortex Support
 	CreateQortexSupport(input *QortexSupportInput) (entry *Entry, err error)
@@ -259,13 +268,16 @@ type AuthUserService interface {
 	EditTask(groupId string, taskId string) (task *Task, err error)
 	ClaimTask(taskId string, groupId string) (task *Task, err error)
 	UpdateSimpleTask(input *TaskInput) (task *Task, err error)
-	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
-	GetOpenTasksIMade() (groupTasks []*GroupTasksOutline, err error)
-	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)
+	GetTasksForMe() (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error) //Deprecated
+	GetOpenTasksIMade() (groupTasks []*GroupTasksOutline, err error)                             //Deprecated
+	GetClosedTasksIMade(before string, limit int) (tasks []*TaskOutline, err error)              //Deprecated
 	GetOpenTasksIWorkedOn() (groupTasks []*GroupTasksOutline, err error)
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
 	GetTasksOutline(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasks(userId string, groupId string) (groupTasks []*GroupTasks, err error)
+
+	GetOpenTodos(createByUid string, assignToUid string, sortBy string) (groupTasks []*GroupTasksOutline, err error)
+	GetCloseTodos(createByUid string, assignToUid string, before string, limit int) (tasks []*TaskOutline, err error)
 
 	GetGroupGeneralSettingPage(gId string) (page *GroupGeneralSettingPage, err error)
 	GetGroupUsersPage(gId string) (page *GroupUsersPage, err error)
@@ -320,8 +332,8 @@ type AuthUserService interface {
 
 	// Search
 	Search(sp SearchInput) (sr SearchResult, err error)
-	RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
-	RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
+	// RetrieveFilesByIndexableIds(ids []string, keywords []string) (apiAtts []*Attachment, err error)
+	// RetrieveLinksByIndexableIds(ids []string, keywords []string) (links []*SearchLink, err error)
 
 	ValidateToken() (err error)
 	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool, groupIds []string) (token string, err error)
@@ -347,6 +359,10 @@ type AuthAdminService interface {
 	GetAllMembers() (members []*Member, err error)
 
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
+	ExportAllUsers() (memberInfos []*MailChimpUserListItem, err error)
+	ExportChineseUsers() (memberInfos []*MailChimpUserListItem, err error)
+	ExportEnglishUsers() (memberInfos []*MailChimpUserListItem, err error)
+	ExportJapaneseUsers() (memberInfos []*MailChimpUserListItem, err error)
 
 	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
 
@@ -367,4 +383,8 @@ type AuthAdminService interface {
 	GetOrgUserCache(orgId string) (orgUserCache *OrgUserCache, err error)
 
 	ResetOrgUserCache(orgId string) (err error)
+
+	SetFreeUserLimit(orgId string, num int) (err error)
+
+	ResetCount(orgId string, groupId string) (err error)
 }

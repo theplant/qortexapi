@@ -53,9 +53,8 @@ type EntryInput struct {
 	BaseOnEntryId    string // when share chat,BaseOnEntryId = chat entry id
 	PublishedToUsers bool
 
-	LocaleName          string
-	LanguageCode        string //CLD language code
-	IsAddingTranslation bool
+	LocaleName   string
+	LanguageCode string //CLD language code
 
 	// For Creating To-Dos From Comment
 	BasedPostId        string
@@ -213,6 +212,7 @@ type ShareChatInput struct {
 }
 
 type ContactInput struct {
+	Name        string
 	FirstName   string
 	LastName    string
 	CompanyName string
@@ -333,4 +333,31 @@ type ZapierSubscribeInput struct {
 	SubscriptionUrl string
 	Event           string
 	TargetUrl       string
+}
+
+type AdvancedToDoSettingsInput struct {
+	Enabled            bool
+	EnableTimeEstimate bool
+	EnableTimeTracking bool
+	TimeUnit           int
+	ProjectManagerId   string
+
+	// NOTE: for new TagIndex, its Index value must be -1
+	Labels             []*TagIndex
+	NotYetOpenStatuses []*TagIndex
+	OpenStatuses       []*TagIndex
+	ClosedStatuses     []*TagIndex
+}
+
+type NewChatInput struct {
+	MessageIds []string
+}
+
+// userId string, entryType string, before string, limit int
+type UserEntriesInput struct {
+	OrgId         string
+	UserId        string
+	BeforeTime    string
+	Limit         int
+	IsShowPrivate bool
 }

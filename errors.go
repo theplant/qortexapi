@@ -8,6 +8,7 @@ var (
 	OrganizationNotJoinedError     = errors.New("not join organization yet")
 	OrganizationsNotFoundError     = errors.New("organizations not found")
 	NonStandardOrganizationError   = errors.New("this organization is not standard")
+	NonSandboxOrganizationError    = errors.New("this organization is not sandbox")
 	GroupNotFoundError             = errors.New("group not found")
 	GroupsNotFoundError            = errors.New("groups not found")
 	MemberNotFoundError            = errors.New("member not found")
