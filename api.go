@@ -299,6 +299,11 @@ type AuthUserService interface {
 	CountOfActionNeededToDosInGroup(gid string) (count int, err error)
 	ToDoCSV(groupId string, userId string, month string) (todos []*ToDoCSVItem, err error)
 
+	// Calendar
+	GetMyAgendaCount(startDate string) (count int64, err error)
+	GetAgendaItems(startDate string /* eg: 2014-01-02*/, assigneeUserId string, groupId string, etype string) (calendarItemGroups []*CalendarItemGroup, err error)
+	GetMonthlyItems(month string /* eg: 2014-02 */, assigneeUserId string, groupId string, etype string) (calendarItems []*CalendarItem, activeGroups []EmbedGroup, err error)
+
 	// Apple device service
 	RegisterAppleDevice(token string) (err error)
 	UnregisterAppleDevice(token string) (err error)

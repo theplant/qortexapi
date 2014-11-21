@@ -1520,6 +1520,29 @@ type (
 	}
 )
 
+// Calendar
+
+type (
+	CalendarItemGroup struct {
+		Name  string
+		Items []CalendarItem
+	}
+
+	CalendarItem struct {
+		EntryId   string
+		Title     string
+		EType     string      `json:",omitempty"`
+		Attending string      `json:",omitempty"` // YES, NO, MAYBE
+		Owner     EmbedUser   `json:",omitempty"`
+		Assignee  EmbedUser   `json:",omitempty"`
+		ToUsers   []EmbedUser `json:",omitempty"`
+		Group     EmbedGroup  `json:",omitempty"`
+		Date      string      `json:",omitempty"` // 2014-01-02
+		StartTime time.Time   `json:",omitempty"`
+		EndTime   time.Time   `json:",omitempty"`
+	}
+)
+
 // The data shared between qortex and qortexpush
 type (
 	UniqushPushData struct {
