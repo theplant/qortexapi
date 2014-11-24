@@ -1530,6 +1530,7 @@ type (
 
 	CalendarItem struct {
 		EntryId   string
+		EntryLink string
 		Title     string
 		EType     string      `json:",omitempty"`
 		Attending string      `json:",omitempty"` // YES, NO, MAYBE

@@ -1,6 +1,9 @@
 package qortexapi
 
-import "io"
+import (
+	"io"
+	"time"
+)
 
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
@@ -302,7 +305,7 @@ type AuthUserService interface {
 	// Calendar
 	GetMyAgendaCount(startDate string) (count int64, err error)
 	GetAgendaItems(startDate string /* eg: 2014-01-02*/, assigneeUserId string, groupId string, etype string) (calendarItemGroups []*CalendarItemGroup, err error)
-	GetMonthlyItems(month string /* eg: 2014-02 */, assigneeUserId string, groupId string, etype string) (calendarItems []*CalendarItem, activeGroups []EmbedGroup, err error)
+	GetMonthlyItems(month string /* eg: 2014-02 */, assigneeUserId string, groupId string, etype string) (calendarItems []CalendarItem, activeGroups []EmbedGroup, startTime time.Time, endTime time.Time, err error)
 
 	// Apple device service
 	RegisterAppleDevice(token string) (err error)
