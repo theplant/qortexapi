@@ -358,6 +358,7 @@ type AuthAdminService interface {
 	ExportEnglishUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportJapaneseUsers() (memberInfos []*MailChimpUserListItem, err error)
 
+	ChangeMemberEmail(input *ChangeEmailInput) (err error)
 	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
 
 	MarkOrgFreeOrPay(orgId string) (free bool, err error)

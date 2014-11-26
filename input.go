@@ -364,3 +364,8 @@ type UserEntriesInput struct {
 	Limit         int
 	IsShowPrivate bool
 }
+
+type ChangeEmailInput struct {
+	OldEmail string
+	NewEmail string
+}
