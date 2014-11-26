@@ -347,12 +347,6 @@ type AuthUserService interface {
 }
 
 type AuthAdminService interface {
-	// Get the overall statistics (excluding ThePlant)
-	GetTotalStats() (totalStat *TotalStats, err error)
-	// Get the weekly statistics (excluding ThePlant)
-	GetWeeklyTotalStats() (totalStat *TotalStats, err error)
-	// Get all the Organizations' statistics
-	GetOrgStats() (orgStats []*OrgStats, err error)
 	// Get all closed beta access requests
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
 	// Get all members
