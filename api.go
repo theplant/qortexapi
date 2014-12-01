@@ -355,16 +355,8 @@ type AuthUserService interface {
 }
 
 type AuthAdminService interface {
-	// Get the overall statistics (excluding ThePlant)
-	GetTotalStats() (totalStat *TotalStats, err error)
-	// Get the weekly statistics (excluding ThePlant)
-	GetWeeklyTotalStats() (totalStat *TotalStats, err error)
-	// Get all the Organizations' statistics
-	GetOrgStats() (orgStats []*OrgStats, err error)
 	// Get all closed beta access requests
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
-	// Get all members
-	GetAllMembers() (members []*Member, err error)
 
 	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 	ExportAllUsers() (memberInfos []*MailChimpUserListItem, err error)
@@ -372,6 +364,7 @@ type AuthAdminService interface {
 	ExportEnglishUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportJapaneseUsers() (memberInfos []*MailChimpUserListItem, err error)
 
+	ChangeMemberEmail(input *ChangeEmailInput) (err error)
 	GetTotalOnlineUsers() (embedUsers []*EmbedUser, err error)
 
 	MarkOrgFreeOrPay(orgId string) (free bool, err error)

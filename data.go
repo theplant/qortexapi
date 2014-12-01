@@ -546,6 +546,7 @@ type Task struct {
 	CanEditDueDate      bool
 	FarAwayCorner       bool
 
+	PriorityPos        int
 	PriorityWeight     float64             `json:",omitempty"`
 	SimpleTaskOutlines []SimpleTaskOutline `json:",omitempty"`
 }
@@ -1080,6 +1081,7 @@ type MarketableMemberInfo struct {
 }
 
 type SimpleTaskOutline struct {
+	Id                  string
 	EntryTitle          string
 	AbovePriorityWeight float64
 }
