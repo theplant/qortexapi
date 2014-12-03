@@ -1071,15 +1071,6 @@ type MailChimpUserListItem struct {
 	PreferredLanguageCode string
 }
 
-type MarketableMemberInfo struct {
-	Email     string
-	FirstName string
-	LastName  string
-	Status    string
-	InvitOrg  string
-	GotoURL   string
-}
-
 type SimpleTaskOutline struct {
 	Id                  string
 	EntryTitle          string
