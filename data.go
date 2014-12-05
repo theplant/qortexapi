@@ -683,11 +683,12 @@ type Entry struct {
 
 	IsHidePresentationTip bool `json:",omitempty"`
 
-	IsKnowledgeBase bool   `json:",omitempty"`
-	IsPost          bool   `json:",omitempty"`
-	IsComment       bool   `json:",omitempty"`
-	IsTask          bool   `json:",omitempty"` // when entry is ack or todo , IsTask = true
-	IsNotification  bool   `json:",omitempty"`
+	IsKnowledgeBase bool `json:",omitempty"`
+	IsPost          bool `json:",omitempty"`
+	IsComment       bool `json:",omitempty"`
+	IsTask          bool `json:",omitempty"` // when entry is ack or todo , IsTask = true
+	IsNotification  bool `json:",omitempty"`
+	Notification    *Notification
 	IsChat          bool   `json:",omitempty"`
 	IsTaskToDo      bool   `json:",omitempty"` // when entry is todo , IsTaskToDo = true
 	IsTaskAck       bool   `json:",omitempty"` // when entry is ack , IsTaskAck = true
@@ -787,6 +788,13 @@ type Entry struct {
 	DisableProFeatrue bool
 
 	LinkedEntries []*LinkedEntry `json:",omitempty"`
+}
+
+type Notification struct {
+	Type      string
+	EntryId   string
+	CommentId string
+	OrgId     string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
 }
 
 type EntryLanguage struct {
