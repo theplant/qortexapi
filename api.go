@@ -358,7 +358,6 @@ type AuthAdminService interface {
 	// Get all closed beta access requests
 	GetAccessRequests() (accessReqs []*AccessReq, err error)
 
-	GetMarketableUsers() (memberInfos []*MarketableMemberInfo, err error)
 	ExportAllUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportChineseUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportEnglishUsers() (memberInfos []*MailChimpUserListItem, err error)
