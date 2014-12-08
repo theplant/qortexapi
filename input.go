@@ -63,6 +63,12 @@ type EntryInput struct {
 	SelectionTextInfo  SelectionTextInfo
 
 	PriorityWeight float64
+
+	IsEvent        bool
+	IsInviteGroup  bool
+	InvitedUserIds string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	StartAt        string //format:201305070900
+	EndAt          string //format:201305071800
 }
 
 type DraftInput struct {
