@@ -1564,6 +1564,7 @@ type (
 		StartTime      time.Time   `json:",omitempty"`
 		EndTime        time.Time   `json:",omitempty"`
 		ImportanceType string      `json:",omitempty"`
+		SortValue      string      `json:",omitempty"`
 	}
 )
 

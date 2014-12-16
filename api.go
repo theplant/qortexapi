@@ -304,7 +304,12 @@ type AuthUserService interface {
 
 	// Calendar
 	GetMyAgendaCount(startDate string) (count int64, err error)
-	GetAgendaItems(startDate string /* eg: 2014-01-02*/, assigneeUserId string, groupId string, etype string) (calendarItemGroups []*CalendarItemGroup, err error)
+
+	/*
+	 * start: combined with the Due date of a Task as format 2006-01-02 concat with created at nano time like 1418368074096000000
+	 * example: 2014-12-20_1418368074096000000
+	 */
+	GetAgendaItems(start string, limit int, assigneeUserId string, groupId string, etype string) (calendarItemGroups []*CalendarItemGroup, hasMore bool, err error)
 	GetMonthlyItems(month string /* eg: 2014-02 */, assigneeUserId string, groupId string, etype string) (calendarItems []CalendarItem, activeGroups []EmbedGroup, startTime time.Time, endTime time.Time, err error)
 
 	// Apple device service
