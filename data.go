@@ -710,6 +710,7 @@ type Entry struct {
 	IsInGroup       bool `json:",omitempty"`
 	IsFromEmail     bool `json:",omitempty"`
 	InlineHelp      bool `json:",omitempty"`
+	IsEvent         bool
 
 	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
 	VisibleForSuperOrg            bool `json:",omitempty"`
@@ -730,6 +731,7 @@ type Entry struct {
 	Todo         *Task         `json:",omitempty"` // when entry is a todo(IsTaskToDo=true), this exsits
 	Ack          *Task         `json:",omitempty"` // when entry is a ack(IsTaskAck=true), this exsits
 	Conversation *Conversation `json:",omitempty"`
+	Event        *Event        // when entry is a event (IsEvent == true), this exists
 
 	Versions []*EntryVersion `json:",omitempty"`
 
@@ -795,6 +797,25 @@ type Notification struct {
 	EntryId   string
 	CommentId string
 	OrgId     string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
+}
+
+type Event struct {
+	Id            string
+	GroupId       string
+	AuthorId      string
+	EntryId       string
+	EntryTitle    string
+	IsInviteGroup bool
+
+	InvitedUIDs  []string
+	GoingUIDs    []string
+	MaybeUIDs    []string
+	NotGoingUIDs []string
+
+	StartAt   time.Time
+	EndAt     time.Time
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type EntryLanguage struct {
