@@ -796,6 +796,7 @@ type Notification struct {
 	CommentId string
 	OrgId     string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
 	User      EmbedUser
+	GroupId string // innermessage
 }
 
 type EntryLanguage struct {
