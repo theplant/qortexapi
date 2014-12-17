@@ -279,6 +279,8 @@ type AuthUserService interface {
 	GetTasksOutline(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasks(userId string, groupId string) (groupTasks []*GroupTasks, err error)
 
+	ReplyEvent(eventId string, groupId string, reply string) (event *Event, err error)
+
 	GetOpenTodos(createByUid string, assignToUid string, sortBy string) (groupTasks []*GroupTasksOutline, err error)
 	GetCloseTodos(createByUid string, assignToUid string, before string, limit int) (tasks []*TaskOutline, err error)
 
