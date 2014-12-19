@@ -1546,8 +1546,9 @@ type (
 
 type (
 	CalendarItemGroup struct {
-		Name  string
-		Items []CalendarItem
+		Name   string
+		WeekNo int
+		Items  []CalendarItem
 	}
 
 	CalendarItem struct {
