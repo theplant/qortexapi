@@ -281,6 +281,10 @@ type AuthUserService interface {
 
 	ReplyEvent(eventId string, groupId string, reply string) (event *Event, err error)
 
+	GetResources() (res []*Resource, err error)
+	// newRes: resourceName ,  updateRes: resourceId:resourceName
+	UpdateResources(newRes []string, updateRes []string, deleteIds []string) (err error)
+
 	GetOpenTodos(createByUid string, assignToUid string, sortBy string) (groupTasks []*GroupTasksOutline, err error)
 	GetCloseTodos(createByUid string, assignToUid string, before string, limit int) (tasks []*TaskOutline, err error)
 

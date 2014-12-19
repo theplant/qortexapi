@@ -818,6 +818,13 @@ type Event struct {
 	UpdatedAt time.Time
 }
 
+type Resource struct {
+	Id        string
+	Name      string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
+
 type EntryLanguage struct {
 	Code         string
 	LanguageName string
