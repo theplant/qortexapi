@@ -113,7 +113,6 @@ type User struct {
 	NoDetail              bool         `json:",omitempty"`
 	EnabledMobilePush     bool         `json:",omitempty"`
 	PreferredLanguageCode string
-	HasIOSDevice          bool `json:"-"` // temp, delete after android implement
 }
 
 type GroupUsers struct {
@@ -185,7 +184,6 @@ type EmbedUser struct {
 	NoDetail              bool
 	UnfollowSharedGroup   bool
 	PreferredLanguageCode string
-	HasIOSDevice          bool `json:"-"` // temp, delete after android implement
 }
 
 type PanelStatus struct {
@@ -798,7 +796,7 @@ type Notification struct {
 	CommentId string
 	OrgId     string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
 	User      EmbedUser
-	GroupId string // innermessage
+	GroupId   string // innermessage
 }
 
 type EntryLanguage struct {
