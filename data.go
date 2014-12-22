@@ -113,6 +113,7 @@ type User struct {
 	NoDetail              bool         `json:",omitempty"`
 	EnabledMobilePush     bool         `json:",omitempty"`
 	PreferredLanguageCode string
+	HasIOSDevice          bool `json:"-"` // temp, delete after android implement
 }
 
 type GroupUsers struct {
@@ -184,6 +185,7 @@ type EmbedUser struct {
 	NoDetail              bool
 	UnfollowSharedGroup   bool
 	PreferredLanguageCode string
+	HasIOSDevice          bool `json:"-"` // temp, delete after android implement
 }
 
 type PanelStatus struct {
@@ -1530,6 +1532,7 @@ type (
 		Message     string `form:"Message" binding:"required"`
 		AlertNumber string `form:"AlertNumber" binding:"required"`
 		ItemId      string `form:"ItemId" binding:"required"`
+		Sound       bool   `form:"Sound"`
 	}
 
 	UniqushSubData struct {
