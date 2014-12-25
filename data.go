@@ -812,6 +812,7 @@ type Event struct {
 	MaybeUIDs    []string
 	NotGoingUIDs []string
 
+	WholeDay  bool
 	StartAt   time.Time
 	EndAt     time.Time
 	CreatedAt time.Time
