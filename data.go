@@ -1563,7 +1563,7 @@ type (
 		EntryId        string
 		EntryLink      string
 		Title          string
-		EType          string      `json:",omitempty"`
+		ItemType       string      `json:",omitempty"`
 		Attending      string      `json:",omitempty"` // YES, NO, MAYBE
 		Owner          EmbedUser   `json:",omitempty"`
 		Assignee       EmbedUser   `json:",omitempty"`
