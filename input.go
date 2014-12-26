@@ -71,6 +71,7 @@ type EntryInput struct {
 	StartAtHM      string //format 8:00
 	EndAt          string //format 20130507
 	EndAtHM        string //format 16:00
+	Resource       []string
 }
 
 type DraftInput struct {
