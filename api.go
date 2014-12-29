@@ -279,7 +279,9 @@ type AuthUserService interface {
 	GetTasksOutline(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasks(userId string, groupId string) (groupTasks []*GroupTasks, err error)
 
+	GetEvent(eventId string, groupId string) (event *Event, err error)
 	ReplyEvent(eventId string, groupId string, reply string) (event *Event, err error)
+	UpdateEvent(input *EventInput) (event *Event, err error)
 
 	GetResources() (res []*Resource, err error)
 	// newRes: resourceName ,  updateRes: resourceId:resourceName

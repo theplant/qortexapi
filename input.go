@@ -384,7 +384,9 @@ type EventInput struct {
 	GroupId        string
 	IsInviteGroup  bool
 	InvitedUserIds string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
-	StartAt        string //format:201305070900
-	EndAt          string //format:201305071800
-	Decision       int
+	StartAt        string //format 20130507
+	StartAtHM      string //format 8:00
+	EndAt          string //format 20130507
+	EndAtHM        string //format 16:00
+	Resource       []string
 }
