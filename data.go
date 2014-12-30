@@ -814,11 +814,12 @@ type Event struct {
 
 	Resource []*Resource
 
-	WholeDay  bool
-	StartAt   time.Time
-	EndAt     time.Time
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	WholeDay       bool
+	TimezoneOffset int64
+	StartAt        time.Time
+	EndAt          time.Time
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
 }
 
 type Resource struct {
