@@ -125,6 +125,7 @@ type GroupUsers struct {
 
 type Preferences struct {
 	Timezone                   string             `json:",omitempty"`
+	FirstDayOfWeek             string             `json:",omitempty"`
 	TimezoneOffset             string             `json:",omitempty"`
 	PreferFullName             bool               `json:",omitempty"`
 	EnterForNewLine            bool               `json:",omitempty"`

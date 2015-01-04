@@ -184,6 +184,7 @@ type LikeInput struct {
 
 type PreferencesInput struct {
 	Timezone                 string
+	FirstDayOfWeek           string
 	TimezoneOffset           string
 	PreferFullName           string
 	EnterForNewLine          string
