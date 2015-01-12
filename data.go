@@ -798,6 +798,8 @@ type Notification struct {
 	EntryId   string
 	CommentId string
 	OrgId     string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
+	User      EmbedUser
+	GroupId   string // innermessage
 }
 
 type Event struct {
@@ -1588,6 +1590,7 @@ type (
 		Message     string `form:"Message" binding:"required"`
 		AlertNumber string `form:"AlertNumber" binding:"required"`
 		ItemId      string `form:"ItemId" binding:"required"`
+		Sound       bool   `form:"Sound"`
 	}
 
 	UniqushSubData struct {
