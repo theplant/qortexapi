@@ -1540,3 +1540,10 @@ type (
 		TokenOrRegId string `form:"TokenOrRegId" binding:"required"`
 	}
 )
+
+type InviteInput struct {
+	Emails           []string
+	ToFollowGroupIds []string
+	Message          string
+	IgnoreError      bool
+}

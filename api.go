@@ -222,7 +222,7 @@ type AuthUserService interface {
 	UpdateOrgResctriction(orgSettingInput *OrganizationInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
-	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string, toFollowGroups []string) (sendedEmails []string, err error)
+	InvitePeople(inviteInput *InviteInput) (sentEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	UpdateGroupAdvancedToDoSettings(groupId string, input *AdvancedToDoSettingsInput) (err error)
