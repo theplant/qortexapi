@@ -278,6 +278,7 @@ type AuthUserService interface {
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
 	GetTasksOutline(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasks(userId string, groupId string) (groupTasks []*GroupTasks, err error)
+	SetTaskDueDate(taskId string, groupId string, date string) (err error)
 
 	GetEvent(eventId string, groupId string) (event *Event, err error)
 	ReplyEvent(eventId string, groupId string, reply string) (event *Event, err error)
