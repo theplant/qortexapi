@@ -1567,6 +1567,7 @@ type (
 
 	CalendarItem struct {
 		EntryId        string
+		EventId        string
 		EntryLink      string
 		Title          string
 		ItemType       string      `json:",omitempty"`

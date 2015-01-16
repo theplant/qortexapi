@@ -282,6 +282,7 @@ type AuthUserService interface {
 	GetEvent(eventId string, groupId string) (event *Event, err error)
 	ReplyEvent(eventId string, groupId string, reply string) (event *Event, err error)
 	UpdateEvent(input *EventInput) (event *Event, err error)
+	MoveEvent(eventId string, groupId string, startAt string, endAt string) (err error)
 
 	GetResources() (res []*Resource, err error)
 	// newRes: resourceName ,  updateRes: resourceId:resourceName
