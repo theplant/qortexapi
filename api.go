@@ -321,6 +321,7 @@ type AuthUserService interface {
 	 */
 	GetAgendaItems(start string, limit int, assigneeUserId string, groupId string, etype string) (calendarItemGroups []*CalendarItemGroup, hasMore bool, err error)
 	GetMonthlyItems(month string /* eg: 2014-02 */, assigneeUserId string, groupId string, etype string) (calendarItems []CalendarItem, activeGroups []EmbedGroup, startTime time.Time, endTime time.Time, err error)
+	GetSubscriptionItems(start string /* eg: 2014-02-01 */, assigneeUserId string, groupId string, etype string, creatorId string) (calendarItems []CalendarItem, err error)
 
 	// Apple device service
 	RegisterAppleDevice(token string) (err error)
@@ -361,6 +362,8 @@ type AuthUserService interface {
 	ValidateToken() (err error)
 	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool, groupIds []string) (token string, err error)
 	DeleteToken(tokenId string) (err error)
+	TokenForLabel(label string, accessLevel int, forAllGroups bool) (token string, err error)
+
 	// RemoveGroupsFromToken(tokenId string, groupIds []string) (err error)
 	// AddGroupsToToken(tokenId string, groupIds []string) (err error)
 	GetOrgTokens() (tokens []*Token, err error)
