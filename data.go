@@ -712,6 +712,7 @@ type Entry struct {
 	IsFromEmail     bool `json:",omitempty"`
 	InlineHelp      bool `json:",omitempty"`
 	IsEvent         bool
+	HasResource     bool
 
 	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
 	VisibleForSuperOrg            bool `json:",omitempty"`
