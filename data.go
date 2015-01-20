@@ -1572,6 +1572,7 @@ type (
 		TaskId         string
 		EntryLink      string
 		Title          string
+		IsAllDay       bool
 		ItemType       string      `json:",omitempty"`
 		Attending      string      `json:",omitempty"` // YES, NO, MAYBE
 		Owner          EmbedUser   `json:",omitempty"`
