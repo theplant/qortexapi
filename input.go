@@ -68,9 +68,11 @@ type EntryInput struct {
 	IsInviteGroup  bool
 	InvitedUserIds string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	StartAt        string //format 20130507
-	StartAtHM      string //format 8:00
+	StartAtH       string //00-23
+	StartAtM       string //00-59
 	EndAt          string //format 20130507
-	EndAtHM        string //format 16:00
+	EndAtH         string //00-23
+	EndAtM         string //00-59
 	Resource       []string
 }
 
@@ -386,8 +388,10 @@ type EventInput struct {
 	IsInviteGroup  bool
 	InvitedUserIds string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
 	StartAt        string //format 20130507
-	StartAtHM      string //format 8:00
+	StartAtH       string //00-23
+	StartAtM       string //00-59
 	EndAt          string //format 20130507
-	EndAtHM        string //format 16:00
+	EndAtH         string //00-23
+	EndAtM         string //00-59
 	Resource       []string
 }
