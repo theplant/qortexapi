@@ -195,7 +195,7 @@ type AuthUserService interface {
 	ReadNotificationItem(itemId, groupId string) (myCount *MyCount, err error)
 
 	// Organization Related
-	GetJoinOrgInvitations() (invitations []*Invitation, err error)
+	GetOrgInvitations() (invitations []*Invitation, err error)
 	GetOrganization(orgId string) (org *Organization, err error)
 	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
 	GetMyOrgsUnreadInfo() (unreadInfo []*OrgUnreadInfo, err error)

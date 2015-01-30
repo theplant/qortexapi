@@ -936,6 +936,7 @@ type Newsletter struct {
 }
 
 type Invitation struct {
+	OrgId             string
 	Email             string
 	Token             string
 	SentAgo           string
@@ -1540,10 +1541,3 @@ type (
 		TokenOrRegId string `form:"TokenOrRegId" binding:"required"`
 	}
 )
-
-type InviteInput struct {
-	Emails           []string
-	ToFollowGroupIds []string
-	Message          string
-	IgnoreError      bool
-}

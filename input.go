@@ -369,3 +369,10 @@ type ChangeEmailInput struct {
 	OldEmail string
 	NewEmail string
 }
+
+type InviteInput struct {
+	Emails           []string
+	ToFollowGroupIds []string
+	Message          string
+	IgnoreError      bool
+}
