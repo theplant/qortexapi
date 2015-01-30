@@ -41,6 +41,9 @@ type PublicService interface {
 
 	// Get the push notification detail
 	GetPushInfo(itemId string) (info *PushInfo, err error)
+
+	// Signup
+	Signup(email string) (accessReq *AccessReq, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.

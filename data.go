@@ -1030,12 +1030,11 @@ type OrgPaymentHistory struct {
 }
 
 type AccessReq struct {
-	Email      string
-	AccessCode string
-	Status     string
-	ApprovedBy string
-	CreatedAt  string
-	UpdatedAt  string
+	Id        string
+	Email     string
+	Status    string
+	CreatedAt string
+	UpdatedAt string
 }
 
 // Deprecated. Now is NewGroupAside

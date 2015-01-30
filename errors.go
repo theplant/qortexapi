@@ -4,6 +4,7 @@ import "errors"
 
 var (
 	ServerError                    = errors.New("Oops, something is wrong!")
+	UnexpectedError                = errors.New("Unexpected error!")
 	OrganizationNotFoundError      = errors.New("organization not found")
 	OrganizationNotJoinedError     = errors.New("not join organization yet")
 	OrganizationsNotFoundError     = errors.New("organizations not found")
