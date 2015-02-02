@@ -22,7 +22,6 @@ type PublicService interface {
 
 	// Sharing Flow
 	ChangeEmailToAcceptSharing(token string, newEmail string) (err error)
-
 	GetShareRequest(token string, memberId string) (shareRequest *ShareRequest, err error)
 
 	ContactUs(input *ContactInput) (contact *ContactInfo, err error)
@@ -44,6 +43,7 @@ type PublicService interface {
 
 	// Signup
 	Signup(email string) (accessReq *AccessReq, err error)
+	GetAccessRequest(token string) (accessReq *AccessReq, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.

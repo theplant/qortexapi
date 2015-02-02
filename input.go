@@ -376,3 +376,15 @@ type InviteInput struct {
 	Message          string
 	IgnoreError      bool
 }
+
+type LoginInput struct {
+	Email      string
+	Password   string
+	LocaleName string
+}
+
+type AccountInput struct {
+	Email        string
+	ConfirmToken string
+	SharingToken string
+}
