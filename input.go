@@ -188,19 +188,6 @@ type PreferencesInput struct {
 	UserLocationCityName     string
 }
 
-type MemberAccountInput struct {
-	FirstName     string // English name
-	LastName      string
-	FirstNameCn   string // Chinese name
-	LastNameCn    string
-	FirstNameJp   string // Japanese name for display
-	LastNameJp    string
-	FirstNameJpKa string // Japanese Katakana name for ordering
-	LastNameJpKa  string
-
-	AvatarURL string
-}
-
 type NewsletterInput struct {
 	Email string
 }
@@ -384,7 +371,39 @@ type LoginInput struct {
 }
 
 type AccountInput struct {
-	Email        string
-	ConfirmToken string
-	SharingToken string
+	Id              string
+	Email           string
+	ConfirmToken    string
+	SharingToken    string
+	InvitationToken string
+
+	FirstName     string // English name
+	LastName      string
+	FirstNameCn   string // Chinese name
+	LastNameCn    string
+	FirstNameJp   string // Japanese name for display
+	LastNameJp    string
+	FirstNameJpKa string // Japanese Katakana name for ordering
+	LastNameJpKa  string
+
+	Password        string
+	ConfirmPassword string
+	AvatarURL       string
+	Title           string
+	Department      string
+	IsAgreed        bool
+}
+
+// KOBELD: Duplicated. Can be replaced by the AccountInput
+type MemberAccountInput struct {
+	FirstName     string // English name
+	LastName      string
+	FirstNameCn   string // Chinese name
+	LastNameCn    string
+	FirstNameJp   string // Japanese name for display
+	LastNameJp    string
+	FirstNameJpKa string // Japanese Katakana name for ordering
+	LastNameJpKa  string
+
+	AvatarURL string
 }

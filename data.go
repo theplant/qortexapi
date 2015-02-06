@@ -965,6 +965,7 @@ type Member struct {
 	Id                 string
 	Name               string
 	Email              string
+	Title              string
 	ComfirmationSentAt string
 	SignupConfirmedAt  string
 	SignupStatus       string

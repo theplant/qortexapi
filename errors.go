@@ -4,6 +4,7 @@ import "errors"
 
 var (
 	ServerError                    = errors.New("Oops, something is wrong!")
+	InvalidIdError                 = errors.New("Invalid Id error!")
 	UnexpectedError                = errors.New("Unexpected error!")
 	OrganizationNotFoundError      = errors.New("organization not found")
 	OrganizationNotJoinedError     = errors.New("not join organization yet")
@@ -40,7 +41,8 @@ var (
 	UnknownEntryType               = errors.New("unknown entry type")
 	UpdateLikeError                = errors.New("update like error")
 	TokenInvalid                   = errors.New("Token is not available")
-	AccountNotActicated            = errors.New("account was not activated yet")
+	AccountNotActivated            = errors.New("Account was not activated yet")
+	AccountAlreadyActivated        = errors.New("Account was already activated")
 	EntryBlankError                = errors.New("Entry can not be blank")
 	GroupBlankError                = errors.New("Group can not be blank")
 	UserBlankError                 = errors.New("User can not be blank")

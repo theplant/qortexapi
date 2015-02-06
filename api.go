@@ -43,6 +43,7 @@ type PublicService interface {
 
 	// Signup
 	Signup(email string) (accessReq *AccessReq, err error)
+	SetupAccount(input *AccountInput) (member *Member, err error)
 	GetAccessRequest(token string) (accessReq *AccessReq, err error)
 }
 
