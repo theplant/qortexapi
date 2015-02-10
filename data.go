@@ -1484,6 +1484,7 @@ type (
 		UpdatedAt   string
 		CurrentUser EmbedUser
 		WithUser    EmbedUser
+		WithUsers   []EmbedUser
 		Convs       []*Conversation `json:",omitempty"`
 		HasMore     bool
 		Messages    []*Message `json:",omitempty"` // For holding the chat search results
