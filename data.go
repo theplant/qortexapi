@@ -795,12 +795,24 @@ type Entry struct {
 }
 
 type Notification struct {
-	Type      string
-	EntryId   string
-	CommentId string
-	OrgId     string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
-	User      EmbedUser
-	GroupId   string // innermessage
+	Type       string
+	EntryId    string
+	CommentId  string
+	OrgId      string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
+	User       EmbedUser
+	GroupId    string      // innermessage
+	EventUsers *EventUsers `json:",omitempty"`
+}
+type EventUser struct {
+	EmbedUser
+	ReplyText string
+	ReplyVal  string
+}
+
+type EventUsers struct {
+	JustNowReplied []*EventUser
+	OthersReplied  []*EventUser
+	NotYetReplied  []*EventUser
 }
 
 type Event struct {
