@@ -16,8 +16,8 @@ type PublicService interface {
 	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, err error)
 
 	// Change Email
-	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, err error)
-	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, invitationToken string, err error)
+	PrepareChangingEmail(input *ChangeEmailInput) (changer *EmailChanger, err error)
+	ConfirmChangingEmail(token string) (changer *EmailChanger, err error)
 	CancelChangingEmail(token string) (err error)
 
 	// Sharing Flow
@@ -45,6 +45,9 @@ type PublicService interface {
 	Signup(email string) (accessReq *AccessReq, err error)
 	SetupAccount(input *AccountInput) (member *Member, err error)
 	GetAccessRequest(token string) (accessReq *AccessReq, err error)
+
+	// Invitation
+	GetInvitation(token string, memberId string) (invitation *Invitation, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -53,15 +56,17 @@ type AuthMemberService interface {
 	GetNewOrganization(memberId string) (org *Organization, err error)
 	GetMyOrganizations() (orgs []*Organization, err error)
 	CreateOrganization(input *OrganizationInput) (apiOrg *Organization, err error)
-	JoinOrganization(orgId string) (err error)
+	JoinOrganization(orgId string) (org *Organization, user *User, err error)
 	LeaveOrganization(orgId string) (err error)
 
 	SwitchOrganization(orgId string) (err error)
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
 
-	GetShareRequest(token string) (shareRequest *ShareRequest, err error)
+	GetShareRequestByToken(token string) (shareRequest *ShareRequest, err error)
 	RejectShareRequestByInvitee(token string) (err error)
 	AcceptShareRequestByInvitee(token string, toOrgId string) (err error)
+
+	AcceptInvitation(token string) (org *Organization, user *User, err error)
 }
 
 // Normal user and joined organization.

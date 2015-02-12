@@ -926,9 +926,11 @@ type InlineHelp struct {
 }
 
 type EmailChanger struct {
-	Token        string
-	Email        string
-	SharingToken string
+	Token             string
+	Email             string
+	SharingToken      string
+	InvitationToken   string
+	ConfirmationToken string
 }
 
 type Newsletter struct {
@@ -937,11 +939,13 @@ type Newsletter struct {
 
 type Invitation struct {
 	OrgId             string
+	OrgName           string
 	Email             string
 	Token             string
 	SentAgo           string
 	ByUser            EmbedUser
 	HideInPendingList bool
+	IsNewAccount      bool // If the invitee is a new account that hasn't signed up yet.
 }
 
 type AbandonInfo struct {

@@ -353,8 +353,11 @@ type UserEntriesInput struct {
 }
 
 type ChangeEmailInput struct {
-	OldEmail string
-	NewEmail string
+	OldEmail          string
+	NewEmail          string
+	IsFromSharing     bool // Sharing signup
+	IsFromInviting    bool // Inviting signup
+	IsFromRegistering bool // Normal signup
 }
 
 type InviteInput struct {
@@ -364,18 +367,13 @@ type InviteInput struct {
 	IgnoreError      bool
 }
 
-type LoginInput struct {
-	Email      string
-	Password   string
-	LocaleName string
-}
-
 type AccountInput struct {
 	Id              string
 	Email           string
 	ConfirmToken    string
 	SharingToken    string
 	InvitationToken string
+	InvitedOrgName  string // This is not for input, for displaying
 
 	FirstName     string // English name
 	LastName      string
@@ -392,6 +390,9 @@ type AccountInput struct {
 	Title           string
 	Department      string
 	IsAgreed        bool
+
+	LocaleName    string   // Login needs this
+	LanguageCodes []string // Invitation signup needs this
 }
 
 // KOBELD: Duplicated. Can be replaced by the AccountInput

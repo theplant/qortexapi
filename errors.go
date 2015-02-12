@@ -55,4 +55,5 @@ var (
 	NotFoundError                  = errors.New("not found")
 	InvitationAlreadyAcceptedError = errors.New("Invitation was accepted")
 	InvitationAlreadyCanceledError = errors.New("Invitation was canceled")
+	ChangeEmailTypeNotProvided     = errors.New("Should provide the type of changing email")
 )
