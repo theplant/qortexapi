@@ -125,6 +125,7 @@ type GroupUsers struct {
 
 type Preferences struct {
 	Timezone                   string             `json:",omitempty"`
+	FirstDayOfWeek             string             `json:",omitempty"`
 	TimezoneOffset             string             `json:",omitempty"`
 	PreferFullName             bool               `json:",omitempty"`
 	EnterForNewLine            bool               `json:",omitempty"`
@@ -710,6 +711,8 @@ type Entry struct {
 	IsInGroup       bool `json:",omitempty"`
 	IsFromEmail     bool `json:",omitempty"`
 	InlineHelp      bool `json:",omitempty"`
+	IsEvent         bool
+	HasResource     bool
 
 	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
 	VisibleForSuperOrg            bool `json:",omitempty"`
@@ -730,6 +733,7 @@ type Entry struct {
 	Todo         *Task         `json:",omitempty"` // when entry is a todo(IsTaskToDo=true), this exsits
 	Ack          *Task         `json:",omitempty"` // when entry is a ack(IsTaskAck=true), this exsits
 	Conversation *Conversation `json:",omitempty"`
+	Event        *Event        // when entry is a event (IsEvent == true), this exists
 
 	Versions []*EntryVersion `json:",omitempty"`
 
@@ -791,12 +795,54 @@ type Entry struct {
 }
 
 type Notification struct {
-	Type      string
-	EntryId   string
-	CommentId string
-	OrgId     string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
-	User      EmbedUser
-	GroupId   string // innermessage
+	Type       string
+	EntryId    string
+	CommentId  string
+	OrgId      string //JoinSharedGroupNotification M_SETUP_ORGANIZATION
+	User       EmbedUser
+	GroupId    string      // innermessage
+	EventUsers *EventUsers `json:",omitempty"`
+}
+type EventUser struct {
+	EmbedUser
+	ReplyText string
+	ReplyVal  string
+}
+
+type EventUsers struct {
+	JustNowReplied []*EventUser
+	OthersReplied  []*EventUser
+	NotYetReplied  []*EventUser
+}
+
+type Event struct {
+	Id            string
+	GroupId       string
+	AuthorId      string
+	EntryId       string
+	EntryTitle    string
+	IsInviteGroup bool
+
+	InvitedUIDs  []string
+	GoingUIDs    []string
+	MaybeUIDs    []string
+	NotGoingUIDs []string
+
+	Resource []*Resource
+
+	WholeDay       bool
+	TimezoneOffset int64
+	StartAt        time.Time
+	EndAt          time.Time
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
+}
+
+type Resource struct {
+	Id        string
+	Name      string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type EntryLanguage struct {
@@ -1521,6 +1567,36 @@ type (
 		EmbedUser           EmbedUser
 		ShowUser            bool
 		IsOffline           bool
+	}
+)
+
+// Calendar
+
+type (
+	CalendarItemGroup struct {
+		Name   string
+		WeekNo int
+		Items  []CalendarItem
+	}
+
+	CalendarItem struct {
+		EntryId        string
+		EventId        string
+		TaskId         string
+		EntryLink      string
+		Title          string
+		IsAllDay       bool
+		ItemType       string      `json:",omitempty"`
+		Attending      string      `json:",omitempty"` // YES, NO, MAYBE
+		Owner          EmbedUser   `json:",omitempty"`
+		Assignee       EmbedUser   `json:",omitempty"`
+		ToUsers        []EmbedUser `json:",omitempty"`
+		Group          EmbedGroup  `json:",omitempty"`
+		Date           string      `json:",omitempty"` // 2014-01-02
+		StartTime      time.Time   `json:",omitempty"`
+		EndTime        time.Time   `json:",omitempty"`
+		ImportanceType string      `json:",omitempty"`
+		SortValue      string      `json:",omitempty"`
 	}
 )
 

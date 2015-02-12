@@ -1,6 +1,9 @@
 package qortexapi
 
-import "io"
+import (
+	"io"
+	"time"
+)
 
 type PublicService interface {
 	GetSession(email string, password string, locale string) (session string, err error)
@@ -275,6 +278,16 @@ type AuthUserService interface {
 	GetClosedTasksIWorkedOn(before string, limit int) (tasks []*TaskOutline, err error)
 	GetTasksOutline(userId string, groupId string) (needActionTasks []*TaskOutline, groupTasks []*GroupTasksOutline, err error)
 	GetTasks(userId string, groupId string) (groupTasks []*GroupTasks, err error)
+	SetTaskDueDate(taskId string, groupId string, date string) (err error)
+
+	GetEvent(eventId string, groupId string) (event *Event, err error)
+	ReplyEvent(eventId string, groupId string, reply string) (event *Event, err error)
+	UpdateEvent(input *EventInput) (event *Event, err error)
+	MoveEvent(eventId string, groupId string, startAt string, endAt string) (err error)
+
+	GetResources() (res []*Resource, err error)
+	// newRes: resourceName ,  updateRes: resourceId:resourceName
+	UpdateResources(newRes []string, updateRes []string, deleteIds []string) (err error)
 
 	GetOpenTodos(createByUid string, assignToUid string, sortBy string) (groupTasks []*GroupTasksOutline, err error)
 	GetCloseTodos(createByUid string, assignToUid string, before string, limit int) (tasks []*TaskOutline, err error)
@@ -298,6 +311,17 @@ type AuthUserService interface {
 	CountOfClosedToDosInGroup(ttype int, groupId string) (count int, err error)
 	CountOfActionNeededToDosInGroup(gid string) (count int, err error)
 	ToDoCSV(groupId string, userId string, month string) (todos []*ToDoCSVItem, err error)
+
+	// Calendar
+	GetMyAgendaCount(startDate string) (count int64, err error)
+
+	/*
+	 * start: combined with the Due date of a Task as format 2006-01-02 concat with created at nano time like 1418368074096000000
+	 * example: 2014-12-20_1418368074096000000
+	 */
+	GetAgendaItems(start string, limit int, assigneeUserId string, resourceId string, groupId string, etype string) (calendarItemGroups []*CalendarItemGroup, hasMore bool, err error)
+	GetCalendarItems(start string /* eg: 2006-01-02*/, end string, assigneeUserId string, resourceId string, groupId string, etype string) (calendarItems []CalendarItem, activeGroups []EmbedGroup, startTime time.Time, endTime time.Time, err error)
+	GetSubscriptionItems(start string /* eg: 2006-01-02 */, assigneeUserId string, groupId string, etype string, creatorId string) (calendarItems []CalendarItem, err error)
 
 	// Apple device service
 	RegisterAppleDevice(token string) (err error)
@@ -338,6 +362,8 @@ type AuthUserService interface {
 	ValidateToken() (err error)
 	SaveToken(tokenId string, label string, accessLevel int, forAllGroups bool, groupIds []string) (token string, err error)
 	DeleteToken(tokenId string) (err error)
+	TokenForLabel(label string, accessLevel int, forAllGroups bool) (token string, err error)
+
 	// RemoveGroupsFromToken(tokenId string, groupIds []string) (err error)
 	// AddGroupsToToken(tokenId string, groupIds []string) (err error)
 	GetOrgTokens() (tokens []*Token, err error)
