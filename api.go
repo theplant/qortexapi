@@ -236,8 +236,6 @@ type AuthUserService interface {
 	ResendInvitation(email string) (err error)
 	UpdateGroupAdvancedToDoSettings(groupId string, input *AdvancedToDoSettingsInput) (err error)
 
-	// TODO: mail-updates: remove it
-	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
 	UpdateNotificationsPreference(input *NotificationPreferenceInput) (err error)
 
 	PrepareChangingEmail(newEmail string) (changer *EmailChanger, err error)

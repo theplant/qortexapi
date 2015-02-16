@@ -353,11 +353,11 @@ type UserEntriesInput struct {
 }
 
 type ChangeEmailInput struct {
-	OldEmail          string
-	NewEmail          string
-	IsFromSharing     bool // Sharing signup
-	IsFromInviting    bool // Inviting signup
-	IsFromRegistering bool // Normal signup
+	OldEmail        string
+	NewEmail        string
+	ConfirmToken    string
+	SharingToken    string
+	InvitationToken string
 }
 
 type InviteInput struct {
