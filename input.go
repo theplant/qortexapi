@@ -63,6 +63,17 @@ type EntryInput struct {
 	SelectionTextInfo  SelectionTextInfo
 
 	PriorityWeight float64
+
+	IsEvent        bool
+	IsInviteGroup  bool
+	InvitedUserIds string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	StartAt        string //format 20130507
+	StartAtH       string //00-23
+	StartAtM       string //00-59
+	EndAt          string //format 20130507
+	EndAtH         string //00-23
+	EndAtM         string //00-59
+	Resource       []string
 }
 
 type DraftInput struct {
@@ -175,6 +186,7 @@ type LikeInput struct {
 
 type PreferencesInput struct {
 	Timezone                 string
+	FirstDayOfWeek           string
 	TimezoneOffset           string
 	PreferFullName           string
 	EnterForNewLine          string
@@ -407,4 +419,18 @@ type MemberAccountInput struct {
 	LastNameJpKa  string
 
 	AvatarURL string
+}
+
+type EventInput struct {
+	EventId        string
+	GroupId        string
+	IsInviteGroup  bool
+	InvitedUserIds string //seperate with "," for example: "1234,4567" means []string{"1234", "5678"}
+	StartAt        string //format 20130507
+	StartAtH       string //00-23
+	StartAtM       string //00-59
+	EndAt          string //format 20130507
+	EndAtH         string //00-23
+	EndAtM         string //00-59
+	Resource       []string
 }
