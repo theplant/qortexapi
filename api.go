@@ -386,4 +386,6 @@ type AuthAdminService interface {
 	SetFreeUserLimit(orgId string, num int) (err error)
 
 	ResetCount(orgId string, groupId string) (err error)
+
+	SendCommunicationMail(setup string) (err error)
 }
