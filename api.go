@@ -342,7 +342,7 @@ type AuthUserService interface {
 	ValidatePayment() (err error)
 	CancelSubscription() (err error)
 	DismissPaymentTips() (err error)
-	DisableProFeatrue(groupId string) (r bool, err error)
+	DisableProFeatrue(groupId string) (r bool, err error) // Deprecated
 
 	GetContactUsInfo() (info *ContactUsInfo, err error)
 	// For Mobile Specifically
@@ -403,6 +403,8 @@ type AuthAdminService interface {
 	ResetOrgUserCache(orgId string) (err error)
 
 	SetFreeUserLimit(orgId string, num int) (err error)
+
+	SetFreePostLimit(orgId string, num int) (err error)
 
 	ResetCount(orgId string, groupId string) (err error)
 }
