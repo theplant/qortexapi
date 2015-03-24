@@ -415,5 +415,5 @@ type AuthAdminService interface {
 
 	ResetCount(orgId string, groupId string) (err error)
 
-	SendCommunicationMail(setup string) (err error)
+	SendCommunicationMail(setup string, lang string) (err error)
 }
