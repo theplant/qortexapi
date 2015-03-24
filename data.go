@@ -1050,7 +1050,9 @@ type OrgStats struct {
 type OrgPaymentInfo struct {
 	OrgId         string
 	OrgName       string
-	FreeUserLimit int
+	FreeUserLimit int // Deprecated
+	FreePostLimit int
+	PostCount     int
 	IsFreeOrg     bool
 	IsSharingOrg  bool
 	HasPaid       bool
@@ -1306,7 +1308,9 @@ type BillingInfo struct {
 	FreeTrialLeftDays    int
 	ExpiredLeftDays      int
 	ActiveUserCount      int
-	FreeUserLimit        int
+	FreeUserLimit        int // Deprecated
+	FreePostLimit        int
+	PostCount            int
 	Country              string
 	Phone                string
 	Billing              *paymentapi.Billing

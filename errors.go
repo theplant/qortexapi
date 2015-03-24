@@ -18,7 +18,7 @@ var (
 	ChangePasswordError            = errors.New("change password error")
 	UserNotFoundError              = errors.New("user not found")
 	UsersNotFoundError             = errors.New("users not found")
-	PermissionDeniedError          = errors.New("permiession denied")
+	PermissionDeniedError          = errors.New("Permiession Denied")
 	SaveMemberError                = errors.New("can not save member")
 	SaveUserError                  = errors.New("can not save user")
 	SaveGroupError                 = errors.New("can not save group")
