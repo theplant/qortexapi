@@ -785,6 +785,9 @@ type Entry struct {
 	IsInnerMessage bool          `json:",omitempty"`
 	InnerMessage   *InnerMessage `json:",omitempty"`
 
+	// Is Reminder type of System Message
+	IsReminderMessage bool `json:",omitempty"`
+
 	// For Advanced To-Dos
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
 	RelatedToDoEntries []*RelatedEntry // For Entry
