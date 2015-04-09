@@ -434,3 +434,9 @@ type EventInput struct {
 	EndAtM         string //00-59
 	Resource       []string
 }
+
+type AccessInput struct {
+	Email   string
+	Phone   string
+	OrgName string
+}

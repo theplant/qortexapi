@@ -1089,6 +1089,8 @@ type OrgPaymentHistory struct {
 type AccessReq struct {
 	Id        string
 	Email     string
+	Phone     string
+	OrgName   string
 	Status    string
 	CreatedAt string
 	UpdatedAt string
