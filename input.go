@@ -436,7 +436,10 @@ type EventInput struct {
 }
 
 type AccessInput struct {
-	Email   string
-	Phone   string
-	OrgName string
+	Name       string
+	Furigana   string
+	Email      string
+	Phone      string
+	OrgName    string
+	LocaleName string
 }
