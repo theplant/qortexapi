@@ -1091,6 +1091,8 @@ type AccessReq struct {
 	Email     string
 	Phone     string
 	OrgName   string
+	DemoOrgId string
+	Name      string
 	Status    string
 	CreatedAt string
 	UpdatedAt string
