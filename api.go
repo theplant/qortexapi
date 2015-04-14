@@ -386,6 +386,7 @@ type AuthAdminService interface {
 	GetRequestAccess() (accessReqs []*AccessReq, sampleOrgs []*EmbedOrg, err error)
 	GenerateDemoOrgForAccess(accessId string, sampleOrgId string) (err error)
 	IgnoreRequestAccess(accessId string) (err error)
+	DestroyDemoOrg(accessId string) (err error)
 
 	ExportAllUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportChineseUsers() (memberInfos []*MailChimpUserListItem, err error)
