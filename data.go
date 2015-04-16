@@ -125,19 +125,20 @@ type GroupUsers struct {
 }
 
 type Preferences struct {
-	Timezone                   string             `json:",omitempty"`
-	FirstDayOfWeek             string             `json:",omitempty"`
-	TimezoneOffset             string             `json:",omitempty"`
-	PreferFullName             bool               `json:",omitempty"`
-	EnterForNewLine            bool               `json:",omitempty"`
-	AsideGroupsCollapse        bool               `json:",omitempty"`
-	AsideOtherGroupsCollapse   bool               `json:",omitempty"`
-	ShowMarkUnreadThreshold    int                `json:",omitempty"`
-	AdminModeOn                bool               `json:",omitempty"`
-	PreferMarkdown             bool               `json:",omitempty"`
-	AutoFollowPublicGroup      bool               `json:",omitempty"`
-	EnableHTML5Notification    bool               `json:",omitempty"`
-	PreferredLanguageSelectors *LanguageSelectors `json:",omitempty"`
+	Timezone                          string             `json:",omitempty"`
+	FirstDayOfWeek                    string             `json:",omitempty"`
+	TimezoneOffset                    string             `json:",omitempty"`
+	PreferFullName                    bool               `json:",omitempty"`
+	EnterForNewLine                   bool               `json:",omitempty"`
+	AsideGroupsCollapse               bool               `json:",omitempty"`
+	AsideOtherGroupsCollapse          bool               `json:",omitempty"`
+	ShowMarkUnreadThreshold           int                `json:",omitempty"`
+	AdminModeOn                       bool               `json:",omitempty"`
+	PreferMarkdown                    bool               `json:",omitempty"`
+	AutoFollowPublicGroup             bool               `json:",omitempty"`
+	EnableHTML5Notification           bool               `json:",omitempty"`
+	DisableWebChatPopupWhenXMPPOnline bool               `json:",omitempty"`
+	PreferredLanguageSelectors        *LanguageSelectors `json:",omitempty"`
 }
 
 type Profile struct {

@@ -185,19 +185,20 @@ type LikeInput struct {
 }
 
 type PreferencesInput struct {
-	Timezone                 string
-	FirstDayOfWeek           string
-	TimezoneOffset           string
-	PreferFullName           string
-	EnterForNewLine          string
-	AsideGroupsCollapse      string
-	AsideOtherGroupsCollapse string
-	ShowMarkUnreadThreshold  string
-	AdminModeOn              string
-	PreferMarkdown           string
-	AutoFollowPublicGroup    string
-	EnableHTML5Notification  string
-	UserLocationCityName     string
+	Timezone                          string
+	FirstDayOfWeek                    string
+	TimezoneOffset                    string
+	PreferFullName                    string
+	EnterForNewLine                   string
+	AsideGroupsCollapse               string
+	AsideOtherGroupsCollapse          string
+	ShowMarkUnreadThreshold           string
+	AdminModeOn                       string
+	PreferMarkdown                    string
+	AutoFollowPublicGroup             string
+	EnableHTML5Notification           string
+	DisableWebChatPopupWhenXMPPOnline string
+	UserLocationCityName              string
 }
 
 type MemberAccountInput struct {
