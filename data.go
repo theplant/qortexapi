@@ -1094,6 +1094,7 @@ type AccessReq struct {
 	DemoOrgId     string
 	DemoOrgStatus string
 	Name          string
+	Referrer      string
 	Status        string
 	CreatedAt     string
 	UpdatedAt     string
