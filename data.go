@@ -138,6 +138,7 @@ type Preferences struct {
 	AutoFollowPublicGroup             bool               `json:",omitempty"`
 	EnableHTML5Notification           bool               `json:",omitempty"`
 	DisableWebChatPopupWhenXMPPOnline bool               `json:",omitempty"`
+	DisableWebChatSound               bool               `json:",omitempty"`
 	PreferredLanguageSelectors        *LanguageSelectors `json:",omitempty"`
 }
 

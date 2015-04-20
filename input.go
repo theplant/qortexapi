@@ -198,6 +198,7 @@ type PreferencesInput struct {
 	AutoFollowPublicGroup             string
 	EnableHTML5Notification           string
 	DisableWebChatPopupWhenXMPPOnline string
+	DisableWebChatSound               string
 	UserLocationCityName              string
 }
 
