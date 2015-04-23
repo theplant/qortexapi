@@ -443,4 +443,6 @@ type AccessInput struct {
 	OrgName    string
 	LocaleName string
 	Referrer   string
+	Country    string
+	DialCode   string
 }
