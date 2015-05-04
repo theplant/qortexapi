@@ -79,6 +79,7 @@ type BlogEntry struct {
 	PrevBlogUrl      string
 	NextBlogUrl      string
 	TweetUrl         string
+	IsSuperOrg       bool
 }
 
 type User struct {
@@ -660,6 +661,7 @@ type Entry struct {
 	BaseOnLink       template.HTMLAttr `json:",omitempty"`
 	BaseOnLinkTitle  string            `json:",omitempty"`
 	PresentationLink template.HTMLAttr `json:",omitempty"`
+	PubLink          template.HTMLAttr `json:",omitempty"`
 	UploadURL        template.HTMLAttr `json:",omitempty"`
 
 	IsShared bool `json:",omitempty"`

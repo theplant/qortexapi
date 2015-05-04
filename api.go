@@ -32,6 +32,8 @@ type PublicService interface {
 	// Blog
 	GetBlogEntries(doi string, pageNum int, limit int) (blog *Blog, blogEntries []*BlogEntry, totalPageNum int, err error)
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
+	GetBlogEntry(doi string, gid string, id string) (blog *Blog, r *BlogEntry, err error)
+	GetSharedEntry(doi string, entryId string, groupId string) (entry *Entry, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, err error)
 

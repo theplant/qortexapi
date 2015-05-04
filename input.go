@@ -44,7 +44,8 @@ type EntryInput struct {
 	IsFromEmail bool // IsFromEmail == true, entry create through email.
 
 	IsPublished bool   // if IsPublished == true, this entry is a public blog.
-	Slug        string // if IsPublished == true required
+	Slug        string // required when publish blog
+	Share       bool   // if Share == true, Slug is not reqired
 	Email       string // Blog Comment required
 	Name        string // Blog Comment required
 
