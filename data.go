@@ -1390,6 +1390,7 @@ type ContactUsInfo struct {
 
 type InitInfo struct {
 	CurrentUser User
+	ChatToken   string
 
 	CurrentOrg *Organization
 	JoinedOrgs []*Organization
