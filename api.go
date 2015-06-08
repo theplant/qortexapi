@@ -37,7 +37,7 @@ type PublicService interface {
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, err error)
 
-	InviteMe(organizationId string, email string) (err error)
+	InviteMe(organizationId string, email string) (apiEmbedOrg *EmbedOrg, apiIvt *Invitation, err error)
 
 	// Demo related
 	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
@@ -234,8 +234,7 @@ type AuthUserService interface {
 
 	// Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
-	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
-	UpdateOrgResctriction(orgSettingInput *OrganizationInput) (err error)
+	UpdateOrgPrivileges(input *OrgPrivilegesInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
 	InvitePeople(inviteInput *InviteInput) (sentEmails []string, err error)

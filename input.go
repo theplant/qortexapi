@@ -152,9 +152,11 @@ type GroupInput struct {
 	CollectionId   string
 }
 
-type OrgSettingsInput struct {
-	AllowUsersCreateGroups bool
-	AllowUsersInvitePeople bool
+type OrgPrivilegesInput struct {
+	AllowUsersCreateGroups   bool
+	AllowUsersInvitePeople   bool
+	RestrictSubscriptionMail bool
+	Domains                  []string
 }
 
 type OrganizationInput struct {
