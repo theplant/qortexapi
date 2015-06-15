@@ -384,6 +384,7 @@ type InviteInput struct {
 
 type AccountInput struct {
 	Id              string
+	OrgId           string
 	Email           string
 	ConfirmToken    string
 	SharingToken    string
