@@ -1639,3 +1639,18 @@ type (
 		TokenOrRegId string `form:"TokenOrRegId" binding:"required"`
 	}
 )
+
+type KnowledgeBaseData struct {
+	GroupKBs []*GroupKB
+	UserKBs  []*UserKB
+}
+
+type GroupKB struct {
+	Group          *EmbedGroup
+	KnowledgeBases []*EmbedEntry
+}
+
+type UserKB struct {
+	User           *EmbedUser
+	KnowledgeBases []*EmbedEntry
+}

@@ -103,6 +103,7 @@ type AuthUserService interface {
 	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
 	GetEntryToTranslate(entryId string, groupId string) (entry *Entry, err error)
 	GetWikiSectionToTranslate(entryId string, groupId string) (entry *KnowledgeOverview, err error)
+	GetKnowledgebase(groupby string, createby string, groupId string) (data *KnowledgeBaseData, err error)
 
 	// dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
