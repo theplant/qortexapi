@@ -4,6 +4,8 @@ import "errors"
 
 var (
 	ServerError                    = errors.New("Oops, something is wrong!")
+	InvalidIdError                 = errors.New("Invalid Id error!")
+	UnexpectedError                = errors.New("Unexpected error!")
 	OrganizationNotFoundError      = errors.New("organization not found")
 	OrganizationNotJoinedError     = errors.New("not join organization yet")
 	OrganizationsNotFoundError     = errors.New("organizations not found")
@@ -39,8 +41,8 @@ var (
 	UnknownEntryType               = errors.New("unknown entry type")
 	UpdateLikeError                = errors.New("update like error")
 	TokenInvalid                   = errors.New("Token is not available")
-	InvitationAlreadyCanceled      = errors.New("invitation was canceled")
-	AccountNotActicated            = errors.New("account was not activated yet")
+	AccountNotActivated            = errors.New("Account was not activated yet")
+	AccountAlreadyActivated        = errors.New("Account was already activated")
 	EntryBlankError                = errors.New("Entry can not be blank")
 	GroupBlankError                = errors.New("Group can not be blank")
 	UserBlankError                 = errors.New("User can not be blank")
@@ -51,4 +53,7 @@ var (
 	NeedPayError                   = errors.New("Qortex need to pay")
 	InvalidLanguageCodeError       = errors.New("Language code is not supported")
 	NotFoundError                  = errors.New("not found")
+	InvitationAlreadyAcceptedError = errors.New("Invitation was accepted")
+	InvitationAlreadyCanceledError = errors.New("Invitation was canceled")
+	ChangeEmailTypeNotProvided     = errors.New("Should provide the type of changing email")
 )

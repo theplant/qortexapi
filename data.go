@@ -79,6 +79,7 @@ type BlogEntry struct {
 	PrevBlogUrl      string
 	NextBlogUrl      string
 	TweetUrl         string
+	IsSuperOrg       bool
 }
 
 type User struct {
@@ -662,6 +663,7 @@ type Entry struct {
 	BaseOnLink       template.HTMLAttr `json:",omitempty"`
 	BaseOnLinkTitle  string            `json:",omitempty"`
 	PresentationLink template.HTMLAttr `json:",omitempty"`
+	PubLink          template.HTMLAttr `json:",omitempty"`
 	UploadURL        template.HTMLAttr `json:",omitempty"`
 
 	IsShared bool `json:",omitempty"`
@@ -786,6 +788,9 @@ type Entry struct {
 	// Is Inner Message type of System Message
 	IsInnerMessage bool          `json:",omitempty"`
 	InnerMessage   *InnerMessage `json:",omitempty"`
+
+	// Is Reminder type of System Message
+	IsReminderMessage bool `json:",omitempty"`
 
 	// For Advanced To-Dos
 	DerivedToDoEntries []*RelatedEntry // For Comment, All embeded items
@@ -975,9 +980,11 @@ type InlineHelp struct {
 }
 
 type EmailChanger struct {
-	Token        string
-	Email        string
-	SharingToken string
+	Token             string
+	Email             string
+	SharingToken      string
+	InvitationToken   string
+	ConfirmationToken string
 }
 
 type Newsletter struct {
@@ -985,11 +992,14 @@ type Newsletter struct {
 }
 
 type Invitation struct {
+	OrgId             string
+	OrgName           string
 	Email             string
 	Token             string
 	SentAgo           string
 	ByUser            EmbedUser
 	HideInPendingList bool
+	IsNewAccount      bool // If the invitee is a new account that hasn't signed up yet.
 }
 
 type AbandonInfo struct {
@@ -1013,6 +1023,7 @@ type Member struct {
 	Id                 string
 	Name               string
 	Email              string
+	Title              string
 	ComfirmationSentAt string
 	SignupConfirmedAt  string
 	SignupStatus       string
@@ -1080,12 +1091,17 @@ type OrgPaymentHistory struct {
 }
 
 type AccessReq struct {
-	Email      string
-	AccessCode string
-	Status     string
-	ApprovedBy string
-	CreatedAt  string
-	UpdatedAt  string
+	Id            string
+	Email         string
+	Phone         string
+	OrgName       string
+	DemoOrgId     string
+	DemoOrgStatus string
+	Name          string
+	Referrer      string
+	Status        string
+	CreatedAt     string
+	UpdatedAt     string
 }
 
 // Deprecated. Now is NewGroupAside
@@ -1627,3 +1643,18 @@ type (
 		TokenOrRegId string `form:"TokenOrRegId" binding:"required"`
 	}
 )
+
+type KnowledgeBaseData struct {
+	GroupKBs []*GroupKB
+	UserKBs  []*UserKB
+}
+
+type GroupKB struct {
+	Group          *EmbedGroup
+	KnowledgeBases []*EmbedEntry
+}
+
+type UserKB struct {
+	User           *EmbedUser
+	KnowledgeBases []*EmbedEntry
+}

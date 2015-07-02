@@ -19,13 +19,12 @@ type PublicService interface {
 	ResetPassword(token string, password string, confirmedPassword string) (memberId string, email string, err error)
 
 	// Change Email
-	PrepareChangingEmail(memberId string, newEmail string, sharingToken string, invitationToken string) (changer *EmailChanger, err error)
-	ConfirmChangingEmail(token string) (activationToken string, sharingToken string, invitationToken string, err error)
+	PrepareChangingEmail(input *ChangeEmailInput) (changer *EmailChanger, err error)
+	ConfirmChangingEmail(token string) (changer *EmailChanger, err error)
 	CancelChangingEmail(token string) (err error)
 
 	// Sharing Flow
 	ChangeEmailToAcceptSharing(token string, newEmail string) (err error)
-
 	GetShareRequest(token string, memberId string) (shareRequest *ShareRequest, err error)
 
 	ContactUs(input *ContactInput) (contact *ContactInfo, err error)
@@ -33,10 +32,12 @@ type PublicService interface {
 	// Blog
 	GetBlogEntries(doi string, pageNum int, limit int) (blog *Blog, blogEntries []*BlogEntry, totalPageNum int, err error)
 	GetBlogEntryBySlug(doi string, slug string) (blog *Blog, blogEntry *BlogEntry, err error)
+	GetBlogEntry(doi string, gid string, id string) (blog *Blog, r *BlogEntry, err error)
+	GetSharedEntry(doi string, entryId string, groupId string) (entry *Entry, err error)
 	GenerateBlogEntrySlug(doi string, slug string) (validSlug string, err error)
 	CreateNewsletter(input *NewsletterInput) (newsletter *Newsletter, err error)
 
-	InviteMe(organizationId string, email string) (err error)
+	InviteMe(organizationId string, email string) (apiEmbedOrg *EmbedOrg, apiIvt *Invitation, err error)
 
 	// Demo related
 	CreateSandboxOrg(idOrQortexURL string) (r *Organization, err error)
@@ -44,6 +45,16 @@ type PublicService interface {
 
 	// Get the push notification detail
 	GetPushInfo(itemId string) (info *PushInfo, err error)
+
+	// Signup
+	Signup(email string) (accessReq *AccessReq, err error)
+	SetupAccount(input *AccountInput) (member *Member, err error)
+	GetAccessRequest(token string) (accessReq *AccessReq, err error)
+
+	RequestSignup(input *AccessInput) (err error)
+
+	// Invitation
+	GetInvitation(token string, memberId string) (invitation *Invitation, err error)
 }
 
 // User registered and confirmed email and logged in but haven't join or create any organization.
@@ -52,15 +63,17 @@ type AuthMemberService interface {
 	GetNewOrganization(memberId string) (org *Organization, err error)
 	GetMyOrganizations() (orgs []*Organization, err error)
 	CreateOrganization(input *OrganizationInput) (apiOrg *Organization, err error)
-	JoinOrganization(orgId string) (err error)
+	JoinOrganization(orgId string) (org *Organization, user *User, err error)
 	LeaveOrganization(orgId string) (err error)
 
 	SwitchOrganization(orgId string) (err error)
 	GetAbandonInfo(abandonOrgId string, memberId string) (info *AbandonInfo, err error)
 
-	GetShareRequest(token string) (shareRequest *ShareRequest, err error)
+	GetShareRequestByToken(token string) (shareRequest *ShareRequest, err error)
 	RejectShareRequestByInvitee(token string) (err error)
 	AcceptShareRequestByInvitee(token string, toOrgId string) (err error)
+
+	AcceptInvitation(token string) (org *Organization, user *User, err error)
 }
 
 // Normal user and joined organization.
@@ -90,6 +103,8 @@ type AuthUserService interface {
 	UpdateKnowledgeOverview(input *KnowledgeOverviewInput) (r *KnowledgeOverview, err error)
 	GetEntryToTranslate(entryId string, groupId string) (entry *Entry, err error)
 	GetWikiSectionToTranslate(entryId string, groupId string) (entry *KnowledgeOverview, err error)
+	GetKnowledgebaseHeader() (userList []User, groupList []*GroupsList, err error)
+	GetKnowledgebase(groupby string, createby string, groupId string) (data *KnowledgeBaseData, err error)
 
 	// dType "all": delete all versions of the entry, "version": delete current version of the entry
 	DeleteEntry(entryId string, groupId string, dType string) (delType string, err error)
@@ -198,7 +213,7 @@ type AuthUserService interface {
 	ReadNotificationItem(itemId, groupId string) (myCount *MyCount, err error)
 
 	// Organization Related
-	GetJoinOrgInvitations() (invitations []*Invitation, err error)
+	GetOrgInvitations() (invitations []*Invitation, err error)
 	GetOrganization(orgId string) (org *Organization, err error)
 	GetOrganizations(orgIds []string) (orgs []*Organization, err error)
 	GetMyOrgsUnreadInfo() (unreadInfo []*OrgUnreadInfo, err error)
@@ -221,17 +236,14 @@ type AuthUserService interface {
 
 	// Settings related
 	GetOrgSettings() (orgSetting *OrgSettings, err error)
-	UpdateOrgSettings(orgSettingInput *OrgSettingsInput) (err error)
-	UpdateOrgResctriction(orgSettingInput *OrganizationInput) (err error)
+	UpdateOrgPrivileges(input *OrgPrivilegesInput) (err error)
 	CanCreateGroup() (ok bool, err error)
 	CanInvitePeople() (ok bool, err error)
-	InvitePeople(emails []string, allowEmpty bool, skipInvalidEmail bool, customMessage string, toFollowGroups []string) (sendedEmails []string, err error)
+	InvitePeople(inviteInput *InviteInput) (sentEmails []string, err error)
 	CancelInvitation(email string) (err error)
 	ResendInvitation(email string) (err error)
 	UpdateGroupAdvancedToDoSettings(groupId string, input *AdvancedToDoSettingsInput) (err error)
 
-	// TODO: mail-updates: remove it
-	// UpdateMailUpdates(input *MailUpdatesInput) (err error)
 	UpdateNotificationsPreference(input *NotificationPreferenceInput) (err error)
 
 	PrepareChangingEmail(newEmail string) (changer *EmailChanger, err error)
@@ -374,7 +386,10 @@ type AuthUserService interface {
 
 type AuthAdminService interface {
 	// Get all closed beta access requests
-	GetAccessRequests() (accessReqs []*AccessReq, err error)
+	GetRequestAccess() (accessReqs []*AccessReq, sampleOrgs []*EmbedOrg, err error)
+	GenerateDemoOrgForAccess(accessId string, sampleOrgId string) (err error)
+	IgnoreRequestAccess(accessId string) (err error)
+	DestroyDemoOrg(accessId string) (err error)
 
 	ExportAllUsers() (memberInfos []*MailChimpUserListItem, err error)
 	ExportChineseUsers() (memberInfos []*MailChimpUserListItem, err error)
@@ -407,4 +422,6 @@ type AuthAdminService interface {
 	SetFreePostLimit(orgId string, num int) (err error)
 
 	ResetCount(orgId string, groupId string) (err error)
+
+	SendCommunicationMail(setup string, lang string) (err error)
 }

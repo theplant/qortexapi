@@ -44,7 +44,8 @@ type EntryInput struct {
 	IsFromEmail bool // IsFromEmail == true, entry create through email.
 
 	IsPublished bool   // if IsPublished == true, this entry is a public blog.
-	Slug        string // if IsPublished == true required
+	Slug        string // required when publish blog
+	Share       bool   // if Share == true, Slug is not reqired
 	Email       string // Blog Comment required
 	Name        string // Blog Comment required
 
@@ -151,9 +152,11 @@ type GroupInput struct {
 	CollectionId   string
 }
 
-type OrgSettingsInput struct {
-	AllowUsersCreateGroups bool
-	AllowUsersInvitePeople bool
+type OrgPrivilegesInput struct {
+	AllowUsersCreateGroups   bool
+	AllowUsersInvitePeople   bool
+	RestrictSubscriptionMail bool
+	Domains                  []string
 }
 
 type OrganizationInput struct {
@@ -200,19 +203,6 @@ type PreferencesInput struct {
 	DisableWebChatPopupWhenXMPPOnline string
 	DisableWebChatSound               string
 	UserLocationCityName              string
-}
-
-type MemberAccountInput struct {
-	FirstName     string // English name
-	LastName      string
-	FirstNameCn   string // Chinese name
-	LastNameCn    string
-	FirstNameJp   string // Japanese name for display
-	LastNameJp    string
-	FirstNameJpKa string // Japanese Katakana name for ordering
-	LastNameJpKa  string
-
-	AvatarURL string
 }
 
 type NewsletterInput struct {
@@ -380,8 +370,61 @@ type UserEntriesInput struct {
 }
 
 type ChangeEmailInput struct {
-	OldEmail string
-	NewEmail string
+	OldEmail        string
+	NewEmail        string
+	ConfirmToken    string
+	SharingToken    string
+	InvitationToken string
+}
+
+type InviteInput struct {
+	Emails           []string
+	ToFollowGroupIds []string
+	Message          string
+	IgnoreError      bool
+}
+
+type AccountInput struct {
+	Id              string
+	OrgId           string
+	Email           string
+	ConfirmToken    string
+	SharingToken    string
+	InvitationToken string
+	InvitedOrgName  string // This is not for input, for displaying
+
+	FirstName     string // English name
+	LastName      string
+	FirstNameCn   string // Chinese name
+	LastNameCn    string
+	FirstNameJp   string // Japanese name for display
+	LastNameJp    string
+	FirstNameJpKa string // Japanese Katakana name for ordering
+	LastNameJpKa  string
+
+	Password        string
+	ConfirmPassword string
+	AvatarURL       string
+	Title           string
+	Department      string
+	IsAgreed        bool
+
+	LocaleName    string   // Login needs this
+	LanguageCodes []string // Invitation signup needs this
+}
+
+// KOBELD: Duplicated. Can be replaced by the AccountInput
+type MemberAccountInput struct {
+	FirstName     string // English name
+	LastName      string
+	FirstNameCn   string // Chinese name
+	LastNameCn    string
+	FirstNameJp   string // Japanese name for display
+	LastNameJp    string
+	FirstNameJpKa string // Japanese Katakana name for ordering
+	LastNameJpKa  string
+
+	AvatarURL string
 }
 
 type EventInput struct {
@@ -396,4 +439,16 @@ type EventInput struct {
 	EndAtH         string //00-23
 	EndAtM         string //00-59
 	Resource       []string
+}
+
+type AccessInput struct {
+	Name       string
+	Furigana   string
+	Email      string
+	Phone      string
+	OrgName    string
+	LocaleName string
+	Referrer   string
+	Country    string
+	DialCode   string
 }
