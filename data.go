@@ -1093,9 +1093,11 @@ type AccessReq struct {
 	Email         string
 	Phone         string
 	OrgName       string
-	DemoOrgId     string
-	DemoOrgStatus string
-	Name          string
+	OrgId         string
+	DemoOrgStatus string // Not be used in Qortex, but still using in Qortex Admin
+	Name          string // Not be used in Qortex, but still using in Qortex Admin
+	FirstName     string
+	LastName      string
 	Referrer      string
 	Status        string
 	CreatedAt     string
@@ -1629,6 +1631,7 @@ type (
 		Message     string `form:"Message" binding:"required"`
 		AlertNumber string `form:"AlertNumber" binding:"required"`
 		ItemId      string `form:"ItemId" binding:"required"`
+		Type        string `form:"Type"`
 		Sound       bool   `form:"Sound"`
 	}
 

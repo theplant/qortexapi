@@ -51,7 +51,7 @@ type PublicService interface {
 	SetupAccount(input *AccountInput) (member *Member, err error)
 	GetAccessRequest(token string) (accessReq *AccessReq, err error)
 
-	RequestSignup(input *AccessInput) (err error)
+	QuickSignup(input *AccessInput) (apiMember *Member, org *Organization, err error)
 
 	// Invitation
 	GetInvitation(token string, memberId string) (invitation *Invitation, err error)
@@ -387,8 +387,6 @@ type AuthUserService interface {
 type AuthAdminService interface {
 	// Get all closed beta access requests
 	GetRequestAccess() (accessReqs []*AccessReq, sampleOrgs []*EmbedOrg, err error)
-	GenerateDemoOrgForAccess(accessId string, sampleOrgId string) (err error)
-	IgnoreRequestAccess(accessId string) (err error)
 	DestroyDemoOrg(accessId string) (err error)
 
 	ExportAllUsers() (memberInfos []*MailChimpUserListItem, err error)

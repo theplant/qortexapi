@@ -440,8 +440,11 @@ type EventInput struct {
 }
 
 type AccessInput struct {
-	Name       string
-	Furigana   string
+	Name       string // TODO: Jul 23. Should be removed
+	Furigana   string // TODO: Jul 23. Should be removed
+	FirstName  string
+	LastName   string
+	Password   string
 	Email      string
 	Phone      string
 	OrgName    string
