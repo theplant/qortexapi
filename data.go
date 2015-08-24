@@ -716,6 +716,7 @@ type Entry struct {
 	InlineHelp      bool `json:",omitempty"`
 	IsEvent         bool
 	HasResource     bool
+	OnlyVisibleTo   bool
 
 	VisibleForSuperUserInSuperOrg bool `json:",omitempty"`
 	VisibleForSuperOrg            bool `json:",omitempty"`

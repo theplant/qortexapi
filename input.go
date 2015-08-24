@@ -24,6 +24,7 @@ type EntryInput struct {
 	ContentType   string // "" ,"html","markdown", when "" will use user's setting
 
 	IsAcknowledgement bool   // if IsAcknowledgement == true, get acknowledgement from notified people(ToUserIds).
+	OnlyVisibleTo     bool   // if OnlyVisibleTo == true, only notified people can see the entry
 	IsToDo            bool   // IsToDo == true, will create todo for entry.
 	TaskDue           string // if AddToDo == true and want to set a deadline. format:20130507
 	TodoStatus        int    // set it in group setting
