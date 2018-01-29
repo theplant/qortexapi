@@ -4,7 +4,7 @@ import (
 	"html/template"
 	"time"
 
-	"labix.org/v2/mgo/bson"
+	"gopkg.in/mgo.v2/bson"
 
 	paymentapi "github.com/theplant/theplant_payment/api"
 )
